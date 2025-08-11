@@ -1,103 +1,105 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import Navigation from '@/components/Navigation';
+import Hero from '@/components/Hero';
+import ServiceCards from '@/components/ServiceCards';
+import Testimonials from '@/components/Testimonials';
+import ContactForm from '@/components/ContactForm';
+import PhoneButton from '@/components/PhoneButton';
+import { MapPin, Clock, Shield, Award } from 'lucide-react';
+import { CONTACT_INFO } from '@/lib/constants';
+
+export default function HomePage() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <>
+      <Navigation />
+      <Hero />
+      <ServiceCards />
+      <Testimonials />
+      
+      {/* Service Area & Contact Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+            {/* Contact Form */}
+            <div>
+              <ContactForm />
+            </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            {/* Service Area & Info */}
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-2xl font-bold text-primary-dark mb-6">
+                  Service Area & Contact
+                </h3>
+                
+                <div className="space-y-6">
+                  <div className="flex items-start space-x-4">
+                    <MapPin className="w-6 h-6 text-primary-accent mt-1" />
+                    <div>
+                      <h4 className="font-bold text-primary-dark mb-2">Service Area</h4>
+                      <p className="text-text-primary">
+                        We proudly serve the entire region with fast, reliable septic services. 
+                        Call to confirm service availability in your area.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-4">
+                    <Clock className="w-6 h-6 text-primary-accent mt-1" />
+                    <div>
+                      <h4 className="font-bold text-primary-dark mb-2">Business Hours</h4>
+                      <p className="text-text-primary mb-1">{CONTACT_INFO.hours}</p>
+                      <p className="text-red-600 font-medium">{CONTACT_INFO.emergencyHours}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-4">
+                    <Shield className="w-6 h-6 text-primary-accent mt-1" />
+                    <div>
+                      <h4 className="font-bold text-primary-dark mb-2">Licensed & Insured</h4>
+                      <p className="text-text-primary">
+                        Fully licensed, bonded, and insured for your protection. 
+                        All work guaranteed and compliant with local regulations.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-4">
+                    <Award className="w-6 h-6 text-primary-accent mt-1" />
+                    <div>
+                      <h4 className="font-bold text-primary-dark mb-2">Quality Guarantee</h4>
+                      <p className="text-text-primary">
+                        We stand behind our work with a satisfaction guarantee. 
+                        If you're not happy, we'll make it right.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Emergency Contact */}
+              <div className="bg-red-50 border border-red-200 rounded-xl p-6">
+                <h4 className="text-xl font-bold text-red-800 mb-3">
+                  24/7 Emergency Service
+                </h4>
+                <p className="text-red-700 mb-4">
+                  Septic emergencies don't wait for business hours. Our emergency team 
+                  is available around the clock for urgent situations.
+                </p>
+                <a
+                  href="tel:(555) 911-HELP"
+                  className="btn-emergency inline-flex items-center space-x-2"
+                >
+                  <span>EMERGENCY: (555) 911-HELP</span>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      <PhoneButton />
+    </>
   );
 }
