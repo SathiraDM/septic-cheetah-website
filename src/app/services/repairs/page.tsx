@@ -152,12 +152,12 @@ export default function RepairsPage() {
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div className="p-6 bg-red-50 border border-red-200 rounded-lg">
-                  <div className="text-3xl font-bold text-red-600 mb-2">< 2 Hours</div>
+                  <div className="text-3xl font-bold text-red-600 mb-2">{"< 2 Hours"}</div>
                   <div className="text-red-800 font-semibold mb-2">Critical Emergencies</div>
                   <div className="text-sm text-red-700">Sewage backup, system overflow</div>
                 </div>
                 <div className="p-6 bg-orange-50 border border-orange-200 rounded-lg">
-                  <div className="text-3xl font-bold text-orange-600 mb-2">< 4 Hours</div>
+                  <div className="text-3xl font-bold text-orange-600 mb-2">{"< 4 Hours"}</div>
                   <div className="text-orange-800 font-semibold mb-2">Urgent Repairs</div>
                   <div className="text-sm text-orange-700">Pump failures, drain field issues</div>
                 </div>
