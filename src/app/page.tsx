@@ -71,7 +71,7 @@ export default function HomePage() {
                       <h4 className="font-bold text-primary-dark mb-2">Quality Guarantee</h4>
                       <p className="text-text-primary">
                         We stand behind our work with a satisfaction guarantee. 
-                        If you're not happy, we'll make it right.
+                        If you&apos;re not happy, we&apos;ll make it right.
                       </p>
                     </div>
                   </div>
@@ -84,7 +84,7 @@ export default function HomePage() {
                   24/7 Emergency Service
                 </h4>
                 <p className="text-red-700 mb-4">
-                  Septic emergencies don't wait for business hours. Our emergency team 
+                  Septic emergencies don&apos;t wait for business hours. Our emergency team 
                   is available around the clock for urgent situations.
                 </p>
                 <a

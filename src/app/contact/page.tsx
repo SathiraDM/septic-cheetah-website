@@ -106,8 +106,8 @@ function ServiceAreaInfo() {
         </div>
         <div className="bg-bg-primary p-3 rounded-lg">
           <p className="text-sm text-text-primary">
-            <strong>Not sure if we serve your area?</strong> Call us! We're always expanding our service 
-            area and may be able to help even if you're outside our typical range.
+            <strong>Not sure if we serve your area?</strong> Call us! We&apos;re always expanding our service 
+            area and may be able to help even if you&apos;re outside our typical range.
           </p>
         </div>
       </div>
@@ -208,7 +208,7 @@ export default function ContactPage() {
         <section className="py-16 bg-red-600 text-white">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">
-              Septic Emergency? Don't Wait!
+              Septic Emergency? Don&apos;t Wait!
             </h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
               Septic emergencies can cause serious damage and health hazards. 

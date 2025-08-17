@@ -42,7 +42,7 @@ export default function TrustSignals() {
             Why Choose Septic Cheetah?
           </h2>
           <p className="text-xl text-text-primary max-w-2xl mx-auto">
-            We've earned our reputation through years of reliable service and customer satisfaction
+            We&apos;ve earned our reputation through years of reliable service and customer satisfaction
           </p>
         </div>
 

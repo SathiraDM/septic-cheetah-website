@@ -1,3 +1,5 @@
+"use client";
+
 import Navigation from '@/components/Navigation';
 import PhoneButton from '@/components/PhoneButton';
 import Link from 'next/link';
@@ -35,7 +37,7 @@ export default function ServicesPage() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {SERVICES.map((service, index) => (
+            {SERVICES.map((service) => (
               <div key={service.id} className="service-card">
                 <h3 className="text-2xl font-bold text-primary-dark mb-4">
                   {service.title}
@@ -76,7 +78,7 @@ export default function ServicesPage() {
           <div className="text-center mb-16">
             <h2 className="section-title">Why Choose Septic Cheetah?</h2>
             <p className="section-subtitle">
-              We're not just another septic company. Here's what sets us apart 
+              We&apos;re not just another septic company. Here&apos;s what sets us apart 
               from the competition.
             </p>
           </div>
@@ -132,10 +134,10 @@ export default function ServicesPage() {
       <section className="py-20 bg-red-600 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-6">
-            Septic Emergency? We're Here 24/7
+            Septic Emergency? We&apos;re Here 24/7
           </h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Don't let a septic emergency ruin your day. Our emergency response team 
+            Don&apos;t let a septic emergency ruin your day. Our emergency response team 
             is available around the clock to handle urgent situations.
           </p>
           <a

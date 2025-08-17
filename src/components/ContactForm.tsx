@@ -58,7 +58,7 @@ export default function ContactForm() {
       } else {
         setSubmitStatus('error');
       }
-    } catch (error) {
+    } catch {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -95,7 +95,7 @@ export default function ContactForm() {
           Get Your Free Estimate
         </h3>
         <p className="text-text-primary">
-          Fill out the form below and we'll contact you within 2 hours
+          Fill out the form below and we&apos;ll contact you within 2 hours
         </p>
       </div>
 

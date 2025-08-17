@@ -356,7 +356,7 @@ export default function InstallationPage() {
                   
                   <div className="mt-6 p-4 bg-green-50 rounded-lg">
                     <p className="text-green-700 text-sm">
-                      <strong>Free site evaluation included!</strong> We'll assess your property and provide 
+                      <strong>Free site evaluation included!</strong> We&apos;ll assess your property and provide 
                       a detailed quote with no obligation.
                     </p>
                   </div>
@@ -373,7 +373,7 @@ export default function InstallationPage() {
               Ready to Install Your New Septic System?
             </h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Get started with a free site evaluation. We'll assess your property and provide 
+              Get started with a free site evaluation. We&apos;ll assess your property and provide 
               a detailed quote for your new septic system.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

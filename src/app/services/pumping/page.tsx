@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
-import { AlertTriangle, CheckCircle, Clock, Phone, Truck, Shield } from 'lucide-react';
+import { AlertTriangle, CheckCircle, Phone, Truck, Shield } from 'lucide-react';
 import { CONTACT_INFO } from '@/lib/constants';
 import { ServiceErrorBoundary } from '@/components/ServiceErrorBoundary';
 
@@ -143,7 +143,7 @@ export default function PumpingPage() {
                   When You Need Septic Pumping
                 </h2>
                 <p className="text-xl text-text-primary">
-                  Don't wait for a backup! Watch for these warning signs that indicate it's time for pumping.
+                  Don&apos;t wait for a backup! Watch for these warning signs that indicate it&apos;s time for pumping.
                 </p>
               </div>
 
@@ -158,7 +158,7 @@ export default function PumpingPage() {
 
               <div className="mt-8 text-center">
                 <p className="text-lg text-text-primary mb-4">
-                  <strong>Don't see your symptoms?</strong> Call us for a free consultation.
+                  <strong>Don&apos;t see your symptoms?</strong> Call us for a free consultation.
                 </p>
                 <a
                   href={`tel:${CONTACT_INFO.phone}`}
@@ -211,7 +211,7 @@ export default function PumpingPage() {
                   Transparent Pricing & Service Details
                 </h2>
                 <p className="text-xl text-text-primary">
-                  No hidden fees, no surprises. Here's exactly what you get with our pumping service.
+                  No hidden fees, no surprises. Here&apos;s exactly what you get with our pumping service.
                 </p>
               </div>
 
@@ -248,7 +248,7 @@ export default function PumpingPage() {
 
                 {/* What's Included */}
                 <div className="professional-card p-8">
-                  <h3 className="text-2xl font-bold text-primary-dark mb-6">What's Included</h3>
+                  <h3 className="text-2xl font-bold text-primary-dark mb-6">What&apos;s Included</h3>
                   <div className="space-y-3">
                     {pricingIncludes.map((item, index) => (
                       <div key={index} className="flex items-center space-x-3">
@@ -264,7 +264,7 @@ export default function PumpingPage() {
                       <span className="font-bold text-green-800">Service Guarantee</span>
                     </div>
                     <p className="text-green-700 text-sm">
-                      100% satisfaction guaranteed. If you're not happy with our service, we'll make it right.
+                      100% satisfaction guaranteed. If you&apos;re not happy with our service, we&apos;ll make it right.
                     </p>
                   </div>
                 </div>

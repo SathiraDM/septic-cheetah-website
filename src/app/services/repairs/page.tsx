@@ -106,7 +106,7 @@ export default function RepairsPage() {
                   </span>
                 </h1>
                 <p className="text-xl text-text-primary mb-8">
-                  Septic emergencies don't wait for business hours. Our emergency repair team 
+                  Septic emergencies don&apos;t wait for business hours. Our emergency repair team 
                   is available around the clock for urgent situations.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
@@ -200,7 +200,7 @@ export default function RepairsPage() {
 
               <div className="mt-8 text-center">
                 <p className="text-lg text-text-primary mb-4">
-                  <strong>Don't see your problem listed?</strong> Call us for expert diagnosis.
+                  <strong>Don&apos;t see your problem listed?</strong> Call us for expert diagnosis.
                 </p>
                 <a
                   href={`tel:${CONTACT_INFO.phone}`}
@@ -286,7 +286,7 @@ export default function RepairsPage() {
                 </div>
 
                 <div className="professional-card p-8">
-                  <h3 className="text-2xl font-bold text-primary-dark mb-6">What's Included</h3>
+                  <h3 className="text-2xl font-bold text-primary-dark mb-6">What&apos;s Included</h3>
                   <div className="space-y-3">
                     {[
                       "Emergency response dispatch",
@@ -349,7 +349,7 @@ export default function RepairsPage() {
                     Save Money with Preventive Maintenance
                   </h3>
                   <p className="text-text-primary">
-                    Regular maintenance can extend your system's life by 50% and prevent 
+                    Regular maintenance can extend your system&apos;s life by 50% and prevent 
                     costly emergency repairs. Schedule your annual inspection today.
                   </p>
                 </div>
@@ -372,7 +372,7 @@ export default function RepairsPage() {
               Septic Emergency? Call Now!
             </h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Don't let a septic emergency get worse. Our emergency response team 
+              Don&apos;t let a septic emergency get worse. Our emergency response team 
               is standing by 24/7 to help when you need it most.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

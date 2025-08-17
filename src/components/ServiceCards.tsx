@@ -78,7 +78,7 @@ export default function ServiceCards() {
               Septic Emergency?
             </h3>
             <p className="text-red-700 mb-6">
-              Don't wait! Septic emergencies can cause serious damage and health hazards. 
+              Don&apos;t wait! Septic emergencies can cause serious damage and health hazards. 
               Our emergency team is standing by 24/7.
             </p>
             <a

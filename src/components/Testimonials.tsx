@@ -8,7 +8,7 @@ export default function Testimonials() {
         <div className="text-center mb-16">
           <h2 className="section-title">What Our Customers Say</h2>
           <p className="section-subtitle">
-            Don't just take our word for it. Here's what real customers say about 
+            Don&apos;t just take our word for it. Here&apos;s what real customers say about 
             our septic services and emergency response.
           </p>
         </div>
@@ -25,7 +25,7 @@ export default function Testimonials() {
               </div>
 
               <p className="text-text-primary mb-6 leading-relaxed italic">
-                "{testimonial.text}"
+                &ldquo;{testimonial.text}&rdquo;
               </p>
 
               <div className="border-t pt-4">

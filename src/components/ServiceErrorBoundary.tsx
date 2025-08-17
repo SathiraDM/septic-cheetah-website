@@ -8,11 +8,15 @@ interface ErrorBoundaryState {
   error?: Error;
 }
 
+interface ServiceErrorBoundaryProps {
+  children: React.ReactNode;
+}
+
 export class ServiceErrorBoundary extends React.Component<
-  React.PropsWithChildren<{}>,
+  ServiceErrorBoundaryProps,
   ErrorBoundaryState
 > {
-  constructor(props: React.PropsWithChildren<{}>) {
+  constructor(props: ServiceErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
   }
@@ -25,8 +29,9 @@ export class ServiceErrorBoundary extends React.Component<
     console.error('Service component error:', error, errorInfo);
     
     // Track error in analytics
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'component_error', {
+    if (typeof window !== 'undefined' && (window as Window & { gtag?: unknown }).gtag) {
+      const gtag = (window as Window & { gtag?: (...args: unknown[]) => void }).gtag;
+      gtag?.('event', 'component_error', {
         error_message: error.message,
         component: 'ServiceErrorBoundary'
       });
@@ -42,7 +47,7 @@ export class ServiceErrorBoundary extends React.Component<
           </div>
           <h3 className="text-red-800 font-semibold text-lg mb-2">Something went wrong</h3>
           <p className="text-red-600 mb-4">
-            We're experiencing technical difficulties. Please call us directly for immediate assistance.
+            We&apos;re experiencing technical difficulties. Please call us directly for immediate assistance.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button 

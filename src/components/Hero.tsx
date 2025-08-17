@@ -1,3 +1,5 @@
+"use client";
+
 import Image from 'next/image';
 import { Phone, CheckCircle } from 'lucide-react';
 import { CONTACT_INFO, TRUST_SIGNALS } from '@/lib/constants';
@@ -19,7 +21,7 @@ export default function Hero() {
               </h1>
               <p className="text-lg md:text-xl text-text-primary max-w-2xl">
                 Emergency septic services across the region - Same day response guaranteed. 
-                We handle the dirty work so you don't have to.
+                We handle the dirty work so you don&apos;t have to.
               </p>
             </div>
 

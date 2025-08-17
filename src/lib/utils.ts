@@ -14,9 +14,10 @@ export function formatPhoneNumber(phone: string): string {
   return phone
 }
 
-export function trackEvent(eventName: string, parameters: any) {
-  if (typeof window !== 'undefined' && (window as any).gtag) {
-    (window as any).gtag('event', eventName, parameters)
+export function trackEvent(eventName: string, parameters: Record<string, unknown>) {
+  if (typeof window !== 'undefined' && (window as Window & { gtag?: unknown }).gtag) {
+    const gtag = (window as Window & { gtag?: (...args: unknown[]) => void }).gtag;
+    gtag?.(eventName, parameters);
   }
 }
 

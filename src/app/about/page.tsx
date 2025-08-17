@@ -1,12 +1,12 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
-import { Shield, Award, Users, Clock, CheckCircle, Star, MapPin } from 'lucide-react';
+import { Award, Users, Star, MapPin } from 'lucide-react';
 import TrustSignals from '@/components/TrustSignals';
 import { ServiceErrorBoundary } from '@/components/ServiceErrorBoundary';
 
 export const metadata: Metadata = {
   title: 'About Us - Our Story & Team',
-  description: 'Learn about Septic Cheetah\'s 15+ years of experience serving the community with professional septic services.',
+  description: 'Learn about Septic Cheetah&apos;s 15+ years of experience serving the community with professional septic services.',
   openGraph: {
     title: 'About Septic Cheetah - Our Story & Team',
     description: 'Trusted septic professionals with 15+ years experience',
@@ -61,7 +61,7 @@ export default function AboutPage() {
               </h1>
               <p className="text-xl text-text-primary leading-relaxed">
                 With over 15 years serving families and businesses across the region, 
-                we've built our reputation one satisfied customer at a time.
+                we&apos;ve built our reputation one satisfied customer at a time.
               </p>
             </div>
           </div>
@@ -80,15 +80,15 @@ export default function AboutPage() {
                     and a commitment to doing things right, we set out to change the industry.
                   </p>
                   <p>
-                    Today, we're proud to be the area's most trusted septic service company, 
+                    Today, we&apos;re proud to be the area&apos;s most trusted septic service company, 
                     having served over 2,000+ satisfied customers. Our team of licensed professionals 
                     treats every job - from routine pumping to complete system installations - 
                     with the same level of care and expertise.
                   </p>
                   <p>
                     We believe in honest pricing, reliable service, and treating our customers 
-                    like family. When you call Septic Cheetah, you're not just getting a service - 
-                    you're getting peace of mind.
+                    like family. When you call Septic Cheetah, you&apos;re not just getting a service - 
+                    you&apos;re getting peace of mind.
                   </p>
                 </div>
               </div>
@@ -184,8 +184,8 @@ export default function AboutPage() {
                 <div>
                   <h3 className="text-xl font-bold mb-3 text-primary-accent">Service Guarantee</h3>
                   <p className="mb-4">
-                    We stand behind every job with a 100% satisfaction guarantee. If you're not 
-                    completely satisfied with our work, we'll make it right at no additional cost.
+                    We stand behind every job with a 100% satisfaction guarantee. If you&apos;re not 
+                    completely satisfied with our work, we&apos;ll make it right at no additional cost.
                   </p>
                 </div>
                 <div>
@@ -205,7 +205,7 @@ export default function AboutPage() {
                 <div>
                   <h3 className="text-xl font-bold mb-3 text-primary-accent">Emergency Response</h3>
                   <p className="mb-4">
-                    Septic emergencies don't wait for business hours. Our emergency response team 
+                    Septic emergencies don&apos;t wait for business hours. Our emergency response team 
                     is available 24/7/365 to handle urgent situations.
                   </p>
                 </div>
