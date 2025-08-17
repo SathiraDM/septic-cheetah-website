@@ -1,9 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { 
   Phone, 
   Menu, 
@@ -63,18 +62,21 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const headerVariants = {
+  const headerVariants: Variants = {
     initial: { y: -100, opacity: 0 },
-    animate: { y: 0, opacity: 1 },
-    transition: { duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] }
+    animate: { 
+      y: 0, 
+      opacity: 1,
+      transition: { duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] }
+    }
   };
 
-  const mobileMenuVariants = {
+  const mobileMenuVariants: Variants = {
     closed: { opacity: 0, height: 0 },
     open: { 
       opacity: 1, 
       height: 'auto',
-      transition: { duration: 0.3, ease: 'easeInOut' }
+      transition: { duration: 0.3, ease: [0.6, -0.05, 0.01, 0.99] }
     }
   };
 

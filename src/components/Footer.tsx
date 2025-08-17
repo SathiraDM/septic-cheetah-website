@@ -1,8 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { 
   Phone, 
   Mail, 
@@ -11,7 +10,6 @@ import {
   Star,
   Shield,
   Award,
-  ExternalLink,
   Facebook,
   Twitter,
   Instagram,
@@ -55,7 +53,7 @@ const trustBadges = [
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -66,12 +64,12 @@ export default function Footer() {
     }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: 'easeOut' }
+      transition: { duration: 0.5, ease: [0.6, -0.05, 0.01, 0.99] }
     }
   };
 
