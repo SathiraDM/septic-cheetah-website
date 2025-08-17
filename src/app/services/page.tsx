@@ -1,7 +1,5 @@
 "use client";
 
-import Navigation from '@/components/Navigation';
-import PhoneButton from '@/components/PhoneButton';
 import Link from 'next/link';
 import { ArrowRight, CheckCircle, Phone } from 'lucide-react';
 import { SERVICES, CONTACT_INFO } from '@/lib/constants';
@@ -10,8 +8,6 @@ import { trackPhoneCall } from '@/lib/utils';
 export default function ServicesPage() {
   return (
     <>
-      <Navigation />
-      
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-bg-primary to-bg-secondary py-20">
         <div className="container mx-auto px-4 text-center">
@@ -149,8 +145,6 @@ export default function ServicesPage() {
           </a>
         </div>
       </section>
-
-      <PhoneButton />
     </>
   );
 }

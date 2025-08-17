@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
+import { Suspense } from 'react'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import PhoneButton from '@/components/PhoneButton'
 import "./globals.css";
 
 const inter = Inter({
@@ -75,7 +79,21 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${playfair.variable} antialiased`}
       >
-        {children}
+        <div className="min-h-screen flex flex-col">
+          <Suspense fallback={<div className="h-20 bg-white animate-pulse" />}>
+            <Header />
+          </Suspense>
+          
+          <main className="flex-1">
+            {children}
+          </main>
+          
+          <Suspense fallback={<div className="h-96 bg-primary-dark animate-pulse" />}>
+            <Footer />
+          </Suspense>
+        </div>
+        
+        <PhoneButton />
       </body>
     </html>
   );

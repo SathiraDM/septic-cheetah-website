@@ -1,18 +1,15 @@
 'use client';
 
-import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import ServiceCards from '@/components/ServiceCards';
 import Testimonials from '@/components/Testimonials';
 import ContactForm from '@/components/ContactForm';
-import PhoneButton from '@/components/PhoneButton';
 import { MapPin, Clock, Shield, Award } from 'lucide-react';
 import { CONTACT_INFO } from '@/lib/constants';
 
 export default function HomePage() {
   return (
     <>
-      <Navigation />
       <Hero />
       <ServiceCards />
       <Testimonials />
@@ -98,8 +95,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      <PhoneButton />
     </>
   );
 }
