@@ -35,3 +35,22 @@ export function trackFormSubmit(formType: string) {
     value: 1
   })
 }
+
+// Service interest tracking
+export function trackServiceInterest(service: string, action: string) {
+  trackEvent('service_interest', {
+    event_category: 'engagement',
+    event_label: `${service}_${action}`,
+    service_type: service,
+    action: action
+  })
+}
+
+// Emergency contact tracking
+export function trackEmergencyContact(method: 'phone' | 'form') {
+  trackEvent('emergency_contact', {
+    event_category: 'emergency',
+    event_label: method,
+    value: 5 // Higher value for emergency contacts
+  })
+}
