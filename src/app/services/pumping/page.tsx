@@ -114,71 +114,66 @@ export default function PumpingPage() {
   return (
     <ServiceErrorBoundary>
       <main className="min-h-screen bg-white">
-        {/* Elegant Hero Section with Brand Colors */}
-        <section className="relative bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 min-h-[90vh] flex items-center overflow-hidden">
+        {/* Elegant Hero Section with Main Brand Colors */}
+        <section className="relative bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-primary min-h-[90vh] flex items-center overflow-hidden">
           {/* Subtle Background Pattern */}
-          <div className="absolute inset-0 opacity-5">
-            <div className="absolute top-20 left-20 w-64 h-64 bg-orange-600 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-20 right-20 w-80 h-80 bg-yellow-600 rounded-full blur-3xl"></div>
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-20 left-20 w-64 h-64 bg-primary-accent rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 right-20 w-80 h-80 bg-secondary-accent rounded-full blur-3xl"></div>
           </div>
           
-          <div className="container mx-auto px-6 lg:px-8 relative z-10">
+          <div className="container mx-auto px-8 lg:px-16 xl:px-24 relative z-10 max-w-7xl">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               {/* Content Side */}
-              <div className="space-y-8">
-                <div className="space-y-6">
-                  <div className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm border border-orange-200 rounded-full px-4 py-2">
-                    <Clock className="w-4 h-4 text-orange-600" />
-                    <span className="text-orange-700 font-medium text-sm">Same-Day Service Available</span>
-                  </div>
-                  
-                  <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
-                    <span className="text-amber-900">Professional</span>
-                    <span className="block text-orange-600">Septic Pumping</span>
+              <div className="space-y-8 text-center lg:text-center flex flex-col justify-center">
+                <div className="space-y-8">
+                  <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
+                    <span className="text-primary-dark">Professional</span>
+                    <span className="block text-primary-accent">Septic Pumping</span>
                   </h1>
                   
-                  <p className="text-xl text-amber-800 leading-relaxed max-w-lg">
+                  <p className="text-lg lg:text-xl text-text-primary leading-relaxed max-w-2xl mx-auto">
                     Expert septic tank pumping services with transparent pricing, 
                     licensed technicians, and complete satisfaction guarantee.
                   </p>
                 </div>
 
                 {/* Service Guarantees */}
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
                   {serviceGuarantees.map((guarantee, index) => (
-                    <div key={index} className="flex items-center space-x-3 p-4 bg-white/60 backdrop-blur-sm border border-orange-100 rounded-xl">
-                      <guarantee.icon className="w-5 h-5 text-orange-600 flex-shrink-0" />
+                    <div key={index} className="flex items-center space-x-3 p-4 bg-white/70 backdrop-blur-sm border border-primary-accent/20 rounded-xl hover:shadow-lg transition-all duration-300">
+                      <guarantee.icon className="w-6 h-6 text-primary-accent flex-shrink-0" />
                       <div>
-                        <div className="font-semibold text-amber-900 text-sm">{guarantee.title}</div>
-                        <div className="text-amber-700 text-xs">{guarantee.description}</div>
+                        <div className="font-bold text-primary-dark text-sm">{guarantee.title}</div>
+                        <div className="text-text-primary text-xs">{guarantee.description}</div>
                       </div>
                     </div>
                   ))}
                 </div>
 
                 {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <a
                     href={`tel:${CONTACT_INFO.phone}`}
-                    className="group relative overflow-hidden bg-gradient-to-r from-orange-600 to-amber-600 text-white font-bold py-4 px-8 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 hover:shadow-xl hover:scale-105"
+                    className="group relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-5 px-8 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 hover:shadow-xl hover:scale-105"
                   >
-                    <Phone className="w-5 h-5" />
-                    <span>Schedule Service</span>
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    <Phone className="w-6 h-6" />
+                    <span className="text-lg">Schedule Service</span>
+                    <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
                   </a>
                   <a
                     href={`tel:${CONTACT_INFO.emergencyPhone}`}
-                    className="bg-red-600 text-white font-bold py-4 px-8 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 hover:bg-red-700 hover:shadow-xl"
+                    className="bg-red-600 text-white font-bold py-5 px-8 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 hover:bg-red-700 hover:shadow-xl hover:scale-105"
                   >
-                    <AlertTriangle className="w-5 h-5" />
-                    <span>Emergency Service</span>
+                    <AlertTriangle className="w-6 h-6" />
+                    <span className="text-lg">Emergency Service</span>
                   </a>
                 </div>
               </div>
 
               {/* Image Side */}
-              <div className="relative">
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+              <div className="relative flex justify-center lg:justify-end">
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-lg w-full">
                   <Image
                     src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=500&fit=crop"
                     alt="Professional septic pumping service"
@@ -186,11 +181,11 @@ export default function PumpingPage() {
                     height={500}
                     className="object-cover w-full h-[500px]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
                 </div>
                 
                 {/* Floating Price Badge */}
-                <div className="absolute -bottom-4 -left-4 bg-gradient-to-r from-orange-600 to-amber-600 text-white p-6 rounded-xl shadow-xl">
+                <div className="absolute -bottom-4 -left-4 bg-gradient-to-r from-primary-accent to-secondary-accent text-white p-6 rounded-xl shadow-xl">
                   <div className="text-2xl font-bold">Starting at $299</div>
                   <div className="text-sm opacity-90">Most residential properties</div>
                 </div>
@@ -200,8 +195,8 @@ export default function PumpingPage() {
                   <div className="flex items-center space-x-2">
                     <Star className="w-5 h-5 text-yellow-500 fill-current" />
                     <div>
-                      <div className="font-bold text-sm text-gray-900">4.9/5</div>
-                      <div className="text-xs text-gray-600">500+ Reviews</div>
+                      <div className="font-bold text-sm text-primary-dark">4.9/5</div>
+                      <div className="text-xs text-text-primary">500+ Reviews</div>
                     </div>
                   </div>
                 </div>
@@ -211,58 +206,70 @@ export default function PumpingPage() {
         </section>
 
         {/* Warning Signs Section */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold mb-4">
-                <span className="text-amber-900">When to Schedule</span>
-                <span className="block text-orange-600">Septic Pumping</span>
+        <section className="py-24 bg-white">
+          <div className="container mx-auto px-8 lg:px-16 xl:px-24 max-w-7xl">
+            <div className="text-center mb-20">
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+                <span className="text-primary-dark">When to Schedule</span>
+                <span className="block text-primary-accent">Septic Pumping</span>
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              {/* Modern decorative line */}
+              <div className="flex items-center justify-center mb-6">
+                <div className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"></div>
+                <div className="w-2 h-2 bg-primary-accent rounded-full mx-4"></div>
+                <div className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"></div>
+              </div>
+              <p className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed">
                 Don&apos;t wait for a system failure. Watch for these warning signs and schedule service before problems become emergencies.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
               {warningSignsData.map((sign, index) => {
                 const severityStyles = {
-                  critical: "bg-red-50 border-red-200 text-red-800",
-                  danger: "bg-orange-50 border-orange-200 text-orange-800", 
-                  warning: "bg-yellow-50 border-yellow-200 text-yellow-800",
-                  info: "bg-blue-50 border-blue-200 text-blue-800"
+                  critical: "bg-red-50 border-red-200 text-red-800 hover:bg-red-100",
+                  danger: "bg-orange-50 border-orange-200 text-orange-800 hover:bg-orange-100", 
+                  warning: "bg-yellow-50 border-yellow-200 text-yellow-800 hover:bg-yellow-100",
+                  info: "bg-blue-50 border-blue-200 text-blue-800 hover:bg-blue-100"
                 };
 
                 return (
-                  <div key={index} className={`p-6 border-2 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg ${severityStyles[sign.severity as keyof typeof severityStyles]}`}>
-                    <sign.icon className="w-8 h-8 mb-4" />
-                    <h3 className="font-bold mb-2">{sign.title}</h3>
-                    <p className="text-sm opacity-90">{sign.description}</p>
+                  <div key={index} className={`p-8 border-2 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-xl ${severityStyles[sign.severity as keyof typeof severityStyles]}`}>
+                    <sign.icon className="w-10 h-10 mb-6" />
+                    <h3 className="text-lg font-bold mb-3">{sign.title}</h3>
+                    <p className="text-sm opacity-90 leading-relaxed">{sign.description}</p>
                   </div>
                 );
               })}
             </div>
 
-            <div className="text-center mt-12">
+            <div className="text-center">
               <a
                 href={`tel:${CONTACT_INFO.phone}`}
-                className="inline-flex items-center space-x-3 bg-gradient-to-r from-orange-600 to-amber-600 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                className="inline-flex items-center space-x-3 bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-5 px-10 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
-                <Phone className="w-5 h-5" />
-                <span>Get Expert Consultation</span>
+                <Phone className="w-6 h-6" />
+                <span className="text-lg">Get Expert Consultation</span>
               </a>
             </div>
           </div>
         </section>
 
         {/* Process Section */}
-        <section className="py-20 bg-gradient-to-br from-amber-50 to-orange-50">
-          <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold mb-4">
-                <span className="text-amber-900">Our Professional</span>
-                <span className="block text-orange-600">Service Process</span>
+        <section className="py-24 bg-gradient-to-br from-bg-primary to-bg-secondary">
+          <div className="container mx-auto px-8 lg:px-16 xl:px-24 max-w-7xl">
+            <div className="text-center mb-20">
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+                <span className="text-primary-dark">Our Professional</span>
+                <span className="block text-primary-accent">Service Process</span>
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              {/* Modern decorative line */}
+              <div className="flex items-center justify-center mb-6">
+                <div className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"></div>
+                <div className="w-2 h-2 bg-primary-accent rounded-full mx-4"></div>
+                <div className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"></div>
+              </div>
+              <p className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed">
                 Systematic approach ensuring thorough, safe, and efficient service every time
               </p>
             </div>
@@ -270,19 +277,19 @@ export default function PumpingPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {processSteps.map((step, index) => (
                 <div key={index} className="relative">
-                  <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
-                    <div className="w-12 h-12 bg-gradient-to-r from-orange-600 to-amber-600 rounded-lg flex items-center justify-center text-white font-bold text-lg mb-4">
+                  <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-primary-accent/10">
+                    <div className="w-16 h-16 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-xl flex items-center justify-center text-white font-bold text-xl mb-6">
                       {step.number}
                     </div>
-                    <h3 className="text-lg font-bold text-amber-900 mb-2">{step.title}</h3>
-                    <p className="text-gray-600 text-sm mb-3">{step.description}</p>
-                    <div className="text-orange-600 text-xs font-medium">{step.duration}</div>
+                    <h3 className="text-xl font-bold text-primary-dark mb-4">{step.title}</h3>
+                    <p className="text-text-primary mb-4 leading-relaxed">{step.description}</p>
+                    <div className="text-primary-accent text-sm font-semibold">{step.duration}</div>
                   </div>
                   
                   {/* Connection Arrow */}
                   {index < processSteps.length - 1 && (
                     <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2">
-                      <ArrowRight className="w-6 h-6 text-orange-300" />
+                      <ArrowRight className="w-8 h-8 text-primary-accent/50" />
                     </div>
                   )}
                 </div>
@@ -292,62 +299,74 @@ export default function PumpingPage() {
         </section>
 
         {/* Pricing Section */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold mb-4">
-                <span className="text-amber-900">Transparent</span>
-                <span className="block text-orange-600">Pricing</span>
+        <section className="py-24 bg-white">
+          <div className="container mx-auto px-8 lg:px-16 xl:px-24 max-w-7xl">
+            <div className="text-center mb-20">
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+                <span className="text-primary-dark">Transparent</span>
+                <span className="block text-primary-accent">Pricing</span>
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              {/* Modern decorative line */}
+              <div className="flex items-center justify-center mb-6">
+                <div className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"></div>
+                <div className="w-2 h-2 bg-primary-accent rounded-full mx-4"></div>
+                <div className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"></div>
+              </div>
+              <p className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed">
                 No hidden fees, no surprises. Know exactly what you&apos;re paying for with our upfront pricing.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
               {/* Pricing Card */}
-              <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-8 border border-orange-200">
-                <div className="text-center mb-8">
-                  <div className="text-4xl font-bold text-orange-600 mb-2">$299 - $399</div>
-                  <div className="text-xl text-amber-900 font-medium">Standard Pumping Service</div>
-                  <div className="text-sm text-gray-600 mt-2">Most residential properties</div>
+              <div className="bg-gradient-to-br from-bg-primary to-bg-secondary rounded-3xl p-10 border-2 border-primary-accent/20 hover:border-primary-accent/40 transition-all duration-300 hover:shadow-xl">
+                <div className="text-center mb-10">
+                  <div className="text-5xl font-bold text-primary-accent mb-4">$299 - $399</div>
+                  <div className="text-2xl text-primary-dark font-semibold">Standard Pumping Service</div>
+                  {/* Small decorative line */}
+                  <div className="flex items-center justify-center mt-4 mb-2">
+                    <div className="h-px bg-gradient-to-r from-transparent via-primary-accent/50 to-transparent w-20"></div>
+                    <div className="w-1 h-1 bg-primary-accent/50 rounded-full mx-2"></div>
+                    <div className="h-px bg-gradient-to-r from-transparent via-primary-accent/50 to-transparent w-20"></div>
+                  </div>
+                  <div className="text-text-primary mt-3">Most residential properties</div>
                 </div>
                 
-                <div className="space-y-4 mb-8">
-                  <div className="flex justify-between items-center py-2 border-b border-orange-100">
-                    <span className="text-gray-600">Service Duration:</span>
-                    <span className="font-semibold text-amber-900">45-90 minutes</span>
+                <div className="space-y-6 mb-10">
+                  <div className="flex justify-between items-center py-3 border-b border-primary-accent/20">
+                    <span className="text-text-primary font-medium">Service Duration:</span>
+                    <span className="font-bold text-primary-dark">45-90 minutes</span>
                   </div>
-                  <div className="flex justify-between items-center py-2 border-b border-orange-100">
-                    <span className="text-gray-600">Same-day Available:</span>
-                    <span className="font-semibold text-green-600">Yes</span>
+                  <div className="flex justify-between items-center py-3 border-b border-primary-accent/20">
+                    <span className="text-text-primary font-medium">Same-day Available:</span>
+                    <span className="font-bold text-green-600">Yes</span>
                   </div>
-                  <div className="flex justify-between items-center py-2 border-b border-orange-100">
-                    <span className="text-gray-600">Emergency Surcharge:</span>
-                    <span className="font-semibold text-red-600">+$100</span>
+                  <div className="flex justify-between items-center py-3 border-b border-primary-accent/20">
+                    <span className="text-text-primary font-medium">Emergency Surcharge:</span>
+                    <span className="font-bold text-red-600">+$100</span>
                   </div>
-                  <div className="flex justify-between items-center py-2">
-                    <span className="text-gray-600">Service Guarantee:</span>
-                    <span className="font-semibold text-green-600">100%</span>
+                  <div className="flex justify-between items-center py-3">
+                    <span className="text-text-primary font-medium">Service Guarantee:</span>
+                    <span className="font-bold text-green-600">100%</span>
                   </div>
                 </div>
 
                 <a
                   href={`tel:${CONTACT_INFO.phone}`}
-                  className="block w-full text-center bg-gradient-to-r from-orange-600 to-amber-600 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                  className="block w-full text-center bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-lg"
                 >
                   Get Exact Quote
                 </a>
               </div>
 
               {/* What&apos;s Included Card */}
-              <div className="bg-amber-900 text-white rounded-2xl p-8">
-                <h3 className="text-2xl font-bold mb-8 text-center">
+              <div className="bg-gradient-to-br from-primary-dark to-secondary-accent text-white rounded-3xl p-10">
+                <h3 className="text-3xl font-bold mb-10 text-center">
                   What&apos;s Included
-                  <span className="block text-lg font-normal text-amber-200 mt-2">Complete service package</span>
+                  <span className="block text-lg font-normal text-white/80 mt-3">Complete service package</span>
                 </h3>
                 
-                <div className="space-y-4 mb-8">
+                <div className="space-y-6 mb-10">
                   {[
                     "Complete tank pumping and waste removal",
                     "Comprehensive system inspection", 
@@ -356,19 +375,19 @@ export default function PumpingPage() {
                     "Detailed service documentation",
                     "Written service guarantee"
                   ].map((item, index) => (
-                    <div key={index} className="flex items-start space-x-3">
-                      <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                      <span className="text-amber-100">{item}</span>
+                    <div key={index} className="flex items-start space-x-4">
+                      <CheckCircle className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
+                      <span className="text-white/90 leading-relaxed">{item}</span>
                     </div>
                   ))}
                 </div>
                 
-                <div className="bg-green-900/20 border border-green-400/20 rounded-xl p-4">
-                  <div className="flex items-center space-x-3 mb-2">
-                    <Shield className="w-5 h-5 text-green-400" />
-                    <span className="font-bold text-green-300">100% Satisfaction Guarantee</span>
+                <div className="bg-green-900/30 border border-green-400/30 rounded-xl p-6">
+                  <div className="flex items-center space-x-3 mb-3">
+                    <Shield className="w-6 h-6 text-green-400" />
+                    <span className="font-bold text-green-300 text-lg">100% Satisfaction Guarantee</span>
                   </div>
-                  <p className="text-green-200 text-sm">
+                  <p className="text-green-200 leading-relaxed">
                     If you&apos;re not completely satisfied with our service, we&apos;ll make it right or provide a full refund.
                   </p>
                 </div>
@@ -378,23 +397,29 @@ export default function PumpingPage() {
         </section>
 
         {/* FAQ Section */}
-        <section className="py-20 bg-gradient-to-br from-amber-50 to-orange-50">
-          <div className="container mx-auto px-6 lg:px-8 max-w-4xl">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold mb-4">
-                <span className="text-amber-900">Frequently Asked</span>
-                <span className="block text-orange-600">Questions</span>
+        <section className="py-24 bg-gradient-to-br from-bg-primary to-bg-secondary">
+          <div className="container mx-auto px-8 lg:px-16 xl:px-24 max-w-6xl">
+            <div className="text-center mb-20">
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+                <span className="text-primary-dark">Frequently Asked</span>
+                <span className="block text-primary-accent">Questions</span>
               </h2>
-              <p className="text-xl text-gray-600">
+              {/* Modern decorative line */}
+              <div className="flex items-center justify-center mb-6">
+                <div className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"></div>
+                <div className="w-2 h-2 bg-primary-accent rounded-full mx-4"></div>
+                <div className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"></div>
+              </div>
+              <p className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed">
                 Get answers to common questions about septic tank pumping services
               </p>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-8">
               {frequentlyAskedQuestions.map((faq, index) => (
-                <div key={index} className="bg-white border border-orange-100 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300">
-                  <h3 className="text-lg font-bold text-amber-900 mb-3">{faq.question}</h3>
-                  <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                <div key={index} className="bg-white border border-primary-accent/20 rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:border-primary-accent/40">
+                  <h3 className="text-xl font-bold text-primary-dark mb-4">{faq.question}</h3>
+                  <p className="text-text-primary leading-relaxed text-lg">{faq.answer}</p>
                 </div>
               ))}
             </div>
@@ -402,27 +427,31 @@ export default function PumpingPage() {
         </section>
 
         {/* Final CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-orange-600 to-amber-600 text-white">
-          <div className="container mx-auto px-6 text-center">
-            <h2 className="text-4xl font-bold mb-6">
-              Ready to Schedule Your Pumping Service?
+        <section className="py-24 bg-gradient-to-br from-primary-dark via-primary-dark to-secondary-accent text-white relative overflow-hidden">
+          {/* Background Elements */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(255,255,255,0.1)_0%,transparent_50%)] pointer-events-none"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(191,136,41,0.2)_0%,transparent_50%)] pointer-events-none"></div>
+          
+          <div className="container mx-auto px-8 lg:px-16 xl:px-24 text-center relative z-10 max-w-7xl">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-8">
+              Ready to Schedule Your <span className="text-primary-accent">Pumping Service?</span>
             </h2>
-            <p className="text-xl mb-10 max-w-3xl mx-auto opacity-90">
-              Same-day service available for most areas. Professional pumping with complete satisfaction guarantee.
+            <p className="text-xl mb-12 max-w-4xl mx-auto opacity-90 leading-relaxed">
+              Same-day service available for most areas. Professional pumping with complete satisfaction guarantee and transparent pricing.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <a
                 href={`tel:${CONTACT_INFO.phone}`}
-                className="bg-white text-orange-600 hover:bg-gray-100 font-bold py-4 px-8 rounded-xl text-lg inline-flex items-center justify-center space-x-3 transition-all duration-300 hover:scale-105 shadow-lg"
+                className="bg-white text-primary-accent hover:bg-gray-100 font-bold py-6 px-10 rounded-xl text-xl inline-flex items-center justify-center space-x-4 transition-all duration-300 hover:scale-105 shadow-xl"
               >
-                <Truck className="w-6 h-6" />
+                <Truck className="w-7 h-7" />
                 <span>Schedule Service Now</span>
               </a>
               <a
                 href={`tel:${CONTACT_INFO.emergencyPhone}`}
-                className="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-xl text-lg inline-flex items-center justify-center space-x-3 transition-all duration-300 hover:scale-105 shadow-lg"
+                className="bg-red-600 hover:bg-red-700 text-white font-bold py-6 px-10 rounded-xl text-xl inline-flex items-center justify-center space-x-4 transition-all duration-300 hover:scale-105 shadow-xl"
               >
-                <AlertTriangle className="w-6 h-6" />
+                <AlertTriangle className="w-7 h-7" />
                 <span>Emergency Service</span>
               </a>
             </div>
