@@ -133,18 +133,24 @@ export default function PumpingPage() {
 
         {/* When You Need Pumping */}
         <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <AlertTriangle className="w-8 h-8 text-red-600" />
+              {/* Modern Elegant Header Section */}
+              <div className="text-center mb-16">
+                <div className="max-w-3xl mx-auto">
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+                    <span className="text-primary-dark">Warning</span>{' '}
+                    <span className="bg-gradient-to-r from-primary-accent via-secondary-accent to-primary-accent bg-clip-text text-transparent bg-300% animate-gradient">
+                      Signs
+                    </span>
+                  </h2>
+                  
+                  <p className="text-lg text-gray-600 mb-6 font-light">
+                    Don&apos;t wait for a backup - watch for these signs
+                  </p>
+                  
+                  <div className="w-16 h-0.5 bg-gradient-to-r from-primary-accent to-secondary-accent mx-auto rounded-full" />
                 </div>
-                <h2 className="text-3xl lg:text-4xl font-bold text-primary-dark mb-4">
-                  When You Need Septic Pumping
-                </h2>
-                <p className="text-xl text-text-primary">
-                  Don&apos;t wait for a backup! Watch for these warning signs that indicate it&apos;s time for pumping.
-                </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -174,14 +180,23 @@ export default function PumpingPage() {
 
         {/* Our Pumping Process */}
         <section className="py-16 bg-bg-secondary">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-primary-dark mb-4">
-                Our Professional Pumping Process
-              </h2>
-              <p className="text-xl text-text-primary max-w-2xl mx-auto">
-                We follow a systematic approach to ensure thorough, safe, and efficient service every time.
-              </p>
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+            {/* Modern Elegant Header Section */}
+            <div className="text-center mb-16">
+              <div className="max-w-3xl mx-auto">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+                  <span className="text-primary-dark">Professional</span>{' '}
+                  <span className="bg-gradient-to-r from-primary-accent via-secondary-accent to-primary-accent bg-clip-text text-transparent bg-300% animate-gradient">
+                    Process
+                  </span>
+                </h2>
+                
+                <p className="text-lg text-gray-600 mb-6 font-light">
+                  Systematic approach for thorough, safe service
+                </p>
+                
+                <div className="w-16 h-0.5 bg-gradient-to-r from-primary-accent to-secondary-accent mx-auto rounded-full" />
+              </div>
             </div>
 
             <div className="max-w-4xl mx-auto">
@@ -204,15 +219,24 @@ export default function PumpingPage() {
 
         {/* Pricing and Service Details */}
         <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl lg:text-4xl font-bold text-primary-dark mb-4">
-                  Transparent Pricing & Service Details
-                </h2>
-                <p className="text-xl text-text-primary">
-                  No hidden fees, no surprises. Here&apos;s exactly what you get with our pumping service.
-                </p>
+              {/* Modern Elegant Header Section */}
+              <div className="text-center mb-16">
+                <div className="max-w-3xl mx-auto">
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+                    <span className="text-primary-dark">Transparent</span>{' '}
+                    <span className="bg-gradient-to-r from-primary-accent via-secondary-accent to-primary-accent bg-clip-text text-transparent bg-300% animate-gradient">
+                      Pricing
+                    </span>
+                  </h2>
+                  
+                  <p className="text-lg text-gray-600 mb-6 font-light">
+                    No hidden fees, no surprises - exactly what you get
+                  </p>
+                  
+                  <div className="w-16 h-0.5 bg-gradient-to-r from-primary-accent to-secondary-accent mx-auto rounded-full" />
+                </div>
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -275,15 +299,24 @@ export default function PumpingPage() {
 
         {/* FAQ Section */}
         <section className="py-16 bg-bg-secondary">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl lg:text-4xl font-bold text-primary-dark mb-4">
-                  Frequently Asked Questions
-                </h2>
-                <p className="text-xl text-text-primary">
-                  Get answers to common questions about septic tank pumping.
-                </p>
+              {/* Modern Elegant Header Section */}
+              <div className="text-center mb-16">
+                <div className="max-w-3xl mx-auto">
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+                    <span className="text-primary-dark">Common</span>{' '}
+                    <span className="bg-gradient-to-r from-primary-accent via-secondary-accent to-primary-accent bg-clip-text text-transparent bg-300% animate-gradient">
+                      Questions
+                    </span>
+                  </h2>
+                  
+                  <p className="text-lg text-gray-600 mb-6 font-light">
+                    Answers about septic tank pumping services
+                  </p>
+                  
+                  <div className="w-16 h-0.5 bg-gradient-to-r from-primary-accent to-secondary-accent mx-auto rounded-full" />
+                </div>
               </div>
 
               <div className="space-y-6">

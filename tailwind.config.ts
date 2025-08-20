@@ -23,6 +23,16 @@ const config: Config = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      animation: {
+        'float': 'float 6s ease-in-out infinite',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translate(0px, 0px)' },
+          '33%': { transform: 'translate(10px, -10px)' },
+          '66%': { transform: 'translate(-5px, 5px)' },
+        },
+      },
       container: {
         center: true,
         padding: '1rem',
@@ -30,7 +40,8 @@ const config: Config = {
           sm: '640px',
           md: '768px',
           lg: '1024px',
-          xl: '1280px',
+          xl: '1200px',
+          '2xl': '1200px',
         },
       },
     },

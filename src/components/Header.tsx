@@ -38,6 +38,11 @@ const navigationItems = [
     ]
   },
   { 
+    href: '/service-areas', 
+    label: 'Service Areas',
+    description: 'Counties and cities we serve'
+  },
+  { 
     href: '/about', 
     label: 'About',
     description: 'Our story and expertise'
@@ -57,21 +62,24 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      // Check if we've scrolled past the status bar height
+      // Status bar height is now approximately 28px (py-1 + border)
+      // Use a larger buffer (20px) for much smoother, gradual transition
+      const statusBarHeight = 28;
+      const buffer = 20;
+      const scrolled = window.scrollY > (statusBarHeight + buffer);
+      setIsScrolled(scrolled);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    // Initial check in case page loads already scrolled
+    handleScroll();
+    
+    // Use passive listener for better performance and reduce glitches
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
-
-  const headerVariants: Variants = {
-    initial: { y: -100, opacity: 0 },
-    animate: { 
-      y: 0, 
-      opacity: 1,
-      transition: { duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] }
-    }
-  };
 
   const mobileMenuVariants: Variants = {
     closed: { opacity: 0, height: 0 },
@@ -84,9 +92,16 @@ export default function Header() {
 
   return (
     <>
-      {/* Top Bar - Modern Elegant Status Bar */}
-      <div className="bg-gradient-to-r from-primary-dark to-primary-dark/95 text-white py-3 px-4 hidden md:block border-b border-primary-accent/20">
-        <div className="container mx-auto flex justify-between items-center text-sm">
+      {/* Top Status Bar - SCROLLABLE (Normal document flow) */}
+      <div className="bg-gradient-to-r from-primary-dark to-primary-dark/95 text-white py-1 px-4 hidden md:block border-b border-primary-accent/20"
+           style={{
+             // Ensure proper positioning and smooth scrolling
+             position: 'relative',
+             zIndex: 1,
+             transform: 'translateZ(0)'
+           }}>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl flex justify-between items-center text-sm"
+             style={{ minHeight: '28px' }}>
           <div className="flex items-center space-x-8">
             <div className="flex items-center space-x-2 group">
               <div className="relative">
@@ -127,18 +142,35 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Main Header - Modern Elegant Design */}
+      {/* Main Navigation Header - ULTRA SMOOTH POSITIONING */}
       <motion.header
-        className={`sticky top-0 z-50 transition-all duration-500 ${
+        className={`${
+          isScrolled 
+            ? 'fixed top-0 left-0 right-0 z-50' 
+            : 'relative z-40'
+        } transition-all duration-700 ease-out ${
           isScrolled 
             ? 'bg-white/98 backdrop-blur-xl shadow-2xl border-b border-primary-accent/10' 
             : 'bg-white/95 backdrop-blur-md shadow-md'
         }`}
-        variants={headerVariants}
-        initial="initial"
-        animate="animate"
+        style={{
+          // Prevent layout shifts with consistent height
+          minHeight: '72px',
+          // GPU acceleration for smooth transitions
+          transform: 'translateZ(0)',
+          willChange: 'transform, background-color, box-shadow'
+        }}
+        animate={{ 
+          y: 0,
+          opacity: 1,
+          scale: 1
+        }}
+        transition={{ 
+          duration: 0.6, 
+          ease: [0.25, 0.46, 0.45, 0.94] // Custom bezier for ultra smooth
+        }}
       >
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <div className="flex justify-between items-center py-3">
             {/* Logo Section - Enhanced */}
             <Link href="/" className="flex items-center group">
@@ -389,6 +421,15 @@ export default function Header() {
           </AnimatePresence>
         </div>
       </motion.header>
+
+      {/* Layout Shift Compensation - Prevents jumping when header becomes fixed */}
+      {isScrolled && (
+        <div 
+          style={{ height: '72px' }}
+          className="block"
+          aria-hidden="true"
+        />
+      )}
     </>
   );
 }

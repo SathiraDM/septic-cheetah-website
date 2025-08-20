@@ -46,27 +46,38 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, [backgroundImages.length]);
 
-  // Calculate hero height based on screen height and navbar
+  // Calculate hero height based on screen height and header
   useEffect(() => {
     const calculateHeroHeight = () => {
       const screenHeight = window.innerHeight;
       
-      if (screenHeight < 750) {
-        // Fixed height for small screens
-        setHeroHeight('720px');
+      if (screenHeight < 700) {
+        // Fixed height for very small screens - ensures scrollability
+        setHeroHeight('600px');
       } else {
-        // Full height minus navbar for larger screens
-        // Top bar: ~48px (py-3 + border), Main header: ~72px (py-3 + logo height)
-        // Total navbar height: approximately 120px
-        const navbarHeight = 120;
-        const availableHeight = screenHeight - navbarHeight;
+        // Use viewport height minus the header heights for proper alignment
+        // Status bar: ~28px (py-1 + border), Main header: ~72px (py-3 + logo height)
+        // Total header height: approximately 100px
+        const headerOffset = 90;
+        const availableHeight = Math.max(600, screenHeight - headerOffset);
         setHeroHeight(`${availableHeight}px`);
       }
     };
     
     calculateHeroHeight();
-    window.addEventListener('resize', calculateHeroHeight);
-    return () => window.removeEventListener('resize', calculateHeroHeight);
+    
+    // Debounce resize events for better performance
+    let resizeTimeout: NodeJS.Timeout;
+    const debouncedResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(calculateHeroHeight, 250);
+    };
+    
+    window.addEventListener('resize', debouncedResize, { passive: true });
+    return () => {
+      window.removeEventListener('resize', debouncedResize);
+      clearTimeout(resizeTimeout);
+    };
   }, []);
 
   const containerVariants = {
@@ -206,7 +217,7 @@ export default function Hero() {
         <Wrench className="w-5 h-5" />
       </motion.div>
 
-      <div className="container mx-auto px-6 relative z-10 h-full flex items-center justify-center">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10 h-full flex items-center justify-center">
         {/* Enhanced Content Background for Maximum Readability */}
         <div className="absolute inset-0 bg-gradient-radial from-black/20 via-black/8 to-transparent blur-3xl opacity-70"></div>
         
@@ -303,7 +314,18 @@ export default function Hero() {
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           onClick={() => {
-            const scrollTarget = heroHeight === '720px' ? 720 : window.innerHeight;
+            // Calculate scroll target based on current hero height
+            const screenHeight = window.innerHeight;
+            let scrollTarget;
+            
+            if (screenHeight < 700) {
+              scrollTarget = 600;
+            } else if (screenHeight >= 700 && screenHeight < 750) {
+              scrollTarget = Math.floor(screenHeight * 0.9);
+            } else {
+              scrollTarget = screenHeight - 120; // minus navbar height
+            }
+            
             window.scrollTo({
               top: scrollTarget,
               behavior: 'smooth'

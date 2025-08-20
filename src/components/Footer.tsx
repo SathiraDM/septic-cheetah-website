@@ -77,7 +77,7 @@ export default function Footer() {
     <footer className="bg-gradient-to-br from-primary-dark via-primary-dark to-secondary-accent text-white">
       {/* Emergency CTA Banner */}
       <div className="bg-red-600 py-4">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="flex items-center space-x-3 mb-3 md:mb-0">
               <AlertTriangle className="w-6 h-6 animate-pulse" />
@@ -102,7 +102,7 @@ export default function Footer() {
 
       {/* Main Footer Content */}
       <motion.div
-        className="container mx-auto px-4 py-16"
+        className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-16"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -285,7 +285,7 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-white/20">
-        <div className="container mx-auto px-4 py-6">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-sm text-gray-300">
               © {currentYear} Septic Cheetah LLC. All rights reserved.

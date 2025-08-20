@@ -114,14 +114,23 @@ export default function AboutPage() {
 
         {/* Team Section */}
         <section className="py-16 bg-bg-secondary">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-primary-dark mb-4">
-                Meet Our Professional Team
-              </h2>
-              <p className="text-xl text-text-primary max-w-2xl mx-auto">
-                Licensed, experienced professionals dedicated to providing exceptional septic services
-              </p>
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+            {/* Modern Elegant Header Section */}
+            <div className="text-center mb-16">
+              <div className="max-w-3xl mx-auto">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+                  <span className="text-primary-dark">Professional</span>{' '}
+                  <span className="bg-gradient-to-r from-primary-accent via-secondary-accent to-primary-accent bg-clip-text text-transparent bg-300% animate-gradient">
+                    Team Members
+                  </span>
+                </h2>
+                
+                <p className="text-lg text-gray-600 mb-6 font-light">
+                  Licensed experts dedicated to exceptional service
+                </p>
+                
+                <div className="w-16 h-0.5 bg-gradient-to-r from-primary-accent to-secondary-accent mx-auto rounded-full" />
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -148,14 +157,23 @@ export default function AboutPage() {
 
         {/* Achievements */}
         <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-primary-dark mb-4">
-                Our Achievements
-              </h2>
-              <p className="text-xl text-text-primary max-w-2xl mx-auto">
-                Recognition and milestones that demonstrate our commitment to excellence
-              </p>
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+            {/* Modern Elegant Header Section */}
+            <div className="text-center mb-16">
+              <div className="max-w-3xl mx-auto">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+                  <span className="text-primary-dark">Company</span>{' '}
+                  <span className="bg-gradient-to-r from-primary-accent via-secondary-accent to-primary-accent bg-clip-text text-transparent bg-300% animate-gradient">
+                    Achievements
+                  </span>
+                </h2>
+                
+                <p className="text-lg text-gray-600 mb-6 font-light">
+                  Recognition and milestones of excellence
+                </p>
+                
+                <div className="w-16 h-0.5 bg-gradient-to-r from-primary-accent to-secondary-accent mx-auto rounded-full" />
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

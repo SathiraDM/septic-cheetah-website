@@ -127,18 +127,24 @@ export default function InstallationPage() {
 
         {/* Installation Services */}
         <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <div className="w-16 h-16 bg-primary-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Wrench className="w-8 h-8 text-primary-accent" />
+              {/* Modern Elegant Header Section */}
+              <div className="text-center mb-16">
+                <div className="max-w-3xl mx-auto">
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+                    <span className="text-primary-dark">Installation</span>{' '}
+                    <span className="bg-gradient-to-r from-primary-accent via-secondary-accent to-primary-accent bg-clip-text text-transparent bg-300% animate-gradient">
+                      Services
+                    </span>
+                  </h2>
+                  
+                  <p className="text-lg text-gray-600 mb-6 font-light">
+                    Complete solutions for residential and commercial properties
+                  </p>
+                  
+                  <div className="w-16 h-0.5 bg-gradient-to-r from-primary-accent to-secondary-accent mx-auto rounded-full" />
                 </div>
-                <h2 className="text-3xl lg:text-4xl font-bold text-primary-dark mb-4">
-                  Our Installation Services
-                </h2>
-                <p className="text-xl text-text-primary">
-                  Comprehensive septic installation services for residential and commercial properties.
-                </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -155,14 +161,23 @@ export default function InstallationPage() {
 
         {/* Installation Process */}
         <section className="py-16 bg-bg-secondary">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-primary-dark mb-4">
-                Professional Installation Process
-              </h2>
-              <p className="text-xl text-text-primary max-w-2xl mx-auto">
-                Our systematic approach ensures proper installation and long-term system performance.
-              </p>
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+            {/* Modern Elegant Header Section */}
+            <div className="text-center mb-16">
+              <div className="max-w-3xl mx-auto">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+                  <span className="text-primary-dark">Installation</span>{' '}
+                  <span className="bg-gradient-to-r from-primary-accent via-secondary-accent to-primary-accent bg-clip-text text-transparent bg-300% animate-gradient">
+                    Process
+                  </span>
+                </h2>
+                
+                <p className="text-lg text-gray-600 mb-6 font-light">
+                  Systematic approach for proper, long-term performance
+                </p>
+                
+                <div className="w-16 h-0.5 bg-gradient-to-r from-primary-accent to-secondary-accent mx-auto rounded-full" />
+              </div>
             </div>
 
             <div className="max-w-4xl mx-auto">
@@ -185,14 +200,24 @@ export default function InstallationPage() {
 
         {/* System Types */}
         <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-primary-dark mb-4">
-                Septic System Types We Install
-              </h2>
-              <p className="text-xl text-text-primary max-w-2xl mx-auto">
-                We install various types of septic systems to meet different property needs and regulations.
-              </p>
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+            {/* Modern Elegant Header Section */}
+            <div className="text-center mb-16">
+              <div className="max-w-3xl mx-auto">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+                  <span className="text-primary-dark">System</span>{' '}
+                  <span className="bg-gradient-to-r from-primary-accent via-secondary-accent to-primary-accent bg-clip-text text-transparent bg-300% animate-gradient">
+                    Types
+                  </span>
+                </h2>
+                
+                <p className="text-lg text-gray-600 mb-6 font-light">
+                  Various systems to meet different property needs
+                </p>
+                
+                <div className="w-16 h-0.5 bg-gradient-to-r from-primary-accent to-secondary-accent mx-auto rounded-full" />
+              </div>
+            </div>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -223,18 +248,24 @@ export default function InstallationPage() {
 
         {/* Permits and Compliance */}
         <section className="py-16 bg-bg-secondary">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <FileText className="w-8 h-8 text-blue-600" />
+              {/* Modern Elegant Header Section */}
+              <div className="text-center mb-16">
+                <div className="max-w-3xl mx-auto">
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+                    <span className="text-primary-dark">Permits &</span>{' '}
+                    <span className="bg-gradient-to-r from-primary-accent via-secondary-accent to-primary-accent bg-clip-text text-transparent bg-300% animate-gradient">
+                      Compliance
+                    </span>
+                  </h2>
+                  
+                  <p className="text-lg text-gray-600 mb-6 font-light">
+                    We handle all permitting and regulatory requirements
+                  </p>
+                  
+                  <div className="w-16 h-0.5 bg-gradient-to-r from-primary-accent to-secondary-accent mx-auto rounded-full" />
                 </div>
-                <h2 className="text-3xl lg:text-4xl font-bold text-primary-dark mb-4">
-                  Permits & Compliance Handled
-                </h2>
-                <p className="text-xl text-text-primary">
-                  We manage all permitting and ensure full compliance with local regulations.
-                </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

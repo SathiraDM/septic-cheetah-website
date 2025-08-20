@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
-import { Settings, AlertTriangle, Clock, Phone, Shield, Wrench, CheckCircle } from 'lucide-react';
+import { Settings, AlertTriangle, Clock, Phone, Shield, CheckCircle } from 'lucide-react';
 import { CONTACT_INFO } from '@/lib/constants';
 import { ServiceErrorBoundary } from '@/components/ServiceErrorBoundary';
 
@@ -145,11 +145,25 @@ export default function RepairsPage() {
 
         {/* Emergency Response Times */}
         <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-3xl lg:text-4xl font-bold text-primary-dark mb-8">
-                Emergency Response Times
-              </h2>
+              {/* Modern Elegant Header Section */}
+              <div className="text-center mb-16">
+                <div className="max-w-3xl mx-auto">
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+                    <span className="text-primary-dark">Emergency</span>{' '}
+                    <span className="bg-gradient-to-r from-primary-accent via-secondary-accent to-primary-accent bg-clip-text text-transparent bg-300% animate-gradient">
+                      Response Times
+                    </span>
+                  </h2>
+                  
+                  <p className="text-lg text-gray-600 mb-6 font-light">
+                    Rapid response when septic emergencies strike
+                  </p>
+                  
+                  <div className="w-16 h-0.5 bg-gradient-to-r from-primary-accent to-secondary-accent mx-auto rounded-full" />
+                </div>
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div className="p-6 bg-red-50 border border-red-200 rounded-lg">
                   <div className="text-3xl font-bold text-red-600 mb-2">{"< 2 Hours"}</div>
@@ -173,15 +187,24 @@ export default function RepairsPage() {
 
         {/* Common Repair Issues */}
         <section className="py-16 bg-bg-secondary">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl lg:text-4xl font-bold text-primary-dark mb-4">
-                  Common Septic Problems We Fix
-                </h2>
-                <p className="text-xl text-text-primary">
-                  From emergency situations to routine repairs, we handle all types of septic system issues.
-                </p>
+              {/* Modern Elegant Header Section */}
+              <div className="text-center mb-16">
+                <div className="max-w-3xl mx-auto">
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+                    <span className="text-primary-dark">Common</span>{' '}
+                    <span className="bg-gradient-to-r from-primary-accent via-secondary-accent to-primary-accent bg-clip-text text-transparent bg-300% animate-gradient">
+                      Repair Issues
+                    </span>
+                  </h2>
+                  
+                  <p className="text-lg text-gray-600 mb-6 font-light">
+                    From emergencies to routine repairs, we fix them all
+                  </p>
+                  
+                  <div className="w-16 h-0.5 bg-gradient-to-r from-primary-accent to-secondary-accent mx-auto rounded-full" />
+                </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -216,14 +239,23 @@ export default function RepairsPage() {
 
         {/* Repair Process */}
         <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-primary-dark mb-4">
-                Our Emergency Repair Process
-              </h2>
-              <p className="text-xl text-text-primary max-w-2xl mx-auto">
-                Fast, systematic approach to diagnose and repair your septic system emergency.
-              </p>
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+            {/* Modern Elegant Header Section */}
+            <div className="text-center mb-16">
+              <div className="max-w-3xl mx-auto">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+                  <span className="text-primary-dark">Emergency</span>{' '}
+                  <span className="bg-gradient-to-r from-primary-accent via-secondary-accent to-primary-accent bg-clip-text text-transparent bg-300% animate-gradient">
+                    Repair Process
+                  </span>
+                </h2>
+                
+                <p className="text-lg text-gray-600 mb-6 font-light">
+                  Systematic approach to diagnose and repair quickly
+                </p>
+                
+                <div className="w-16 h-0.5 bg-gradient-to-r from-primary-accent to-secondary-accent mx-auto rounded-full" />
+              </div>
             </div>
 
             <div className="max-w-4xl mx-auto">
@@ -246,15 +278,24 @@ export default function RepairsPage() {
 
         {/* Pricing and Response */}
         <section className="py-16 bg-bg-secondary">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl lg:text-4xl font-bold text-primary-dark mb-4">
-                  Emergency Repair Pricing
-                </h2>
-                <p className="text-xl text-text-primary">
-                  Transparent pricing for emergency repairs with no hidden fees.
-                </p>
+              {/* Modern Elegant Header Section */}
+              <div className="text-center mb-16">
+                <div className="max-w-3xl mx-auto">
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+                    <span className="text-primary-dark">Emergency</span>{' '}
+                    <span className="bg-gradient-to-r from-primary-accent via-secondary-accent to-primary-accent bg-clip-text text-transparent bg-300% animate-gradient">
+                      Repair Pricing
+                    </span>
+                  </h2>
+                  
+                  <p className="text-lg text-gray-600 mb-6 font-light">
+                    Transparent pricing with no hidden fees
+                  </p>
+                  
+                  <div className="w-16 h-0.5 bg-gradient-to-r from-primary-accent to-secondary-accent mx-auto rounded-full" />
+                </div>
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -320,18 +361,24 @@ export default function RepairsPage() {
 
         {/* Preventive Maintenance */}
         <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <div className="w-16 h-16 bg-primary-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Wrench className="w-8 h-8 text-primary-accent" />
+              {/* Modern Elegant Header Section */}
+              <div className="text-center mb-16">
+                <div className="max-w-3xl mx-auto">
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+                    <span className="text-primary-dark">Preventive</span>{' '}
+                    <span className="bg-gradient-to-r from-primary-accent via-secondary-accent to-primary-accent bg-clip-text text-transparent bg-300% animate-gradient">
+                      Maintenance
+                    </span>
+                  </h2>
+                  
+                  <p className="text-lg text-gray-600 mb-6 font-light">
+                    Avoid costly emergencies with regular care
+                  </p>
+                  
+                  <div className="w-16 h-0.5 bg-gradient-to-r from-primary-accent to-secondary-accent mx-auto rounded-full" />
                 </div>
-                <h2 className="text-3xl lg:text-4xl font-bold text-primary-dark mb-4">
-                  Preventive Maintenance Services
-                </h2>
-                <p className="text-xl text-text-primary">
-                  Avoid costly emergencies with regular maintenance and inspections.
-                </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">

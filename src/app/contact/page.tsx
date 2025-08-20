@@ -179,13 +179,29 @@ export default function ContactPage() {
             {/* Enhanced Contact Form */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
               <div>
-                <h2 className="text-3xl font-bold text-primary-dark mb-6">Get Free Estimate</h2>
+                <div className="mb-8">
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+                    <span className="text-primary-dark">Free</span>{' '}
+                    <span className="bg-gradient-to-r from-primary-accent via-secondary-accent to-primary-accent bg-clip-text text-transparent bg-300% animate-gradient">
+                      Estimate
+                    </span>
+                  </h2>
+                  <div className="w-16 h-0.5 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full" />
+                </div>
                 <ContactForm />
               </div>
 
               {/* Service Area & Location Info */}
               <div>
-                <h2 className="text-3xl font-bold text-primary-dark mb-6">Service Information</h2>
+                <div className="mb-8">
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+                    <span className="text-primary-dark">Service</span>{' '}
+                    <span className="bg-gradient-to-r from-primary-accent via-secondary-accent to-primary-accent bg-clip-text text-transparent bg-300% animate-gradient">
+                      Information
+                    </span>
+                  </h2>
+                  <div className="w-16 h-0.5 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full" />
+                </div>
                 <ServiceAreaInfo />
                 <BusinessHoursWidget />
                 

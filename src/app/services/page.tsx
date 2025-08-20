@@ -70,13 +70,23 @@ export default function ServicesPage() {
 
       {/* Why Choose Us */}
       <section className="py-20 bg-bg-secondary">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+          {/* Modern Elegant Header Section */}
           <div className="text-center mb-16">
-            <h2 className="section-title">Why Choose Septic Cheetah?</h2>
-            <p className="section-subtitle">
-              We&apos;re not just another septic company. Here&apos;s what sets us apart 
-              from the competition.
-            </p>
+            <div className="max-w-3xl mx-auto">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+                <span className="text-primary-dark">Why Choose</span>{' '}
+                <span className="bg-gradient-to-r from-primary-accent via-secondary-accent to-primary-accent bg-clip-text text-transparent bg-300% animate-gradient">
+                  Septic Cheetah
+                </span>
+              </h2>
+              
+              <p className="text-lg text-gray-600 mb-6 font-light">
+                What sets us apart from the competition
+              </p>
+              
+              <div className="w-16 h-0.5 bg-gradient-to-r from-primary-accent to-secondary-accent mx-auto rounded-full" />
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

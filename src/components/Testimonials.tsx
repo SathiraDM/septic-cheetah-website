@@ -1,17 +1,60 @@
+'use client';
+
 import { Star, Quote } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { TESTIMONIALS } from '@/lib/constants';
 
 export default function Testimonials() {
   return (
     <section className="py-20 bg-bg-secondary">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="section-title">What Our Customers Say</h2>
-          <p className="section-subtitle">
-            Don&apos;t just take our word for it. Here&apos;s what real customers say about 
-            our septic services and emergency response.
-          </p>
-        </div>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        {/* Modern Elegant Header Section */}
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+        >
+          <motion.div
+            className="max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <motion.h2 
+              className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <span className="text-primary-dark">Customer</span>{' '}
+              <span className="bg-gradient-to-r from-primary-accent via-secondary-accent to-primary-accent bg-clip-text text-transparent bg-300% animate-gradient">
+                Success Stories
+              </span>
+            </motion.h2>
+            
+            <motion.p 
+              className="text-lg text-gray-600 mb-6 font-light"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              Real experiences from satisfied customers
+            </motion.p>
+            
+            <motion.div
+              className="w-16 h-0.5 bg-gradient-to-r from-primary-accent to-secondary-accent mx-auto rounded-full"
+              initial={{ width: 0 }}
+              whileInView={{ width: 64 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.6 }}
+            />
+          </motion.div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {TESTIMONIALS.map((testimonial, index) => (
