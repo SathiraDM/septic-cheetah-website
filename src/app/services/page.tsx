@@ -1,10 +1,20 @@
 "use client";
 
 import Link from 'next/link';
-import { ArrowRight, CheckCircle, Phone, Star, Shield, Award, Clock } from 'lucide-react';
+import { ArrowRight, CheckCircle, Phone, Star, Shield, Award, Clock, Zap, MessageCircle, Home } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { SERVICES, CONTACT_INFO, TESTIMONIALS, COMPETITIVE_ADVANTAGES } from '@/lib/constants';
 import { trackPhoneCall } from '@/lib/utils';
+
+// Icon mapping for competitive advantages
+const getIcon = (iconName: string) => {
+  const icons = {
+    Zap,
+    MessageCircle,
+    Home,
+  };
+  return icons[iconName as keyof typeof icons] || Zap;
+};
 
 export default function ServicesPage() {
   return (
@@ -261,17 +271,22 @@ export default function ServicesPage() {
 
           {/* Main Competitive Advantages */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            {COMPETITIVE_ADVANTAGES.map((advantage, index) => (
-              <div key={index} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300 group">
-                <div className="text-5xl mb-6 group-hover:scale-110 transition-transform duration-300">{advantage.icon}</div>
-                <h3 className="text-2xl font-bold text-white mb-4">
-                  {advantage.title}
-                </h3>
-                <p className="text-gray-200 leading-relaxed">
-                  {advantage.description}
-                </p>
-              </div>
-            ))}
+            {COMPETITIVE_ADVANTAGES.map((advantage, index) => {
+              const IconComponent = getIcon(advantage.icon);
+              return (
+                <div key={index} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300 group">
+                  <div className="mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <IconComponent className="w-12 h-12 text-primary-accent" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-4">
+                    {advantage.title}
+                  </h3>
+                  <p className="text-gray-200 leading-relaxed">
+                    {advantage.description}
+                  </p>
+                </div>
+              );
+            })}
           </div>
 
           {/* Trust Indicators Grid */}
