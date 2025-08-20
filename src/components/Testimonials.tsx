@@ -56,32 +56,90 @@ export default function Testimonials() {
           </motion.div>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        >
           {TESTIMONIALS.map((testimonial, index) => (
-            <div key={index} className="bg-white rounded-xl shadow-lg p-8 relative">
-              <Quote className="w-8 h-8 text-primary-accent/20 absolute top-4 right-4" />
-              
-              <div className="flex items-center mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                ))}
-              </div>
-
-              <p className="text-text-primary mb-6 leading-relaxed italic">
-                &ldquo;{testimonial.text}&rdquo;
-              </p>
-
-              <div className="border-t pt-4">
-                <div className="font-bold text-primary-dark">
-                  {testimonial.name}
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ 
+                duration: 0.6, 
+                delay: index * 0.1,
+                ease: "easeOut"
+              }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="group"
+            >
+              <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-8 relative overflow-hidden border border-white/50 h-full hover:shadow-2xl transition-all duration-500">
+                {/* Background Effects */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary-accent/5 via-transparent to-secondary-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute -top-10 -right-10 w-24 h-24 bg-gradient-to-br from-primary-accent/10 to-secondary-accent/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                {/* Quote Icon */}
+                <Quote className="w-10 h-10 text-primary-accent/15 absolute top-6 right-6 group-hover:text-primary-accent/25 transition-colors duration-300" />
+                
+                {/* Enhanced Star Rating */}
+                <div className="flex items-center mb-6 relative z-10">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, scale: 0 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ 
+                        duration: 0.4, 
+                        delay: index * 0.1 + i * 0.05,
+                        type: "spring"
+                      }}
+                      whileHover={{ scale: 1.2 }}
+                    >
+                      <Star className="w-5 h-5 text-amber-400 fill-current drop-shadow-sm mr-0.5" />
+                    </motion.div>
+                  ))}
                 </div>
-                <div className="text-sm text-gray-600">
-                  {testimonial.location}
+
+                {/* Testimonial Text */}
+                <div className="relative z-10 mb-8">
+                  <p className="text-gray-700 leading-relaxed text-base font-medium">
+                    <span className="text-xl text-primary-accent/30 font-serif">&ldquo;</span>
+                    {testimonial.text}
+                    <span className="text-xl text-primary-accent/30 font-serif">&rdquo;</span>
+                  </p>
+                </div>
+
+                {/* Customer Info */}
+                <div className="border-t border-gray-100 pt-6 relative z-10">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="font-bold text-gray-800 text-lg">
+                        {testimonial.name}
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        {testimonial.location}
+                      </div>
+                    </div>
+                    <motion.div 
+                      className="w-10 h-10 bg-gradient-to-br from-green-400 to-emerald-500 rounded-lg flex items-center justify-center shadow-md"
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </motion.div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Trust Stats */}
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">

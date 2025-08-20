@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
 import { 
   Phone, 
@@ -76,10 +77,10 @@ export default function Footer() {
   return (
     <footer className="bg-gradient-to-br from-primary-dark via-primary-dark to-secondary-accent text-white">
       {/* Emergency CTA Banner */}
-      <div className="bg-red-600 py-4">
+      <div className="bg-red-600 py-3">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="flex items-center space-x-3 mb-3 md:mb-0">
+            <div className="flex items-center space-x-3 mb-2 md:mb-0">
               <AlertTriangle className="w-6 h-6 animate-pulse" />
               <div>
                 <div className="font-bold text-lg">Septic Emergency?</div>
@@ -102,26 +103,29 @@ export default function Footer() {
 
       {/* Main Footer Content */}
       <motion.div
-        className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-16"
+        className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-8"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {/* Company Info */}
           <motion.div variants={itemVariants} className="lg:col-span-1">
-            <Link href="/" className="flex items-center space-x-3 mb-6 group">
-              <div className="w-12 h-12 bg-gradient-to-br from-primary-accent to-secondary-accent rounded-xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
-                <span className="text-white font-bold text-xl">SC</span>
-              </div>
-              <div>
-                <div className="text-xl font-bold">Septic Cheetah</div>
-                <div className="text-sm text-primary-accent">Fast, Reliable and Kinda Dirty</div>
+            <Link href="/" className="flex items-center mb-4 group">
+              <div className="relative bg-white/30 backdrop-blur-md rounded-xl p-3 border border-white/30 shadow-lg group-hover:bg-white/35 transition-all duration-300">
+                <Image
+                  src="/images/logo-horizontal.png"
+                  alt="Septic Cheetah - Fast, Reliable and Kinda Dirty"
+                  width={180}
+                  height={54}
+                  className="h-12 w-auto group-hover:scale-105 transition-transform"
+                  priority
+                />
               </div>
             </Link>
 
-            <p className="text-gray-300 mb-6 leading-relaxed">
+            <p className="text-gray-300 mb-4 leading-relaxed text-sm">
               Professional septic services with over 15 years of experience. 
               Licensed, insured, and committed to keeping your septic system running smoothly.
             </p>
@@ -144,8 +148,8 @@ export default function Footer() {
 
           {/* Services */}
           <motion.div variants={itemVariants}>
-            <h3 className="text-xl font-bold mb-6 text-primary-accent">Our Services</h3>
-            <div className="space-y-3">
+            <h3 className="text-lg font-bold mb-4 text-primary-accent">Our Services</h3>
+            <div className="space-y-2">
               {SERVICES.map((service) => (
                 <Link
                   key={service.id}
@@ -162,12 +166,12 @@ export default function Footer() {
               ))}
             </div>
 
-            <div className="mt-6 p-4 bg-primary-accent/20 rounded-lg">
-              <div className="flex items-center space-x-2 mb-2">
+            <div className="mt-4 p-3 bg-primary-accent/20 rounded-lg">
+              <div className="flex items-center space-x-2 mb-1">
                 <Clock className="w-4 h-4 text-primary-accent" />
-                <span className="font-semibold text-primary-accent">Same-Day Service</span>
+                <span className="font-semibold text-primary-accent text-sm">Same-Day Service</span>
               </div>
-              <p className="text-sm text-gray-300">
+              <p className="text-xs text-gray-300">
                 Emergency response available 24/7/365 across our entire service area.
               </p>
             </div>
@@ -175,8 +179,8 @@ export default function Footer() {
 
           {/* Contact Info */}
           <motion.div variants={itemVariants}>
-            <h3 className="text-xl font-bold mb-6 text-primary-accent">Contact Info</h3>
-            <div className="space-y-4">
+            <h3 className="text-lg font-bold mb-4 text-primary-accent">Contact Info</h3>
+            <div className="space-y-3">
               <motion.a
                 href={`tel:${CONTACT_INFO.phone}`}
                 onClick={() => trackPhoneCall('footer_main')}
@@ -231,21 +235,21 @@ export default function Footer() {
 
           {/* Quick Links & Social */}
           <motion.div variants={itemVariants}>
-            <h3 className="text-xl font-bold mb-6 text-primary-accent">Quick Links</h3>
-            <div className="grid grid-cols-2 gap-2 mb-8">
+            <h3 className="text-lg font-bold mb-4 text-primary-accent">Quick Links</h3>
+            <div className="grid grid-cols-2 gap-1 mb-6">
               {quickLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-gray-300 hover:text-primary-accent transition-colors text-sm py-1"
+                  className="text-gray-300 hover:text-primary-accent transition-colors text-xs py-1"
                 >
                   {link.label}
                 </Link>
               ))}
             </div>
 
-            <h4 className="font-semibold mb-4 text-primary-accent">Follow Us</h4>
-            <div className="flex space-x-3 mb-8">
+            <h4 className="font-semibold mb-3 text-primary-accent text-sm">Follow Us</h4>
+            <div className="flex space-x-2 mb-6">
               {socialLinks.map((social) => (
                 <motion.a
                   key={social.href}
@@ -263,18 +267,18 @@ export default function Footer() {
             </div>
 
             {/* Newsletter Signup */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-              <h4 className="font-semibold mb-2 text-primary-accent">Stay Updated</h4>
-              <p className="text-sm text-gray-300 mb-3">
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3">
+              <h4 className="font-semibold mb-2 text-primary-accent text-sm">Stay Updated</h4>
+              <p className="text-xs text-gray-300 mb-2">
                 Get septic maintenance tips and special offers.
               </p>
               <div className="flex space-x-2">
                 <input
                   type="email"
                   placeholder="Your email"
-                  className="flex-1 px-3 py-2 bg-white/20 border border-white/30 rounded text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-accent"
+                  className="flex-1 px-2 py-1 bg-white/20 border border-white/30 rounded text-xs placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-accent"
                 />
-                <button className="bg-primary-accent hover:bg-secondary-accent px-4 py-2 rounded text-sm font-medium transition-colors">
+                <button className="bg-primary-accent hover:bg-secondary-accent px-3 py-1 rounded text-xs font-medium transition-colors">
                   Subscribe
                 </button>
               </div>
@@ -285,13 +289,13 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-white/20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="text-sm text-gray-300">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-4">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
+            <div className="text-xs text-gray-300">
               © {currentYear} Septic Cheetah LLC. All rights reserved.
             </div>
             
-            <div className="flex items-center space-x-6 text-sm">
+            <div className="flex items-center space-x-4 text-xs">
               {legalLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -303,7 +307,7 @@ export default function Footer() {
               ))}
             </div>
 
-            <div className="flex items-center space-x-4 text-sm text-gray-300">
+            <div className="flex items-center space-x-4 text-xs text-gray-300">
               <span>Made with ❤️ for our community</span>
             </div>
           </div>

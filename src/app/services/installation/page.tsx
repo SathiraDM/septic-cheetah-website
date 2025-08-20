@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
-import { Wrench, CheckCircle, Clock, Phone, FileText, Shield, Award } from 'lucide-react';
+import { CheckCircle, Clock, Phone, FileText, Shield, Award } from 'lucide-react';
 import { CONTACT_INFO } from '@/lib/constants';
 import { ServiceErrorBoundary } from '@/components/ServiceErrorBoundary';
 
@@ -217,7 +217,6 @@ export default function InstallationPage() {
                 
                 <div className="w-16 h-0.5 bg-gradient-to-r from-primary-accent to-secondary-accent mx-auto rounded-full" />
               </div>
-            </div>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
