@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Truck, Wrench, Settings, ArrowRight, Star, Clock, Shield, Zap } from 'lucide-react';
+import { Truck, Wrench, Settings, Search, Building, Home, ArrowRight, Star, Clock, Shield, Zap } from 'lucide-react';
 import { SERVICES } from '@/lib/constants';
 import { trackEvent } from '@/lib/utils';
 import { useState } from 'react';
@@ -11,6 +11,9 @@ const iconMap = {
   Truck,
   Wrench,
   Settings,
+  Search,
+  Building,
+  Home,
 };
 
 const features = [
@@ -278,7 +281,7 @@ export default function ServiceCards() {
                       {service.description}
                     </motion.p>
 
-                    {/* Pricing Section */}
+                    {/* Features List */}
                     <motion.div 
                       className="mb-8"
                       initial={{ opacity: 0, y: 20 }}
@@ -286,37 +289,26 @@ export default function ServiceCards() {
                       viewport={{ once: true }}
                       transition={{ duration: 0.6, delay: index * 0.1 + 0.4 }}
                     >
-                      <div className="bg-gradient-to-r from-primary-accent/5 to-secondary-accent/5 rounded-2xl p-6 border border-primary-accent/10">
-                        <div className="flex justify-between items-center mb-4">
-                          <span className="text-3xl font-bold bg-gradient-to-r from-primary-accent to-secondary-accent bg-clip-text text-transparent">
-                            {service.startingPrice}
-                          </span>
-                          <span className="text-sm text-gray-500 bg-white px-3 py-1 rounded-full border">
-                            Starting at
-                          </span>
-                        </div>
-
-                        <ul className="space-y-3">
-                          {service.features.map((feature, featureIndex) => (
-                            <motion.li 
-                              key={featureIndex} 
-                              className="flex items-center text-gray-700"
-                              initial={{ opacity: 0, x: -10 }}
-                              whileInView={{ opacity: 1, x: 0 }}
+                      <ul className="space-y-3">
+                        {service.features.map((feature, featureIndex) => (
+                          <motion.li 
+                            key={featureIndex} 
+                            className="flex items-center text-gray-700"
+                            initial={{ opacity: 0, x: -10 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.4, delay: index * 0.1 + featureIndex * 0.1 + 0.5 }}
+                          >
+                            <motion.div 
+                              className="w-2 h-2 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full mr-3"
+                              whileInView={{ scale: [0, 1.2, 1] }}
                               viewport={{ once: true }}
-                              transition={{ duration: 0.4, delay: index * 0.1 + featureIndex * 0.1 + 0.5 }}
-                            >
-                              <motion.div 
-                                className="w-2 h-2 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full mr-3"
-                                whileInView={{ scale: [0, 1.2, 1] }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: index * 0.1 + featureIndex * 0.1 + 0.6 }}
-                              />
-                              {feature}
-                            </motion.li>
-                          ))}
-                        </ul>
-                      </div>
+                              transition={{ duration: 0.5, delay: index * 0.1 + featureIndex * 0.1 + 0.6 }}
+                            />
+                            {feature}
+                          </motion.li>
+                        ))}
+                      </ul>
                     </motion.div>
 
                     {/* Enhanced CTA Button */}

@@ -27,14 +27,17 @@ const navigationItems = [
     label: 'Home',
     description: 'Professional septic services'
   },
-  { 
-    href: '/services', 
+  {
+    href: '/services',
     label: 'Services',
     description: 'Complete septic solutions',
     submenu: [
-      { href: '/services/pumping', label: 'Septic Pumping', price: 'From $299' },
-      { href: '/services/installation', label: 'System Installation', price: 'From $3,499' },
-      { href: '/services/repairs', label: 'Emergency Repairs', price: '24/7 Available' }
+      { href: '/services/pumping', label: 'Septic Pumping', price: 'Call for Quote' },
+      { href: '/services/installation', label: 'System Installation', price: 'Call for Quote' },
+      { href: '/services/repairs', label: 'Emergency Repairs', price: '24/7 Available' },
+      { href: '/services/inspections', label: 'System Inspections', price: 'Call for Quote' },
+      { href: '/services/grease-trap', label: 'Grease Trap Services', price: 'Call for Quote' },
+      { href: '/services/portable-toilets', label: 'Portable Toilet Rentals', price: 'Call for Quote' }
     ]
   },
   { 
