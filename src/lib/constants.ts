@@ -154,16 +154,16 @@ export const COMPETITIVE_ADVANTAGES = [
   {
     title: 'Fast Response Without Cutting Corners',
     description: 'When septic issues come up, time matters. SepticCheetah is built around efficiency--responding quickly and completing work on schedule--while never sacrificing the thoroughness and quality that protect your system long-term.',
-    icon: '⚡'
+    icon: 'Zap'
   },
   {
     title: 'Clear Communication & Customer Education',
     description: 'We believe customers deserve to understand the work being done. That\'s why we explain each step in simple terms, answer questions, and make sure you feel confident in the decisions you\'re making.',
-    icon: '💬'
+    icon: 'MessageCircle'
   },
   {
     title: 'Local, Family-Owned Dedication',
     description: 'As a family-owned business serving Austin and the surrounding areas, SepticCheetah is personally invested in every project. We see our customers as neighbors, and our success is tied directly to the well-being of the community we serve.',
-    icon: '🏡'
+    icon: 'Home'
   },
 ] as const;
