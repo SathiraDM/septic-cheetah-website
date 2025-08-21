@@ -15,20 +15,28 @@ export default function Hero() {
   
   const backgroundImages = [
     {
-      src: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1920&q=80",
+      src: "/images/hero-01.jpg",
       alt: "Professional septic tank services"
     },
     {
-      src: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1920&q=80",
+      src: "/images/hero-02.png",
       alt: "Heavy equipment for septic installation"
     },
     {
-      src: "https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?auto=compress&cs=tinysrgb&w=1920",
+      src: "/images/hero-03.jpg",
       alt: "Professional septic service trucks"
     },
     {
-      src: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1920&q=80",
+      src: "/images/hero-08.jpg",
       alt: "Septic system maintenance"
+    },
+    {
+      src: "/images/hero-09.jpg",
+      alt: "Septic maintenance and repair"
+    },
+    {
+      src: "/images/hero-10.jpg",
+      alt: "Professional septic services"
     }
   ];
 
