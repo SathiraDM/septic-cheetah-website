@@ -319,6 +319,11 @@ section {
   @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
 }
 
+/* Service Page Container - 1540px max width */
+.container-service {
+  @apply max-w-[1540px] mx-auto px-8 lg:px-16 xl:px-24 relative;
+}
+
 /* Prevent horizontal overflow */
 .no-overflow {
   @apply overflow-x-hidden max-w-full;
@@ -342,4 +347,136 @@ section {
   transform: translateZ(0);
   will-change: transform;
   backface-visibility: hidden;
+}
+
+/* Custom Width Constraint Utilities for Homepage */
+.content-container {
+  max-width: 1540px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+
+@media (min-width: 640px) {
+  .content-container {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .content-container {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+}
+
+/* Full width background with constrained content */
+.section-full-bg {
+  width: 100% !important;
+  position: relative !important;
+}
+
+.section-full-bg .content-container {
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+/* Force width constraint even when other classes conflict */
+.force-width-limit {
+  max-width: 1540px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+
+/* STRONGER WIDTH CONSTRAINTS - Higher Specificity */
+.septic-content-constrained,
+.septic-content-constrained > *,
+div.septic-content-constrained {
+  max-width: 1540px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  box-sizing: border-box !important;
+}
+
+@media (min-width: 640px) {
+  .septic-content-constrained,
+  .septic-content-constrained > *,
+  div.septic-content-constrained {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .septic-content-constrained,
+  .septic-content-constrained > *,
+  div.septic-content-constrained {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+}
+
+/* Debug styles to make width constraints visible - REMOVED */
+
+/* Section wrapper that allows full-width backgrounds */
+.septic-section-wrapper {
+  width: 100% !important;
+  position: relative !important;
+}
+
+/* Ensure no horizontal overflow */
+.septic-no-overflow {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+}
+
+/* Force width on specific containers */
+.septic-force-1540 {
+  max-width: 1540px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+}
+
+/* ENHANCED WIDTH CONSTRAINT SYSTEM - Ultra Strong */
+.septic-max-width {
+  max-width: 1540px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: clamp(1rem, 2.5vw, 2rem) !important;
+  padding-right: clamp(1rem, 2.5vw, 2rem) !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+}
+
+/* Header and Footer specific constraints */
+.septic-header-content,
+.septic-footer-content {
+  max-width: 1540px !important;
+  margin: 0 auto !important;
+  padding-left: clamp(1rem, 2.5vw, 2rem) !important;
+  padding-right: clamp(1rem, 2.5vw, 2rem) !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  position: relative !important;
+}
+
+/* Section backgrounds that expand full width */
+.septic-full-bg {
+  width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  right: 50% !important;
+  margin-left: -50vw !important;
+  margin-right: -50vw !important;
+}
+
+/* Content within full-width sections */
+.septic-full-bg .septic-max-width {
+  position: relative !important;
+  z-index: 10 !important;
 }

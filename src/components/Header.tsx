@@ -13,7 +13,6 @@ import {
   MapPin, 
   Star,
   Shield,
-  Award,
   ChevronDown,
   ExternalLink,
   Sparkles
@@ -94,16 +93,16 @@ export default function Header() {
   };
 
   return (
-    <>
+    <div className="w-full septic-no-overflow">
       {/* Top Status Bar - SCROLLABLE (Normal document flow) */}
-      <div className="bg-gradient-to-r from-primary-dark to-primary-dark/95 text-white py-1 px-4 hidden md:block border-b border-primary-accent/20"
+      <div className="septic-full-bg bg-gradient-to-r from-primary-dark to-primary-dark/95 text-white py-1 px-4 hidden md:block border-b border-primary-accent/20"
            style={{
              // Ensure proper positioning and smooth scrolling
              position: 'relative',
              zIndex: 1,
              transform: 'translateZ(0)'
            }}>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl flex justify-between items-center text-sm"
+        <div className="septic-max-width septic-header-content flex justify-between items-center text-sm"
              style={{ minHeight: '28px' }}>
           <div className="flex items-center space-x-8">
             <div className="flex items-center space-x-2 group">
@@ -118,7 +117,7 @@ export default function Header() {
             <div className="flex items-center space-x-2 group">
               <MapPin className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
               <span className="font-medium opacity-90 group-hover:opacity-100 transition-opacity">
-                Serving 50+ Mile Radius
+                Serving Central Texas
               </span>
             </div>
           </div>
@@ -133,12 +132,6 @@ export default function Header() {
               <Shield className="w-4 h-4 text-green-400 group-hover:rotate-12 transition-transform duration-300" />
               <span className="font-medium opacity-90 group-hover:opacity-100 transition-opacity">
                 Licensed & Insured
-              </span>
-            </div>
-            <div className="flex items-center space-x-1.5 group cursor-default">
-              <Award className="w-4 h-4 text-blue-400 group-hover:scale-110 transition-transform duration-300" />
-              <span className="font-medium opacity-90 group-hover:opacity-100 transition-opacity">
-                BBB A+ Rated
               </span>
             </div>
           </div>
@@ -173,7 +166,7 @@ export default function Header() {
           ease: [0.25, 0.46, 0.45, 0.94] // Custom bezier for ultra smooth
         }}
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div className="septic-max-width septic-header-content">
           <div className="flex justify-between items-center py-3">
             {/* Logo Section - Enhanced */}
             <Link href="/" className="flex items-center group">
@@ -211,7 +204,7 @@ export default function Header() {
                       href={item.href}
                       className={`relative flex items-center space-x-1 px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
                         isActive 
-                          ? 'text-white bg-gradient-to-r from-primary-accent to-secondary-accent shadow-lg shadow-primary-accent/25' 
+                          ? 'text-primary-accent' 
                           : 'text-gray-700 hover:text-primary-accent hover:bg-white/70 hover:shadow-md'
                       }`}
                     >
@@ -219,17 +212,16 @@ export default function Header() {
                       {item.submenu && (
                         <ChevronDown className={`w-4 h-4 transition-all duration-300 ${
                           activeSubmenu === item.label ? 'rotate-180' : ''
-                        } ${isActive ? 'text-white' : 'text-gray-500'}`} />
+                        } ${isActive ? 'text-primary-accent' : 'text-gray-500'}`} />
                       )}
                       
-                      {/* Active Indicator */}
+                      {/* Simple Bottom Line Active Indicator */}
                       {isActive && (
                         <motion.div
-                          className="absolute -bottom-1 left-1/2 w-1 h-1 bg-white rounded-full"
+                          className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full"
                           layoutId="activeIndicator"
                           initial={false}
                           transition={{ type: "spring", damping: 30, stiffness: 400 }}
-                          style={{ x: '-50%' }}
                         />
                       )}
                     </Link>
@@ -433,6 +425,6 @@ export default function Header() {
           aria-hidden="true"
         />
       )}
-    </>
+    </div>
   );
 }

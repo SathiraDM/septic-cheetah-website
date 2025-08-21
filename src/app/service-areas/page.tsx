@@ -217,7 +217,7 @@ export default function ServiceAreas() {
           <CheckCircle className="w-5 h-5" />
         </motion.div>
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10 h-full flex items-center justify-center">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1540px] relative z-10 h-full flex items-center justify-center">
           {/* Enhanced Content Background for Maximum Readability */}
           <div className="absolute inset-0 bg-gradient-radial from-black/20 via-black/8 to-transparent blur-3xl opacity-70"></div>
           
@@ -373,7 +373,7 @@ export default function ServiceAreas() {
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary-accent/5 rounded-full blur-3xl transform translate-x-48 translate-y-48"></div>
         
         <motion.div 
-          className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative"
+          className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1540px] relative"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -442,7 +442,7 @@ export default function ServiceAreas() {
         </div>
         
         <motion.div 
-          className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative"
+          className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1540px] relative"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -591,7 +591,7 @@ export default function ServiceAreas() {
         </div>
         
         <motion.div 
-          className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl text-center"
+          className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1540px] text-center"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}

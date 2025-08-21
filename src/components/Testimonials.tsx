@@ -6,8 +6,8 @@ import { TESTIMONIALS } from '@/lib/constants';
 
 export default function Testimonials() {
   return (
-    <section className="py-20 bg-bg-secondary">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+    <section className="septic-section-wrapper py-20 bg-bg-secondary">
+      <div className="septic-content-constrained septic-force-1540">
         {/* Modern Elegant Header Section */}
         <motion.div 
           className="text-center mb-16"

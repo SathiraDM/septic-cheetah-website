@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { Phone, Clock, Mail, MapPin, AlertTriangle, Shield, Star, Heart, Zap } from 'lucide-react';
+import { Phone, Clock, Mail, MapPin, AlertTriangle, Star } from 'lucide-react';
 import ContactForm from '@/components/ContactForm';
 import { CONTACT_INFO } from '@/lib/constants';
 import { ServiceErrorBoundary } from '@/components/ServiceErrorBoundary';
@@ -81,29 +81,6 @@ const serviceAreas = [
   }
 ];
 
-const whyChooseUs = [
-  {
-    icon: Zap,
-    title: "Fast Response",
-    description: "Cheetah-speed service when you need it most"
-  },
-  {
-    icon: Heart,
-    title: "Family-Owned",
-    description: "Local business serving our community with care"
-  },
-  {
-    icon: Shield,
-    title: "Licensed & Insured",
-    description: "Professional credentials and full insurance coverage"
-  },
-  {
-    icon: Star,
-    title: "Quality Work",
-    description: "Done right the first time, every time"
-  }
-];
-
 const testimonials = [
   {
     quote: "SepticCheetah was a lifesaver! They showed up the same day we called, worked quickly, and had our system back up and running in no time. Fast and reliable service--exactly what we needed.",
@@ -139,7 +116,7 @@ export default function ContactPage() {
           </div>
           
           <div className="relative z-10 h-screen flex items-center justify-center">
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto px-4 max-w-[1540px]">
               <div className="max-w-2xl mx-auto text-center space-y-8">
                 {/* Badge */}
                 <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full px-4 py-2">
@@ -211,7 +188,7 @@ export default function ContactPage() {
 
         {/* Contact Methods Section */}
         <section className="py-24 bg-gradient-to-br from-slate-50 to-white">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1540px]">
             <div className="text-center mb-20">
               <div className="inline-flex items-center space-x-2 bg-primary-accent/10 text-primary-accent rounded-full px-4 py-2 mb-6">
                 <Phone className="w-5 h-5" />
@@ -263,7 +240,7 @@ export default function ContactPage() {
 
         {/* Contact Form & Service Info Section */}
         <section id="contact-form" className="py-24 bg-gradient-to-br from-primary-dark via-primary-accent to-secondary-accent">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1540px]">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
               {/* Contact Form */}
               <div>
@@ -366,7 +343,7 @@ export default function ContactPage() {
 
         {/* Customer Testimonials */}
         <section className="py-24 bg-gradient-to-br from-slate-50 to-white">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1540px]">
             <div className="text-center mb-20">
               <h2 className="text-4xl lg:text-5xl font-bold mb-6">
                 <span className="text-slate-900">What Our</span>
@@ -413,7 +390,7 @@ export default function ContactPage() {
             <div className="absolute bottom-10 right-10 w-80 h-80 bg-white/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
           </div>
           
-          <div className="container mx-auto px-4 text-center relative z-10">
+          <div className="container mx-auto px-4 max-w-[1540px] text-center relative z-10">
             <h2 className="text-4xl lg:text-5xl font-bold mb-8">
               Septic Emergency? Don&apos;t Wait!
             </h2>

@@ -67,7 +67,7 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-gradient-to-br from-primary-dark/80 via-primary-dark/60 to-secondary-accent/70"></div>
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/20 to-black/10"></div>
           
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1540px] relative z-10">
             <div className="text-center max-w-5xl mx-auto">
               <div className="inline-flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 mb-8 border border-white/20">
                 <Home className="w-5 h-5 text-primary-accent" />
@@ -113,7 +113,7 @@ export default function AboutPage() {
           <div className="absolute top-0 left-0 w-96 h-96 bg-primary-accent/5 rounded-full blur-3xl transform -translate-x-48 -translate-y-48"></div>
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary-accent/5 rounded-full blur-3xl transform translate-x-48 translate-y-48"></div>
           
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1540px] relative">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-accent to-secondary-accent rounded-2xl mb-8 shadow-lg">
@@ -208,7 +208,7 @@ export default function AboutPage() {
 
         {/* Mission & Vision Section */}
         <section className="py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1540px] relative">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
                 <span className="text-primary-dark">Mission</span>{' '}
@@ -250,7 +250,7 @@ export default function AboutPage() {
 
         {/* What Sets Us Apart Section */}
         <section className="py-24 bg-white relative overflow-hidden">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1540px] relative">
             <div className="text-center mb-16">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-accent to-secondary-accent rounded-2xl mb-6 shadow-lg">
                 <Zap className="w-8 h-8 text-white" />
@@ -293,7 +293,7 @@ export default function AboutPage() {
 
         {/* Customer Testimonials */}
         <section className="py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1540px] relative">
             <div className="text-center mb-16">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-accent to-secondary-accent rounded-2xl mb-6 shadow-lg">
                 <Users className="w-8 h-8 text-white" />
@@ -342,7 +342,7 @@ export default function AboutPage() {
         <section className="py-24 bg-gradient-to-br from-primary-dark via-primary-dark to-secondary-accent text-white relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-black/10 to-black/30"></div>
           
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10 text-center">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1540px] relative z-10 text-center">
             <div className="inline-flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 mb-8 border border-white/20">
               <Phone className="w-5 h-5 text-primary-accent" />
               <span className="font-semibold">Ready to Experience the Difference?</span>

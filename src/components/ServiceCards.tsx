@@ -75,7 +75,7 @@ export default function ServiceCards() {
   };
 
   return (
-    <section className="py-24 bg-gradient-to-br from-gray-50 via-white to-blue-50/30 relative overflow-hidden">
+    <section className="septic-section-wrapper py-24 bg-gradient-to-br from-gray-50 via-white to-blue-50/30 relative overflow-hidden">
       {/* Animated Background Elements - Fixed to prevent overflow */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
@@ -106,7 +106,7 @@ export default function ServiceCards() {
         />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
+      <div className="septic-content-constrained septic-force-1540 relative z-10">
         {/* Modern Elegant Header Section */}
         <motion.div 
           className="text-center mb-16"
@@ -200,33 +200,22 @@ export default function ServiceCards() {
                 className="group relative"
                 variants={cardVariants}
                 whileHover={{ 
-                  y: -10,
-                  transition: { duration: 0.3 }
+                  y: -8,
+                  scale: 1.02,
+                  transition: { duration: 0.3, ease: "easeOut" }
                 }}
                 onHoverStart={() => setHoveredCard(service.id)}
                 onHoverEnd={() => setHoveredCard(null)}
               >
-                {/* Card Background with Gradient Border */}
-                <div className="relative bg-white rounded-3xl p-8 h-full shadow-xl border border-gray-100 overflow-hidden group-hover:shadow-2xl transition-all duration-500">
-                  {/* Animated Gradient Border */}
+                {/* Redesigned Card with Subtle Border and Elegant Hover */}
+                <div className="relative bg-white rounded-3xl p-8 h-full shadow-lg border border-gray-200/50 overflow-hidden group-hover:shadow-2xl group-hover:border-primary-accent/30 transition-all duration-300">
+                  {/* Subtle Gradient Overlay on Hover */}
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-primary-accent via-secondary-accent to-primary-accent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{
-                      background: `linear-gradient(45deg, #BF8829, #8E5C1B, #BF8829)`,
-                      backgroundSize: '300% 300%',
-                    }}
-                    animate={isHovered ? {
-                      backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
-                    } : {}}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "linear"
-                    }}
+                    className="absolute inset-0 bg-gradient-to-br from-primary-accent/5 via-transparent to-secondary-accent/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   />
                   
-                  {/* Inner Card Content */}
-                  <div className="relative bg-white rounded-3xl p-8 m-px h-full flex flex-col">
+                  {/* Card Content */}
+                  <div className="relative h-full flex flex-col">
                     {/* Service Header */}
                     <motion.div 
                       className="flex items-center mb-8"
@@ -237,26 +226,13 @@ export default function ServiceCards() {
                     >
                       <motion.div 
                         className="relative p-4 bg-gradient-to-br from-primary-accent/10 to-secondary-accent/5 rounded-2xl mr-4 group-hover:from-primary-accent/20 group-hover:to-secondary-accent/10 transition-all duration-300"
-                        whileHover={{ rotate: 360 }}
-                        transition={{ duration: 0.8 }}
+                        whileHover={{ rotate: 12, scale: 1.1 }}
+                        transition={{ duration: 0.3 }}
                       >
                         <IconComponent className="w-10 h-10 text-primary-accent group-hover:scale-110 transition-transform duration-300" />
-                        
-                        {/* Icon Glow Effect */}
-                        <motion.div
-                          className="absolute inset-0 bg-primary-accent/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                          animate={isHovered ? {
-                            scale: [1, 1.2, 1],
-                          } : {}}
-                          transition={{
-                            duration: 2,
-                            repeat: Infinity,
-                            ease: "easeInOut"
-                          }}
-                        />
                       </motion.div>
                       
-                      <div>
+                      <div className="flex-1">
                         <h3 className="text-2xl font-bold text-primary-dark group-hover:text-primary-accent transition-colors duration-300">
                           {service.title}
                         </h3>
@@ -300,12 +276,12 @@ export default function ServiceCards() {
                             transition={{ duration: 0.4, delay: index * 0.1 + featureIndex * 0.1 + 0.5 }}
                           >
                             <motion.div 
-                              className="w-2 h-2 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full mr-3"
+                              className="w-2 h-2 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full mr-3 flex-shrink-0"
                               whileInView={{ scale: [0, 1.2, 1] }}
                               viewport={{ once: true }}
                               transition={{ duration: 0.5, delay: index * 0.1 + featureIndex * 0.1 + 0.6 }}
                             />
-                            {feature}
+                            <span className="text-sm">{feature}</span>
                           </motion.li>
                         ))}
                       </ul>
@@ -324,31 +300,18 @@ export default function ServiceCards() {
                         className="block"
                       >
                         <motion.div
-                          className="relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 flex items-center justify-center space-x-3 group/btn"
-                          whileHover={{ scale: 1.02 }}
+                          className="relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-semibold py-4 px-6 rounded-2xl transition-all duration-300 flex items-center justify-center space-x-3 group/btn"
+                          whileHover={{ scale: 1.02, y: -2 }}
                           whileTap={{ scale: 0.98 }}
                         >
-                          <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/10 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"
-                            initial={false}
-                            animate={isHovered ? {
-                              x: ['-100%', '100%']
-                            } : {}}
-                            transition={{
-                              duration: 1.5,
-                              repeat: Infinity,
-                              ease: "linear"
-                            }}
-                          />
-                          
                           <span className="relative z-10">Learn More</span>
                           <motion.div
                             className="relative z-10"
                             animate={{
-                              x: isHovered ? [0, 5, 0] : 0
+                              x: isHovered ? [0, 4, 0] : 0
                             }}
                             transition={{
-                              duration: 1,
+                              duration: 1.5,
                               repeat: isHovered ? Infinity : 0,
                               ease: "easeInOut"
                             }}
@@ -360,28 +323,6 @@ export default function ServiceCards() {
                     </motion.div>
                   </div>
                 </div>
-
-                {/* Floating Badge */}
-                <motion.div
-                  className="absolute -top-4 -right-4 bg-gradient-to-r from-red-500 to-red-600 text-white text-xs font-bold px-3 py-2 rounded-full shadow-lg"
-                  initial={{ scale: 0, rotate: -45 }}
-                  whileInView={{ scale: 1, rotate: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 + 0.8, type: "spring" }}
-                >
-                  <motion.span
-                    animate={{
-                      y: isHovered ? [-2, 2, -2] : 0
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: isHovered ? Infinity : 0,
-                      ease: "easeInOut"
-                    }}
-                  >
-                    Popular
-                  </motion.span>
-                </motion.div>
               </motion.div>
             );
           })}

@@ -217,7 +217,7 @@ export default function Hero() {
         <Wrench className="w-5 h-5" />
       </motion.div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10 h-full flex items-center justify-center">
+      <div className="septic-content-constrained septic-force-1540 relative z-10 h-full flex items-center justify-center">
         {/* Enhanced Content Background for Maximum Readability */}
         <div className="absolute inset-0 bg-gradient-radial from-black/20 via-black/8 to-transparent blur-3xl opacity-70"></div>
         
