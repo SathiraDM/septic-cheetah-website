@@ -1,42 +1,42 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
-import { AlertTriangle, CheckCircle, Phone, Truck, Shield, Clock, MapPin, Star, Calendar, ArrowRight, Award } from 'lucide-react';
+import { AlertTriangle, CheckCircle, Phone, Shield, Clock, MapPin, Star, Calendar, ArrowRight, Award, Search } from 'lucide-react';
 import { CONTACT_INFO } from '@/lib/constants';
 import { ServiceErrorBoundary } from '@/components/ServiceErrorBoundary';
 
 export const metadata: Metadata = {
-  title: 'Professional Septic Tank Pumping Services | Septic Cheetah',
-  description: 'Expert septic tank pumping with same-day service. Licensed technicians, transparent pricing, and 100% satisfaction guarantee. Serving Central Texas.',
+  title: 'Professional Septic System Inspections | Septic Cheetah',
+  description: 'Comprehensive septic system inspections for real estate transactions and maintenance. Licensed inspectors, detailed reports included.',
   openGraph: {
-    title: 'Professional Septic Tank Pumping Services | Septic Cheetah',
-    description: 'Expert septic tank pumping with same-day service available',
-    url: '/services/pumping'
+    title: 'Professional Septic System Inspections | Septic Cheetah',
+    description: 'Expert septic inspections with detailed reporting',
+    url: '/services/inspections'
   }
 };
 
 const warningSignsData = [
   {
     icon: AlertTriangle,
-    title: "Slow Draining",
-    description: "Fixtures draining slowly or backing up",
+    title: "Pre-Purchase",
+    description: "Before buying property with septic system",
     severity: "warning"
   },
   {
     icon: MapPin,
-    title: "Standing Water",
-    description: "Pooling water around septic area",
+    title: "System Issues",
+    description: "Slow drains, odors, or standing water",
     severity: "danger"
   },
   {
     icon: AlertTriangle,
-    title: "Sewage Odors",
-    description: "Persistent sewage smells outside",
+    title: "Maintenance Check",
+    description: "Annual system health evaluation",
     severity: "critical"
   },
   {
     icon: Calendar,
-    title: "Regular Maintenance",
-    description: "Every 3-5 years for optimal performance",
+    title: "Regular Inspections",
+    description: "Every 3-5 years for preventive care",
     severity: "info"
   }
 ];
@@ -44,73 +44,73 @@ const warningSignsData = [
 const processSteps = [
   {
     number: "01",
-    title: "Tank Location & Access",
-    description: "Professional equipment locates and safely accesses your septic system",
+    title: "System Location & Access",
+    description: "Professional location of all system components and safe access preparation",
     duration: "15-20 min"
   },
   {
     number: "02", 
-    title: "Complete Waste Removal",
-    description: "Thorough removal of all waste, sludge, and scum layers",
-    duration: "30-45 min"
+    title: "Comprehensive Inspection",
+    description: "Thorough evaluation of tank, distribution box, and drain field condition",
+    duration: "45-60 min"
   },
   {
     number: "03",
-    title: "System Inspection", 
-    description: "Comprehensive inspection of tank condition and components",
-    duration: "10-15 min"
+    title: "Component Testing", 
+    description: "Testing of all system components including pumps and alarms",
+    duration: "15-20 min"
   },
   {
     number: "04",
-    title: "Professional Disposal",
-    description: "Licensed disposal at state-approved treatment facilities",
-    duration: "Complete"
+    title: "Detailed Report",
+    description: "Complete written report with findings and recommendations",
+    duration: "Same Day"
   }
 ];
 
 const serviceGuarantees = [
   {
     icon: Shield,
-    title: "Licensed & Insured",
-    description: "Fully certified professionals"
+    title: "Licensed Inspectors",
+    description: "Certified professionals"
   },
   {
     icon: Clock,
-    title: "Same-Day Service",
-    description: "Available for most locations"
+    title: "Same-Day Reports",
+    description: "Fast turnaround time"
   },
   {
     icon: Star,
-    title: "100% Satisfaction",
-    description: "Complete service guarantee"
+    title: "Detailed Analysis",
+    description: "Comprehensive evaluation"
   },
   {
     icon: Award,
     title: "5-Star Rated",
-    description: "Trusted by thousands"
+    description: "Trusted by realtors"
   }
 ];
 
 const frequentlyAskedQuestions = [
   {
-    question: "How often should I pump my septic tank?",
-    answer: "Most residential septic tanks should be pumped every 3-5 years, depending on household size and usage. Regular pumping prevents costly system failures and extends the life of your septic system."
+    question: "How long does a septic inspection take?",
+    answer: "A comprehensive septic inspection typically takes 60-90 minutes, depending on system size and accessibility. We provide detailed reports on the same day."
   },
   {
-    question: "How long does septic pumping take?",
-    answer: "Standard pumping takes 45-90 minutes from start to finish. We work efficiently to minimize disruption while ensuring thorough service and proper system inspection."
+    question: "What's included in the inspection report?",
+    answer: "Our reports include tank condition, sludge levels, component functionality, drain field assessment, and detailed recommendations for any needed repairs or maintenance."
   },
   {
-    question: "What happens to the waste after pumping?",
-    answer: "All waste is transported to state-approved treatment facilities in our licensed vehicles. We follow strict environmental regulations and provide proper disposal documentation."
+    question: "Do you inspect for real estate transactions?",
+    answer: "Yes, we provide pre-purchase inspections for real estate transactions. Our detailed reports help buyers make informed decisions and negotiate repairs if needed."
   },
   {
-    question: "Do you offer emergency pumping services?",
-    answer: "Yes, we provide 24/7 emergency services for critical situations. Emergency services include priority response with additional charges, but we prioritize health and safety above all."
+    question: "How often should I have my septic system inspected?",
+    answer: "We recommend annual inspections for optimal performance, or every 3-5 years minimum. More frequent inspections may be needed for older systems or high-usage properties."
   }
 ];
 
-export default function PumpingPage() {
+export default function InspectionsPage() {
   return (
     <ServiceErrorBoundary>
       <main className="min-h-screen bg-white">
@@ -129,12 +129,12 @@ export default function PumpingPage() {
                 <div className="space-y-8">
                   <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
                     <span className="text-primary-dark">Professional</span>
-                    <span className="block text-primary-accent">Septic Pumping</span>
+                    <span className="block text-primary-accent">Septic Inspections</span>
                   </h1>
                   
                   <p className="text-lg lg:text-xl text-text-primary leading-relaxed max-w-2xl mx-auto">
-                    Expert septic tank pumping services with transparent pricing, 
-                    licensed technicians, and complete satisfaction guarantee.
+                    Comprehensive septic system inspections for real estate transactions, 
+                    maintenance checks, and peace of mind.
                   </p>
                 </div>
 
@@ -158,7 +158,7 @@ export default function PumpingPage() {
                     className="group relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-5 px-8 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 hover:shadow-xl hover:scale-105"
                   >
                     <Phone className="w-6 h-6" />
-                    <span className="text-lg">Schedule Service</span>
+                    <span className="text-lg">Schedule Inspection</span>
                     <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
                   </a>
                   <a
@@ -175,8 +175,8 @@ export default function PumpingPage() {
               <div className="relative flex justify-center lg:justify-end">
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-lg w-full">
                   <Image
-                    src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=500&fit=crop"
-                    alt="Professional septic pumping service"
+                    src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=500&fit=crop"
+                    alt="Professional septic system inspection"
                     width={600}
                     height={500}
                     className="object-cover w-full h-[500px]"
@@ -186,8 +186,8 @@ export default function PumpingPage() {
                 
                 {/* Floating Price Badge */}
                 <div className="absolute -bottom-4 -left-4 bg-gradient-to-r from-primary-accent to-secondary-accent text-white p-6 rounded-xl shadow-xl">
-                  <div className="text-2xl font-bold">Starting at $299</div>
-                  <div className="text-sm opacity-90">Most residential properties</div>
+                  <div className="text-2xl font-bold">Starting at $200</div>
+                  <div className="text-sm opacity-90">Complete inspection</div>
                 </div>
 
                 {/* Rating Badge */}
@@ -196,7 +196,7 @@ export default function PumpingPage() {
                     <Star className="w-5 h-5 text-yellow-500 fill-current" />
                     <div>
                       <div className="font-bold text-sm text-primary-dark">4.9/5</div>
-                      <div className="text-xs text-text-primary">500+ Reviews</div>
+                      <div className="text-xs text-text-primary">400+ Reviews</div>
                     </div>
                   </div>
                 </div>
@@ -211,7 +211,7 @@ export default function PumpingPage() {
             <div className="text-center mb-20">
               <h2 className="text-4xl lg:text-5xl font-bold mb-6">
                 <span className="text-primary-dark">When to Schedule</span>
-                <span className="block text-primary-accent">Septic Pumping</span>
+                <span className="block text-primary-accent">Septic Inspections</span>
               </h2>
               {/* Modern decorative line */}
               <div className="flex items-center justify-center mb-6">
@@ -220,7 +220,7 @@ export default function PumpingPage() {
                 <div className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"></div>
               </div>
               <p className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed">
-                Don&apos;t wait for a system failure. Watch for these warning signs and schedule service before problems become emergencies.
+                Don&apos;t wait for costly surprises. Know when to schedule inspections for optimal system performance and compliance.
               </p>
             </div>
 
@@ -261,7 +261,7 @@ export default function PumpingPage() {
             <div className="text-center mb-20">
               <h2 className="text-4xl lg:text-5xl font-bold mb-6">
                 <span className="text-primary-dark">Our Professional</span>
-                <span className="block text-primary-accent">Service Process</span>
+                <span className="block text-primary-accent">Inspection Process</span>
               </h2>
               {/* Modern decorative line */}
               <div className="flex items-center justify-center mb-6">
@@ -270,7 +270,7 @@ export default function PumpingPage() {
                 <div className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"></div>
               </div>
               <p className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed">
-                Systematic approach ensuring thorough, safe, and efficient service every time
+                Systematic approach ensuring thorough, accurate, and detailed inspection every time
               </p>
             </div>
 
@@ -321,8 +321,8 @@ export default function PumpingPage() {
               {/* Pricing Card */}
               <div className="bg-gradient-to-br from-bg-primary to-bg-secondary rounded-3xl p-10 border-2 border-primary-accent/20 hover:border-primary-accent/40 transition-all duration-300 hover:shadow-xl">
                 <div className="text-center mb-10">
-                  <div className="text-5xl font-bold text-primary-accent mb-4">$299 - $399</div>
-                  <div className="text-2xl text-primary-dark font-semibold">Standard Pumping Service</div>
+                  <div className="text-5xl font-bold text-primary-accent mb-4">$200 - $350</div>
+                  <div className="text-2xl text-primary-dark font-semibold">Complete Inspection Service</div>
                   {/* Small decorative line */}
                   <div className="flex items-center justify-center mt-4 mb-2">
                     <div className="h-px bg-gradient-to-r from-transparent via-primary-accent/50 to-transparent w-20"></div>
@@ -334,16 +334,16 @@ export default function PumpingPage() {
                 
                 <div className="space-y-6 mb-10">
                   <div className="flex justify-between items-center py-3 border-b border-primary-accent/20">
-                    <span className="text-text-primary font-medium">Service Duration:</span>
-                    <span className="font-bold text-primary-dark">45-90 minutes</span>
+                    <span className="text-text-primary font-medium">Inspection Duration:</span>
+                    <span className="font-bold text-primary-dark">60-90 minutes</span>
                   </div>
                   <div className="flex justify-between items-center py-3 border-b border-primary-accent/20">
-                    <span className="text-text-primary font-medium">Same-day Available:</span>
+                    <span className="text-text-primary font-medium">Same-day Report:</span>
                     <span className="font-bold text-green-600">Yes</span>
                   </div>
                   <div className="flex justify-between items-center py-3 border-b border-primary-accent/20">
-                    <span className="text-text-primary font-medium">Emergency Surcharge:</span>
-                    <span className="font-bold text-red-600">+$100</span>
+                    <span className="text-text-primary font-medium">Pre-purchase Premium:</span>
+                    <span className="font-bold text-orange-600">+$50</span>
                   </div>
                   <div className="flex justify-between items-center py-3">
                     <span className="text-text-primary font-medium">Service Guarantee:</span>
@@ -363,17 +363,17 @@ export default function PumpingPage() {
               <div className="bg-gradient-to-br from-primary-dark to-secondary-accent text-white rounded-3xl p-10">
                 <h3 className="text-3xl font-bold mb-10 text-center">
                   What&apos;s Included
-                  <span className="block text-lg font-normal text-white/80 mt-3">Complete service package</span>
+                  <span className="block text-lg font-normal text-white/80 mt-3">Complete inspection package</span>
                 </h3>
                 
                 <div className="space-y-6 mb-10">
                   {[
-                    "Complete tank pumping and waste removal",
-                    "Comprehensive system inspection", 
-                    "Licensed waste disposal at approved facilities",
-                    "Site cleanup and restoration",
-                    "Detailed service documentation",
-                    "Written service guarantee"
+                    "Complete system location and access",
+                    "Comprehensive component inspection", 
+                    "Tank condition and sludge level assessment",
+                    "Drain field evaluation and testing",
+                    "Detailed written report with recommendations",
+                    "Same-day report delivery"
                   ].map((item, index) => (
                     <div key={index} className="flex items-start space-x-4">
                       <CheckCircle className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
@@ -385,10 +385,10 @@ export default function PumpingPage() {
                 <div className="bg-green-900/30 border border-green-400/30 rounded-xl p-6">
                   <div className="flex items-center space-x-3 mb-3">
                     <Shield className="w-6 h-6 text-green-400" />
-                    <span className="font-bold text-green-300 text-lg">100% Satisfaction Guarantee</span>
+                    <span className="font-bold text-green-300 text-lg">100% Professional Guarantee</span>
                   </div>
                   <p className="text-green-200 leading-relaxed">
-                    If you&apos;re not completely satisfied with our service, we&apos;ll make it right or provide a full refund.
+                    If you&apos;re not completely satisfied with our inspection service, we&apos;ll make it right or provide a full refund.
                   </p>
                 </div>
               </div>
@@ -411,7 +411,7 @@ export default function PumpingPage() {
                 <div className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"></div>
               </div>
               <p className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed">
-                Get answers to common questions about septic tank pumping services
+                Get answers to common questions about septic system inspection services
               </p>
             </div>
 
@@ -434,18 +434,18 @@ export default function PumpingPage() {
           
           <div className="container-service text-center z-10">
             <h2 className="text-4xl lg:text-5xl font-bold mb-8">
-              Ready to Schedule Your <span className="text-primary-accent">Pumping Service?</span>
+              Ready to Schedule Your <span className="text-primary-accent">Septic Inspection?</span>
             </h2>
             <p className="text-xl mb-12 max-w-4xl mx-auto opacity-90 leading-relaxed">
-              Same-day service available for most areas. Professional pumping with complete satisfaction guarantee and transparent pricing.
+              Get peace of mind with professional inspection service. Detailed reports with same-day delivery and complete satisfaction guarantee.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <a
                 href={`tel:${CONTACT_INFO.phone}`}
                 className="bg-white text-primary-accent hover:bg-gray-100 font-bold py-6 px-10 rounded-xl text-xl inline-flex items-center justify-center space-x-4 transition-all duration-300 hover:scale-105 shadow-xl"
               >
-                <Truck className="w-7 h-7" />
-                <span>Schedule Service Now</span>
+                <Search className="w-7 h-7" />
+                <span>Schedule Inspection Now</span>
               </a>
               <a
                 href={`tel:${CONTACT_INFO.emergencyPhone}`}

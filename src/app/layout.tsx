@@ -77,9 +77,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${playfair.variable} antialiased`}
+        className={`${inter.variable} ${playfair.variable} antialiased overflow-x-hidden max-w-full`}
+        style={{ maxWidth: '100vw', overflowX: 'hidden' }}
       >
-        <div className="min-h-screen flex flex-col">
+        <div className="min-h-screen flex flex-col overflow-x-hidden max-w-full" style={{ maxWidth: '100vw' }}>
           <Suspense fallback={<div className="h-20 bg-white animate-pulse" />}>
             <Header />
           </Suspense>

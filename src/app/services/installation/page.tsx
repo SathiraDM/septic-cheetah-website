@@ -1,395 +1,458 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
-import { Wrench, CheckCircle, Clock, Phone, FileText, Shield, Award } from 'lucide-react';
+import { AlertTriangle, CheckCircle, Phone, Shield, Clock, MapPin, Star, Calendar, ArrowRight, Award, Settings } from 'lucide-react';
 import { CONTACT_INFO } from '@/lib/constants';
 import { ServiceErrorBoundary } from '@/components/ServiceErrorBoundary';
 
 export const metadata: Metadata = {
-  title: 'Septic System Installation - Licensed Professionals',
-  description: 'Professional septic system installation. New construction, replacements, permits handled. Licensed installers, warranty included.',
+  title: 'Professional Septic System Installation | Septic Cheetah',
+  description: 'Expert septic system installation with permits handled. Licensed installers, warranty included, professional service from start to finish.',
   openGraph: {
-    title: 'Septic System Installation - Licensed Professionals',
-    description: 'Complete septic installation with permits and inspections handled',
+    title: 'Professional Septic System Installation | Septic Cheetah',
+    description: 'Expert septic installation with permits and warranties',
     url: '/services/installation'
   }
 };
 
-const installationServices = [
-  "New construction septic systems",
-  "Replacement of failed systems", 
-  "System upgrades and expansions",
-  "Alternative system installations",
-  "Pump system installations",
-  "Commercial septic systems"
-];
-
-const installationProcess = [
+const warningSignsData = [
   {
-    number: "01",
-    title: "Site Evaluation & Soil Testing",
-    description: "Comprehensive site assessment and percolation testing to determine the best system design for your property."
+    icon: AlertTriangle,
+    title: "New Construction",
+    description: "Building new home requiring septic system",
+    severity: "warning"
   },
   {
-    number: "02",
-    title: "Permit Application & Approval",
-    description: "We handle all permit applications and work with local authorities to ensure compliance with regulations."
+    icon: MapPin,
+    title: "System Failure",
+    description: "Current system beyond repair",
+    severity: "danger"
   },
   {
-    number: "03",
-    title: "System Design & Engineering",
-    description: "Custom system design based on soil conditions, property layout, and household needs."
+    icon: AlertTriangle,
+    title: "Code Upgrades",
+    description: "Upgrading to meet current regulations",
+    severity: "critical"
   },
   {
-    number: "04",
-    title: "Excavation & Installation",
-    description: "Professional excavation and installation by licensed technicians using proper techniques and materials."
-  },
-  {
-    number: "05",
-    title: "Inspection & Final Approval",
-    description: "Coordinated inspections with local authorities and final system approval for operation."
+    icon: Calendar,
+    title: "Planned Replacement",
+    description: "Proactive system replacement",
+    severity: "info"
   }
 ];
 
-const systemTypes = [
+const processSteps = [
   {
-    name: "Conventional Systems",
-    description: "Traditional septic systems suitable for most soil conditions",
-    price: "$3,499 - $5,999",
-    features: ["Standard drain field", "Gravity-fed design", "Most cost-effective", "Suitable for most properties"]
+    number: "01",
+    title: "Site Evaluation & Design",
+    description: "Professional site assessment, soil testing, and custom system design",
+    duration: "1-2 days"
   },
   {
-    name: "Advanced Treatment Systems",
-    description: "Enhanced treatment for challenging soil or environmental conditions",
-    price: "$6,000 - $12,000",
-    features: ["Superior treatment", "Smaller footprint", "Environmental protection", "Required in some areas"]
+    number: "02", 
+    title: "Permits & Approvals",
+    description: "Complete permit applications and regulatory approvals handled",
+    duration: "1-2 weeks"
   },
   {
-    name: "Pump Systems",
-    description: "For properties with challenging topography or high water tables",
-    price: "$5,000 - $8,000",
-    features: ["Uphill pumping capability", "Flexible placement", "Alarm systems", "Professional monitoring"]
+    number: "03",
+    title: "Professional Installation", 
+    description: "Expert excavation and installation by licensed technicians",
+    duration: "2-5 days"
+  },
+  {
+    number: "04",
+    title: "Inspection & Startup",
+    description: "Final inspections, system testing, and operational startup",
+    duration: "1-2 days"
+  }
+];
+
+const serviceGuarantees = [
+  {
+    icon: Shield,
+    title: "Licensed Installers",
+    description: "Certified professionals"
+  },
+  {
+    icon: Clock,
+    title: "Permits Handled",
+    description: "Complete paperwork"
+  },
+  {
+    icon: Star,
+    title: "5-Year Warranty",
+    description: "Installation guarantee"
+  },
+  {
+    icon: Award,
+    title: "5-Star Rated",
+    description: "Trusted by homeowners"
+  }
+];
+
+const frequentlyAskedQuestions = [
+  {
+    question: "How long does septic system installation take?",
+    answer: "Complete installation typically takes 2-4 weeks from start to finish, including permits, site preparation, installation, and final inspections. Weather and soil conditions may affect timeline."
+  },
+  {
+    question: "Do you handle all permits and inspections?",
+    answer: "Yes, we handle all permit applications, regulatory approvals, and coordinate all required inspections. You don't need to worry about the paperwork - we manage everything."
+  },
+  {
+    question: "What's included in the installation warranty?",
+    answer: "Our installations include a comprehensive 5-year warranty covering workmanship, materials, and system functionality. We stand behind our work with complete confidence."
+  },
+  {
+    question: "How much does a new septic system cost?",
+    answer: "Installation costs vary based on system type, soil conditions, and property requirements. Most residential installations range from $3,500-$8,000. We provide detailed quotes after site evaluation."
   }
 ];
 
 export default function InstallationPage() {
   return (
     <ServiceErrorBoundary>
-      <main className="min-h-screen">
-        {/* Hero Section */}
-        <section className="bg-gradient-to-br from-bg-primary to-bg-secondary py-20">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <h1 className="text-4xl lg:text-5xl font-bold text-primary-dark mb-6">
-                  Septic System Installation
-                  <span className="block text-2xl lg:text-3xl text-secondary-accent mt-2 font-normal">
-                    New systems installed right the first time
-                  </span>
-                </h1>
-                <p className="text-xl text-text-primary mb-8">
-                  Complete septic system installation with permits handled by licensed professionals. 
-                  From site evaluation to final inspection, we manage every detail.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <a
-                    href={`tel:${CONTACT_INFO.phone}`}
-                    className="btn-primary text-lg flex items-center justify-center space-x-2"
-                  >
-                    <Phone className="w-5 h-5" />
-                    <span>Get Installation Quote</span>
-                  </a>
-                  <a
-                    href={`tel:${CONTACT_INFO.phone}`}
-                    className="btn-secondary text-lg flex items-center justify-center space-x-2"
-                  >
-                    <FileText className="w-5 h-5" />
-                    <span>Free Site Evaluation</span>
-                  </a>
-                </div>
-              </div>
-              <div className="relative">
-                <Image
-                  src="https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?auto=compress&cs=tinysrgb&w=800"
-                  alt="Septic system installation in progress"
-                  width={600}
-                  height={400}
-                  className="rounded-lg shadow-lg"
-                />
-                <div className="absolute -bottom-6 -left-6 bg-primary-accent text-white p-4 rounded-lg shadow-lg">
-                  <div className="text-2xl font-bold">$3,499</div>
-                  <div className="text-sm">Starting Price</div>
-                </div>
-              </div>
-            </div>
+      <main className="min-h-screen bg-white">
+        {/* Elegant Hero Section with Main Brand Colors */}
+        <section className="relative bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-primary min-h-[90vh] flex items-center overflow-hidden">
+          {/* Subtle Background Pattern */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-20 left-20 w-64 h-64 bg-primary-accent rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 right-20 w-80 h-80 bg-secondary-accent rounded-full blur-3xl"></div>
           </div>
-        </section>
-
-        {/* Installation Services */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <div className="w-16 h-16 bg-primary-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Wrench className="w-8 h-8 text-primary-accent" />
+          
+          <div className="container-service z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              {/* Content Side */}
+              <div className="space-y-8 text-center lg:text-center flex flex-col justify-center">
+                <div className="space-y-8">
+                  <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
+                    <span className="text-primary-dark">Professional</span>
+                    <span className="block text-primary-accent">Septic Installation</span>
+                  </h1>
+                  
+                  <p className="text-lg lg:text-xl text-text-primary leading-relaxed max-w-2xl mx-auto">
+                    Complete septic system installation with permits handled by 
+                    licensed professionals. From design to final inspection.
+                  </p>
                 </div>
-                <h2 className="text-3xl lg:text-4xl font-bold text-primary-dark mb-4">
-                  Our Installation Services
-                </h2>
-                <p className="text-xl text-text-primary">
-                  Comprehensive septic installation services for residential and commercial properties.
-                </p>
+
+                {/* Service Guarantees */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+                  {serviceGuarantees.map((guarantee, index) => (
+                    <div key={index} className="flex items-center space-x-3 p-4 bg-white/70 backdrop-blur-sm border border-primary-accent/20 rounded-xl hover:shadow-lg transition-all duration-300">
+                      <guarantee.icon className="w-6 h-6 text-primary-accent flex-shrink-0" />
+                      <div>
+                        <div className="font-bold text-primary-dark text-sm">{guarantee.title}</div>
+                        <div className="text-text-primary text-xs">{guarantee.description}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* CTA Buttons */}
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <a
+                    href={`tel:${CONTACT_INFO.phone}`}
+                    className="group relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-5 px-8 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 hover:shadow-xl hover:scale-105"
+                  >
+                    <Phone className="w-6 h-6" />
+                    <span className="text-lg">Get Installation Quote</span>
+                    <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                  </a>
+                  <a
+                    href={`tel:${CONTACT_INFO.emergencyPhone}`}
+                    className="bg-red-600 text-white font-bold py-5 px-8 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 hover:bg-red-700 hover:shadow-xl hover:scale-105"
+                  >
+                    <AlertTriangle className="w-6 h-6" />
+                    <span className="text-lg">Emergency Service</span>
+                  </a>
+                </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {installationServices.map((service, index) => (
-                  <div key={index} className="flex items-start space-x-3 p-4 bg-primary-accent/5 rounded-lg">
-                    <CheckCircle className="w-5 h-5 text-primary-accent mt-1 flex-shrink-0" />
-                    <span className="text-text-primary font-medium">{service}</span>
+              {/* Image Side */}
+              <div className="relative flex justify-center lg:justify-end">
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-lg w-full">
+                  <Image
+                    src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=500&fit=crop"
+                    alt="Professional septic system installation"
+                    width={600}
+                    height={500}
+                    className="object-cover w-full h-[500px]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                </div>
+                
+                {/* Floating Price Badge */}
+                <div className="absolute -bottom-4 -left-4 bg-gradient-to-r from-primary-accent to-secondary-accent text-white p-6 rounded-xl shadow-xl">
+                  <div className="text-2xl font-bold">Starting at $3,499</div>
+                  <div className="text-sm opacity-90">Complete installation</div>
+                </div>
+
+                {/* Rating Badge */}
+                <div className="absolute -top-4 -right-4 bg-white p-4 rounded-xl shadow-lg">
+                  <div className="flex items-center space-x-2">
+                    <Star className="w-5 h-5 text-yellow-500 fill-current" />
+                    <div>
+                      <div className="font-bold text-sm text-primary-dark">4.9/5</div>
+                      <div className="text-xs text-text-primary">200+ Installations</div>
+                    </div>
                   </div>
-                ))}
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Installation Process */}
-        <section className="py-16 bg-bg-secondary">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-primary-dark mb-4">
-                Professional Installation Process
+        {/* Warning Signs Section */}
+        <section className="py-24 bg-white">
+          <div className="container-service">
+            <div className="text-center mb-20">
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+                <span className="text-primary-dark">When You Need</span>
+                <span className="block text-primary-accent">New Installation</span>
               </h2>
-              <p className="text-xl text-text-primary max-w-2xl mx-auto">
-                Our systematic approach ensures proper installation and long-term system performance.
+              {/* Modern decorative line */}
+              <div className="flex items-center justify-center mb-6">
+                <div className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"></div>
+                <div className="w-2 h-2 bg-primary-accent rounded-full mx-4"></div>
+                <div className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"></div>
+              </div>
+              <p className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed">
+                Whether building new or replacing an old system, know when it&apos;s time for professional septic installation.
               </p>
             </div>
 
-            <div className="max-w-4xl mx-auto">
-              <div className="space-y-8">
-                {installationProcess.map((step, index) => (
-                  <div key={index} className="flex items-start space-x-6">
-                    <div className="w-16 h-16 bg-primary-accent text-white rounded-full flex items-center justify-center font-bold text-xl flex-shrink-0">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+              {warningSignsData.map((sign, index) => {
+                const severityStyles = {
+                  critical: "bg-red-50 border-red-200 text-red-800 hover:bg-red-100",
+                  danger: "bg-orange-50 border-orange-200 text-orange-800 hover:bg-orange-100", 
+                  warning: "bg-yellow-50 border-yellow-200 text-yellow-800 hover:bg-yellow-100",
+                  info: "bg-blue-50 border-blue-200 text-blue-800 hover:bg-blue-100"
+                };
+
+                return (
+                  <div key={index} className={`p-8 border-2 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-xl ${severityStyles[sign.severity as keyof typeof severityStyles]}`}>
+                    <sign.icon className="w-10 h-10 mb-6" />
+                    <h3 className="text-lg font-bold mb-3">{sign.title}</h3>
+                    <p className="text-sm opacity-90 leading-relaxed">{sign.description}</p>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="text-center">
+              <a
+                href={`tel:${CONTACT_INFO.phone}`}
+                className="inline-flex items-center space-x-3 bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-5 px-10 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              >
+                <Phone className="w-6 h-6" />
+                <span className="text-lg">Get Expert Consultation</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Process Section */}
+        <section className="py-24 bg-gradient-to-br from-bg-primary to-bg-secondary">
+          <div className="container-service">
+            <div className="text-center mb-20">
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+                <span className="text-primary-dark">Our Professional</span>
+                <span className="block text-primary-accent">Installation Process</span>
+              </h2>
+              {/* Modern decorative line */}
+              <div className="flex items-center justify-center mb-6">
+                <div className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"></div>
+                <div className="w-2 h-2 bg-primary-accent rounded-full mx-4"></div>
+                <div className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"></div>
+              </div>
+              <p className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed">
+                Systematic approach ensuring proper installation, regulatory compliance, and long-term performance
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {processSteps.map((step, index) => (
+                <div key={index} className="relative">
+                  <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-primary-accent/10">
+                    <div className="w-16 h-16 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-xl flex items-center justify-center text-white font-bold text-xl mb-6">
                       {step.number}
                     </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-primary-dark mb-2">{step.title}</h3>
-                      <p className="text-text-primary">{step.description}</p>
+                    <h3 className="text-xl font-bold text-primary-dark mb-4">{step.title}</h3>
+                    <p className="text-text-primary mb-4 leading-relaxed">{step.description}</p>
+                    <div className="text-primary-accent text-sm font-semibold">{step.duration}</div>
+                  </div>
+                  
+                  {/* Connection Arrow */}
+                  {index < processSteps.length - 1 && (
+                    <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2">
+                      <ArrowRight className="w-8 h-8 text-primary-accent/50" />
                     </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* System Types */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-primary-dark mb-4">
-                Septic System Types We Install
-              </h2>
-              <p className="text-xl text-text-primary max-w-2xl mx-auto">
-                We install various types of septic systems to meet different property needs and regulations.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {systemTypes.map((system, index) => (
-                <div key={index} className="professional-card p-6">
-                  <h3 className="text-xl font-bold text-primary-dark mb-3">{system.name}</h3>
-                  <p className="text-text-primary mb-4">{system.description}</p>
-                  <div className="text-2xl font-bold text-primary-accent mb-4">{system.price}</div>
-                  <div className="space-y-2 mb-6">
-                    {system.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-center space-x-2">
-                        <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
-                        <span className="text-sm text-text-primary">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <a
-                    href={`tel:${CONTACT_INFO.phone}`}
-                    className="btn-primary w-full text-center"
-                  >
-                    Get Quote
-                  </a>
+                  )}
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Permits and Compliance */}
-        <section className="py-16 bg-bg-secondary">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <FileText className="w-8 h-8 text-blue-600" />
+        {/* Pricing Section */}
+        <section className="py-24 bg-white">
+          <div className="container-service">
+            <div className="text-center mb-20">
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+                <span className="text-primary-dark">Transparent</span>
+                <span className="block text-primary-accent">Pricing</span>
+              </h2>
+              {/* Modern decorative line */}
+              <div className="flex items-center justify-center mb-6">
+                <div className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"></div>
+                <div className="w-2 h-2 bg-primary-accent rounded-full mx-4"></div>
+                <div className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"></div>
+              </div>
+              <p className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed">
+                No hidden fees, no surprises. Know exactly what you&apos;re paying for with our upfront pricing.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+              {/* Pricing Card */}
+              <div className="bg-gradient-to-br from-bg-primary to-bg-secondary rounded-3xl p-10 border-2 border-primary-accent/20 hover:border-primary-accent/40 transition-all duration-300 hover:shadow-xl">
+                <div className="text-center mb-10">
+                  <div className="text-5xl font-bold text-primary-accent mb-4">$3,499 - $7,999</div>
+                  <div className="text-2xl text-primary-dark font-semibold">Complete Installation</div>
+                  {/* Small decorative line */}
+                  <div className="flex items-center justify-center mt-4 mb-2">
+                    <div className="h-px bg-gradient-to-r from-transparent via-primary-accent/50 to-transparent w-20"></div>
+                    <div className="w-1 h-1 bg-primary-accent/50 rounded-full mx-2"></div>
+                    <div className="h-px bg-gradient-to-r from-transparent via-primary-accent/50 to-transparent w-20"></div>
+                  </div>
+                  <div className="text-text-primary mt-3">Most residential properties</div>
                 </div>
-                <h2 className="text-3xl lg:text-4xl font-bold text-primary-dark mb-4">
-                  Permits & Compliance Handled
-                </h2>
-                <p className="text-xl text-text-primary">
-                  We manage all permitting and ensure full compliance with local regulations.
-                </p>
+                
+                <div className="space-y-6 mb-10">
+                  <div className="flex justify-between items-center py-3 border-b border-primary-accent/20">
+                    <span className="text-text-primary font-medium">Installation Duration:</span>
+                    <span className="font-bold text-primary-dark">2-4 weeks</span>
+                  </div>
+                  <div className="flex justify-between items-center py-3 border-b border-primary-accent/20">
+                    <span className="text-text-primary font-medium">Site Evaluation:</span>
+                    <span className="font-bold text-green-600">FREE</span>
+                  </div>
+                  <div className="flex justify-between items-center py-3 border-b border-primary-accent/20">
+                    <span className="text-text-primary font-medium">Permits Included:</span>
+                    <span className="font-bold text-green-600">Yes</span>
+                  </div>
+                  <div className="flex justify-between items-center py-3">
+                    <span className="text-text-primary font-medium">Installation Warranty:</span>
+                    <span className="font-bold text-green-600">5 Years</span>
+                  </div>
+                </div>
+
+                <a
+                  href={`tel:${CONTACT_INFO.phone}`}
+                  className="block w-full text-center bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-lg"
+                >
+                  Get Exact Quote
+                </a>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="professional-card p-6">
-                  <h3 className="text-xl font-bold text-primary-dark mb-4">What We Handle</h3>
-                  <div className="space-y-3">
-                    {[
-                      "Permit applications and fees",
-                      "Soil percolation testing",
-                      "System design approval",
-                      "Installation inspections",
-                      "Final system approval",
-                      "Compliance documentation"
-                    ].map((item, index) => (
-                      <div key={index} className="flex items-center space-x-3">
-                        <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-                        <span className="text-text-primary">{item}</span>
-                      </div>
-                    ))}
-                  </div>
+              {/* What&apos;s Included Card */}
+              <div className="bg-gradient-to-br from-primary-dark to-secondary-accent text-white rounded-3xl p-10">
+                <h3 className="text-3xl font-bold mb-10 text-center">
+                  What&apos;s Included
+                  <span className="block text-lg font-normal text-white/80 mt-3">Complete installation package</span>
+                </h3>
+                
+                <div className="space-y-6 mb-10">
+                  {[
+                    "Complete site evaluation and design",
+                    "All permit applications and approvals", 
+                    "Professional excavation and installation",
+                    "System testing and startup",
+                    "Final inspections and documentation",
+                    "5-year installation warranty"
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-start space-x-4">
+                      <CheckCircle className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
+                      <span className="text-white/90 leading-relaxed">{item}</span>
+                    </div>
+                  ))}
                 </div>
-
-                <div className="professional-card p-6">
-                  <h3 className="text-xl font-bold text-primary-dark mb-4">Our Credentials</h3>
-                  <div className="space-y-4">
-                    <div className="flex items-center space-x-3">
-                      <Shield className="w-6 h-6 text-primary-accent" />
-                      <div>
-                        <div className="font-semibold">State Licensed Installers</div>
-                        <div className="text-sm text-text-primary">License #12345</div>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <Award className="w-6 h-6 text-primary-accent" />
-                      <div>
-                        <div className="font-semibold">Fully Insured</div>
-                        <div className="text-sm text-text-primary">$2M Liability Coverage</div>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <CheckCircle className="w-6 h-6 text-primary-accent" />
-                      <div>
-                        <div className="font-semibold">Workmanship Warranty</div>
-                        <div className="text-sm text-text-primary">5-year installation warranty</div>
-                      </div>
-                    </div>
+                
+                <div className="bg-green-900/30 border border-green-400/30 rounded-xl p-6">
+                  <div className="flex items-center space-x-3 mb-3">
+                    <Shield className="w-6 h-6 text-green-400" />
+                    <span className="font-bold text-green-300 text-lg">100% Installation Guarantee</span>
                   </div>
+                  <p className="text-green-200 leading-relaxed">
+                    If you&apos;re not completely satisfied with our installation, we&apos;ll make it right or provide a full refund.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Timeline and Pricing */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl lg:text-4xl font-bold text-primary-dark mb-4">
-                  Timeline & Investment
-                </h2>
-                <p className="text-xl text-text-primary">
-                  Understanding the installation process timeline and investment required.
-                </p>
+        {/* FAQ Section */}
+        <section className="py-24 bg-gradient-to-br from-bg-primary to-bg-secondary">
+          <div className="container-service">
+            <div className="text-center mb-20">
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+                <span className="text-primary-dark">Frequently Asked</span>
+                <span className="block text-primary-accent">Questions</span>
+              </h2>
+              {/* Modern decorative line */}
+              <div className="flex items-center justify-center mb-6">
+                <div className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"></div>
+                <div className="w-2 h-2 bg-primary-accent rounded-full mx-4"></div>
+                <div className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"></div>
               </div>
+              <p className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed">
+                Get answers to common questions about septic system installation services
+              </p>
+            </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div className="professional-card p-8">
-                  <div className="flex items-center space-x-3 mb-6">
-                    <Clock className="w-8 h-8 text-primary-accent" />
-                    <h3 className="text-2xl font-bold text-primary-dark">Project Timeline</h3>
-                  </div>
-                  <div className="space-y-4">
-                    <div className="flex justify-between">
-                      <span className="text-text-primary">Site Evaluation:</span>
-                      <span className="font-medium">1-2 days</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-text-primary">Permit Processing:</span>
-                      <span className="font-medium">1-2 weeks</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-text-primary">Installation:</span>
-                      <span className="font-medium">2-5 days</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-text-primary">Final Inspection:</span>
-                      <span className="font-medium">1-2 days</span>
-                    </div>
-                    <div className="border-t pt-4">
-                      <div className="flex justify-between font-bold">
-                        <span className="text-primary-dark">Total Timeline:</span>
-                        <span className="text-primary-accent">2-4 weeks</span>
-                      </div>
-                    </div>
-                  </div>
+            <div className="space-y-8">
+              {frequentlyAskedQuestions.map((faq, index) => (
+                <div key={index} className="bg-white border border-primary-accent/20 rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:border-primary-accent/40">
+                  <h3 className="text-xl font-bold text-primary-dark mb-4">{faq.question}</h3>
+                  <p className="text-text-primary leading-relaxed text-lg">{faq.answer}</p>
                 </div>
-
-                <div className="professional-card p-8">
-                  <h3 className="text-2xl font-bold text-primary-dark mb-6">Investment Range</h3>
-                  <div className="space-y-4">
-                    <div className="flex justify-between">
-                      <span className="text-text-primary">Standard Systems:</span>
-                      <span className="font-medium">$3,499 - $7,999</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-text-primary">Advanced Systems:</span>
-                      <span className="font-medium">$8,000 - $15,000</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-text-primary">Site Evaluation:</span>
-                      <span className="font-medium text-green-600">FREE</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-text-primary">Permits Included:</span>
-                      <span className="font-medium text-green-600">YES</span>
-                    </div>
-                  </div>
-                  
-                  <div className="mt-6 p-4 bg-green-50 rounded-lg">
-                    <p className="text-green-700 text-sm">
-                      <strong>Free site evaluation included!</strong> We&apos;ll assess your property and provide 
-                      a detailed quote with no obligation.
-                    </p>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Final CTA */}
-        <section className="py-16 bg-primary-dark text-white">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6">
-              Ready to Install Your New Septic System?
+        {/* Final CTA Section */}
+        <section className="py-24 bg-gradient-to-br from-primary-dark via-primary-dark to-secondary-accent text-white relative overflow-hidden">
+          {/* Background Elements */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(255,255,255,0.1)_0%,transparent_50%)] pointer-events-none"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(191,136,41,0.2)_0%,transparent_50%)] pointer-events-none"></div>
+          
+          <div className="container-service text-center z-10">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-8">
+              Ready for Your <span className="text-primary-accent">New Septic System?</span>
             </h2>
-            <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Get started with a free site evaluation. We&apos;ll assess your property and provide 
-              a detailed quote for your new septic system.
+            <p className="text-xl mb-12 max-w-4xl mx-auto opacity-90 leading-relaxed">
+              Get started with professional installation service. Complete project management from permits to final inspection with warranty included.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <a
                 href={`tel:${CONTACT_INFO.phone}`}
-                className="bg-primary-accent hover:bg-secondary-accent text-white font-bold py-4 px-8 rounded-lg text-lg inline-flex items-center justify-center space-x-2"
+                className="bg-white text-primary-accent hover:bg-gray-100 font-bold py-6 px-10 rounded-xl text-xl inline-flex items-center justify-center space-x-4 transition-all duration-300 hover:scale-105 shadow-xl"
               >
-                <FileText className="w-5 h-5" />
-                <span>Free Site Evaluation</span>
+                <Settings className="w-7 h-7" />
+                <span>Get Installation Quote</span>
               </a>
               <a
-                href={`tel:${CONTACT_INFO.phone}`}
-                className="bg-white text-primary-dark hover:bg-gray-100 font-bold py-4 px-8 rounded-lg text-lg inline-flex items-center justify-center space-x-2"
+                href={`tel:${CONTACT_INFO.emergencyPhone}`}
+                className="bg-red-600 hover:bg-red-700 text-white font-bold py-6 px-10 rounded-xl text-xl inline-flex items-center justify-center space-x-4 transition-all duration-300 hover:scale-105 shadow-xl"
               >
-                <Phone className="w-5 h-5" />
-                <span>Get Installation Quote</span>
+                <AlertTriangle className="w-7 h-7" />
+                <span>Emergency Service</span>
               </a>
             </div>
           </div>
