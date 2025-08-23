@@ -276,7 +276,7 @@ export default function Footer() {
               </div>
 
               <div className="flex items-center space-x-4 text-xs text-gray-300">
-                <span>Made with ❤️ by Absterco (PVT)Ltd</span>
+                <span>Made with ❤️ by Absterco</span>
               </div>
             </div>
           </div>
