@@ -89,7 +89,7 @@ export default function ServicesPage() {
           <CheckCircle className="w-5 h-5" />
         </motion.div>
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1540px] relative z-10 h-full flex items-center justify-center">
+        <div className="septic-max-width relative z-10 h-full flex items-center justify-center">
           {/* Enhanced Content Background for Maximum Readability */}
           <div className="absolute inset-0 bg-gradient-radial from-black/20 via-black/8 to-transparent blur-3xl opacity-70"></div>
           
@@ -198,7 +198,7 @@ export default function ServicesPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(191,136,41,0.05)_0%,transparent_50%)] pointer-events-none"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(69,49,14,0.03)_0%,transparent_50%)] pointer-events-none"></div>
         
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1540px] relative">
+        <div className="septic-max-width relative">
           <div className="text-center mb-16">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-accent to-secondary-accent rounded-2xl mb-8 shadow-lg">
               <CheckCircle className="w-8 h-8 text-white" />
@@ -255,7 +255,7 @@ export default function ServicesPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(255,255,255,0.1)_0%,transparent_50%)] pointer-events-none"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(191,136,41,0.2)_0%,transparent_50%)] pointer-events-none"></div>
         
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1540px] relative">
+        <div className="septic-max-width relative">
           {/* Header Section */}
           <div className="text-center mb-16">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl mb-8">
@@ -333,7 +333,7 @@ export default function ServicesPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(191,136,41,0.05)_0%,transparent_50%)] pointer-events-none"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(69,49,14,0.03)_0%,transparent_50%)] pointer-events-none"></div>
         
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1540px] relative">
+        <div className="septic-max-width relative">
           <div className="text-center mb-16">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-accent to-secondary-accent rounded-2xl mb-8 shadow-lg">
               <Star className="w-8 h-8 text-white" />
@@ -384,7 +384,7 @@ export default function ServicesPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(255,255,255,0.1)_0%,transparent_50%)] pointer-events-none"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(0,0,0,0.1)_0%,transparent_50%)] pointer-events-none"></div>
         
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1540px] relative">
+        <div className="septic-max-width relative">
           <div className="text-center max-w-4xl mx-auto">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl mb-8">
               <Phone className="w-8 h-8 text-white" />

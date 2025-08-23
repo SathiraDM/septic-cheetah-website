@@ -14,8 +14,7 @@ import {
   Star,
   Shield,
   ChevronDown,
-  ExternalLink,
-  Sparkles
+  ExternalLink
 } from 'lucide-react';
 import { CONTACT_INFO } from '@/lib/constants';
 import { trackPhoneCall } from '@/lib/utils';
@@ -31,12 +30,12 @@ const navigationItems = [
     label: 'Services',
     description: 'Complete septic solutions',
     submenu: [
-      { href: '/services/pumping', label: 'Septic Pumping', price: 'Call for Quote' },
-      { href: '/services/installation', label: 'System Installation', price: 'Call for Quote' },
-      { href: '/services/repairs', label: 'Emergency Repairs', price: '24/7 Available' },
-      { href: '/services/inspections', label: 'System Inspections', price: 'Call for Quote' },
-      { href: '/services/grease-trap', label: 'Grease Trap Services', price: 'Call for Quote' },
-      { href: '/services/portable-toilets', label: 'Portable Toilet Rentals', price: 'Call for Quote' }
+      { href: '/services/pumping', label: 'Septic Pumping' },
+      { href: '/services/installation', label: 'System Installation' },
+      { href: '/services/repairs', label: 'Emergency Repairs' },
+      { href: '/services/inspections', label: 'System Inspections' },
+      { href: '/services/grease-trap', label: 'Grease Trap Services' },
+      { href: '/services/portable-toilets', label: 'Portable Toilet Rentals' }
     ]
   },
   { 
@@ -93,7 +92,7 @@ export default function Header() {
   };
 
   return (
-    <div className="w-full septic-no-overflow">
+    <div className="w-full" style={{ overflow: 'visible' }}>
       {/* Top Status Bar - SCROLLABLE (Normal document flow) */}
       <div className="septic-full-bg bg-gradient-to-r from-primary-dark to-primary-dark/95 text-white py-1 px-4 hidden md:block border-b border-primary-accent/20"
            style={{
@@ -142,8 +141,8 @@ export default function Header() {
       <motion.header
         className={`${
           isScrolled 
-            ? 'fixed top-0 left-0 right-0 z-50' 
-            : 'relative z-40'
+            ? 'fixed top-0 left-0 right-0 z-[999]' 
+            : 'relative z-[999]'
         } transition-all duration-700 ease-out ${
           isScrolled 
             ? 'bg-white/98 backdrop-blur-xl shadow-2xl border-b border-primary-accent/10' 
@@ -154,7 +153,9 @@ export default function Header() {
           minHeight: '72px',
           // GPU acceleration for smooth transitions
           transform: 'translateZ(0)',
-          willChange: 'transform, background-color, box-shadow'
+          willChange: 'transform, background-color, box-shadow',
+          zIndex: 999,
+          overflow: 'visible'
         }}
         animate={{ 
           y: 0,
@@ -166,8 +167,8 @@ export default function Header() {
           ease: [0.25, 0.46, 0.45, 0.94] // Custom bezier for ultra smooth
         }}
       >
-        <div className="septic-max-width septic-header-content">
-          <div className="flex justify-between items-center py-3">
+        <div className="septic-max-width septic-header-content" style={{ overflow: 'visible', position: 'static' }}>
+          <div className="flex justify-between items-center py-3" style={{ overflow: 'visible', position: 'relative' }}>
             {/* Logo Section - Enhanced */}
             <Link href="/" className="flex items-center group">
               <motion.div
@@ -188,7 +189,7 @@ export default function Header() {
             </Link>
 
             {/* Desktop Navigation - Modern Glass Design */}
-            <nav className="hidden lg:flex items-center space-x-1 bg-gray-50/50 backdrop-blur-sm rounded-xl p-1.5 border border-gray-200/50">
+            <nav className="hidden lg:flex items-center space-x-1 bg-gray-50/50 backdrop-blur-sm rounded-xl p-1.5 border border-gray-200/50" style={{ overflow: 'visible', position: 'relative' }}>
               {navigationItems.map((item) => {
                 const isActive = pathname === item.href || 
                   (item.submenu && item.submenu.some(subItem => pathname === subItem.href));
@@ -197,8 +198,15 @@ export default function Header() {
                   <div
                     key={item.href}
                     className="relative group"
-                    onMouseEnter={() => item.submenu && setActiveSubmenu(item.label)}
-                    onMouseLeave={() => setActiveSubmenu(null)}
+                    style={{ overflow: 'visible' }}
+                    onMouseEnter={() => {
+                      if (item.submenu) {
+                        setActiveSubmenu(item.label);
+                      }
+                    }}
+                    onMouseLeave={() => {
+                      setActiveSubmenu(null);
+                    }}
                   >
                     <Link
                       href={item.href}
@@ -231,35 +239,33 @@ export default function Header() {
                       <AnimatePresence>
                         {activeSubmenu === item.label && (
                           <motion.div
-                            className="absolute top-full left-1/2 transform -translate-x-1/2 mt-3 w-80 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-100/50 overflow-hidden"
-                            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                            className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 min-w-max bg-white/98 backdrop-blur-xl rounded-xl shadow-xl border border-primary-accent/10"
+                            style={{ 
+                              zIndex: 99999,
+                              overflow: 'visible',
+                              width: 'max-content'
+                            }}
+                            initial={{ opacity: 0, y: -10, scale: 0.95 }}
                             animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                            exit={{ opacity: 0, y: -10, scale: 0.95 }}
                             transition={{ duration: 0.2, ease: "easeOut" }}
                           >
-                            <div className="p-3">
+                            <div className="py-2">
                               {item.submenu.map((subItem, index) => (
                                 <motion.div
                                   key={subItem.href}
                                   initial={{ opacity: 0, x: -10 }}
                                   animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: index * 0.05 }}
+                                  transition={{ delay: index * 0.03 }}
                                 >
                                   <Link
                                     href={subItem.href}
-                                    className="flex items-center justify-between p-4 rounded-xl hover:bg-gradient-to-r hover:from-primary-accent/5 hover:to-secondary-accent/5 transition-all duration-200 group"
+                                    className="flex items-center px-6 py-3 text-gray-700 hover:text-primary-accent hover:bg-gradient-to-r hover:from-primary-accent/5 hover:to-secondary-accent/5 transition-all duration-200 group border-l-2 border-transparent hover:border-primary-accent whitespace-nowrap"
                                   >
-                                    <div>
-                                      <div className="font-semibold text-primary-dark group-hover:text-primary-accent transition-colors">
-                                        {subItem.label}
-                                      </div>
-                                      <div className="text-sm text-gray-600 font-medium">
-                                        {subItem.price}
-                                      </div>
-                                    </div>
-                                    <div className="flex items-center space-x-2">
-                                      <Sparkles className="w-4 h-4 text-secondary-accent opacity-0 group-hover:opacity-100 transition-opacity" />
-                                      <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-primary-accent transition-colors" />
+                                    <div className="w-2 h-2 bg-primary-accent rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex-shrink-0"></div>
+                                    <span className="font-medium text-sm flex-shrink-0">{subItem.label}</span>
+                                    <div className="ml-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex-shrink-0">
+                                      <ExternalLink className="w-3 h-3 text-primary-accent" />
                                     </div>
                                   </Link>
                                 </motion.div>
@@ -371,15 +377,15 @@ export default function Header() {
 
                       {/* Mobile Submenu */}
                       {item.submenu && (
-                        <div className="ml-4 mt-2 space-y-1">
+                        <div className="ml-4 mt-2 space-y-1 bg-gray-50/50 rounded-lg p-2">
                           {item.submenu.map((subItem) => (
                             <Link
                               key={subItem.href}
                               href={subItem.href}
-                              className="block p-2 text-sm text-gray-600 hover:text-primary-accent transition-colors"
+                              className="block p-2 text-sm text-gray-600 hover:text-primary-accent hover:bg-white rounded-md transition-all duration-200"
                               onClick={() => setIsMenuOpen(false)}
                             >
-                              {subItem.label} - {subItem.price}
+                              {subItem.label}
                             </Link>
                           ))}
                         </div>

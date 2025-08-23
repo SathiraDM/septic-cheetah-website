@@ -16,7 +16,7 @@ export default function TermsOfServicePage() {
     <main className="min-h-screen bg-gradient-to-br from-slate-50 to-white">
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary-dark via-primary-accent to-secondary-accent py-16">
-        <div className="container mx-auto px-4 max-w-[1540px] text-center">
+        <div className="septic-max-width text-center">
           <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full px-4 py-2 mb-6">
             <Scale className="w-5 h-5 text-white" />
             <span className="text-white font-medium">Legal Terms & Conditions</span>
@@ -37,7 +37,7 @@ export default function TermsOfServicePage() {
 
       {/* Terms Content */}
       <section className="py-16">
-        <div className="container mx-auto px-4 max-w-4xl">
+        <div className="septic-max-width">
           <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12">
             
             {/* Acceptance of Terms */}

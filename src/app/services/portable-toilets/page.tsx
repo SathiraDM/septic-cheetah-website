@@ -122,7 +122,7 @@ export default function PortableToiletsPage() {
             <div className="absolute bottom-20 right-20 w-80 h-80 bg-secondary-accent rounded-full blur-3xl"></div>
           </div>
           
-          <div className="container-service z-10">
+          <div className="septic-max-width z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               {/* Content Side */}
               <div className="space-y-8 text-center lg:text-center flex flex-col justify-center">
@@ -207,7 +207,7 @@ export default function PortableToiletsPage() {
 
         {/* Warning Signs Section */}
         <section className="py-24 bg-white">
-          <div className="container-service">
+          <div className="septic-max-width">
             <div className="text-center mb-20">
               <h2 className="text-4xl lg:text-5xl font-bold mb-6">
                 <span className="text-primary-dark">Perfect For</span>
@@ -257,7 +257,7 @@ export default function PortableToiletsPage() {
 
         {/* Process Section */}
         <section className="py-24 bg-gradient-to-br from-bg-primary to-bg-secondary">
-          <div className="container-service">
+          <div className="septic-max-width">
             <div className="text-center mb-20">
               <h2 className="text-4xl lg:text-5xl font-bold mb-6">
                 <span className="text-primary-dark">Our Professional</span>
@@ -300,7 +300,7 @@ export default function PortableToiletsPage() {
 
         {/* Pricing Section */}
         <section className="py-24 bg-white">
-          <div className="container-service">
+          <div className="septic-max-width">
             <div className="text-center mb-20">
               <h2 className="text-4xl lg:text-5xl font-bold mb-6">
                 <span className="text-primary-dark">Transparent</span>
@@ -398,7 +398,7 @@ export default function PortableToiletsPage() {
 
         {/* FAQ Section */}
         <section className="py-24 bg-gradient-to-br from-bg-primary to-bg-secondary">
-          <div className="container-service">
+          <div className="septic-max-width">
             <div className="text-center mb-20">
               <h2 className="text-4xl lg:text-5xl font-bold mb-6">
                 <span className="text-primary-dark">Frequently Asked</span>
@@ -432,7 +432,7 @@ export default function PortableToiletsPage() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(255,255,255,0.1)_0%,transparent_50%)] pointer-events-none"></div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(191,136,41,0.2)_0%,transparent_50%)] pointer-events-none"></div>
           
-          <div className="container-service text-center z-10">
+          <div className="septic-max-width text-center z-10">
             <h2 className="text-4xl lg:text-5xl font-bold mb-8">
               Ready to Rent <span className="text-primary-accent">Portable Toilets?</span>
             </h2>
