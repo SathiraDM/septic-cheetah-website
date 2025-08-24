@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Truck, Wrench, Settings, Search, Building, Home, ArrowRight, Star, Clock, Shield, Zap } from 'lucide-react';
-import { SERVICES } from '@/lib/constants';
+import { SERVICES, CONTACT_INFO } from '@/lib/constants';
 import { trackEvent } from '@/lib/utils';
 import { useState } from 'react';
 
@@ -75,7 +75,7 @@ export default function ServiceCards() {
   };
 
   return (
-    <section className="septic-section-wrapper py-24 bg-gradient-to-br from-gray-50 via-white to-blue-50/30 relative overflow-hidden">
+    <section className="septic-section-wrapper pt-24 pb-8 bg-gradient-to-br from-gray-50 via-white to-blue-50/30 relative overflow-hidden">
       {/* Animated Background Elements - Fixed to prevent overflow */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
@@ -172,7 +172,7 @@ export default function ServiceCards() {
               transition={{ duration: 0.3 }}
             >
               <div className="bg-gradient-to-br from-primary-accent/10 to-secondary-accent/5 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:from-primary-accent/20 group-hover:to-secondary-accent/10 transition-all duration-300 shadow-lg group-hover:shadow-xl">
-                <feature.icon className="w-8 h-8 text-primary-accent group-hover:scale-110 transition-transform duration-300" />
+                <feature.icon className="w-8 h-8 text-primary-accent group-hover:scale-110 transition-transform duration-300 icon-320-sm" />
               </div>
               <h3 className="font-bold text-primary-dark mb-2 group-hover:text-primary-accent transition-colors duration-300">
                 {feature.title}
@@ -229,7 +229,7 @@ export default function ServiceCards() {
                         whileHover={{ rotate: 12, scale: 1.1 }}
                         transition={{ duration: 0.3 }}
                       >
-                        <IconComponent className="w-10 h-10 text-primary-accent group-hover:scale-110 transition-transform duration-300" />
+                        <IconComponent className="w-10 h-10 text-primary-accent group-hover:scale-110 transition-transform duration-300 icon-320-md" />
                       </motion.div>
                       
                       <div className="flex-1">
@@ -392,7 +392,7 @@ export default function ServiceCards() {
               </motion.p>
               
               <motion.a
-                href={`tel:${SERVICES[0] ? '(555) 911-HELP' : '(555) 123-4567'}`}
+                href={`tel:${CONTACT_INFO.emergencyPhone}`}
                 className="inline-flex items-center space-x-3 bg-white text-red-600 font-bold py-4 px-8 rounded-2xl hover:bg-gray-100 transition-all duration-300 shadow-xl hover:shadow-2xl group/emergency"
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -411,7 +411,7 @@ export default function ServiceCards() {
                 >
                   <Clock className="w-6 h-6" />
                 </motion.div>
-                <span className="text-xl">EMERGENCY: (555) 911-HELP</span>
+                <span className="text-xl">EMERGENCY: {CONTACT_INFO.emergencyPhone}</span>
               </motion.a>
             </div>
           </motion.div>

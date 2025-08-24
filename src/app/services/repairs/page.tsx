@@ -114,8 +114,20 @@ export default function RepairsPage() {
   return (
     <ServiceErrorBoundary>
       <main className="min-h-screen bg-white">
-        {/* Elegant Hero Section with Emergency Colors */}
-        <section className="relative bg-gradient-to-br from-red-900 via-red-800 to-orange-900 min-h-[90vh] flex items-center overflow-hidden">
+        {/* Elegant Hero Section - Responsive Height */}
+        <section 
+          className="relative bg-gradient-to-br from-primary-dark via-primary-dark/95 to-secondary-accent flex items-center justify-center overflow-hidden service-hero-responsive"
+        >
+          {/* Background Elements */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-dark/55 via-primary-dark/35 to-secondary-accent/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/30 to-black/10"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/25 via-black/5 to-black/25"></div>
+          <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/15 to-black/30"></div>
+          <div className="absolute inset-0 bg-black/18"></div>
+          
+          {/* Emergency accent overlay for repairs */}
+          <div className="absolute inset-0 bg-red-900/20"></div>
+          
           {/* Subtle Background Pattern */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-20 left-20 w-64 h-64 bg-red-500 rounded-full blur-3xl"></div>
@@ -123,26 +135,26 @@ export default function RepairsPage() {
           </div>
           
           <div className="septic-max-width z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center hero-grid-mobile">
               {/* Content Side */}
-              <div className="space-y-8 text-center lg:text-center flex flex-col justify-center">
+              <div className="space-y-8 text-center lg:text-center flex flex-col justify-center hero-content-mobile">
                 <div className="space-y-8">
-                  <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
+                  <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight hero-title-320">
                     <span className="text-white">Emergency</span>
                     <span className="block text-red-300">Septic Repairs</span>
                   </h1>
                   
-                  <p className="text-lg lg:text-xl text-red-100 leading-relaxed max-w-2xl mx-auto">
+                  <p className="text-lg lg:text-xl text-red-100 leading-relaxed max-w-2xl mx-auto hero-subtitle-320">
                     24/7 emergency septic repair services with rapid response times. 
                     Professional technicians ready when your system fails.
                   </p>
                 </div>
 
                 {/* Service Guarantees */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto service-guarantees-320">
                   {serviceGuarantees.map((guarantee, index) => (
-                    <div key={index} className="flex items-center space-x-3 p-4 bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl hover:shadow-lg transition-all duration-300">
-                      <guarantee.icon className="w-6 h-6 text-red-300 flex-shrink-0" />
+                    <div key={index} className="flex items-center space-x-3 p-4 bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl hover:shadow-lg transition-all duration-300 guarantee-card-320">
+                      <guarantee.icon className="w-6 h-6 text-red-300 flex-shrink-0 icon-320-sm" />
                       <div>
                         <div className="font-bold text-white text-sm">{guarantee.title}</div>
                         <div className="text-red-200 text-xs">{guarantee.description}</div>
@@ -152,40 +164,46 @@ export default function RepairsPage() {
                 </div>
 
                 {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center emergency-cta-ultra-responsive">
                   <a
                     href={`tel:${CONTACT_INFO.emergencyPhone}`}
-                    className="group relative overflow-hidden bg-gradient-to-r from-red-500 to-orange-500 text-white font-bold py-5 px-8 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 hover:shadow-xl hover:scale-105 animate-pulse"
+                    className="group relative overflow-hidden bg-gradient-to-r from-red-500 to-orange-500 text-white font-bold py-5 px-8 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 hover:shadow-xl hover:scale-105 animate-pulse emergency-banner-320"
                   >
-                    <AlertTriangle className="w-6 h-6" />
-                    <span className="text-lg">Emergency: {CONTACT_INFO.emergencyPhone}</span>
-                    <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                    <AlertTriangle className="w-6 h-6 icon-320-md" />
+                    <span className="text-lg emergency-text-320">Emergency: {CONTACT_INFO.emergencyPhone}</span>
+                    <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform icon-320-md" />
                   </a>
                   <a
                     href={`tel:${CONTACT_INFO.phone}`}
-                    className="bg-white/20 text-white font-bold py-5 px-8 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 hover:bg-white/30 hover:shadow-xl hover:scale-105"
+                    className="bg-white/20 text-white font-bold py-5 px-8 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 hover:bg-white/30 hover:shadow-xl hover:scale-105 emergency-banner-320"
                   >
-                    <Phone className="w-6 h-6" />
-                    <span className="text-lg">Schedule Repair</span>
+                    <Phone className="w-6 h-6 icon-320-md" />
+                    <span className="text-lg emergency-text-320">Schedule Repair</span>
                   </a>
+                </div>
+
+                {/* Mobile Emergency Display - Only visible when floating badge is hidden */}
+                <div className="mobile-pricing-display bg-gradient-to-r from-red-500 to-orange-500 text-white p-6 rounded-xl shadow-xl text-center">
+                  <div className="text-2xl font-bold">24/7</div>
+                  <div className="text-sm opacity-90">Emergency Service</div>
                 </div>
               </div>
 
               {/* Image Side */}
               <div className="relative flex justify-center lg:justify-end">
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-lg w-full">
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-lg w-full service-image-320">
                   <Image
                     src="https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?w=600&h=500&fit=crop"
                     alt="Emergency septic repair service"
                     width={600}
                     height={500}
-                    className="object-cover w-full h-[500px]"
+                    className="object-cover w-full h-[500px] image-320-responsive"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                 </div>
                 
                 {/* Floating Emergency Badge */}
-                <div className="absolute -bottom-4 -left-4 bg-gradient-to-r from-red-500 to-orange-500 text-white p-6 rounded-xl shadow-xl animate-pulse">
+                <div className="absolute -bottom-4 -left-4 bg-gradient-to-r from-red-500 to-orange-500 text-white p-6 rounded-xl shadow-xl animate-pulse floating-badge-320">
                   <div className="text-2xl font-bold">24/7</div>
                   <div className="text-sm opacity-90">Emergency Service</div>
                 </div>

@@ -230,23 +230,23 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-radial from-black/20 via-black/8 to-transparent blur-3xl opacity-70"></div>
         
         <motion.div 
-          className="max-w-4xl mx-auto text-center relative z-10"
+          className="max-w-4xl mx-auto text-center relative z-10 hero-320-compact"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           {/* Centered Main Content */}
-          <motion.div className="space-y-6" variants={itemVariants}>
+          <motion.div className="space-y-4 sm:space-y-6" variants={itemVariants}>
             {/* Main Heading with Animated Text */}
-            <div className="space-y-4">
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight drop-shadow-2xl">
+            <div className="space-y-3 sm:space-y-4">
+              <h1 className="text-3xl xs:text-4xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight drop-shadow-2xl hero-title-320">
                 Professional
                 <br />
                 <span className="relative inline-block">
                   <span className="text-primary-accent drop-shadow-lg">Septic</span>
                   <motion.span 
                     key={currentWordIndex}
-                    className="block text-primary-accent mt-1 drop-shadow-lg"
+                    className="block text-primary-accent mt-0.5 sm:mt-1 drop-shadow-lg"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
@@ -256,7 +256,7 @@ export default function Hero() {
                   </motion.span>
                   {/* Animated Underline */}
                   <motion.div 
-                    className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-1 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full"
+                    className="absolute -bottom-0.5 sm:-bottom-1 left-1/2 transform -translate-x-1/2 h-0.5 sm:h-1 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full"
                     initial={{ width: 0 }}
                     animate={{ width: "100%" }}
                     transition={{ duration: 0.8, delay: 0.5 }}
@@ -264,7 +264,7 @@ export default function Hero() {
                 </span>
               </h1>
               <motion.p 
-                className="text-xl md:text-2xl text-primary-accent font-medium drop-shadow-md"
+                className="text-lg xs:text-xl sm:text-xl md:text-2xl text-primary-accent font-medium drop-shadow-md hero-subtitle-320"
                 variants={itemVariants}
               >
                 Fast, Reliable and Kinda Dirty
@@ -273,7 +273,7 @@ export default function Hero() {
 
             {/* Description */}
             <motion.p 
-              className="text-lg md:text-xl text-white max-w-3xl mx-auto leading-relaxed drop-shadow-md"
+              className="text-base xs:text-lg sm:text-lg md:text-xl text-white max-w-3xl mx-auto leading-relaxed drop-shadow-md px-4 sm:px-0"
               variants={itemVariants}
             >
               Emergency septic services across the region with same day response guaranteed. 
@@ -282,28 +282,28 @@ export default function Hero() {
 
             {/* CTA Buttons */}
             <motion.div 
-              className="flex flex-col sm:flex-row gap-4 justify-center"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0 btn-group-320"
               variants={itemVariants}
             >
               <motion.a
                 href={`tel:${CONTACT_INFO.phone}`}
                 onClick={() => trackPhoneCall('hero_primary')}
-                className="relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-4 px-8 rounded-xl shadow-2xl transition-all duration-300 flex items-center justify-center space-x-3 group"
+                className="relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl shadow-2xl transition-all duration-300 flex items-center justify-center space-x-2 sm:space-x-3 group text-sm sm:text-base emergency-btn-ultra-compact"
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <Phone className="w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
-                <span className="relative z-10">CALL NOW: {CONTACT_INFO.phone}</span>
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5 relative z-10 group-hover:rotate-12 transition-transform duration-300 icon-320-sm" />
+                <span className="relative z-10 whitespace-nowrap">CALL NOW: {CONTACT_INFO.phone}</span>
               </motion.a>
 
               <motion.button 
-                className="bg-white/20 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white hover:text-primary-dark font-bold py-4 px-8 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 group"
+                className="bg-white/20 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white hover:text-primary-dark font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 group text-sm sm:text-base emergency-btn-ultra-compact"
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
               >
                 <span>Get Free Estimate</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300 icon-320-sm" />
               </motion.button>
             </motion.div>
           </motion.div>

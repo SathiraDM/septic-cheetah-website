@@ -156,14 +156,14 @@ export default function ContactForm() {
             <span className="text-sm font-semibold text-primary-accent">FREE ESTIMATE</span>
           </div>
           
-          <h3 className="text-4xl font-bold mb-4 leading-tight">
+          <h3 className="text-4xl font-bold mb-4 leading-tight hero-title-320">
             <span className="text-gray-800">Get Your </span>
             <span className="bg-gradient-to-r from-primary-accent to-secondary-accent bg-clip-text text-transparent">
               Free Estimate
             </span>
           </h3>
           
-          <p className="text-gray-600 text-lg leading-relaxed max-w-md mx-auto">
+          <p className="text-gray-600 text-lg leading-relaxed max-w-md mx-auto hero-subtitle-320">
             Fill out the form below and we&apos;ll contact you within 2 hours
           </p>
         </motion.div>
@@ -184,7 +184,7 @@ export default function ContactForm() {
 
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Name and Phone Row */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 grid-320-single">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}

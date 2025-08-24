@@ -18,14 +18,10 @@ const getIcon = (iconName: string) => {
 
 export default function ServicesPage() {
   return (
-    <>
-      {/* Redesigned Hero Section - Vertically Centered with Dynamic Height */}
+    <div className="min-h-screen septic-no-overflow">
+      {/* Redesigned Hero Section - Responsive Height */}
       <section
-        className="relative flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-dark via-primary-dark to-secondary-accent text-white"
-        style={{
-          minHeight: '100vh',
-          height: 'calc(100vh - 90px)' // Accounting for header height
-        }}
+        className="relative flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-dark via-primary-dark to-secondary-accent text-white main-services-hero-responsive"
       >
         {/* Background Elements */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary-dark/55 via-primary-dark/35 to-secondary-accent/40"></div>
@@ -89,18 +85,18 @@ export default function ServicesPage() {
           <CheckCircle className="w-5 h-5" />
         </motion.div>
 
-        <div className="septic-max-width relative z-10 h-full flex items-center justify-center">
+        <div className="septic-max-width relative z-10 h-full flex items-center justify-center py-20 px-6">
           {/* Enhanced Content Background for Maximum Readability */}
           <div className="absolute inset-0 bg-gradient-radial from-black/20 via-black/8 to-transparent blur-3xl opacity-70"></div>
           
           <motion.div
-            className="max-w-5xl mx-auto text-center relative z-10"
+            className="max-w-5xl mx-auto text-center relative z-10 w-full"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
             <motion.div
-              className="space-y-6"
+              className="space-y-12"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
@@ -117,7 +113,7 @@ export default function ServicesPage() {
 
               {/* Main Heading */}
               <div className="space-y-4">
-                <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight drop-shadow-2xl">
+                <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight drop-shadow-2xl hero-title-320">
                   Professional
                   <br />
                   <span className="text-primary-accent drop-shadow-lg">Septic Services</span>
@@ -126,7 +122,7 @@ export default function ServicesPage() {
                 </h1>
                 
                 <motion.p
-                  className="text-xl md:text-2xl text-primary-accent font-medium drop-shadow-md"
+                  className="text-xl md:text-2xl text-primary-accent font-medium drop-shadow-md hero-subtitle-320"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.7 }}
@@ -148,19 +144,18 @@ export default function ServicesPage() {
 
               {/* Service Area Info */}
               <motion.div
-                className="mb-10"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.1 }}
               >
-                <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 border border-white/20 mb-4">
+                <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 border border-white/20">
                   <span className="text-gray-300">Service Radius: {CONTACT_INFO.serviceRadius}</span>
                 </div>
               </motion.div>
 
               {/* CTA Buttons */}
               <motion.div
-                className="flex flex-col sm:flex-row gap-4 justify-center"
+                className="flex flex-col sm:flex-row gap-4 justify-center btn-group-320"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.3 }}
@@ -168,22 +163,22 @@ export default function ServicesPage() {
                 <motion.a
                   href={`tel:${CONTACT_INFO.phone}`}
                   onClick={() => trackPhoneCall('services_hero')}
-                  className="relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-4 px-8 rounded-xl shadow-2xl transition-all duration-300 flex items-center justify-center space-x-3 group"
+                  className="relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-4 px-8 rounded-xl shadow-2xl transition-all duration-300 flex items-center justify-center space-x-3 group emergency-btn-ultra-compact"
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <Phone className="w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
+                  <Phone className="w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform duration-300 icon-320-sm" />
                   <span className="relative z-10">CALL NOW: {CONTACT_INFO.phone}</span>
                 </motion.a>
 
                 <motion.button
-                  className="bg-white/20 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white hover:text-primary-dark font-bold py-4 px-8 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 group"
+                  className="bg-white/20 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white hover:text-primary-dark font-bold py-4 px-8 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 group emergency-btn-ultra-compact"
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
                 >
                   <span>Get Free Estimate</span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300 icon-320-sm" />
                 </motion.button>
               </motion.div>
             </motion.div>
@@ -198,12 +193,12 @@ export default function ServicesPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(191,136,41,0.05)_0%,transparent_50%)] pointer-events-none"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(69,49,14,0.03)_0%,transparent_50%)] pointer-events-none"></div>
         
-        <div className="septic-max-width relative">
+        <div className="septic-max-width relative container-320">
           <div className="text-center mb-16">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-accent to-secondary-accent rounded-2xl mb-8 shadow-lg">
-              <CheckCircle className="w-8 h-8 text-white" />
+              <CheckCircle className="w-8 h-8 text-white icon-320-sm" />
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6 tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6 tracking-tight hero-title-320">
               Comprehensive <span className="text-primary-accent">Septic Services</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -212,7 +207,7 @@ export default function ServicesPage() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 grid-320-single">
             {SERVICES.map((service, index) => (
               <div key={service.id} className="group relative">
                 <div className="bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:bg-white hover:border-primary-accent/30 hover:-translate-y-2 h-full flex flex-col">
@@ -226,21 +221,20 @@ export default function ServicesPage() {
                   </h3>
                   <p className="text-gray-600 mb-6 flex-grow leading-relaxed">
                     {service.description}
-                  </p>
-                  <div className="space-y-3 mb-8">
+                  </p>                    <div className="space-y-3 mb-8">
                     {service.features.map((feature, idx) => (
                       <div key={idx} className="flex items-start">
-                        <CheckCircle className="w-4 h-4 text-primary-accent mr-3 mt-0.5 flex-shrink-0" />
+                        <CheckCircle className="w-4 h-4 text-primary-accent mr-3 mt-0.5 flex-shrink-0 icon-320-sm" />
                         <span className="text-sm text-gray-600">{feature}</span>
                       </div>
                     ))}
                   </div>
                   <Link
                     href={service.href}
-                    className="mt-auto bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-semibold py-3 px-6 rounded-xl hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2 group-hover:scale-105"
+                    className="mt-auto bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-semibold py-3 px-6 rounded-xl hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2 group-hover:scale-105 emergency-btn-ultra-compact"
                   >
                     <span>Learn More</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300 icon-320-sm" />
                   </Link>
                 </div>
               </div>
@@ -419,6 +413,6 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

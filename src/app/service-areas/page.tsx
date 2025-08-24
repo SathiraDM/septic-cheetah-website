@@ -4,7 +4,6 @@ import { MapPin, Phone, Clock, Shield, Zap, Award, ArrowRight, Star, Users, Truc
 import { motion } from 'framer-motion';
 import { CONTACT_INFO } from '@/lib/constants';
 import { trackPhoneCall } from '@/lib/utils';
-import { useState, useEffect } from 'react';
 
 const serviceAreas = [
   {
@@ -97,37 +96,6 @@ const stats = [
 ];
 
 export default function ServiceAreas() {
-  const [heroHeight, setHeroHeight] = useState('100vh');
-
-  // Calculate hero height based on screen height and header (similar to home page)
-  useEffect(() => {
-    const calculateHeroHeight = () => {
-      const screenHeight = window.innerHeight;
-      
-      if (screenHeight < 700) {
-        setHeroHeight('600px');
-      } else {
-        const headerOffset = 90;
-        const availableHeight = Math.max(600, screenHeight - headerOffset);
-        setHeroHeight(`${availableHeight}px`);
-      }
-    };
-    
-    calculateHeroHeight();
-    
-    let resizeTimeout: NodeJS.Timeout;
-    const debouncedResize = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(calculateHeroHeight, 250);
-    };
-    
-    window.addEventListener('resize', debouncedResize, { passive: true });
-    return () => {
-      window.removeEventListener('resize', debouncedResize);
-      clearTimeout(resizeTimeout);
-    };
-  }, []);
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -150,10 +118,9 @@ export default function ServiceAreas() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
-      {/* Modern Hero Section - Vertically Centered */}
+      {/* Modern Hero Section - Responsive Height */}
       <section 
-        className="relative flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-dark via-primary-dark/95 to-secondary-accent"
-        style={{ height: heroHeight }}
+        className="relative flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-dark via-primary-dark/95 to-secondary-accent service-hero-responsive"
       >
         {/* Background Elements */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary-dark/55 via-primary-dark/35 to-secondary-accent/40"></div>
@@ -217,29 +184,29 @@ export default function ServiceAreas() {
           <CheckCircle className="w-5 h-5" />
         </motion.div>
 
-        <div className="septic-max-width relative z-10 h-full flex items-center justify-center">
+        <div className="septic-max-width relative z-10 h-full flex items-center justify-center py-16 px-6 container-320">
           {/* Enhanced Content Background for Maximum Readability */}
           <div className="absolute inset-0 bg-gradient-radial from-black/20 via-black/8 to-transparent blur-3xl opacity-70"></div>
           
           <motion.div 
-            className="max-w-4xl mx-auto text-center relative z-10"
+            className="max-w-4xl mx-auto text-center relative z-10 w-full"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
-            <motion.div className="space-y-6" variants={itemVariants}>
+            <motion.div className="space-y-10" variants={itemVariants}>
               {/* Badge */}
               <motion.div 
-                className="inline-flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-white/20"
+                className="inline-flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 border border-white/20"
                 variants={itemVariants}
               >
-                <MapPin className="w-5 h-5 text-primary-accent" />
+                <MapPin className="w-5 h-5 text-primary-accent icon-320-sm" />
                 <span className="text-sm font-semibold tracking-wide text-white">Serving Austin & Central Texas</span>
               </motion.div>
               
               {/* Main Heading */}
               <div className="space-y-4">
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight drop-shadow-2xl">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight drop-shadow-2xl hero-title-320">
                   Our Service Areas
                   <br />
                   <span className="bg-gradient-to-r from-primary-accent via-yellow-400 to-secondary-accent bg-clip-text text-transparent">
@@ -247,7 +214,7 @@ export default function ServiceAreas() {
                   </span>
                 </h1>
                 <motion.p 
-                  className="text-lg md:text-xl text-primary-accent font-medium drop-shadow-md"
+                  className="text-lg md:text-xl text-primary-accent font-medium drop-shadow-md hero-subtitle-320"
                   variants={itemVariants}
                 >
                   Fast, Reliable and Kinda Dirty
@@ -265,7 +232,7 @@ export default function ServiceAreas() {
 
               {/* Stats Row */}
               <motion.div 
-                className="grid grid-cols-3 gap-6 mb-8 max-w-3xl mx-auto"
+                className="grid grid-cols-3 gap-6 max-w-3xl mx-auto grid-320-single"
                 variants={itemVariants}
               >
                 {stats.map((stat, index) => (
@@ -276,7 +243,7 @@ export default function ServiceAreas() {
                     transition={{ type: "spring", stiffness: 300 }}
                   >
                     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 mb-3 group-hover:bg-white/20 transition-all duration-300 border border-white/20">
-                      <stat.icon className="w-6 h-6 text-primary-accent mx-auto mb-2" />
+                      <stat.icon className="w-6 h-6 text-primary-accent mx-auto mb-2 icon-320-sm" />
                       <div className="text-xl md:text-2xl font-bold text-white mb-1">{stat.value}</div>
                       <div className="text-sm text-white/80 font-medium">{stat.label}</div>
                       <div className="text-xs text-white/60">{stat.subtext}</div>
@@ -314,55 +281,6 @@ export default function ServiceAreas() {
             </motion.div>
           </motion.div>
         </div>
-
-        {/* Scroll Indicator */}
-        <motion.div 
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2.5, duration: 0.8 }}
-        >
-          <motion.div
-            className="cursor-pointer group"
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            onClick={() => {
-              const screenHeight = window.innerHeight;
-              let scrollTarget;
-              
-              if (screenHeight < 700) {
-                scrollTarget = 600;
-              } else if (screenHeight >= 700 && screenHeight < 750) {
-                scrollTarget = Math.floor(screenHeight * 0.9);
-              } else {
-                scrollTarget = screenHeight - 120;
-              }
-              
-              window.scrollTo({
-                top: scrollTarget,
-                behavior: 'smooth'
-              });
-            }}
-          >
-            <motion.div
-              className="w-5 h-8 border-2 border-white/40 rounded-full flex justify-center group-hover:border-white/80 transition-colors duration-300"
-              whileHover={{ scale: 1.1 }}
-            >
-              <motion.div
-                className="w-0.5 h-2 bg-white/40 rounded-full mt-1.5 group-hover:bg-white/80 transition-colors duration-300"
-                animate={{ 
-                  y: [0, 8, 0],
-                  opacity: [1, 0.3, 1]
-                }}
-                transition={{ 
-                  duration: 1.5, 
-                  repeat: Infinity, 
-                  ease: "easeInOut" 
-                }}
-              />
-            </motion.div>
-          </motion.div>
-        </motion.div>
       </section>
 
       {/* Service Features Section */}
@@ -591,7 +509,7 @@ export default function ServiceAreas() {
         </div>
         
         <motion.div 
-          className="relative text-center"
+          className="septic-max-width relative text-center"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}

@@ -115,38 +115,38 @@ export default function ContactPage() {
             <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-white/8 rounded-full blur-3xl animate-pulse delay-2000"></div>
           </div>
           
-          <div className="relative z-10 h-screen flex items-center justify-center">
-            <div className="septic-max-width">
+          <div className="relative z-10 h-full flex items-center justify-center">
+            <div className="septic-max-width container-320">
               <div className="max-w-2xl mx-auto text-center space-y-8">
                 {/* Badge */}
                 <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full px-4 py-2">
-                  <Phone className="w-4 h-4 text-white" />
+                  <Phone className="w-4 h-4 text-white icon-320-sm" />
                   <span className="text-white font-medium">Fast, Reliable and Kinda Dirty</span>
                 </div>
                 
                 {/* Main Heading */}
                 <div className="space-y-4">
-                  <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+                  <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight hero-title-320">
                     Contact
                     <span className="block text-primary-dark">
                       Septic Cheetah
                     </span>
                   </h1>
                   
-                  <p className="text-lg md:text-xl text-white/90 leading-relaxed">
+                  <p className="text-lg md:text-xl text-white/90 leading-relaxed hero-subtitle-320">
                     Ready to get your septic system working perfectly?
                   </p>
                 </div>
 
                 {/* Quick Contact Info */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg mx-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg mx-auto grid-320-single">
                   <div className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl p-4 text-center">
-                    <AlertTriangle className="w-6 h-6 text-primary-dark mx-auto mb-2" />
+                    <AlertTriangle className="w-6 h-6 text-primary-dark mx-auto mb-2 icon-320-sm" />
                     <div className="font-bold text-white text-sm">24/7 Emergency</div>
                     <div className="text-primary-dark text-xs font-bold">{CONTACT_INFO.emergencyPhone}</div>
                   </div>
                   <div className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl p-4 text-center">
-                    <Phone className="w-6 h-6 text-primary-dark mx-auto mb-2" />
+                    <Phone className="w-6 h-6 text-primary-dark mx-auto mb-2 icon-320-sm" />
                     <div className="font-bold text-white text-sm">Business Line</div>
                     <div className="text-primary-dark text-xs font-bold">{CONTACT_INFO.phone}</div>
                   </div>

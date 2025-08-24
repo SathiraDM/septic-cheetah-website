@@ -67,21 +67,21 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-gradient-to-br from-primary-dark/80 via-primary-dark/60 to-secondary-accent/70"></div>
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/20 to-black/10"></div>
           
-          <div className="septic-max-width relative z-10">
+          <div className="septic-max-width relative z-10 container-320">
             <div className="text-center max-w-5xl mx-auto">
               <div className="inline-flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 mb-8 border border-white/20">
-                <Home className="w-5 h-5 text-primary-accent" />
+                <Home className="w-5 h-5 text-primary-accent icon-320-sm" />
                 <span className="text-white font-semibold">Family-Owned • Local Business</span>
               </div>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 hero-title-320">
                 About{' '}
                 <span className="bg-gradient-to-r from-primary-accent via-yellow-400 to-secondary-accent bg-clip-text text-transparent">
                   Septic Cheetah
                 </span>
               </h1>
 
-              <p className="text-xl md:text-2xl text-primary-accent font-medium mb-6">
+              <p className="text-xl md:text-2xl text-primary-accent font-medium mb-6 hero-subtitle-320">
                 Fast, Reliable and Kinda Dirty
               </p>
 
@@ -90,12 +90,12 @@ export default function AboutPage() {
                 built on values of honesty, hard work, and respect for the people we serve.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center btn-group-320">
                 <a
                   href={`tel:${CONTACT_INFO.phone}`}
-                  className="relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-4 px-8 rounded-xl shadow-2xl transition-all duration-300 flex items-center justify-center space-x-3 group hover:scale-105"
+                  className="relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-4 px-8 rounded-xl shadow-2xl transition-all duration-300 flex items-center justify-center space-x-3 group hover:scale-105 emergency-btn-ultra-compact"
                 >
-                  <Phone className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
+                  <Phone className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300 icon-320-sm" />
                   <span>Call: {CONTACT_INFO.phone}</span>
                 </a>
 

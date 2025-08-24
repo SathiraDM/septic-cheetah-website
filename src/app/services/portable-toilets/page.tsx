@@ -114,78 +114,96 @@ export default function PortableToiletsPage() {
   return (
     <ServiceErrorBoundary>
       <main className="min-h-screen bg-white">
-        {/* Elegant Hero Section with Main Brand Colors */}
-        <section className="relative bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-primary min-h-[90vh] flex items-center overflow-hidden">
+        {/* Elegant Hero Section - Responsive Height */}
+        <section 
+          className="relative bg-gradient-to-br from-primary-dark via-primary-dark/95 to-secondary-accent flex items-center justify-center overflow-hidden service-hero-responsive"
+        >
+          {/* Background Elements */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-dark/55 via-primary-dark/35 to-secondary-accent/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/30 to-black/10"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/25 via-black/5 to-black/25"></div>
+          <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/15 to-black/30"></div>
+          <div className="absolute inset-0 bg-black/18"></div>
+          
           {/* Subtle Background Pattern */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-20 left-20 w-64 h-64 bg-primary-accent rounded-full blur-3xl"></div>
             <div className="absolute bottom-20 right-20 w-80 h-80 bg-secondary-accent rounded-full blur-3xl"></div>
           </div>
           
-          <div className="septic-max-width z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="septic-max-width relative z-10 h-full flex items-center justify-center py-20 px-6">
+            {/* Enhanced Content Background for Maximum Readability */}
+            <div className="absolute inset-0 bg-gradient-radial from-black/20 via-black/8 to-transparent blur-3xl opacity-70"></div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full relative z-10 hero-grid-mobile">
               {/* Content Side */}
-              <div className="space-y-8 text-center lg:text-center flex flex-col justify-center">
+              <div className="space-y-12 text-center lg:text-center flex flex-col justify-center hero-content-mobile">
                 <div className="space-y-8">
-                  <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
-                    <span className="text-primary-dark">Professional</span>
+                  <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight text-white drop-shadow-2xl hero-title-320">
+                    <span className="text-primary-accent">Professional</span>
                     <span className="block text-primary-accent">Portable Toilet Rentals</span>
                   </h1>
                   
-                  <p className="text-lg lg:text-xl text-text-primary leading-relaxed max-w-2xl mx-auto">
+                  <p className="text-lg lg:text-xl text-white/90 leading-relaxed max-w-2xl mx-auto drop-shadow-md hero-subtitle-320">
                     Clean, reliable portable toilet rentals for construction sites, 
                     events, and outdoor projects with professional service.
                   </p>
                 </div>
 
                 {/* Service Guarantees */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto service-guarantees-320">
                   {serviceGuarantees.map((guarantee, index) => (
-                    <div key={index} className="flex items-center space-x-3 p-4 bg-white/70 backdrop-blur-sm border border-primary-accent/20 rounded-xl hover:shadow-lg transition-all duration-300">
-                      <guarantee.icon className="w-6 h-6 text-primary-accent flex-shrink-0" />
+                    <div key={index} className="flex items-center space-x-3 p-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl hover:bg-white/20 transition-all duration-300 guarantee-card-320">
+                      <guarantee.icon className="w-6 h-6 text-primary-accent flex-shrink-0 icon-320-sm" />
                       <div>
-                        <div className="font-bold text-primary-dark text-sm">{guarantee.title}</div>
-                        <div className="text-text-primary text-xs">{guarantee.description}</div>
+                        <div className="font-bold text-white text-sm">{guarantee.title}</div>
+                        <div className="text-white/80 text-xs">{guarantee.description}</div>
                       </div>
                     </div>
                   ))}
                 </div>
 
                 {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center emergency-cta-ultra-responsive">
                   <a
                     href={`tel:${CONTACT_INFO.phone}`}
-                    className="group relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-5 px-8 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 hover:shadow-xl hover:scale-105"
+                    className="group relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-5 px-8 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 hover:shadow-xl hover:scale-105 emergency-banner-320"
                   >
-                    <Phone className="w-6 h-6" />
-                    <span className="text-lg">Get Rental Quote</span>
-                    <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                    <Phone className="w-6 h-6 icon-320-md" />
+                    <span className="text-lg emergency-text-320">Get Rental Quote</span>
+                    <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform icon-320-md" />
                   </a>
                   <a
                     href={`tel:${CONTACT_INFO.emergencyPhone}`}
-                    className="bg-red-600 text-white font-bold py-5 px-8 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 hover:bg-red-700 hover:shadow-xl hover:scale-105"
+                    className="bg-red-600 text-white font-bold py-5 px-8 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 hover:bg-red-700 hover:shadow-xl hover:scale-105 emergency-banner-320"
                   >
-                    <AlertTriangle className="w-6 h-6" />
-                    <span className="text-lg">Emergency Service</span>
+                    <AlertTriangle className="w-6 h-6 icon-320-md" />
+                    <span className="text-lg emergency-text-320">Emergency Service</span>
                   </a>
+                </div>
+
+                {/* Mobile Pricing Display - Only visible when floating badge is hidden */}
+                <div className="mobile-pricing-display bg-gradient-to-r from-primary-accent to-secondary-accent text-white p-6 rounded-xl shadow-xl text-center">
+                  <div className="text-2xl font-bold">Starting at $75</div>
+                  <div className="text-sm opacity-90">Weekly rental rates</div>
                 </div>
               </div>
 
               {/* Image Side */}
               <div className="relative flex justify-center lg:justify-end">
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-lg w-full">
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-lg w-full service-image-320">
                   <Image
                     src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=500&fit=crop"
                     alt="Professional portable toilet rentals"
                     width={600}
                     height={500}
-                    className="object-cover w-full h-[500px]"
+                    className="object-cover w-full h-[500px] image-320-responsive"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
                 </div>
                 
                 {/* Floating Price Badge */}
-                <div className="absolute -bottom-4 -left-4 bg-gradient-to-r from-primary-accent to-secondary-accent text-white p-6 rounded-xl shadow-xl">
+                <div className="absolute -bottom-4 -left-4 bg-gradient-to-r from-primary-accent to-secondary-accent text-white p-6 rounded-xl shadow-xl floating-badge-320">
                   <div className="text-2xl font-bold">Starting at $75</div>
                   <div className="text-sm opacity-90">Per week</div>
                 </div>

@@ -87,26 +87,16 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {/* Company Info */}
             <motion.div variants={itemVariants} className="lg:col-span-1">
-              <Link href="/" className="flex items-center justify-center mb-6 group">
-                <div className="relative bg-white/20 backdrop-blur-xl rounded-2xl p-8 border border-white/30 shadow-2xl group-hover:bg-white/25 transition-all duration-300 hover:scale-105 w-full">
-                  {/* Glassmorphism overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-white/10 to-transparent rounded-2xl"></div>
-                  <div className="absolute inset-0 bg-gradient-to-tl from-primary-accent/20 via-transparent to-secondary-accent/10 rounded-2xl"></div>
-                  
-                  {/* Logo */}
-                  <div className="relative z-10 flex justify-center">
-                    <Image
-                      src="/images/logo-high-resolution.png"
-                      alt="Septic Cheetah - Fast, Reliable and Kinda Dirty"
-                      width={320}
-                      height={240}
-                      className="h-24 lg:h-28 xl:h-32 w-auto max-w-full group-hover:scale-105 transition-transform duration-300 drop-shadow-lg"
-                      priority
-                    />
-                  </div>
-                  
-                  {/* Subtle shine effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 translate-x-[-100%] group-hover:translate-x-[300%] transition-transform duration-1000 rounded-2xl"></div>
+              <Link href="/" className="block mb-6 group">
+                <div className="relative w-full h-48 lg:h-56 xl:h-64 bg-white/25 backdrop-blur-sm rounded-xl border border-white/30 flex items-center justify-center p-4 group-hover:bg-white/35 transition-all duration-300">
+                  <Image
+                    src="/images/logo-high-resolution.png"
+                    alt="Septic Cheetah - Fast, Reliable and Kinda Dirty"
+                    width={800}
+                    height={600}
+                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                    priority
+                  />
                 </div>
               </Link>
 
