@@ -3,7 +3,6 @@ import { Inter, Playfair_Display } from "next/font/google";
 import { Suspense } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import PhoneButton from '@/components/PhoneButton'
 import "./globals.css";
 
 const inter = Inter({
@@ -93,8 +92,6 @@ export default function RootLayout({
             <Footer />
           </Suspense>
         </div>
-        
-        <PhoneButton />
       </body>
     </html>
   );

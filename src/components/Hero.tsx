@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Phone, ArrowRight, Droplets, Wrench } from 'lucide-react';
+import { Phone, ArrowRight, Wrench } from 'lucide-react';
 import { CONTACT_INFO } from '@/lib/constants';
 import { trackPhoneCall } from '@/lib/utils';
 import { useState, useEffect } from 'react';
@@ -209,7 +209,7 @@ export default function Hero() {
           y: { duration: 3, repeat: Infinity, ease: "easeInOut" }
         }}
       >
-        <Droplets className="w-6 h-6" />
+        <Wrench className="w-6 h-6" />
       </motion.div>
       <motion.div 
         className="absolute bottom-32 right-1/4 text-secondary-accent/40"

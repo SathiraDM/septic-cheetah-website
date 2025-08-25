@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { CONTACT_INFO } from '@/lib/constants';
 import { trackPhoneCall } from '@/lib/utils';
+import EmergencyModal from './EmergencyModal';
 
 const navigationItems = [
   { 
@@ -60,6 +61,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
+  const [isEmergencyModalOpen, setIsEmergencyModalOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -295,9 +297,8 @@ export default function Header() {
                 <span className="xl:hidden relative z-10">Call Now</span>
               </motion.a>
 
-              <motion.a
-                href={`tel:${CONTACT_INFO.emergencyPhone}`}
-                onClick={() => trackPhoneCall('header_emergency')}
+              <motion.button
+                onClick={() => setIsEmergencyModalOpen(true)}
                 className="relative overflow-hidden bg-gradient-to-r from-red-600 to-red-700 text-white font-bold py-2.5 px-5 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center space-x-2 group"
                 whileHover={{ scale: 1.02, y: -1 }}
                 whileTap={{ scale: 0.98 }}
@@ -305,7 +306,7 @@ export default function Header() {
                 <div className="absolute inset-0 bg-gradient-to-r from-red-700 to-red-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div className="absolute -inset-1 bg-red-400 rounded-xl opacity-30 animate-pulse"></div>
                 <span className="text-sm relative z-10 tracking-wide">EMERGENCY</span>
-              </motion.a>
+              </motion.button>
             </div>
 
             {/* Enhanced Mobile Menu Button */}
@@ -341,81 +342,109 @@ export default function Header() {
             </button>
           </div>
 
-          {/* Mobile Navigation */}
+          {/* Mobile Navigation - Minimal Height Drawer */}
           <AnimatePresence>
             {isMenuOpen && (
               <motion.div
-                className="lg:hidden border-t border-gray-100"
+                className="lg:hidden border-t border-primary-accent/20 bg-gradient-to-r from-white/98 to-gray-50/98 backdrop-blur-xl"
                 variants={mobileMenuVariants}
                 initial="closed"
                 animate="open"
                 exit="closed"
               >
-                <div className="py-4 space-y-2">
-                  {navigationItems.map((item, index) => (
-                    <motion.div
-                      key={item.href}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                    >
-                      <Link
-                        href={item.href}
-                        className="flex items-center justify-between p-3 rounded-lg hover:bg-primary-accent/5 transition-colors group"
-                        onClick={() => setIsMenuOpen(false)}
+                <div className="py-4 px-4">
+                  {/* Navigation Grid - Minimal Height */}
+                  <div className="grid grid-cols-2 gap-3 mb-4">
+                    {navigationItems.map((item, index) => (
+                      <motion.div
+                        key={item.href}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: index * 0.05, type: "spring", stiffness: 300 }}
                       >
-                        <div>
-                          <div className="font-medium text-primary-dark group-hover:text-primary-accent">
-                            {item.label}
+                        <Link
+                          href={item.href}
+                          className="relative flex items-center justify-center p-3 rounded-xl bg-white/80 border border-gray-100 hover:border-primary-accent/30 hover:bg-gradient-to-r hover:from-primary-accent/5 hover:to-secondary-accent/5 transition-all duration-300 group shadow-sm hover:shadow-md"
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          {/* Background Gradient on Hover */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-primary-accent/10 to-secondary-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+                          
+                          <div className="relative z-10 text-center">
+                            <div className="font-semibold text-sm text-gray-700 group-hover:text-primary-accent transition-colors duration-300">
+                              {item.label}
+                            </div>
                           </div>
-                          <div className="text-sm text-gray-600">
-                            {item.description}
-                          </div>
-                        </div>
-                        <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-primary-accent" />
-                      </Link>
+                          
+                          {/* Subtle Arrow */}
+                          <motion.div
+                            className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                            whileHover={{ scale: 1.1 }}
+                          >
+                            <ExternalLink className="w-3 h-3 text-primary-accent" />
+                          </motion.div>
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </div>
 
-                      {/* Mobile Submenu */}
-                      {item.submenu && (
-                        <div className="ml-4 mt-2 space-y-1 bg-gray-50/50 rounded-lg p-2">
-                          {item.submenu.map((subItem) => (
-                            <Link
-                              key={subItem.href}
-                              href={subItem.href}
-                              className="block p-2 text-sm text-gray-600 hover:text-primary-accent hover:bg-white rounded-md transition-all duration-200"
-                              onClick={() => setIsMenuOpen(false)}
-                            >
-                              {subItem.label}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </motion.div>
-                  ))}
-
-                  {/* Mobile CTA Buttons */}
-                  <div className="pt-4 space-y-3">
-                    <a
+                  {/* Compact CTA Buttons */}
+                  <div className="flex gap-3">
+                    <motion.a
                       href={`tel:${CONTACT_INFO.phone}`}
                       onClick={() => {
                         trackPhoneCall('mobile_header');
                         setIsMenuOpen(false);
                       }}
-                      className="block bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-3 px-6 rounded-lg text-center shadow-lg"
+                      className="flex-1 flex items-center justify-center space-x-2 bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-semibold py-3 px-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group text-sm"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
                     >
-                      Call Now: {CONTACT_INFO.phone}
-                    </a>
-                    <a
-                      href={`tel:${CONTACT_INFO.emergencyPhone}`}
+                      <Phone className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
+                      <span>Call Now</span>
+                    </motion.a>
+                    
+                    <motion.button
                       onClick={() => {
-                        trackPhoneCall('mobile_emergency');
+                        setIsEmergencyModalOpen(true);
                         setIsMenuOpen(false);
                       }}
-                      className="block bg-red-600 text-white font-bold py-3 px-6 rounded-lg text-center shadow-lg animate-pulse"
+                      className="flex-1 flex items-center justify-center space-x-2 bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold py-3 px-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden text-sm"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.35 }}
                     >
-                      EMERGENCY: {CONTACT_INFO.emergencyPhone}
-                    </a>
+                      <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-red-600/20 animate-pulse"></div>
+                      <Phone className="w-4 h-4 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
+                      <span className="relative z-10">Emergency</span>
+                    </motion.button>
                   </div>
+                  
+                  {/* Minimal Trust Indicators */}
+                  <motion.div
+                    className="flex justify-center space-x-4 pt-3 border-t border-gray-100 mt-3"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                  >
+                    <div className="flex items-center space-x-1 text-xs text-gray-500">
+                      <Shield className="w-3 h-3 text-primary-accent" />
+                      <span>Licensed</span>
+                    </div>
+                    <div className="flex items-center space-x-1 text-xs text-gray-500">
+                      <Star className="w-3 h-3 text-yellow-500 fill-current" />
+                      <span>5-Star</span>
+                    </div>
+                    <div className="flex items-center space-x-1 text-xs text-gray-500">
+                      <Clock className="w-3 h-3 text-primary-accent" />
+                      <span>24/7</span>
+                    </div>
+                  </motion.div>
                 </div>
               </motion.div>
             )}
@@ -431,6 +460,12 @@ export default function Header() {
           aria-hidden="true"
         />
       )}
+
+      {/* Emergency Modal */}
+      <EmergencyModal 
+        isOpen={isEmergencyModalOpen}
+        onClose={() => setIsEmergencyModalOpen(false)}
+      />
     </div>
   );
 }

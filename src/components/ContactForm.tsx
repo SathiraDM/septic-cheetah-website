@@ -70,7 +70,7 @@ export default function ContactForm() {
   if (submitStatus === 'success') {
     return (
       <motion.div 
-        className="relative overflow-hidden bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 border-2 border-green-200/50 rounded-3xl p-10 text-center backdrop-blur-sm"
+        className="relative overflow-hidden bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 border-2 border-green-200/50 rounded-2xl sm:rounded-3xl p-6 sm:p-10 text-center backdrop-blur-sm"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6, type: "spring" }}
@@ -84,11 +84,11 @@ export default function ContactForm() {
           animate={{ scale: 1 }}
           transition={{ delay: 0.2, duration: 0.5, type: "spring" }}
         >
-          <CheckCircle className="w-20 h-20 text-green-600 mx-auto mb-6 drop-shadow-lg" />
+          <CheckCircle className="w-16 h-16 sm:w-20 sm:h-20 text-green-600 mx-auto mb-4 sm:mb-6 drop-shadow-lg" />
         </motion.div>
         
         <motion.h3 
-          className="text-3xl font-bold bg-gradient-to-r from-green-700 to-emerald-700 bg-clip-text text-transparent mb-4"
+          className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-green-700 to-emerald-700 bg-clip-text text-transparent mb-3 sm:mb-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.5 }}
@@ -97,7 +97,7 @@ export default function ContactForm() {
         </motion.h3>
         
         <motion.p 
-          className="text-green-700 mb-6 text-lg leading-relaxed"
+          className="text-green-700 mb-4 sm:mb-6 text-base sm:text-lg leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.5 }}
@@ -106,7 +106,7 @@ export default function ContactForm() {
         </motion.p>
         
         <motion.p 
-          className="text-sm text-green-600 bg-white/50 rounded-xl p-3 mb-6"
+          className="text-xs sm:text-sm text-green-600 bg-white/50 rounded-lg sm:rounded-xl p-2 sm:p-3 mb-4 sm:mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.5 }}
@@ -116,7 +116,7 @@ export default function ContactForm() {
         
         <motion.button
           onClick={() => setSubmitStatus('idle')}
-          className="text-green-600 hover:text-green-800 font-semibold underline transition-colors duration-300"
+          className="text-green-600 hover:text-green-800 font-semibold underline transition-colors duration-300 text-sm sm:text-base"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6, duration: 0.5 }}
@@ -131,7 +131,7 @@ export default function ContactForm() {
 
   return (
     <motion.div 
-      className="relative overflow-hidden bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl border border-white/50"
+      className="relative overflow-hidden bg-white/95 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-2xl border border-white/50"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -142,60 +142,60 @@ export default function ContactForm() {
       <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-primary-accent/10 to-secondary-accent/10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-blue-400/10 to-purple-400/10 rounded-full blur-2xl transform -translate-x-1/2 translate-y-1/2"></div>
       
-      <div className="relative z-10 p-10">
+      <div className="relative z-10 p-6 sm:p-8 lg:p-10">
         {/* Header Section */}
         <motion.div 
-          className="text-center mb-10"
+          className="text-center mb-6 sm:mb-10"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-accent/15 to-secondary-accent/15 px-4 py-2 rounded-full mb-4">
+          <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-accent/15 to-secondary-accent/15 px-3 sm:px-4 py-2 rounded-full mb-3 sm:mb-4">
             <Sparkles className="w-4 h-4 text-primary-accent" />
-            <span className="text-sm font-semibold text-primary-accent">FREE ESTIMATE</span>
+            <span className="text-xs sm:text-sm font-semibold text-primary-accent">FREE ESTIMATE</span>
           </div>
           
-          <h3 className="text-4xl font-bold mb-4 leading-tight hero-title-320">
+          <h3 className="text-2xl sm:text-4xl font-bold mb-3 sm:mb-4 leading-tight hero-title-320">
             <span className="text-gray-800">Get Your </span>
             <span className="bg-gradient-to-r from-primary-accent to-secondary-accent bg-clip-text text-transparent">
               Free Estimate
             </span>
           </h3>
           
-          <p className="text-gray-600 text-lg leading-relaxed max-w-md mx-auto hero-subtitle-320">
+          <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-md mx-auto hero-subtitle-320">
             Fill out the form below and we&apos;ll contact you within 2 hours
           </p>
         </motion.div>
 
         {submitStatus === 'error' && (
           <motion.div 
-            className="bg-red-50/80 backdrop-blur-sm border border-red-200/60 rounded-2xl p-4 mb-8 flex items-center"
+            className="bg-red-50/80 backdrop-blur-sm border border-red-200/60 rounded-xl sm:rounded-2xl p-3 sm:p-4 mb-6 sm:mb-8 flex items-start sm:items-center"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <AlertCircle className="w-5 h-5 text-red-600 mr-3 flex-shrink-0" />
-            <span className="text-red-700">
+            <AlertCircle className="w-5 h-5 text-red-600 mr-2 sm:mr-3 flex-shrink-0 mt-0.5 sm:mt-0" />
+            <span className="text-red-700 text-sm sm:text-base">
               There was an error submitting your request. Please try again or call us directly.
             </span>
           </motion.div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-8">
+        <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
           {/* Name and Phone Row */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 grid-320-single">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 grid-320-single">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-3">
+              <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2 sm:mb-3">
                 Your Name *
               </label>
               <div className="relative group">
-                <User className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${
+                <User className={`absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 transition-colors duration-300 ${
                   focusedField === 'name' ? 'text-primary-accent' : 'text-gray-400'
                 }`} />
                 <input
@@ -207,7 +207,7 @@ export default function ContactForm() {
                   onFocus={() => setFocusedField('name')}
                   onBlur={() => setFocusedField('')}
                   required
-                  className="w-full pl-12 pr-4 py-4 bg-gray-50/80 border-2 border-gray-200/60 rounded-2xl focus:outline-none focus:border-primary-accent focus:bg-white transition-all duration-300 text-gray-800 placeholder:text-gray-400"
+                  className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-3 sm:py-4 bg-gray-50/80 border-2 border-gray-200/60 rounded-xl sm:rounded-2xl focus:outline-none focus:border-primary-accent focus:bg-white transition-all duration-300 text-gray-800 placeholder:text-gray-400 text-sm sm:text-base"
                   placeholder="Enter your full name"
                 />
               </div>
@@ -219,11 +219,11 @@ export default function ContactForm() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-3">
+              <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2 sm:mb-3">
                 Phone Number *
               </label>
               <div className="relative group">
-                <Phone className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${
+                <Phone className={`absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 transition-colors duration-300 ${
                   focusedField === 'phone' ? 'text-primary-accent' : 'text-gray-400'
                 }`} />
                 <input
@@ -235,7 +235,7 @@ export default function ContactForm() {
                   onFocus={() => setFocusedField('phone')}
                   onBlur={() => setFocusedField('')}
                   required
-                  className="w-full pl-12 pr-4 py-4 bg-gray-50/80 border-2 border-gray-200/60 rounded-2xl focus:outline-none focus:border-primary-accent focus:bg-white transition-all duration-300 text-gray-800 placeholder:text-gray-400"
+                  className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-3 sm:py-4 bg-gray-50/80 border-2 border-gray-200/60 rounded-xl sm:rounded-2xl focus:outline-none focus:border-primary-accent focus:bg-white transition-all duration-300 text-gray-800 placeholder:text-gray-400 text-sm sm:text-base"
                   placeholder="(555) 123-4567"
                 />
               </div>
@@ -249,11 +249,11 @@ export default function ContactForm() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-3">
+            <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2 sm:mb-3">
               Email Address *
             </label>
             <div className="relative group">
-              <Mail className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${
+              <Mail className={`absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 transition-colors duration-300 ${
                 focusedField === 'email' ? 'text-primary-accent' : 'text-gray-400'
               }`} />
               <input
@@ -265,7 +265,7 @@ export default function ContactForm() {
                 onFocus={() => setFocusedField('email')}
                 onBlur={() => setFocusedField('')}
                 required
-                className="w-full pl-12 pr-4 py-4 bg-gray-50/80 border-2 border-gray-200/60 rounded-2xl focus:outline-none focus:border-primary-accent focus:bg-white transition-all duration-300 text-gray-800 placeholder:text-gray-400"
+                className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-3 sm:py-4 bg-gray-50/80 border-2 border-gray-200/60 rounded-xl sm:rounded-2xl focus:outline-none focus:border-primary-accent focus:bg-white transition-all duration-300 text-gray-800 placeholder:text-gray-400 text-sm sm:text-base"
                 placeholder="your@email.com"
               />
             </div>
@@ -278,11 +278,11 @@ export default function ContactForm() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <label htmlFor="service" className="block text-sm font-semibold text-gray-700 mb-3">
+            <label htmlFor="service" className="block text-sm font-semibold text-gray-700 mb-2 sm:mb-3">
               What service do you need? *
             </label>
             <div className="relative group">
-              <Settings className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${
+              <Settings className={`absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 transition-colors duration-300 z-10 ${
                 focusedField === 'service' ? 'text-primary-accent' : 'text-gray-400'
               }`} />
               <select
@@ -293,7 +293,7 @@ export default function ContactForm() {
                 onFocus={() => setFocusedField('service')}
                 onBlur={() => setFocusedField('')}
                 required
-                className="w-full pl-12 pr-4 py-4 bg-gray-50/80 border-2 border-gray-200/60 rounded-2xl focus:outline-none focus:border-primary-accent focus:bg-white transition-all duration-300 text-gray-800 appearance-none cursor-pointer"
+                className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-3 sm:py-4 bg-gray-50/80 border-2 border-gray-200/60 rounded-xl sm:rounded-2xl focus:outline-none focus:border-primary-accent focus:bg-white transition-all duration-300 text-gray-800 appearance-none cursor-pointer text-sm sm:text-base"
               >
                 <option value="">Select a service...</option>
                 <option value="pumping">Septic Pumping/Cleaning</option>
@@ -302,8 +302,8 @@ export default function ContactForm() {
                 <option value="maintenance">Maintenance/Inspection</option>
                 <option value="other">Other/Not Sure</option>
               </select>
-              <div className="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </div>
@@ -317,10 +317,10 @@ export default function ContactForm() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.5 }}
           >
-            <label className="block text-sm font-semibold text-gray-700 mb-4">
+            <label className="block text-sm font-semibold text-gray-700 mb-3 sm:mb-4">
               When do you need service? *
             </label>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 gap-3 sm:gap-4">
               {[
                 { 
                   value: 'emergency', 
@@ -349,7 +349,7 @@ export default function ContactForm() {
               ].map((option, index) => (
                 <motion.label 
                   key={option.value} 
-                  className={`group relative flex flex-col p-4 border-2 rounded-2xl cursor-pointer transition-all duration-300 transform hover:scale-105 ${
+                  className={`group relative flex flex-col p-3 sm:p-4 border-2 rounded-xl sm:rounded-2xl cursor-pointer transition-all duration-300 transform hover:scale-105 ${
                     formData.urgency === option.value 
                       ? `${option.bg} ${option.border} shadow-lg scale-105` 
                       : 'border-gray-200 hover:border-gray-300 bg-white hover:shadow-md'
@@ -370,17 +370,17 @@ export default function ContactForm() {
                       required
                       className="sr-only"
                     />
-                    <div className={`w-5 h-5 rounded-full border-2 mr-3 flex items-center justify-center transition-all duration-300 ${
+                    <div className={`w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 mr-2 sm:mr-3 flex items-center justify-center transition-all duration-300 ${
                       formData.urgency === option.value 
                         ? `bg-gradient-to-r ${option.gradient} border-transparent` 
                         : 'border-gray-300 group-hover:border-gray-400'
                     }`}>
                       {formData.urgency === option.value && (
-                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full"></div>
                       )}
                     </div>
                     <div className="flex-1">
-                      <span className={`font-semibold text-sm transition-colors duration-300 ${
+                      <span className={`font-semibold text-xs sm:text-sm transition-colors duration-300 ${
                         formData.urgency === option.value ? 'text-gray-800' : 'text-gray-700'
                       }`}>
                         {option.label}
@@ -393,7 +393,7 @@ export default function ContactForm() {
                     </div>
                   </div>
                   {formData.urgency === option.value && (
-                    <Clock className="absolute top-3 right-3 w-4 h-4 text-gray-600" />
+                    <Clock className="absolute top-2 sm:top-3 right-2 sm:right-3 w-3 h-3 sm:w-4 sm:h-4 text-gray-600" />
                   )}
                 </motion.label>
               ))}
@@ -407,11 +407,11 @@ export default function ContactForm() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.6 }}
           >
-            <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-3">
+            <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2 sm:mb-3">
               Describe your septic issue or needs
             </label>
             <div className="relative group">
-              <MessageSquare className={`absolute left-4 top-4 w-5 h-5 transition-colors duration-300 ${
+              <MessageSquare className={`absolute left-3 sm:left-4 top-3 sm:top-4 w-4 h-4 sm:w-5 sm:h-5 transition-colors duration-300 ${
                 focusedField === 'message' ? 'text-primary-accent' : 'text-gray-400'
               }`} />
               <textarea
@@ -422,7 +422,7 @@ export default function ContactForm() {
                 onFocus={() => setFocusedField('message')}
                 onBlur={() => setFocusedField('')}
                 rows={4}
-                className="w-full pl-12 pr-4 py-4 bg-gray-50/80 border-2 border-gray-200/60 rounded-2xl focus:outline-none focus:border-primary-accent focus:bg-white transition-all duration-300 text-gray-800 placeholder:text-gray-400 resize-none"
+                className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-3 sm:py-4 bg-gray-50/80 border-2 border-gray-200/60 rounded-xl sm:rounded-2xl focus:outline-none focus:border-primary-accent focus:bg-white transition-all duration-300 text-gray-800 placeholder:text-gray-400 resize-none text-sm sm:text-base"
                 placeholder="Tell us about your septic system, any problems you're experiencing, or questions you have..."
               />
             </div>
@@ -438,26 +438,26 @@ export default function ContactForm() {
             <motion.button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-gradient-to-r from-primary-accent to-secondary-accent hover:from-secondary-accent hover:to-primary-accent text-white font-bold py-5 px-8 rounded-2xl transition-all duration-300 flex items-center justify-center space-x-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              className="w-full bg-gradient-to-r from-primary-accent to-secondary-accent hover:from-secondary-accent hover:to-primary-accent text-white font-bold py-4 sm:py-5 px-6 sm:px-8 rounded-xl sm:rounded-2xl transition-all duration-300 flex items-center justify-center space-x-2 sm:space-x-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
               {isSubmitting ? (
                 <>
-                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
-                  <span className="text-lg">Submitting...</span>
+                  <div className="animate-spin rounded-full h-5 w-5 sm:h-6 sm:w-6 border-b-2 border-white"></div>
+                  <span className="text-base sm:text-lg">Submitting...</span>
                 </>
               ) : (
                 <>
-                  <Send className="w-6 h-6" />
-                  <span className="text-lg">Get Free Estimate</span>
+                  <Send className="w-5 h-5 sm:w-6 sm:h-6" />
+                  <span className="text-base sm:text-lg">Get Free Estimate</span>
                 </>
               )}
             </motion.button>
           </motion.div>
 
           <motion.p 
-            className="text-xs text-gray-500 text-center bg-gray-50/50 rounded-xl p-3"
+            className="text-xs text-gray-500 text-center bg-gray-50/50 rounded-lg sm:rounded-xl p-2 sm:p-3"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}

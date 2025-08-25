@@ -284,17 +284,17 @@ export default function TestimonialsWithDrag() {
             })}
           </div>
 
-          {/* Navigation Buttons */}
+          {/* Navigation Buttons - Hidden on screens < 533px */}
           <button
             onClick={prevTestimonial}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg border border-gray-200 flex items-center justify-center text-gray-600 hover:text-green-600 hover:border-green-200 hover:shadow-xl transition-all duration-300 z-10 hover:scale-110 active:scale-95 carousel-nav-320"
+            className="hidden sm:flex absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg border border-gray-200 items-center justify-center text-gray-600 hover:text-green-600 hover:border-green-200 hover:shadow-xl transition-all duration-300 z-10 hover:scale-110 active:scale-95 carousel-nav-320"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
 
           <button
             onClick={nextTestimonial}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg border border-gray-200 flex items-center justify-center text-gray-600 hover:text-green-600 hover:border-green-200 hover:shadow-xl transition-all duration-300 z-10 hover:scale-110 active:scale-95 carousel-nav-320"
+            className="hidden sm:flex absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg border border-gray-200 items-center justify-center text-gray-600 hover:text-green-600 hover:border-green-200 hover:shadow-xl transition-all duration-300 z-10 hover:scale-110 active:scale-95 carousel-nav-320"
           >
             <ChevronRight className="w-6 h-6" />
           </button>

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { ArrowRight, CheckCircle, Phone, Star, Shield, Award, Clock, Zap, MessageCircle, Home } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { SERVICES, CONTACT_INFO, TESTIMONIALS, COMPETITIVE_ADVANTAGES } from '@/lib/constants';
+import { SERVICES, CONTACT_INFO, COMPETITIVE_ADVANTAGES } from '@/lib/constants';
 import { trackPhoneCall } from '@/lib/utils';
 
 // Icon mapping for competitive advantages
@@ -315,57 +315,6 @@ export default function ServicesPage() {
                 <p className="text-xs text-gray-300 leading-relaxed">
                   {benefit.description}
                 </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Customer Testimonials - Modern Design */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 via-white to-gray-50 relative overflow-hidden">
-        {/* Subtle Background Pattern */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(191,136,41,0.05)_0%,transparent_50%)] pointer-events-none"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(69,49,14,0.03)_0%,transparent_50%)] pointer-events-none"></div>
-        
-        <div className="septic-max-width relative">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-accent to-secondary-accent rounded-2xl mb-8 shadow-lg">
-              <Star className="w-8 h-8 text-white" />
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6 tracking-tight">
-              What Our <span className="text-primary-accent">Neighbors</span> Are Saying
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Real feedback from real customers across Austin and Central Texas
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {TESTIMONIALS.slice(0, 3).map((testimonial, index) => (
-              <div key={index} className="group relative">
-                <div className="bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:bg-white hover:border-primary-accent/30 hover:-translate-y-1 h-full">
-                  {/* Quote Mark */}
-                  <div className="absolute -top-4 left-8 w-8 h-8 bg-gradient-to-br from-primary-accent to-secondary-accent rounded-full flex items-center justify-center shadow-lg">
-                    <span className="text-white text-xl font-bold">&quot;</span>
-                  </div>
-                  
-                  <div className="flex items-center mb-6 pt-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-gray-600 mb-6 italic text-lg leading-relaxed">
-                    &quot;{testimonial.text}&quot;
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <span className="font-bold text-primary-dark text-lg">
-                      {testimonial.name}
-                    </span>
-                    <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
-                      {testimonial.location}
-                    </span>
-                  </div>
-                </div>
               </div>
             ))}
           </div>

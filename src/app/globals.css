@@ -167,21 +167,6 @@ section {
   @apply bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 border border-gray-100;
 }
 
-/* Sticky Phone Button */
-.sticky-phone {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-@media (min-width: 768px) {
-  .sticky-phone {
-    display: none;
-  }
-}
-
 /* Trust Signals */
 .trust-bar {
   @apply flex flex-wrap justify-center items-center gap-4 py-4 text-sm font-medium text-secondary-accent;
