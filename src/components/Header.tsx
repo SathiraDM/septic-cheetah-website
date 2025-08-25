@@ -14,11 +14,11 @@ import {
   Star,
   Shield,
   ChevronDown,
-  ExternalLink,
-  Sparkles
+  ExternalLink
 } from 'lucide-react';
 import { CONTACT_INFO } from '@/lib/constants';
 import { trackPhoneCall } from '@/lib/utils';
+import EmergencyModal from './EmergencyModal';
 
 const navigationItems = [
   { 
@@ -31,12 +31,12 @@ const navigationItems = [
     label: 'Services',
     description: 'Complete septic solutions',
     submenu: [
-      { href: '/services/pumping', label: 'Septic Pumping', price: 'Call for Quote' },
-      { href: '/services/installation', label: 'System Installation', price: 'Call for Quote' },
-      { href: '/services/repairs', label: 'Emergency Repairs', price: '24/7 Available' },
-      { href: '/services/inspections', label: 'System Inspections', price: 'Call for Quote' },
-      { href: '/services/grease-trap', label: 'Grease Trap Services', price: 'Call for Quote' },
-      { href: '/services/portable-toilets', label: 'Portable Toilet Rentals', price: 'Call for Quote' }
+      { href: '/services/pumping', label: 'Septic Pumping' },
+      { href: '/services/installation', label: 'System Installation' },
+      { href: '/services/repairs', label: 'Emergency Repairs' },
+      { href: '/services/inspections', label: 'System Inspections' },
+      { href: '/services/grease-trap', label: 'Grease Trap Services' },
+      { href: '/services/portable-toilets', label: 'Portable Toilet Rentals' }
     ]
   },
   { 
@@ -61,6 +61,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
+  const [isEmergencyModalOpen, setIsEmergencyModalOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -93,7 +94,7 @@ export default function Header() {
   };
 
   return (
-    <div className="w-full septic-no-overflow">
+    <div className="w-full" style={{ overflow: 'visible' }}>
       {/* Top Status Bar - SCROLLABLE (Normal document flow) */}
       <div className="septic-full-bg bg-gradient-to-r from-primary-dark to-primary-dark/95 text-white py-1 px-4 hidden md:block border-b border-primary-accent/20"
            style={{
@@ -142,8 +143,8 @@ export default function Header() {
       <motion.header
         className={`${
           isScrolled 
-            ? 'fixed top-0 left-0 right-0 z-50' 
-            : 'relative z-40'
+            ? 'fixed top-0 left-0 right-0 z-[999]' 
+            : 'relative z-[999]'
         } transition-all duration-700 ease-out ${
           isScrolled 
             ? 'bg-white/98 backdrop-blur-xl shadow-2xl border-b border-primary-accent/10' 
@@ -154,7 +155,9 @@ export default function Header() {
           minHeight: '72px',
           // GPU acceleration for smooth transitions
           transform: 'translateZ(0)',
-          willChange: 'transform, background-color, box-shadow'
+          willChange: 'transform, background-color, box-shadow',
+          zIndex: 999,
+          overflow: 'visible'
         }}
         animate={{ 
           y: 0,
@@ -166,8 +169,8 @@ export default function Header() {
           ease: [0.25, 0.46, 0.45, 0.94] // Custom bezier for ultra smooth
         }}
       >
-        <div className="septic-max-width septic-header-content">
-          <div className="flex justify-between items-center py-3">
+        <div className="septic-max-width septic-header-content" style={{ overflow: 'visible', position: 'static' }}>
+          <div className="flex justify-between items-center py-3" style={{ overflow: 'visible', position: 'relative' }}>
             {/* Logo Section - Enhanced */}
             <Link href="/" className="flex items-center group">
               <motion.div
@@ -188,7 +191,7 @@ export default function Header() {
             </Link>
 
             {/* Desktop Navigation - Modern Glass Design */}
-            <nav className="hidden lg:flex items-center space-x-1 bg-gray-50/50 backdrop-blur-sm rounded-xl p-1.5 border border-gray-200/50">
+            <nav className="hidden lg:flex items-center space-x-1 bg-gray-50/50 backdrop-blur-sm rounded-xl p-1.5 border border-gray-200/50" style={{ overflow: 'visible', position: 'relative' }}>
               {navigationItems.map((item) => {
                 const isActive = pathname === item.href || 
                   (item.submenu && item.submenu.some(subItem => pathname === subItem.href));
@@ -197,8 +200,15 @@ export default function Header() {
                   <div
                     key={item.href}
                     className="relative group"
-                    onMouseEnter={() => item.submenu && setActiveSubmenu(item.label)}
-                    onMouseLeave={() => setActiveSubmenu(null)}
+                    style={{ overflow: 'visible' }}
+                    onMouseEnter={() => {
+                      if (item.submenu) {
+                        setActiveSubmenu(item.label);
+                      }
+                    }}
+                    onMouseLeave={() => {
+                      setActiveSubmenu(null);
+                    }}
                   >
                     <Link
                       href={item.href}
@@ -231,35 +241,33 @@ export default function Header() {
                       <AnimatePresence>
                         {activeSubmenu === item.label && (
                           <motion.div
-                            className="absolute top-full left-1/2 transform -translate-x-1/2 mt-3 w-80 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-100/50 overflow-hidden"
-                            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                            className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 min-w-max bg-white/98 backdrop-blur-xl rounded-xl shadow-xl border border-primary-accent/10"
+                            style={{ 
+                              zIndex: 99999,
+                              overflow: 'visible',
+                              width: 'max-content'
+                            }}
+                            initial={{ opacity: 0, y: -10, scale: 0.95 }}
                             animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                            exit={{ opacity: 0, y: -10, scale: 0.95 }}
                             transition={{ duration: 0.2, ease: "easeOut" }}
                           >
-                            <div className="p-3">
+                            <div className="py-2">
                               {item.submenu.map((subItem, index) => (
                                 <motion.div
                                   key={subItem.href}
                                   initial={{ opacity: 0, x: -10 }}
                                   animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: index * 0.05 }}
+                                  transition={{ delay: index * 0.03 }}
                                 >
                                   <Link
                                     href={subItem.href}
-                                    className="flex items-center justify-between p-4 rounded-xl hover:bg-gradient-to-r hover:from-primary-accent/5 hover:to-secondary-accent/5 transition-all duration-200 group"
+                                    className="flex items-center px-6 py-3 text-gray-700 hover:text-primary-accent hover:bg-gradient-to-r hover:from-primary-accent/5 hover:to-secondary-accent/5 transition-all duration-200 group border-l-2 border-transparent hover:border-primary-accent whitespace-nowrap"
                                   >
-                                    <div>
-                                      <div className="font-semibold text-primary-dark group-hover:text-primary-accent transition-colors">
-                                        {subItem.label}
-                                      </div>
-                                      <div className="text-sm text-gray-600 font-medium">
-                                        {subItem.price}
-                                      </div>
-                                    </div>
-                                    <div className="flex items-center space-x-2">
-                                      <Sparkles className="w-4 h-4 text-secondary-accent opacity-0 group-hover:opacity-100 transition-opacity" />
-                                      <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-primary-accent transition-colors" />
+                                    <div className="w-2 h-2 bg-primary-accent rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex-shrink-0"></div>
+                                    <span className="font-medium text-sm flex-shrink-0">{subItem.label}</span>
+                                    <div className="ml-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex-shrink-0">
+                                      <ExternalLink className="w-3 h-3 text-primary-accent" />
                                     </div>
                                   </Link>
                                 </motion.div>
@@ -289,9 +297,8 @@ export default function Header() {
                 <span className="xl:hidden relative z-10">Call Now</span>
               </motion.a>
 
-              <motion.a
-                href={`tel:${CONTACT_INFO.emergencyPhone}`}
-                onClick={() => trackPhoneCall('header_emergency')}
+              <motion.button
+                onClick={() => setIsEmergencyModalOpen(true)}
                 className="relative overflow-hidden bg-gradient-to-r from-red-600 to-red-700 text-white font-bold py-2.5 px-5 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center space-x-2 group"
                 whileHover={{ scale: 1.02, y: -1 }}
                 whileTap={{ scale: 0.98 }}
@@ -299,7 +306,7 @@ export default function Header() {
                 <div className="absolute inset-0 bg-gradient-to-r from-red-700 to-red-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div className="absolute -inset-1 bg-red-400 rounded-xl opacity-30 animate-pulse"></div>
                 <span className="text-sm relative z-10 tracking-wide">EMERGENCY</span>
-              </motion.a>
+              </motion.button>
             </div>
 
             {/* Enhanced Mobile Menu Button */}
@@ -335,81 +342,109 @@ export default function Header() {
             </button>
           </div>
 
-          {/* Mobile Navigation */}
+          {/* Mobile Navigation - Minimal Height Drawer */}
           <AnimatePresence>
             {isMenuOpen && (
               <motion.div
-                className="lg:hidden border-t border-gray-100"
+                className="lg:hidden border-t border-primary-accent/20 bg-gradient-to-r from-white/98 to-gray-50/98 backdrop-blur-xl"
                 variants={mobileMenuVariants}
                 initial="closed"
                 animate="open"
                 exit="closed"
               >
-                <div className="py-4 space-y-2">
-                  {navigationItems.map((item, index) => (
-                    <motion.div
-                      key={item.href}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                    >
-                      <Link
-                        href={item.href}
-                        className="flex items-center justify-between p-3 rounded-lg hover:bg-primary-accent/5 transition-colors group"
-                        onClick={() => setIsMenuOpen(false)}
+                <div className="py-4 px-4">
+                  {/* Navigation Grid - Minimal Height */}
+                  <div className="grid grid-cols-2 gap-3 mb-4">
+                    {navigationItems.map((item, index) => (
+                      <motion.div
+                        key={item.href}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: index * 0.05, type: "spring", stiffness: 300 }}
                       >
-                        <div>
-                          <div className="font-medium text-primary-dark group-hover:text-primary-accent">
-                            {item.label}
+                        <Link
+                          href={item.href}
+                          className="relative flex items-center justify-center p-3 rounded-xl bg-white/80 border border-gray-100 hover:border-primary-accent/30 hover:bg-gradient-to-r hover:from-primary-accent/5 hover:to-secondary-accent/5 transition-all duration-300 group shadow-sm hover:shadow-md"
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          {/* Background Gradient on Hover */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-primary-accent/10 to-secondary-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+                          
+                          <div className="relative z-10 text-center">
+                            <div className="font-semibold text-sm text-gray-700 group-hover:text-primary-accent transition-colors duration-300">
+                              {item.label}
+                            </div>
                           </div>
-                          <div className="text-sm text-gray-600">
-                            {item.description}
-                          </div>
-                        </div>
-                        <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-primary-accent" />
-                      </Link>
+                          
+                          {/* Subtle Arrow */}
+                          <motion.div
+                            className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                            whileHover={{ scale: 1.1 }}
+                          >
+                            <ExternalLink className="w-3 h-3 text-primary-accent" />
+                          </motion.div>
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </div>
 
-                      {/* Mobile Submenu */}
-                      {item.submenu && (
-                        <div className="ml-4 mt-2 space-y-1">
-                          {item.submenu.map((subItem) => (
-                            <Link
-                              key={subItem.href}
-                              href={subItem.href}
-                              className="block p-2 text-sm text-gray-600 hover:text-primary-accent transition-colors"
-                              onClick={() => setIsMenuOpen(false)}
-                            >
-                              {subItem.label} - {subItem.price}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </motion.div>
-                  ))}
-
-                  {/* Mobile CTA Buttons */}
-                  <div className="pt-4 space-y-3">
-                    <a
+                  {/* Compact CTA Buttons */}
+                  <div className="flex gap-3">
+                    <motion.a
                       href={`tel:${CONTACT_INFO.phone}`}
                       onClick={() => {
                         trackPhoneCall('mobile_header');
                         setIsMenuOpen(false);
                       }}
-                      className="block bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-3 px-6 rounded-lg text-center shadow-lg"
+                      className="flex-1 flex items-center justify-center space-x-2 bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-semibold py-3 px-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group text-sm"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
                     >
-                      Call Now: {CONTACT_INFO.phone}
-                    </a>
-                    <a
-                      href={`tel:${CONTACT_INFO.emergencyPhone}`}
+                      <Phone className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
+                      <span>Call Now</span>
+                    </motion.a>
+                    
+                    <motion.button
                       onClick={() => {
-                        trackPhoneCall('mobile_emergency');
+                        setIsEmergencyModalOpen(true);
                         setIsMenuOpen(false);
                       }}
-                      className="block bg-red-600 text-white font-bold py-3 px-6 rounded-lg text-center shadow-lg animate-pulse"
+                      className="flex-1 flex items-center justify-center space-x-2 bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold py-3 px-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden text-sm"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.35 }}
                     >
-                      EMERGENCY: {CONTACT_INFO.emergencyPhone}
-                    </a>
+                      <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-red-600/20 animate-pulse"></div>
+                      <Phone className="w-4 h-4 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
+                      <span className="relative z-10">Emergency</span>
+                    </motion.button>
                   </div>
+                  
+                  {/* Minimal Trust Indicators */}
+                  <motion.div
+                    className="flex justify-center space-x-4 pt-3 border-t border-gray-100 mt-3"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                  >
+                    <div className="flex items-center space-x-1 text-xs text-gray-500">
+                      <Shield className="w-3 h-3 text-primary-accent" />
+                      <span>Licensed</span>
+                    </div>
+                    <div className="flex items-center space-x-1 text-xs text-gray-500">
+                      <Star className="w-3 h-3 text-yellow-500 fill-current" />
+                      <span>5-Star</span>
+                    </div>
+                    <div className="flex items-center space-x-1 text-xs text-gray-500">
+                      <Clock className="w-3 h-3 text-primary-accent" />
+                      <span>24/7</span>
+                    </div>
+                  </motion.div>
                 </div>
               </motion.div>
             )}
@@ -425,6 +460,12 @@ export default function Header() {
           aria-hidden="true"
         />
       )}
+
+      {/* Emergency Modal */}
+      <EmergencyModal 
+        isOpen={isEmergencyModalOpen}
+        onClose={() => setIsEmergencyModalOpen(false)}
+      />
     </div>
   );
 }
