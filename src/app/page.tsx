@@ -1,15 +1,27 @@
 'use client';
 
+import { useState } from 'react';
 import Hero from '@/components/Hero';
 import ServiceCards from '@/components/ServiceCards';
 import TestimonialsWithDrag from '@/components/TestimonialsWithDrag';
 import ContactForm from '@/components/ContactForm';
+import EmergencyModal from '@/components/EmergencyModal';
 import Image from 'next/image';
 import { Phone, AlertTriangle } from 'lucide-react';
 import { CONTACT_INFO } from '@/lib/constants';
 import { trackPhoneCall } from '@/lib/utils';
 
 export default function HomePage() {
+  const [isEmergencyModalOpen, setIsEmergencyModalOpen] = useState(false);
+
+  const openEmergencyModal = () => {
+    setIsEmergencyModalOpen(true);
+  };
+
+  const closeEmergencyModal = () => {
+    setIsEmergencyModalOpen(false);
+  };
+
   return (
     <div className="septic-no-overflow">
       <Hero />
@@ -81,7 +93,7 @@ export default function HomePage() {
 
                 {/* Contact Image */}
                 <div className="mt-8 sm:mt-10">
-                  <div className="relative group">
+                  <div className="relative group cursor-pointer" onClick={openEmergencyModal}>
                     {/* Animated background gradient */}
                     <div className="absolute -inset-2 bg-gradient-to-r from-primary-accent via-secondary-accent to-primary-accent rounded-3xl blur-lg opacity-30 group-hover:opacity-50 transition-all duration-500 animate-pulse"></div>
                     
@@ -94,9 +106,16 @@ export default function HomePage() {
                       <div className="absolute top-0 left-0 w-12 h-12 bg-gradient-to-br from-primary-accent/30 to-transparent rounded-br-3xl"></div>
                       <div className="absolute bottom-0 right-0 w-12 h-12 bg-gradient-to-tl from-secondary-accent/30 to-transparent rounded-tl-3xl"></div>
                       
+                      {/* Click indicator overlay */}
+                      <div className="absolute inset-0 bg-red-600/10 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-xl flex items-center justify-center">
+                        <div className="bg-red-600/90 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                          Click for Emergency
+                        </div>
+                      </div>
+                      
                       <Image
                         src="/images/ContactUs.png"
-                        alt="Contact Septic Cheetah for professional septic services"
+                        alt="Contact Septic Cheetah for professional septic services - Click for Emergency"
                         width={350}
                         height={240}
                         className="w-full h-auto rounded-xl shadow-xl transition-all duration-500 group-hover:scale-[1.02] group-hover:shadow-2xl"
@@ -112,6 +131,12 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+      
+      {/* Emergency Modal */}
+      <EmergencyModal 
+        isOpen={isEmergencyModalOpen} 
+        onClose={closeEmergencyModal} 
+      />
     </div>
   );
 }

@@ -351,88 +351,73 @@ export default function Header() {
             </button>
           </div>
 
-          {/* Mobile Navigation - Minimal Height Drawer */}
+          {/* Modern Mobile Navigation Drawer */}
           <AnimatePresence>
             {isMenuOpen && (
               <motion.div
-                className="xl:hidden border-t border-primary-accent/20 bg-gradient-to-r from-white/98 to-gray-50/98 backdrop-blur-xl"
+                className="xl:hidden bg-white/98 backdrop-blur-xl border-t border-gray-100/80 shadow-lg"
                 variants={mobileMenuVariants}
                 initial="closed"
                 animate="open"
                 exit="closed"
               >
-                <div className="py-4 px-4">
-                  {/* Navigation Grid - Minimal Height */}
-                  <div className="grid grid-cols-2 gap-3 mb-4">
+                <div className="px-4 py-3">
+                  {/* Primary Navigation - Clean List */}
+                  <div className="space-y-1 mb-4">
                     {navigationItems.map((item, index) => {
-                      // Handle Services dropdown separately in mobile
+                      const isActive = pathname === item.href || 
+                        (item.submenu && item.submenu.some(subItem => pathname === subItem.href));
+                      
+                      // Handle Services dropdown
                       if (item.href === '#' && item.submenu) {
                         return (
                           <motion.div
                             key={item.label}
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: index * 0.05, type: "spring", stiffness: 300 }}
-                            className="col-span-2"
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: index * 0.05 }}
                           >
-                            <div className="relative">
-                              <button
-                                className="w-full flex items-center justify-center p-3 rounded-xl bg-white/80 border border-gray-100 hover:border-primary-accent/30 hover:bg-gradient-to-r hover:from-primary-accent/5 hover:to-secondary-accent/5 transition-all duration-300 group shadow-sm hover:shadow-md"
-                                onClick={() => setActiveSubmenu(activeSubmenu === item.label ? null : item.label)}
-                              >
-                                <div className="absolute inset-0 bg-gradient-to-r from-primary-accent/10 to-secondary-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
-                                
-                                <div className="relative z-10 text-center flex items-center space-x-2">
-                                  <div className="font-semibold text-sm text-gray-700 group-hover:text-primary-accent transition-colors duration-300">
-                                    {item.label}
-                                  </div>
-                                  <ChevronDown className={`w-4 h-4 transition-all duration-300 ${
-                                    activeSubmenu === item.label ? 'rotate-180' : ''
-                                  } text-gray-500 group-hover:text-primary-accent`} />
-                                </div>
-                              </button>
-                              
-                              {/* Mobile Submenu */}
-                              <AnimatePresence>
-                                {activeSubmenu === item.label && (
-                                  <motion.div
-                                    className="mt-2 bg-white/95 backdrop-blur-xl rounded-xl shadow-lg border border-primary-accent/10"
-                                    initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                                    exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                                    transition={{ duration: 0.2, ease: "easeOut" }}
-                                  >
-                                    <div className="py-2">
-                                      {item.submenu.map((subItem, subIndex) => (
-                                        <motion.div
-                                          key={subItem.href}
-                                          initial={{ opacity: 0, x: -10 }}
-                                          animate={{ opacity: 1, x: 0 }}
-                                          transition={{ delay: subIndex * 0.03 }}
-                                        >
-                                          <Link
-                                            href={subItem.href}
-                                            className="flex items-center justify-between px-4 py-2 text-gray-700 hover:text-primary-accent hover:bg-gradient-to-r hover:from-primary-accent/5 hover:to-secondary-accent/5 transition-all duration-200 group border-l-2 border-transparent hover:border-primary-accent"
-                                            onClick={() => {
-                                              setIsMenuOpen(false);
-                                              setActiveSubmenu(null);
-                                            }}
-                                          >
-                                            <div className="flex items-center">
-                                              <div className="w-2 h-2 bg-primary-accent rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex-shrink-0"></div>
-                                              <span className="font-medium text-sm flex-shrink-0">{subItem.label}</span>
-                                            </div>
-                                            <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex-shrink-0">
-                                              <ExternalLink className="w-3 h-3 text-primary-accent" />
-                                            </div>
-                                          </Link>
-                                        </motion.div>
-                                      ))}
-                                    </div>
-                                  </motion.div>
-                                )}
-                              </AnimatePresence>
-                            </div>
+                            <button
+                              className={`w-full flex items-center justify-between py-3 px-4 rounded-lg text-left transition-all duration-200 group ${
+                                isActive || activeSubmenu === item.label
+                                  ? 'bg-primary-accent/10 text-primary-accent' 
+                                  : 'text-gray-700 hover:bg-gray-50 hover:text-primary-accent'
+                              }`}
+                              onClick={() => setActiveSubmenu(activeSubmenu === item.label ? null : item.label)}
+                            >
+                              <span className="font-medium">{item.label}</span>
+                              <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${
+                                activeSubmenu === item.label ? 'rotate-180' : ''
+                              }`} />
+                            </button>
+                            
+                            {/* Submenu */}
+                            <AnimatePresence>
+                              {activeSubmenu === item.label && (
+                                <motion.div
+                                  className="ml-4 mt-1 space-y-1"
+                                  initial={{ opacity: 0, height: 0 }}
+                                  animate={{ opacity: 1, height: 'auto' }}
+                                  exit={{ opacity: 0, height: 0 }}
+                                  transition={{ duration: 0.2 }}
+                                >
+                                  {item.submenu.map((subItem) => (
+                                    <Link
+                                      key={subItem.href}
+                                      href={subItem.href}
+                                      className="flex items-center py-2 px-3 text-sm text-gray-600 hover:text-primary-accent hover:bg-primary-accent/5 rounded-md transition-all duration-200 border-l-2 border-transparent hover:border-primary-accent/30"
+                                      onClick={() => {
+                                        setIsMenuOpen(false);
+                                        setActiveSubmenu(null);
+                                      }}
+                                    >
+                                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mr-3"></div>
+                                      {subItem.label}
+                                    </Link>
+                                  ))}
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
                           </motion.div>
                         );
                       }
@@ -441,54 +426,46 @@ export default function Header() {
                       return (
                         <motion.div
                           key={item.href}
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: index * 0.05, type: "spring", stiffness: 300 }}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.05 }}
                         >
                           <Link
                             href={item.href}
-                            className="relative flex items-center justify-center p-3 rounded-xl bg-white/80 border border-gray-100 hover:border-primary-accent/30 hover:bg-gradient-to-r hover:from-primary-accent/5 hover:to-secondary-accent/5 transition-all duration-300 group shadow-sm hover:shadow-md"
+                            className={`flex items-center py-3 px-4 rounded-lg transition-all duration-200 group ${
+                              isActive
+                                ? 'bg-primary-accent/10 text-primary-accent font-medium' 
+                                : 'text-gray-700 hover:bg-gray-50 hover:text-primary-accent'
+                            }`}
                             onClick={() => setIsMenuOpen(false)}
                           >
-                            {/* Background Gradient on Hover */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-primary-accent/10 to-secondary-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
-                            
-                            <div className="relative z-10 text-center">
-                              <div className="font-semibold text-sm text-gray-700 group-hover:text-primary-accent transition-colors duration-300">
-                                {item.label}
-                              </div>
-                            </div>
-                            
-                            {/* Subtle Arrow */}
-                            <motion.div
-                              className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                              whileHover={{ scale: 1.1 }}
-                            >
-                              <ExternalLink className="w-3 h-3 text-primary-accent" />
-                            </motion.div>
+                            <span className="font-medium">{item.label}</span>
+                            {isActive && (
+                              <div className="ml-auto w-2 h-2 bg-primary-accent rounded-full"></div>
+                            )}
                           </Link>
                         </motion.div>
                       );
                     })}
                   </div>
 
-                  {/* Compact CTA Buttons */}
-                  <div className="flex gap-3">
+                  {/* Action Buttons - Streamlined */}
+                  <div className="flex gap-2 pt-3 border-t border-gray-100">
                     <motion.a
                       href={`tel:${CONTACT_INFO.phone}`}
                       onClick={() => {
                         trackPhoneCall('mobile_header');
                         setIsMenuOpen(false);
                       }}
-                      className="flex-1 flex items-center justify-center space-x-2 bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-semibold py-3 px-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group text-sm"
+                      className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-medium py-2.5 px-4 rounded-lg shadow-sm hover:shadow-md transition-all duration-200"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.3 }}
+                      transition={{ delay: 0.2 }}
                     >
-                      <Phone className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
-                      <span>Call Now</span>
+                      <Phone className="w-4 h-4" />
+                      <span className="text-sm">Call Now</span>
                     </motion.a>
                     
                     <motion.button
@@ -496,39 +473,16 @@ export default function Header() {
                         setIsEmergencyModalOpen(true);
                         setIsMenuOpen(false);
                       }}
-                      className="flex-1 flex items-center justify-center space-x-2 bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold py-3 px-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden text-sm"
+                      className="px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg shadow-sm hover:shadow-md transition-all duration-200 text-sm"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.35 }}
+                      transition={{ delay: 0.25 }}
                     >
-                      <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-red-600/20 animate-pulse"></div>
-                      <Phone className="w-4 h-4 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
-                      <span className="relative z-10">Emergency</span>
+                      Emergency
                     </motion.button>
                   </div>
-                  
-                  {/* Minimal Trust Indicators */}
-                  <motion.div
-                    className="flex justify-center space-x-4 pt-3 border-t border-gray-100 mt-3"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.4 }}
-                  >
-                    <div className="flex items-center space-x-1 text-xs text-gray-500">
-                      <Shield className="w-3 h-3 text-primary-accent" />
-                      <span>Licensed</span>
-                    </div>
-                    <div className="flex items-center space-x-1 text-xs text-gray-500">
-                      <Star className="w-3 h-3 text-yellow-500 fill-current" />
-                      <span>5-Star</span>
-                    </div>
-                    <div className="flex items-center space-x-1 text-xs text-gray-500">
-                      <Clock className="w-3 h-3 text-primary-accent" />
-                      <span>24/7</span>
-                    </div>
-                  </motion.div>
                 </div>
               </motion.div>
             )}
