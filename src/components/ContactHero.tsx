@@ -1,6 +1,6 @@
 'use client';
 
-import { Phone, Mail, AlertTriangle, ArrowRight } from 'lucide-react';
+import { Phone, Mail, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { CONTACT_INFO } from '@/lib/constants';
 import { trackPhoneCall } from '@/lib/utils';
@@ -128,22 +128,6 @@ export default function ContactHero() {
               Multiple ways to connect with your local septic experts. 
               Emergency service available 24/7 throughout {CONTACT_INFO.serviceAreas}.
             </motion.p>
-
-            {/* Contact Info */}
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.1 }}
-            >
-              <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 border border-white/20">
-                <AlertTriangle className="w-5 h-5 text-red-400" />
-                <span className="text-gray-300">Emergency: {CONTACT_INFO.emergencyPhone}</span>
-              </div>
-              <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 border border-white/20">
-                <span className="text-gray-300">Business: {CONTACT_INFO.phone}</span>
-              </div>
-            </motion.div>
 
             {/* CTA Buttons */}
             <motion.div

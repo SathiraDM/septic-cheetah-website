@@ -214,11 +214,11 @@ section {
 }
 
 /* Responsive Typography */
-.hero-title {
+.hero-title-legacy {
   @apply text-4xl md:text-5xl lg:text-6xl font-bold text-primary-dark leading-tight;
 }
 
-.hero-subtitle {
+.hero-subtitle-legacy {
   @apply text-xl md:text-2xl lg:text-3xl text-secondary-accent font-medium;
 }
 
@@ -462,6 +462,124 @@ div.septic-content-constrained {
 .septic-full-bg .septic-max-width {
   position: relative !important;
   z-index: 10 !important;
+}
+
+/* ===== HERO COMPONENT RESPONSIVE ENHANCEMENTS ===== */
+
+/* Force hero text sizes for large screens with higher specificity */
+@media (min-width: 1280px) {
+  .hero-title-320,
+  h1.hero-title-320,
+  .hero-320-compact h1.hero-title-320 {
+    font-size: 4.5rem !important;
+    line-height: 1.1 !important;
+  }
+  
+  .hero-subtitle-320,
+  p.hero-subtitle-320,
+  .hero-320-compact p.hero-subtitle-320 {
+    font-size: 1.875rem !important;
+  }
+  
+  /* Force container width */
+  .hero-320-compact {
+    max-width: 72rem !important;
+  }
+  
+  /* Emergency button compact styling for xl screens */
+  .emergency-btn-ultra-compact {
+    padding: 1.25rem 2.5rem !important;
+    font-size: 1.125rem !important;
+  }
+  
+  /* Button group spacing */
+  .btn-group-320 {
+    gap: 1.5rem !important;
+  }
+  
+  /* Icon sizing */
+  .icon-320-sm {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+  }
+}
+
+@media (min-width: 1536px) {
+  .hero-title-320,
+  h1.hero-title-320,
+  .hero-320-compact h1.hero-title-320 {
+    font-size: 6rem !important;
+    line-height: 1.1 !important;
+  }
+  
+  .hero-subtitle-320,
+  p.hero-subtitle-320,
+  .hero-320-compact p.hero-subtitle-320 {
+    font-size: 2.25rem !important;
+  }
+  
+  /* Force container width */
+  .hero-320-compact {
+    max-width: 80rem !important;
+  }
+  
+  /* Emergency button compact styling for 2xl screens */
+  .emergency-btn-ultra-compact {
+    padding: 1.5rem 3rem !important;
+    font-size: 1.25rem !important;
+  }
+  
+  /* Button group spacing */
+  .btn-group-320 {
+    gap: 2rem !important;
+  }
+  
+  /* Icon sizing */
+  .icon-320-sm {
+    width: 1.75rem !important;
+    height: 1.75rem !important;
+  }
+}
+
+/* Additional hero element forcing for large screens */
+@media (min-width: 1280px) {
+  /* Force all text in hero to scale */
+  .hero-320-compact .text-lg,
+  .hero-320-compact .text-xl,
+  .hero-320-compact .text-2xl {
+    font-size: 1.5rem !important;
+  }
+  
+  /* Force spacing */
+  .hero-320-compact .space-y-4 > * + *,
+  .hero-320-compact .space-y-6 > * + * {
+    margin-top: 2rem !important;
+  }
+  
+  .hero-320-compact .space-y-8 > * + * {
+    margin-top: 2.5rem !important;
+  }
+}
+
+@media (min-width: 1536px) {
+  /* Force all text in hero to scale even more */
+  .hero-320-compact .text-lg,
+  .hero-320-compact .text-xl,
+  .hero-320-compact .text-2xl {
+    font-size: 1.875rem !important;
+  }
+  
+  /* Force spacing */
+  .hero-320-compact .space-y-4 > * + *,
+  .hero-320-compact .space-y-6 > * + * {
+    margin-top: 3rem !important;
+  }
+  
+  .hero-320-compact .space-y-8 > * + *,
+  .hero-320-compact .space-y-10 > * + *,
+  .hero-320-compact .space-y-12 > * + * {
+    margin-top: 4rem !important;
+  }
 }
 
 /* ===== MOBILE RESPONSIVENESS ENHANCEMENTS ===== */
@@ -1403,5 +1521,224 @@ div.septic-content-constrained {
   /* CTA buttons responsive spacing */
   .emergency-cta-ultra-responsive {
     margin-top: 1.5rem !important;
+  }
+}
+
+/* ===== NAVIGATION RESPONSIVE FIXES ===== */
+
+/* Large screens (1024px-1279px) - Tablet/Laptop transition */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  /* Hide desktop navigation in this range to prevent text wrapping */
+  .desktop-nav-lg-hidden {
+    display: none !important;
+  }
+  
+  /* Ensure mobile menu is available in this range */
+  .mobile-menu-lg-show {
+    display: block !important;
+  }
+  
+  /* Optimize header spacing for this breakpoint */
+  .septic-header-content {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+  
+  /* Compact navigation spacing for tablets */
+  .nav-compact-spacing {
+    gap: 0.5rem !important;
+  }
+  
+  /* Smaller button padding for this range */
+  .nav-btn-compact {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+/* Extra large screens (1280px+) - Full desktop navigation */
+@media (min-width: 1280px) {
+  /* Ensure desktop navigation is shown */
+  .desktop-nav-xl-show {
+    display: flex !important;
+  }
+  
+  /* Hide mobile menu button */
+  .mobile-menu-xl-hidden {
+    display: none !important;
+  }
+  
+  /* Full desktop spacing */
+  .septic-header-content {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+}
+
+/* Prevent navigation text wrapping */
+.nav-no-wrap {
+  white-space: nowrap !important;
+}
+
+/* Hero description text scaling */
+@media (min-width: 1280px) {
+  .hero-320-compact p {
+    font-size: 1.5rem !important;
+    max-width: 64rem !important;
+  }
+}
+
+@media (min-width: 1536px) {
+  .hero-320-compact p {
+    font-size: 1.875rem !important;
+    max-width: 80rem !important;
+  }
+}
+
+/* Hero spacing enhancements */
+@media (min-width: 1280px) {
+  .hero-320-compact > div {
+    gap: 2rem !important;
+  }
+  
+  .hero-320-compact > div > div:first-child {
+    gap: 1.5rem !important;
+  }
+}
+
+@media (min-width: 1536px) {
+  .hero-320-compact > div {
+    gap: 3rem !important;
+  }
+  
+  .hero-320-compact > div > div:first-child {
+    gap: 2rem !important;
+  }
+}
+
+/* ===== CONTACT FORM SPECIFIC OVERRIDES ===== */
+
+/* Override hero title and subtitle sizes specifically for ContactForm component */
+/* This ensures ContactForm headings remain small regardless of screen size */
+
+/* ContactForm title should stay at text-2xl (1.5rem) for all screen sizes */
+@media (min-width: 1280px) {
+  /* ContactForm h3 with hero-title-320 class */
+  form h3.hero-title-320,
+  .contact-form h3.hero-title-320,
+  [class*="ContactForm"] h3.hero-title-320 {
+    font-size: 1.5rem !important;
+    line-height: 1.33 !important;
+  }
+  
+  /* ContactForm paragraph with hero-subtitle-320 class */
+  form p.hero-subtitle-320,
+  .contact-form p.hero-subtitle-320,
+  [class*="ContactForm"] p.hero-subtitle-320 {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
+}
+
+@media (min-width: 1536px) {
+  /* ContactForm h3 with hero-title-320 class */
+  form h3.hero-title-320,
+  .contact-form h3.hero-title-320,
+  [class*="ContactForm"] h3.hero-title-320 {
+    font-size: 1.5rem !important;
+    line-height: 1.33 !important;
+  }
+  
+  /* ContactForm paragraph with hero-subtitle-320 class */
+  form p.hero-subtitle-320,
+  .contact-form p.hero-subtitle-320,
+  [class*="ContactForm"] p.hero-subtitle-320 {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
+}
+
+/* More specific override by targeting the form container structure */
+/* This targets the motion.div containing the ContactForm header */
+.relative.overflow-hidden.bg-white\/95 h3.hero-title-320 {
+  font-size: 1.5rem !important;
+  line-height: 1.33 !important;
+}
+
+.relative.overflow-hidden.bg-white\/95 p.hero-subtitle-320 {
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+}
+
+/* Alternative approach: Target by form context */
+div[class*="motion"] form h3.hero-title-320,
+div[class*="relative"] form h3.hero-title-320 {
+  font-size: 1.5rem !important;
+  line-height: 1.33 !important;
+}
+
+div[class*="motion"] form p.hero-subtitle-320,
+div[class*="relative"] form p.hero-subtitle-320 {
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+}
+
+/* Most specific ContactForm overrides using the new classes */
+.contact-form-header .contact-form-title.hero-title-320 {
+  font-size: 1.5rem !important;
+  line-height: 1.33 !important;
+}
+
+.contact-form-header .contact-form-subtitle.hero-subtitle-320 {
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+}
+
+/* Ensure these rules apply at all screen sizes */
+@media (min-width: 768px) {
+  .contact-form-header .contact-form-title.hero-title-320 {
+    font-size: 1.5rem !important;
+    line-height: 1.33 !important;
+  }
+  
+  .contact-form-header .contact-form-subtitle.hero-subtitle-320 {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .contact-form-header .contact-form-title.hero-title-320 {
+    font-size: 1.5rem !important;
+    line-height: 1.33 !important;
+  }
+  
+  .contact-form-header .contact-form-subtitle.hero-subtitle-320 {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .contact-form-header .contact-form-title.hero-title-320 {
+    font-size: 1.5rem !important;
+    line-height: 1.33 !important;
+  }
+  
+  .contact-form-header .contact-form-subtitle.hero-subtitle-320 {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
+}
+
+@media (min-width: 1536px) {
+  .contact-form-header .contact-form-title.hero-title-320 {
+    font-size: 1.5rem !important;
+    line-height: 1.33 !important;
+  }
+  
+  .contact-form-header .contact-form-subtitle.hero-subtitle-320 {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
   }
 }

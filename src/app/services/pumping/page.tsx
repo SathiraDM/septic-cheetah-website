@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
-import { AlertTriangle, CheckCircle, Phone, Truck, Shield, Clock, MapPin, Star, Calendar, ArrowRight, Award } from 'lucide-react';
+import { AlertTriangle, CheckCircle, Phone, Shield, Clock, MapPin, Star, Calendar, ArrowRight, Award } from 'lucide-react';
 import { CONTACT_INFO } from '@/lib/constants';
 import { ServiceErrorBoundary } from '@/components/ServiceErrorBoundary';
 
@@ -459,18 +459,18 @@ export default function PumpingPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center emergency-cta-ultra-responsive">
               <a
-                href={`tel:${CONTACT_INFO.phone}`}
-                className="bg-white text-primary-accent hover:bg-gray-100 font-bold py-6 px-10 rounded-xl text-xl inline-flex items-center justify-center space-x-4 transition-all duration-300 hover:scale-105 shadow-xl emergency-btn-ultra-compact"
-              >
-                <Truck className="w-7 h-7 icon-320-md" />
-                <span>Schedule Service Now</span>
-              </a>
-              <a
                 href={`tel:${CONTACT_INFO.emergencyPhone}`}
-                className="bg-red-600 hover:bg-red-700 text-white font-bold py-6 px-10 rounded-xl text-xl inline-flex items-center justify-center space-x-4 transition-all duration-300 hover:scale-105 shadow-xl emergency-btn-ultra-compact"
+                className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold py-6 px-10 rounded-xl text-xl inline-flex items-center justify-center space-x-4 transition-all duration-300 hover:scale-105 shadow-xl emergency-btn-ultra-compact"
               >
                 <AlertTriangle className="w-7 h-7 icon-320-md" />
-                <span>Emergency Service</span>
+                <span>24/7 EMERGENCY</span>
+              </a>
+              <a
+                href="/contact"
+                className="bg-white text-primary-accent hover:bg-gray-100 font-bold py-6 px-10 rounded-xl text-xl inline-flex items-center justify-center space-x-4 transition-all duration-300 hover:scale-105 shadow-xl emergency-btn-ultra-compact"
+              >
+                <Calendar className="w-7 h-7 icon-320-md" />
+                <span>Schedule Service</span>
               </a>
             </div>
           </div>

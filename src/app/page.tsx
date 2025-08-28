@@ -4,6 +4,7 @@ import Hero from '@/components/Hero';
 import ServiceCards from '@/components/ServiceCards';
 import TestimonialsWithDrag from '@/components/TestimonialsWithDrag';
 import ContactForm from '@/components/ContactForm';
+import Image from 'next/image';
 import { Phone, AlertTriangle } from 'lucide-react';
 import { CONTACT_INFO } from '@/lib/constants';
 import { trackPhoneCall } from '@/lib/utils';
@@ -25,7 +26,7 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(191,136,41,0.2)_0%,transparent_50%)] pointer-events-none"></div>
           
           <div className="septic-content-constrained septic-force-1540 relative">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-start">
             
               {/* Left Side - Content */}
               <div className="text-white px-4 sm:px-0">
@@ -33,7 +34,7 @@ export default function HomePage() {
                   <Phone className="w-6 h-6 sm:w-8 sm:h-8 text-primary-accent" />
                 </div>
                 
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
                   Get Your <span className="text-primary-accent">Free Estimate</span>
                 </h2>
                 
@@ -56,10 +57,6 @@ export default function HomePage() {
                     <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-primary-accent rounded-full flex-shrink-0"></div>
                     <span className="text-gray-200 text-sm sm:text-base">Licensed & insured professionals</span>
                   </div>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-primary-accent rounded-full flex-shrink-0"></div>
-                    <span className="text-gray-200 text-sm sm:text-base">15+ years serving Central Texas</span>
-                  </div>
                 </div>
 
                 {/* Emergency Contact */}
@@ -80,6 +77,33 @@ export default function HomePage() {
                     <Phone className="w-4 h-4 sm:w-5 sm:h-5 icon-320-sm" />
                     <span className="whitespace-nowrap emergency-text-320">EMERGENCY: {CONTACT_INFO.emergencyPhone}</span>
                   </a>
+                </div>
+
+                {/* Contact Image */}
+                <div className="mt-8 sm:mt-10">
+                  <div className="relative group">
+                    {/* Animated background gradient */}
+                    <div className="absolute -inset-2 bg-gradient-to-r from-primary-accent via-secondary-accent to-primary-accent rounded-3xl blur-lg opacity-30 group-hover:opacity-50 transition-all duration-500 animate-pulse"></div>
+                    
+                    {/* Secondary glow layer */}
+                    <div className="absolute -inset-1 bg-gradient-to-br from-white/20 to-primary-accent/30 rounded-2xl blur opacity-40 group-hover:opacity-60 transition-all duration-300"></div>
+                    
+                    {/* Main image container */}
+                    <div className="relative bg-white/5 backdrop-blur-md rounded-2xl p-3 sm:p-4 border border-white/30 shadow-2xl overflow-hidden">
+                      {/* Decorative corner accents */}
+                      <div className="absolute top-0 left-0 w-12 h-12 bg-gradient-to-br from-primary-accent/30 to-transparent rounded-br-3xl"></div>
+                      <div className="absolute bottom-0 right-0 w-12 h-12 bg-gradient-to-tl from-secondary-accent/30 to-transparent rounded-tl-3xl"></div>
+                      
+                      <Image
+                        src="/images/ContactUs.png"
+                        alt="Contact Septic Cheetah for professional septic services"
+                        width={350}
+                        height={240}
+                        className="w-full h-auto rounded-xl shadow-xl transition-all duration-500 group-hover:scale-[1.02] group-hover:shadow-2xl"
+                        priority={false}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
 

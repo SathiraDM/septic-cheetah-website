@@ -11,8 +11,8 @@ export const BRAND_COLORS = {
 } as const;
 
 export const CONTACT_INFO = {
-  phone: '(512) 969-9655',
-  emergencyPhone: '(512) 969-9655',
+  phone: '(512) 969-9655', // Main emergency line - used for all calls
+  emergencyPhone: '(512) 969-9655', // Emergency line (same as main)
   email: 'info@septiccheetah.com',
   address: '2204 Inks Cv, Cedar Park, TX 78613',
   hours: '24 Hours - 7 Days a Week',

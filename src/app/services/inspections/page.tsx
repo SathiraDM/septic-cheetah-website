@@ -459,18 +459,18 @@ export default function InspectionsPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <a
-                href={`tel:${CONTACT_INFO.phone}`}
+                href={`tel:${CONTACT_INFO.emergencyPhone}`}
+                className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold py-6 px-10 rounded-xl text-xl inline-flex items-center justify-center space-x-4 transition-all duration-300 hover:scale-105 shadow-xl"
+              >
+                <AlertTriangle className="w-7 h-7" />
+                <span>24/7 EMERGENCY</span>
+              </a>
+              <a
+                href="/contact"
                 className="bg-white text-primary-accent hover:bg-gray-100 font-bold py-6 px-10 rounded-xl text-xl inline-flex items-center justify-center space-x-4 transition-all duration-300 hover:scale-105 shadow-xl"
               >
                 <Search className="w-7 h-7" />
-                <span>Schedule Inspection Now</span>
-              </a>
-              <a
-                href={`tel:${CONTACT_INFO.emergencyPhone}`}
-                className="bg-red-600 hover:bg-red-700 text-white font-bold py-6 px-10 rounded-xl text-xl inline-flex items-center justify-center space-x-4 transition-all duration-300 hover:scale-105 shadow-xl"
-              >
-                <AlertTriangle className="w-7 h-7" />
-                <span>Emergency Service</span>
+                <span>Schedule Inspection</span>
               </a>
             </div>
           </div>

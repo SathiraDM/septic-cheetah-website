@@ -431,11 +431,11 @@ export default function AboutPage() {
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center btn-group-320">
                 <a
-                  href={`tel:${CONTACT_INFO.phone}`}
+                  href={`tel:${CONTACT_INFO.emergencyPhone}`}
                   className="relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-4 px-8 rounded-xl shadow-2xl transition-all duration-300 flex items-center justify-center space-x-3 group hover:scale-105 emergency-btn-ultra-compact"
                 >
                   <Phone className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300 icon-320-sm" />
-                  <span>Call: {CONTACT_INFO.phone}</span>
+                  <span>Call: {CONTACT_INFO.emergencyPhone}</span>
                 </a>
 
                 <button className="bg-white/20 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white hover:text-primary-dark font-bold py-4 px-8 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 group">
@@ -655,17 +655,20 @@ export default function AboutPage() {
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <a
-                href={`tel:${CONTACT_INFO.phone}`}
+                href={`tel:${CONTACT_INFO.emergencyPhone}`}
                 className="inline-flex items-center space-x-4 bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-6 px-12 rounded-2xl hover:shadow-2xl transition-all duration-300 text-xl group"
               >
                 <Phone className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
-                <span>Call Now: {CONTACT_INFO.phone}</span>
+                <span>Call Now: {CONTACT_INFO.emergencyPhone}</span>
               </a>
 
-              <button className="bg-white/20 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white hover:text-primary-dark font-bold py-6 px-12 rounded-2xl transition-all duration-300 flex items-center justify-center space-x-3 text-xl group">
+              <a
+                href="/contact"
+                className="bg-white/20 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white hover:text-primary-dark font-bold py-6 px-12 rounded-2xl transition-all duration-300 flex items-center justify-center space-x-3 text-xl group"
+              >
                 <span>Free Estimate</span>
                 <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
-              </button>
+              </a>
             </div>
           </div>
         </section>

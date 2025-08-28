@@ -230,23 +230,23 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-radial from-black/20 via-black/8 to-transparent blur-3xl opacity-70"></div>
         
         <motion.div 
-          className="max-w-4xl mx-auto text-center relative z-10 hero-320-compact"
+          className="max-w-4xl lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto text-center relative z-10 hero-320-compact"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           {/* Centered Main Content */}
-          <motion.div className="space-y-4 sm:space-y-6" variants={itemVariants}>
+          <motion.div className="space-y-4 sm:space-y-6 lg:space-y-8 xl:space-y-10 2xl:space-y-12" variants={itemVariants}>
             {/* Main Heading with Animated Text */}
-            <div className="space-y-3 sm:space-y-4">
-              <h1 className="text-3xl xs:text-4xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight drop-shadow-2xl hero-title-320">
+            <div className="space-y-3 sm:space-y-4 lg:space-y-5 xl:space-y-6 2xl:space-y-8">
+              <h1 className="text-3xl xs:text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold text-white leading-tight drop-shadow-2xl hero-title-320">
                 Professional
                 <br />
                 <span className="relative inline-block">
                   <span className="text-primary-accent drop-shadow-lg">Septic</span>
                   <motion.span 
                     key={currentWordIndex}
-                    className="block text-primary-accent mt-0.5 sm:mt-1 drop-shadow-lg"
+                    className="block text-primary-accent mt-0.5 sm:mt-1 lg:mt-1 xl:mt-1.5 2xl:mt-2 drop-shadow-lg"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
@@ -256,7 +256,7 @@ export default function Hero() {
                   </motion.span>
                   {/* Animated Underline */}
                   <motion.div 
-                    className="absolute -bottom-0.5 sm:-bottom-1 left-1/2 transform -translate-x-1/2 h-0.5 sm:h-1 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full"
+                    className="absolute -bottom-0.5 sm:-bottom-1 lg:-bottom-1 xl:-bottom-1.5 2xl:-bottom-2 left-1/2 transform -translate-x-1/2 h-0.5 sm:h-1 lg:h-1 xl:h-1.5 2xl:h-2 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full"
                     initial={{ width: 0 }}
                     animate={{ width: "100%" }}
                     transition={{ duration: 0.8, delay: 0.5 }}
@@ -264,7 +264,7 @@ export default function Hero() {
                 </span>
               </h1>
               <motion.p 
-                className="text-lg xs:text-xl sm:text-xl md:text-2xl text-primary-accent font-medium drop-shadow-md hero-subtitle-320"
+                className="text-lg xs:text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-3xl 2xl:text-4xl text-primary-accent font-medium drop-shadow-md hero-subtitle-320"
                 variants={itemVariants}
               >
                 Fast, Reliable and Kinda Dirty
@@ -273,7 +273,7 @@ export default function Hero() {
 
             {/* Description */}
             <motion.p 
-              className="text-base xs:text-lg sm:text-lg md:text-xl text-white max-w-3xl mx-auto leading-relaxed drop-shadow-md px-4 sm:px-0"
+              className="text-base xs:text-lg sm:text-lg md:text-xl lg:text-xl xl:text-2xl 2xl:text-3xl text-white max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl mx-auto leading-relaxed drop-shadow-md px-4 sm:px-0"
               variants={itemVariants}
             >
               Emergency septic services across the region with same day response guaranteed. 
@@ -282,29 +282,30 @@ export default function Hero() {
 
             {/* CTA Buttons */}
             <motion.div 
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0 btn-group-320"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:gap-5 xl:gap-6 2xl:gap-8 justify-center px-4 sm:px-0 btn-group-320"
               variants={itemVariants}
             >
               <motion.a
-                href={`tel:${CONTACT_INFO.phone}`}
-                onClick={() => trackPhoneCall('hero_primary')}
-                className="relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl shadow-2xl transition-all duration-300 flex items-center justify-center space-x-2 sm:space-x-3 group text-sm sm:text-base emergency-btn-ultra-compact"
+                href={`tel:${CONTACT_INFO.emergencyPhone}`}
+                onClick={() => trackPhoneCall('hero_emergency')}
+                className="relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-3 sm:py-4 lg:py-4 xl:py-5 2xl:py-6 px-6 sm:px-8 lg:px-8 xl:px-10 2xl:px-12 rounded-xl shadow-2xl transition-all duration-300 flex items-center justify-center space-x-2 sm:space-x-3 lg:space-x-3 xl:space-x-4 2xl:space-x-5 group text-sm sm:text-base lg:text-base xl:text-lg 2xl:text-xl emergency-btn-ultra-compact"
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <Phone className="w-4 h-4 sm:w-5 sm:h-5 relative z-10 group-hover:rotate-12 transition-transform duration-300 icon-320-sm" />
-                <span className="relative z-10 whitespace-nowrap">CALL NOW: {CONTACT_INFO.phone}</span>
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 2xl:w-7 2xl:h-7 relative z-10 group-hover:rotate-12 transition-transform duration-300 icon-320-sm" />
+                <span className="relative z-10 whitespace-nowrap">CALL NOW: {CONTACT_INFO.emergencyPhone}</span>
               </motion.a>
 
-              <motion.button 
-                className="bg-white/20 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white hover:text-primary-dark font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 group text-sm sm:text-base emergency-btn-ultra-compact"
+              <motion.a
+                href="#contact-form"
+                className="bg-white/20 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white hover:text-primary-dark font-bold py-3 sm:py-4 lg:py-4 xl:py-5 2xl:py-6 px-6 sm:px-8 lg:px-8 xl:px-10 2xl:px-12 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 lg:space-x-2 xl:space-x-3 2xl:space-x-4 group text-sm sm:text-base lg:text-base xl:text-lg 2xl:text-xl emergency-btn-ultra-compact"
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
               >
                 <span>Get Free Estimate</span>
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300 icon-320-sm" />
-              </motion.button>
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 2xl:w-7 2xl:h-7 group-hover:translate-x-1 transition-transform duration-300 icon-320-sm" />
+              </motion.a>
             </motion.div>
           </motion.div>
         </motion.div>

@@ -179,15 +179,17 @@ export default function TestimonialsWithDrag() {
                     isDragging ? 'duration-100' : 'duration-500'
                   } ${
                     isCenter 
-                      ? 'shadow-xl border-green-100' 
+                      ? 'border-green-100' 
                       : 'shadow-md hover:shadow-lg'
                   }`}
                   style={{
                     boxShadow: isDragging 
                       ? isCenter 
-                        ? '0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(34, 197, 94, 0.1)'
+                        ? '0 0 0 1px rgba(34, 197, 94, 0.1)'
                         : '0 10px 25px -3px rgba(0, 0, 0, 0.1)'
-                      : undefined
+                      : isCenter 
+                        ? 'none'
+                        : undefined
                   }}
                   >
                     <div className="p-6">
@@ -308,7 +310,7 @@ export default function TestimonialsWithDrag() {
               onClick={() => setCurrentIndex(index)}
               className={`relative overflow-hidden rounded-full transition-all duration-300 hover:scale-125 active:scale-75 ${
                 index === currentIndex 
-                  ? 'w-12 h-3 bg-green-500' 
+                  ? 'w-12 h-3 bg-primary-accent' 
                   : 'w-3 h-3 bg-gray-300 hover:bg-gray-400'
               }`}
             />
@@ -333,31 +335,7 @@ export default function TestimonialsWithDrag() {
           </div>
         </div>
 
-        {/* Drag instruction hint */}
-        <div className="text-center mt-6">
-          <p className={`text-sm font-light transition-all duration-300 ${
-            isDragging 
-              ? 'text-green-600 font-medium' 
-              : 'text-gray-500'
-          }`}>
-            {isDragging 
-              ? `Dragging... ${Math.abs(dragOffset) > 100 ? '(Release to change review)' : '(Drag more to switch)'}`
-              : '← Drag the cards or use arrow buttons to navigate →'
-            }
-          </p>
-          {isDragging && (
-            <div className="mt-2 w-32 h-1 bg-gray-200 rounded-full mx-auto overflow-hidden">
-              <div 
-                className="h-full transition-all duration-100 rounded-full"
-                style={{
-                  width: `${Math.min((Math.abs(dragOffset) / 100) * 100, 100)}%`,
-                  backgroundColor: Math.abs(dragOffset) > 100 ? '#22c55e' : '#86efac',
-                  transform: `scaleX(${Math.abs(dragOffset) > 100 ? 1.1 : 1})`,
-                }}
-              />
-            </div>
-          )}
-        </div>
+
       </div>
     </section>
   );

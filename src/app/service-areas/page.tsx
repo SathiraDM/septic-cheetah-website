@@ -1,6 +1,6 @@
 'use client';
 
-import { MapPin, Phone, Clock, Shield, Zap, Award, ArrowRight, CheckCircle, Home, Building } from 'lucide-react';
+import { MapPin, Phone, Clock, Shield, Zap, Award, ArrowRight, CheckCircle, Home, Building, AlertTriangle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { CONTACT_INFO } from '@/lib/constants';
 import { trackPhoneCall } from '@/lib/utils';
@@ -241,7 +241,7 @@ export default function ServiceAreas() {
                 transition={{ duration: 0.8, delay: 1.3 }}
               >
                 <motion.a
-                  href={`tel:${CONTACT_INFO.phone}`}
+                  href={`tel:${CONTACT_INFO.emergencyPhone}`}
                   onClick={() => trackPhoneCall('service_areas_hero')}
                   className="relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-4 px-8 rounded-xl shadow-2xl transition-all duration-300 flex items-center justify-center space-x-3 group emergency-btn-ultra-compact"
                   whileHover={{ scale: 1.03, y: -2 }}
@@ -249,17 +249,18 @@ export default function ServiceAreas() {
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <Phone className="w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform duration-300 icon-320-sm" />
-                  <span className="relative z-10">CALL NOW: {CONTACT_INFO.phone}</span>
+                  <span className="relative z-10">CALL NOW: {CONTACT_INFO.emergencyPhone}</span>
                 </motion.a>
 
-                <motion.button
+                <motion.a
+                  href="/contact"
                   className="bg-white/20 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white hover:text-primary-dark font-bold py-4 px-8 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 group emergency-btn-ultra-compact"
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
                 >
                   <span>Get Free Estimate</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300 icon-320-sm" />
-                </motion.button>
+                </motion.a>
               </motion.div>
             </motion.div>
           </motion.div>
@@ -551,9 +552,9 @@ export default function ServiceAreas() {
                 
                 {/* Enhanced CTA Button */}
                 <motion.a
-                  href={`tel:${CONTACT_INFO.phone}`}
+                  href={`tel:${CONTACT_INFO.emergencyPhone}`}
                   onClick={() => trackPhoneCall('service_areas_expansion')}
-                  className="relative overflow-hidden inline-flex items-center space-x-2 sm:space-x-4 bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-3 sm:py-4 md:py-5 px-6 sm:px-8 md:px-10 rounded-xl sm:rounded-2xl transition-all duration-300 shadow-2xl hover:shadow-3xl text-sm sm:text-base md:text-lg group"
+                  className="relative overflow-hidden inline-flex items-center space-x-2 sm:space-x-4 bg-gradient-to-r from-red-600 to-red-700 text-white font-bold py-3 sm:py-4 md:py-5 px-6 sm:px-8 md:px-10 rounded-xl sm:rounded-2xl transition-all duration-300 shadow-2xl hover:shadow-3xl text-sm sm:text-base md:text-lg group"
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0, y: 20 }}
@@ -561,8 +562,8 @@ export default function ServiceAreas() {
                   transition={{ duration: 0.6, delay: 0.6 }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <Phone className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
-                  <span className="relative z-10">Contact Us: {CONTACT_INFO.phone}</span>
+                  <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
+                  <span className="relative z-10">24/7 EMERGENCY: {CONTACT_INFO.emergencyPhone}</span>
                 </motion.a>
                 
                 {/* Additional Info */}
@@ -636,14 +637,14 @@ export default function ServiceAreas() {
               variants={itemVariants}
             >
               <motion.a
-                href={`tel:${CONTACT_INFO.phone}`}
+                href={`tel:${CONTACT_INFO.emergencyPhone}`}
                 onClick={() => trackPhoneCall('service_areas_emergency')}
                 className="inline-flex items-center space-x-2 sm:space-x-3 md:space-x-4 bg-white text-red-600 font-bold py-4 sm:py-5 md:py-6 px-6 sm:px-8 md:px-12 rounded-xl sm:rounded-2xl hover:bg-gray-100 transition-all duration-300 shadow-2xl hover:shadow-3xl text-sm sm:text-base md:text-lg group"
                 whileHover={{ scale: 1.05, y: -3 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Phone className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 group-hover:rotate-12 transition-transform duration-300" />
-                <span>Emergency: {CONTACT_INFO.phone}</span>
+                <AlertTriangle className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 group-hover:rotate-12 transition-transform duration-300" />
+                <span>24/7 EMERGENCY: {CONTACT_INFO.emergencyPhone}</span>
               </motion.a>
               
               <div className="text-center sm:text-left self-center">

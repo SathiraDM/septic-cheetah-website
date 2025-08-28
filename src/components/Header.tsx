@@ -27,7 +27,7 @@ const navigationItems = [
     description: 'Professional septic services'
   },
   {
-    href: '/services',
+    href: '#',
     label: 'Services',
     description: 'Complete septic solutions',
     submenu: [
@@ -191,7 +191,7 @@ export default function Header() {
             </Link>
 
             {/* Desktop Navigation - Modern Glass Design */}
-            <nav className="hidden lg:flex items-center space-x-1 bg-gray-50/50 backdrop-blur-sm rounded-xl p-1.5 border border-gray-200/50" style={{ overflow: 'visible', position: 'relative' }}>
+            <nav className="hidden xl:flex items-center space-x-1 bg-gray-50/50 backdrop-blur-sm rounded-xl p-1.5 border border-gray-200/50" style={{ overflow: 'visible', position: 'relative' }}>
               {navigationItems.map((item) => {
                 const isActive = pathname === item.href || 
                   (item.submenu && item.submenu.some(subItem => pathname === subItem.href));
@@ -210,31 +210,38 @@ export default function Header() {
                       setActiveSubmenu(null);
                     }}
                   >
-                    <Link
-                      href={item.href}
-                      className={`relative flex items-center space-x-1 px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
-                        isActive 
-                          ? 'text-primary-accent' 
-                          : 'text-gray-700 hover:text-primary-accent hover:bg-white/70 hover:shadow-md'
-                      }`}
-                    >
-                      <span className="relative z-10">{item.label}</span>
-                      {item.submenu && (
-                        <ChevronDown className={`w-4 h-4 transition-all duration-300 ${
-                          activeSubmenu === item.label ? 'rotate-180' : ''
-                        } ${isActive ? 'text-primary-accent' : 'text-gray-500'}`} />
-                      )}
-                      
-                      {/* Simple Bottom Line Active Indicator */}
-                      {isActive && (
-                        <motion.div
-                          className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full"
-                          layoutId="activeIndicator"
-                          initial={false}
-                          transition={{ type: "spring", damping: 30, stiffness: 400 }}
-                        />
-                      )}
-                    </Link>
+                    {item.href === '#' ? (
+                      <div
+                        className={`relative flex items-center space-x-1 px-4 py-2 rounded-lg font-medium transition-all duration-300 whitespace-nowrap cursor-pointer ${
+                          isActive 
+                            ? 'text-primary-accent bg-primary-accent/15 shadow-sm' 
+                            : 'text-gray-700 hover:text-primary-accent hover:bg-white/70 hover:shadow-md'
+                        }`}
+                      >
+                        <span className="relative z-10">{item.label}</span>
+                        {item.submenu && (
+                          <ChevronDown className={`w-4 h-4 transition-all duration-300 ${
+                            activeSubmenu === item.label ? 'rotate-180' : ''
+                          } ${isActive ? 'text-primary-accent' : 'text-gray-500'}`} />
+                        )}
+                      </div>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        className={`relative flex items-center space-x-1 px-4 py-2 rounded-lg font-medium transition-all duration-300 whitespace-nowrap ${
+                          isActive 
+                            ? 'text-primary-accent bg-primary-accent/15 shadow-sm' 
+                            : 'text-gray-700 hover:text-primary-accent hover:bg-white/70 hover:shadow-md'
+                        }`}
+                      >
+                        <span className="relative z-10">{item.label}</span>
+                        {item.submenu && (
+                          <ChevronDown className={`w-4 h-4 transition-all duration-300 ${
+                            activeSubmenu === item.label ? 'rotate-180' : ''
+                          } ${isActive ? 'text-primary-accent' : 'text-gray-500'}`} />
+                        )}
+                      </Link>
+                    )}
 
                     {/* Enhanced Submenu */}
                     {item.submenu && (
@@ -262,11 +269,13 @@ export default function Header() {
                                 >
                                   <Link
                                     href={subItem.href}
-                                    className="flex items-center px-6 py-3 text-gray-700 hover:text-primary-accent hover:bg-gradient-to-r hover:from-primary-accent/5 hover:to-secondary-accent/5 transition-all duration-200 group border-l-2 border-transparent hover:border-primary-accent whitespace-nowrap"
+                                    className="flex items-center justify-between px-6 py-3 text-gray-700 hover:text-primary-accent hover:bg-gradient-to-r hover:from-primary-accent/5 hover:to-secondary-accent/5 transition-all duration-200 group border-l-2 border-transparent hover:border-primary-accent whitespace-nowrap"
                                   >
-                                    <div className="w-2 h-2 bg-primary-accent rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex-shrink-0"></div>
-                                    <span className="font-medium text-sm flex-shrink-0">{subItem.label}</span>
-                                    <div className="ml-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex-shrink-0">
+                                    <div className="flex items-center">
+                                      <div className="w-2 h-2 bg-primary-accent rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex-shrink-0"></div>
+                                      <span className="font-medium text-sm flex-shrink-0">{subItem.label}</span>
+                                    </div>
+                                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex-shrink-0">
                                       <ExternalLink className="w-3 h-3 text-primary-accent" />
                                     </div>
                                   </Link>
@@ -311,7 +320,7 @@ export default function Header() {
 
             {/* Enhanced Mobile Menu Button */}
             <button
-              className="lg:hidden relative p-2.5 rounded-xl hover:bg-gray-100/80 transition-all duration-300 group"
+              className="xl:hidden relative p-2.5 rounded-xl hover:bg-gray-100/80 transition-all duration-300 group"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -346,7 +355,7 @@ export default function Header() {
           <AnimatePresence>
             {isMenuOpen && (
               <motion.div
-                className="lg:hidden border-t border-primary-accent/20 bg-gradient-to-r from-white/98 to-gray-50/98 backdrop-blur-xl"
+                className="xl:hidden border-t border-primary-accent/20 bg-gradient-to-r from-white/98 to-gray-50/98 backdrop-blur-xl"
                 variants={mobileMenuVariants}
                 initial="closed"
                 animate="open"
@@ -355,37 +364,112 @@ export default function Header() {
                 <div className="py-4 px-4">
                   {/* Navigation Grid - Minimal Height */}
                   <div className="grid grid-cols-2 gap-3 mb-4">
-                    {navigationItems.map((item, index) => (
-                      <motion.div
-                        key={item.href}
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: index * 0.05, type: "spring", stiffness: 300 }}
-                      >
-                        <Link
-                          href={item.href}
-                          className="relative flex items-center justify-center p-3 rounded-xl bg-white/80 border border-gray-100 hover:border-primary-accent/30 hover:bg-gradient-to-r hover:from-primary-accent/5 hover:to-secondary-accent/5 transition-all duration-300 group shadow-sm hover:shadow-md"
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          {/* Background Gradient on Hover */}
-                          <div className="absolute inset-0 bg-gradient-to-r from-primary-accent/10 to-secondary-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
-                          
-                          <div className="relative z-10 text-center">
-                            <div className="font-semibold text-sm text-gray-700 group-hover:text-primary-accent transition-colors duration-300">
-                              {item.label}
-                            </div>
-                          </div>
-                          
-                          {/* Subtle Arrow */}
+                    {navigationItems.map((item, index) => {
+                      // Handle Services dropdown separately in mobile
+                      if (item.href === '#' && item.submenu) {
+                        return (
                           <motion.div
-                            className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                            whileHover={{ scale: 1.1 }}
+                            key={item.label}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: index * 0.05, type: "spring", stiffness: 300 }}
+                            className="col-span-2"
                           >
-                            <ExternalLink className="w-3 h-3 text-primary-accent" />
+                            <div className="relative">
+                              <button
+                                className="w-full flex items-center justify-center p-3 rounded-xl bg-white/80 border border-gray-100 hover:border-primary-accent/30 hover:bg-gradient-to-r hover:from-primary-accent/5 hover:to-secondary-accent/5 transition-all duration-300 group shadow-sm hover:shadow-md"
+                                onClick={() => setActiveSubmenu(activeSubmenu === item.label ? null : item.label)}
+                              >
+                                <div className="absolute inset-0 bg-gradient-to-r from-primary-accent/10 to-secondary-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+                                
+                                <div className="relative z-10 text-center flex items-center space-x-2">
+                                  <div className="font-semibold text-sm text-gray-700 group-hover:text-primary-accent transition-colors duration-300">
+                                    {item.label}
+                                  </div>
+                                  <ChevronDown className={`w-4 h-4 transition-all duration-300 ${
+                                    activeSubmenu === item.label ? 'rotate-180' : ''
+                                  } text-gray-500 group-hover:text-primary-accent`} />
+                                </div>
+                              </button>
+                              
+                              {/* Mobile Submenu */}
+                              <AnimatePresence>
+                                {activeSubmenu === item.label && (
+                                  <motion.div
+                                    className="mt-2 bg-white/95 backdrop-blur-xl rounded-xl shadow-lg border border-primary-accent/10"
+                                    initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                                    exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                                    transition={{ duration: 0.2, ease: "easeOut" }}
+                                  >
+                                    <div className="py-2">
+                                      {item.submenu.map((subItem, subIndex) => (
+                                        <motion.div
+                                          key={subItem.href}
+                                          initial={{ opacity: 0, x: -10 }}
+                                          animate={{ opacity: 1, x: 0 }}
+                                          transition={{ delay: subIndex * 0.03 }}
+                                        >
+                                          <Link
+                                            href={subItem.href}
+                                            className="flex items-center justify-between px-4 py-2 text-gray-700 hover:text-primary-accent hover:bg-gradient-to-r hover:from-primary-accent/5 hover:to-secondary-accent/5 transition-all duration-200 group border-l-2 border-transparent hover:border-primary-accent"
+                                            onClick={() => {
+                                              setIsMenuOpen(false);
+                                              setActiveSubmenu(null);
+                                            }}
+                                          >
+                                            <div className="flex items-center">
+                                              <div className="w-2 h-2 bg-primary-accent rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex-shrink-0"></div>
+                                              <span className="font-medium text-sm flex-shrink-0">{subItem.label}</span>
+                                            </div>
+                                            <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex-shrink-0">
+                                              <ExternalLink className="w-3 h-3 text-primary-accent" />
+                                            </div>
+                                          </Link>
+                                        </motion.div>
+                                      ))}
+                                    </div>
+                                  </motion.div>
+                                )}
+                              </AnimatePresence>
+                            </div>
                           </motion.div>
-                        </Link>
-                      </motion.div>
-                    ))}
+                        );
+                      }
+                      
+                      // Regular navigation items
+                      return (
+                        <motion.div
+                          key={item.href}
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: index * 0.05, type: "spring", stiffness: 300 }}
+                        >
+                          <Link
+                            href={item.href}
+                            className="relative flex items-center justify-center p-3 rounded-xl bg-white/80 border border-gray-100 hover:border-primary-accent/30 hover:bg-gradient-to-r hover:from-primary-accent/5 hover:to-secondary-accent/5 transition-all duration-300 group shadow-sm hover:shadow-md"
+                            onClick={() => setIsMenuOpen(false)}
+                          >
+                            {/* Background Gradient on Hover */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-primary-accent/10 to-secondary-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+                            
+                            <div className="relative z-10 text-center">
+                              <div className="font-semibold text-sm text-gray-700 group-hover:text-primary-accent transition-colors duration-300">
+                                {item.label}
+                              </div>
+                            </div>
+                            
+                            {/* Subtle Arrow */}
+                            <motion.div
+                              className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                              whileHover={{ scale: 1.1 }}
+                            >
+                              <ExternalLink className="w-3 h-3 text-primary-accent" />
+                            </motion.div>
+                          </Link>
+                        </motion.div>
+                      );
+                    })}
                   </div>
 
                   {/* Compact CTA Buttons */}

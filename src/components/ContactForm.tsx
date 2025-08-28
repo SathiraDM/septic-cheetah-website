@@ -49,14 +49,6 @@ export default function ContactForm() {
       if (response.ok) {
         setSubmitStatus('success');
         trackFormSubmit('contact_form');
-        setFormData({
-          name: '',
-          phone: '',
-          email: '',
-          service: '',
-          urgency: '',
-          message: ''
-        });
       } else {
         setSubmitStatus('error');
       }
@@ -102,35 +94,27 @@ export default function ContactForm() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.5 }}
         >
-          We received your request and will call you within 2 hours during business hours.
+          We received your request for <strong>{formData.service === 'pumping' ? 'Septic Pumping/Cleaning' : 
+            formData.service === 'installation' ? 'New Installation' :
+            formData.service === 'repairs' ? 'Emergency Repairs' :
+            formData.service === 'maintenance' ? 'Maintenance/Inspection' : 'service'}</strong> and will call you within 2 hours during business hours.
         </motion.p>
         
         <motion.p 
-          className="text-xs sm:text-sm text-green-600 bg-white/50 rounded-lg sm:rounded-xl p-2 sm:p-3 mb-4 sm:mb-6"
+          className="text-xs sm:text-sm text-green-600 bg-white/50 rounded-lg sm:rounded-xl p-2 sm:p-3"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.5 }}
         >
           For immediate emergencies, please call our emergency hotline.
         </motion.p>
-        
-        <motion.button
-          onClick={() => setSubmitStatus('idle')}
-          className="text-green-600 hover:text-green-800 font-semibold underline transition-colors duration-300 text-sm sm:text-base"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6, duration: 0.5 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Submit another request
-        </motion.button>
       </motion.div>
     );
   }
 
   return (
     <motion.div 
+      id="contact-form"
       className="relative overflow-hidden bg-white/95 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-2xl border border-white/50"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -145,7 +129,7 @@ export default function ContactForm() {
       <div className="relative z-10 p-6 sm:p-8 lg:p-10">
         {/* Header Section */}
         <motion.div 
-          className="text-center mb-6 sm:mb-10"
+          className="text-center mb-6 sm:mb-10 contact-form-header"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -156,14 +140,14 @@ export default function ContactForm() {
             <span className="text-xs sm:text-sm font-semibold text-primary-accent">FREE ESTIMATE</span>
           </div>
           
-          <h3 className="text-2xl sm:text-4xl font-bold mb-3 sm:mb-4 leading-tight hero-title-320">
+          <h3 className="text-2xl font-bold mb-3 sm:mb-4 leading-tight hero-title-320 contact-form-title">
             <span className="text-gray-800">Get Your </span>
             <span className="bg-gradient-to-r from-primary-accent to-secondary-accent bg-clip-text text-transparent">
               Free Estimate
             </span>
           </h3>
           
-          <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-md mx-auto hero-subtitle-320">
+          <p className="text-gray-600 text-base leading-relaxed max-w-md mx-auto hero-subtitle-320 contact-form-subtitle">
             Fill out the form below and we&apos;ll contact you within 2 hours
           </p>
         </motion.div>

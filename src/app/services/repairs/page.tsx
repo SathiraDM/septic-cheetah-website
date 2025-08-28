@@ -460,17 +460,13 @@ export default function RepairsPage() {
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <a
                 href={`tel:${CONTACT_INFO.emergencyPhone}`}
-                className="bg-white text-red-600 hover:bg-gray-100 font-bold py-6 px-10 rounded-xl text-xl inline-flex items-center justify-center space-x-4 transition-all duration-300 hover:scale-105 shadow-xl"
+                className="bg-white text-red-600 hover:bg-gray-100 font-bold py-8 px-12 rounded-xl text-2xl inline-flex items-center justify-center space-x-4 transition-all duration-300 hover:scale-105 shadow-xl"
               >
-                <AlertTriangle className="w-7 h-7" />
-                <span>Emergency: {CONTACT_INFO.emergencyPhone}</span>
-              </a>
-              <a
-                href={`tel:${CONTACT_INFO.phone}`}
-                className="bg-red-800 hover:bg-red-900 text-white font-bold py-6 px-10 rounded-xl text-xl inline-flex items-center justify-center space-x-4 transition-all duration-300 hover:scale-105 shadow-xl"
-              >
-                <Phone className="w-7 h-7" />
-                <span>Schedule Repair</span>
+                <AlertTriangle className="w-8 h-8" />
+                <div className="text-left">
+                  <div className="text-sm">24/7 EMERGENCY</div>
+                  <div className="text-2xl font-black">{CONTACT_INFO.emergencyPhone}</div>
+                </div>
               </a>
             </div>
           </div>
