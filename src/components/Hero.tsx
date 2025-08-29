@@ -61,13 +61,13 @@ export default function Hero() {
       
       if (screenHeight < 700) {
         // Fixed height for very small screens - ensures scrollability
-        setHeroHeight('600px');
+        setHeroHeight('700px');
       } else {
         // Use viewport height minus the header heights for proper alignment
         // Status bar: ~28px (py-1 + border), Main header: ~72px (py-3 + logo height)
         // Total header height: approximately 100px
         const headerOffset = 90;
-        const availableHeight = Math.max(600, screenHeight - headerOffset);
+        const availableHeight = Math.max(700, screenHeight - headerOffset);
         setHeroHeight(`${availableHeight}px`);
       }
     };
@@ -239,7 +239,7 @@ export default function Hero() {
           <motion.div className="space-y-4 sm:space-y-6 lg:space-y-8 xl:space-y-10 2xl:space-y-12" variants={itemVariants}>
             {/* Main Heading with Animated Text */}
             <div className="space-y-3 sm:space-y-4 lg:space-y-5 xl:space-y-6 2xl:space-y-8">
-              <h1 className="text-3xl xs:text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold text-white leading-tight drop-shadow-2xl hero-title-320">
+              <h1 className="text-3xl xs:text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-white leading-tight drop-shadow-2xl hero-title-320">
                 Professional
                 <br />
                 <span className="relative inline-block">
@@ -254,9 +254,9 @@ export default function Hero() {
                   >
                     {septicWords[currentWordIndex]}
                   </motion.span>
-                  {/* Animated Underline */}
+                  {/* Animated Underline - Thinner with increased gap */}
                   <motion.div 
-                    className="absolute -bottom-0.5 sm:-bottom-1 lg:-bottom-1 xl:-bottom-1.5 2xl:-bottom-2 left-1/2 transform -translate-x-1/2 h-0.5 sm:h-1 lg:h-1 xl:h-1.5 2xl:h-2 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full"
+                    className="absolute -bottom-2 sm:-bottom-3 lg:-bottom-3 xl:-bottom-4 2xl:-bottom-5 left-1/2 transform -translate-x-1/2 h-0.5 sm:h-0.5 lg:h-0.5 xl:h-1 2xl:h-1 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full"
                     initial={{ width: 0 }}
                     animate={{ width: "100%" }}
                     transition={{ duration: 0.8, delay: 0.5 }}
@@ -264,7 +264,7 @@ export default function Hero() {
                 </span>
               </h1>
               <motion.p 
-                className="text-lg xs:text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-3xl 2xl:text-4xl text-primary-accent font-medium drop-shadow-md hero-subtitle-320"
+                className="text-lg xs:text-lg sm:text-xl md:text-xl lg:text-2xl xl:text-2xl 2xl:text-3xl text-primary-accent font-medium drop-shadow-md hero-subtitle-320"
                 variants={itemVariants}
               >
                 Fast, Reliable and Kinda Dirty
@@ -273,7 +273,7 @@ export default function Hero() {
 
             {/* Description */}
             <motion.p 
-              className="text-base xs:text-lg sm:text-lg md:text-xl lg:text-xl xl:text-2xl 2xl:text-3xl text-white max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl mx-auto leading-relaxed drop-shadow-md px-4 sm:px-0"
+              className="text-sm xs:text-base sm:text-base md:text-lg lg:text-lg xl:text-xl 2xl:text-2xl text-white max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl mx-auto leading-relaxed drop-shadow-md px-4 sm:px-0"
               variants={itemVariants}
             >
               Emergency septic services across the region with same day response guaranteed. 
@@ -288,18 +288,17 @@ export default function Hero() {
               <motion.a
                 href={`tel:${CONTACT_INFO.emergencyPhone}`}
                 onClick={() => trackPhoneCall('hero_emergency')}
-                className="relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-3 sm:py-4 lg:py-4 xl:py-5 2xl:py-6 px-6 sm:px-8 lg:px-8 xl:px-10 2xl:px-12 rounded-xl shadow-2xl transition-all duration-300 flex items-center justify-center space-x-2 sm:space-x-3 lg:space-x-3 xl:space-x-4 2xl:space-x-5 group text-sm sm:text-base lg:text-base xl:text-lg 2xl:text-xl emergency-btn-ultra-compact"
+                className="relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-3 sm:py-3 lg:py-4 xl:py-4 2xl:py-5 px-6 sm:px-7 lg:px-8 xl:px-9 2xl:px-11 rounded-xl shadow-2xl transition-all duration-300 flex items-center justify-center space-x-2 sm:space-x-2 lg:space-x-3 xl:space-x-3 2xl:space-x-4 group text-sm sm:text-sm lg:text-base xl:text-base 2xl:text-lg emergency-btn-ultra-compact before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/20 before:to-white/10 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:rounded-[inherit]"
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <Phone className="w-4 h-4 sm:w-5 sm:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 2xl:w-7 2xl:h-7 relative z-10 group-hover:rotate-12 transition-transform duration-300 icon-320-sm" />
                 <span className="relative z-10 whitespace-nowrap">CALL NOW: {CONTACT_INFO.emergencyPhone}</span>
               </motion.a>
 
               <motion.a
                 href="#contact-form"
-                className="bg-white/20 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white hover:text-primary-dark font-bold py-3 sm:py-4 lg:py-4 xl:py-5 2xl:py-6 px-6 sm:px-8 lg:px-8 xl:px-10 2xl:px-12 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 lg:space-x-2 xl:space-x-3 2xl:space-x-4 group text-sm sm:text-base lg:text-base xl:text-lg 2xl:text-xl emergency-btn-ultra-compact"
+                className="bg-white/20 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white hover:text-primary-dark font-bold py-3 sm:py-3 lg:py-4 xl:py-4 2xl:py-5 px-6 sm:px-7 lg:px-8 xl:px-9 2xl:px-11 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 lg:space-x-2 xl:space-x-2 2xl:space-x-3 group text-sm sm:text-sm lg:text-base xl:text-base 2xl:text-lg emergency-btn-ultra-compact"
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
               >
@@ -328,7 +327,7 @@ export default function Hero() {
             let scrollTarget;
             
             if (screenHeight < 700) {
-              scrollTarget = 600;
+              scrollTarget = 700;
             } else if (screenHeight >= 700 && screenHeight < 750) {
               scrollTarget = Math.floor(screenHeight * 0.9);
             } else {

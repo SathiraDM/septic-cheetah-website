@@ -28,6 +28,11 @@ export const metadata: Metadata = {
   authors: [{ name: 'Septic Cheetah' }],
   creator: 'Septic Cheetah',
   publisher: 'Septic Cheetah',
+  icons: {
+    icon: '/icon.png',
+    shortcut: '/icon.png',
+    apple: '/icon.png'
+  },
   formatDetection: {
     email: false,
     address: false,

@@ -432,10 +432,10 @@ export default function AboutPage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center btn-group-320">
                 <a
                   href={`tel:${CONTACT_INFO.emergencyPhone}`}
-                  className="relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-4 px-8 rounded-xl shadow-2xl transition-all duration-300 flex items-center justify-center space-x-3 group hover:scale-105 emergency-btn-ultra-compact"
+                  className="relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-4 px-8 rounded-xl shadow-2xl transition-all duration-300 flex items-center justify-center space-x-3 group hover:scale-105 emergency-btn-ultra-compact before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/20 before:to-white/10 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:rounded-[inherit]"
                 >
-                  <Phone className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300 icon-320-sm" />
-                  <span>Call: {CONTACT_INFO.emergencyPhone}</span>
+                  <Phone className="w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform duration-300 icon-320-sm" />
+                  <span className="relative z-10">Call: {CONTACT_INFO.emergencyPhone}</span>
                 </a>
 
                 <button className="bg-white/20 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white hover:text-primary-dark font-bold py-4 px-8 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 group">

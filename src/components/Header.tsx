@@ -96,7 +96,7 @@ export default function Header() {
   return (
     <div className="w-full" style={{ overflow: 'visible' }}>
       {/* Top Status Bar - SCROLLABLE (Normal document flow) */}
-      <div className="septic-full-bg bg-gradient-to-r from-primary-dark to-primary-dark/95 text-white py-1 px-4 hidden md:block border-b border-primary-accent/20"
+      <div className="w-full bg-gradient-to-r from-primary-dark to-primary-dark/95 text-white py-1 hidden md:block border-b border-primary-accent/20"
            style={{
              // Ensure proper positioning and smooth scrolling
              position: 'relative',
@@ -190,8 +190,8 @@ export default function Header() {
               </motion.div>
             </Link>
 
-            {/* Desktop Navigation - Modern Glass Design */}
-            <nav className="hidden xl:flex items-center space-x-1 bg-gray-50/50 backdrop-blur-sm rounded-xl p-1.5 border border-gray-200/50" style={{ overflow: 'visible', position: 'relative' }}>
+            {/* Desktop Navigation - Elegant Minimalist Design */}
+            <nav className="hidden xl:flex items-center space-x-8" style={{ overflow: 'visible', position: 'relative' }}>
               {navigationItems.map((item) => {
                 const isActive = pathname === item.href || 
                   (item.submenu && item.submenu.some(subItem => pathname === subItem.href));
@@ -211,73 +211,84 @@ export default function Header() {
                     }}
                   >
                     {item.href === '#' ? (
-                      <div
-                        className={`relative flex items-center space-x-1 px-4 py-2 rounded-lg font-medium transition-all duration-300 whitespace-nowrap cursor-pointer ${
+                      <div className="relative flex items-center space-x-1 cursor-pointer group/link">
+                        <span className={`relative font-medium text-[15px] tracking-wide transition-all duration-300 ease-out ${
                           isActive 
-                            ? 'text-primary-accent bg-primary-accent/15 shadow-sm' 
-                            : 'text-gray-700 hover:text-primary-accent hover:bg-white/70 hover:shadow-md'
-                        }`}
-                      >
-                        <span className="relative z-10">{item.label}</span>
+                            ? 'text-primary-accent' 
+                            : 'text-gray-700 group-hover/link:text-primary-accent'
+                        }`}>
+                          {item.label}
+                          
+                          {/* Enhanced gradient underline animation - only under text */}
+                          <div className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-primary-accent via-primary-accent/80 to-secondary-accent transition-all duration-300 ease-out ${
+                            isActive 
+                              ? 'w-full opacity-100' 
+                              : 'w-0 group-hover/link:w-full opacity-0 group-hover/link:opacity-100'
+                          }`}></div>
+                        </span>
                         {item.submenu && (
                           <ChevronDown className={`w-4 h-4 transition-all duration-300 ${
                             activeSubmenu === item.label ? 'rotate-180' : ''
-                          } ${isActive ? 'text-primary-accent' : 'text-gray-500'}`} />
+                          } ${isActive ? 'text-primary-accent' : 'text-gray-500 group-hover/link:text-primary-accent'}`} />
                         )}
                       </div>
                     ) : (
-                      <Link
-                        href={item.href}
-                        className={`relative flex items-center space-x-1 px-4 py-2 rounded-lg font-medium transition-all duration-300 whitespace-nowrap ${
+                      <Link href={item.href} className="relative group/link">
+                        <span className={`relative font-medium text-[15px] tracking-wide transition-all duration-300 ease-out ${
                           isActive 
-                            ? 'text-primary-accent bg-primary-accent/15 shadow-sm' 
-                            : 'text-gray-700 hover:text-primary-accent hover:bg-white/70 hover:shadow-md'
-                        }`}
-                      >
-                        <span className="relative z-10">{item.label}</span>
-                        {item.submenu && (
-                          <ChevronDown className={`w-4 h-4 transition-all duration-300 ${
-                            activeSubmenu === item.label ? 'rotate-180' : ''
-                          } ${isActive ? 'text-primary-accent' : 'text-gray-500'}`} />
-                        )}
+                            ? 'text-primary-accent' 
+                            : 'text-gray-700 group-hover/link:text-primary-accent'
+                        }`}>
+                          {item.label}
+                          
+                          {/* Enhanced gradient underline animation */}
+                          <div className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-primary-accent via-primary-accent/80 to-secondary-accent transition-all duration-300 ease-out ${
+                            isActive 
+                              ? 'w-full opacity-100' 
+                              : 'w-0 group-hover/link:w-full opacity-0 group-hover/link:opacity-100'
+                          }`}></div>
+                        </span>
                       </Link>
                     )}
 
-                    {/* Enhanced Submenu */}
+                    {/* Enhanced Submenu with Clean Design */}
                     {item.submenu && (
                       <AnimatePresence>
                         {activeSubmenu === item.label && (
                           <motion.div
-                            className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 min-w-max bg-white/98 backdrop-blur-xl rounded-xl shadow-xl border border-primary-accent/10"
+                            className="absolute top-full left-1/2 transform -translate-x-1/2 mt-4 min-w-max bg-white/98 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-100/80"
                             style={{ 
                               zIndex: 99999,
                               overflow: 'visible',
                               width: 'max-content'
                             }}
-                            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                            initial={{ opacity: 0, y: -15, scale: 0.95 }}
                             animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                            transition={{ duration: 0.2, ease: "easeOut" }}
+                            exit={{ opacity: 0, y: -15, scale: 0.95 }}
+                            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
                           >
-                            <div className="py-2">
+                            {/* Arrow indicator */}
+                            <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white/98 border-l border-t border-gray-100/80 rotate-45 rounded-tl-sm"></div>
+                            
+                            <div className="py-3 relative z-10">
                               {item.submenu.map((subItem, index) => (
                                 <motion.div
                                   key={subItem.href}
                                   initial={{ opacity: 0, x: -10 }}
                                   animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: index * 0.03 }}
+                                  transition={{ delay: index * 0.04, duration: 0.2 }}
                                 >
                                   <Link
                                     href={subItem.href}
-                                    className="flex items-center justify-between px-6 py-3 text-gray-700 hover:text-primary-accent hover:bg-gradient-to-r hover:from-primary-accent/5 hover:to-secondary-accent/5 transition-all duration-200 group border-l-2 border-transparent hover:border-primary-accent whitespace-nowrap"
+                                    className="relative flex items-center px-6 py-3 text-gray-700 hover:text-primary-accent transition-all duration-200 group/sub whitespace-nowrap"
                                   >
-                                    <div className="flex items-center">
-                                      <div className="w-2 h-2 bg-primary-accent rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex-shrink-0"></div>
-                                      <span className="font-medium text-sm flex-shrink-0">{subItem.label}</span>
-                                    </div>
-                                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex-shrink-0">
-                                      <ExternalLink className="w-3 h-3 text-primary-accent" />
-                                    </div>
+                                    <span className="font-medium text-[14px] tracking-wide">{subItem.label}</span>
+                                    
+                                    {/* Subtle hover indicator */}
+                                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary-accent scale-y-0 group-hover/sub:scale-y-100 transition-transform duration-200 origin-center rounded-r-full"></div>
+                                    
+                                    {/* Gentle background highlight */}
+                                    <div className="absolute inset-0 bg-gradient-to-r from-primary-accent/5 to-transparent opacity-0 group-hover/sub:opacity-100 transition-opacity duration-200 rounded-xl"></div>
                                   </Link>
                                 </motion.div>
                               ))}
@@ -296,11 +307,10 @@ export default function Header() {
               <motion.a
                 href={`tel:${CONTACT_INFO.phone}`}
                 onClick={() => trackPhoneCall('header_primary')}
-                className="relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-semibold py-2.5 px-5 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center space-x-2 group"
+                className="relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-semibold py-2.5 px-5 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center space-x-2 group before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/15 before:to-white/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:rounded-[inherit]"
                 whileHover={{ scale: 1.02, y: -1 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-primary-accent/80 to-secondary-accent/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <Phone className="w-4 h-4 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
                 <span className="hidden xl:inline relative z-10">{CONTACT_INFO.phone}</span>
                 <span className="xl:hidden relative z-10">Call Now</span>
@@ -308,12 +318,10 @@ export default function Header() {
 
               <motion.button
                 onClick={() => setIsEmergencyModalOpen(true)}
-                className="relative overflow-hidden bg-gradient-to-r from-red-600 to-red-700 text-white font-bold py-2.5 px-5 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center space-x-2 group"
+                className="relative overflow-hidden bg-gradient-to-r from-red-600 to-red-700 text-white font-bold py-2.5 px-5 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center space-x-2 group cursor-pointer before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/20 before:to-white/10 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:rounded-[inherit] after:absolute after:-inset-1 after:bg-red-400 after:rounded-xl after:opacity-30 after:animate-pulse after:-z-10"
                 whileHover={{ scale: 1.02, y: -1 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-red-700 to-red-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute -inset-1 bg-red-400 rounded-xl opacity-30 animate-pulse"></div>
                 <span className="text-sm relative z-10 tracking-wide">EMERGENCY</span>
               </motion.button>
             </div>

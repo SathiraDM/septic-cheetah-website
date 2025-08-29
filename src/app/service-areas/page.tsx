@@ -243,11 +243,10 @@ export default function ServiceAreas() {
                 <motion.a
                   href={`tel:${CONTACT_INFO.emergencyPhone}`}
                   onClick={() => trackPhoneCall('service_areas_hero')}
-                  className="relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-4 px-8 rounded-xl shadow-2xl transition-all duration-300 flex items-center justify-center space-x-3 group emergency-btn-ultra-compact"
+                  className="relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-4 px-8 rounded-xl shadow-2xl transition-all duration-300 flex items-center justify-center space-x-3 group emergency-btn-ultra-compact before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/20 before:to-white/10 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:rounded-[inherit]"
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <Phone className="w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform duration-300 icon-320-sm" />
                   <span className="relative z-10">CALL NOW: {CONTACT_INFO.emergencyPhone}</span>
                 </motion.a>
@@ -554,14 +553,13 @@ export default function ServiceAreas() {
                 <motion.a
                   href={`tel:${CONTACT_INFO.emergencyPhone}`}
                   onClick={() => trackPhoneCall('service_areas_expansion')}
-                  className="relative overflow-hidden inline-flex items-center space-x-2 sm:space-x-4 bg-gradient-to-r from-red-600 to-red-700 text-white font-bold py-3 sm:py-4 md:py-5 px-6 sm:px-8 md:px-10 rounded-xl sm:rounded-2xl transition-all duration-300 shadow-2xl hover:shadow-3xl text-sm sm:text-base md:text-lg group"
+                  className="relative overflow-hidden inline-flex items-center space-x-2 sm:space-x-4 bg-gradient-to-r from-red-600 to-red-700 text-white font-bold py-3 sm:py-4 md:py-5 px-6 sm:px-8 md:px-10 rounded-xl sm:rounded-2xl transition-all duration-300 shadow-2xl hover:shadow-3xl text-sm sm:text-base md:text-lg group before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/20 before:to-white/10 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:rounded-[inherit]"
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
                   <span className="relative z-10">24/7 EMERGENCY: {CONTACT_INFO.emergencyPhone}</span>
                 </motion.a>
