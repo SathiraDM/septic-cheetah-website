@@ -15,7 +15,7 @@ export default function Hero() {
   
   const backgroundImages = [
     {
-      src: "/images/hero-01.jpeg",
+      src: "/images/hero-01.jpg",
       alt: "Professional septic tank services"
     },
     {
