@@ -13,8 +13,7 @@ import {
   MapPin, 
   Star,
   Shield,
-  ChevronDown,
-  ExternalLink
+  ChevronDown
 } from 'lucide-react';
 import { CONTACT_INFO } from '@/lib/constants';
 import { trackPhoneCall } from '@/lib/utils';

@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Phone, AlertTriangle, Clock, Shield } from 'lucide-react';
+import { X, Phone, AlertTriangle } from 'lucide-react';
 import { CONTACT_INFO } from '@/lib/constants';
 import { trackPhoneCall } from '@/lib/utils';
 

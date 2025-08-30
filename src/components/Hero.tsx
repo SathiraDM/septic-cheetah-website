@@ -19,7 +19,7 @@ export default function Hero() {
       alt: "Professional septic tank services"
     },
     {
-      src: "/images/hero-02.png",
+      src: "/images/hero-02.jpg",
       alt: "Heavy equipment for septic installation"
     },
     {
