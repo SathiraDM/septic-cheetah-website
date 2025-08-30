@@ -37,6 +37,13 @@ export default function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Custom validation: require either email or phone
+    if (!formData.email && !formData.phone) {
+      alert('Please provide either an email address or phone number so we can contact you.');
+      return;
+    }
+    
     setIsSubmitting(true);
     
     try {
@@ -204,7 +211,7 @@ export default function ContactForm() {
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2 sm:mb-3">
-                Phone Number *
+                Phone Number
               </label>
               <div className="relative group">
                 <Phone className={`absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 transition-colors duration-300 ${
@@ -218,7 +225,6 @@ export default function ContactForm() {
                   onChange={handleChange}
                   onFocus={() => setFocusedField('phone')}
                   onBlur={() => setFocusedField('')}
-                  required
                   className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-3 sm:py-4 bg-gray-50/80 border-2 border-gray-200/60 rounded-xl sm:rounded-2xl focus:outline-none focus:border-primary-accent focus:bg-white transition-all duration-300 text-gray-800 placeholder:text-gray-400 text-sm sm:text-base"
                   placeholder="(555) 123-4567"
                 />
@@ -234,7 +240,7 @@ export default function ContactForm() {
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2 sm:mb-3">
-              Email Address *
+              Email Address
             </label>
             <div className="relative group">
               <Mail className={`absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 transition-colors duration-300 ${
@@ -248,11 +254,11 @@ export default function ContactForm() {
                 onChange={handleChange}
                 onFocus={() => setFocusedField('email')}
                 onBlur={() => setFocusedField('')}
-                required
                 className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-3 sm:py-4 bg-gray-50/80 border-2 border-gray-200/60 rounded-xl sm:rounded-2xl focus:outline-none focus:border-primary-accent focus:bg-white transition-all duration-300 text-gray-800 placeholder:text-gray-400 text-sm sm:text-base"
                 placeholder="your@email.com"
               />
             </div>
+            <p className="text-xs text-gray-500 mt-2">* Please provide either phone or email so we can contact you</p>
           </motion.div>
 
           {/* Service Selection */}

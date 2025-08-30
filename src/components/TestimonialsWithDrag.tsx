@@ -7,7 +7,6 @@ import { TESTIMONIALS } from '@/lib/constants';
 // Enhanced testimonials with Trustpilot-style data
 const trustpilotStyleTestimonials = TESTIMONIALS.map((testimonial, index) => ({
   ...testimonial,
-  date: ['2 days ago', '1 week ago', '3 days ago', '5 days ago'][index] || '1 week ago',
   verified: true,
   avatar: testimonial.name.split(' ').map(n => n[0]).join(''),
   service: ['Septic Pumping', 'Emergency Repair', 'System Installation', 'Maintenance'][index] || 'Septic Service'
@@ -97,7 +96,7 @@ export default function TestimonialsWithDrag() {
         <div className="text-center mb-16">
           <div className="inline-flex items-center justify-center mb-6">
             {/* Trustpilot-style overall rating */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 px-6 py-4">
+            <div className="bg-white rounded-3xl shadow-lg border border-gray-200/50 px-6 py-4 hover:shadow-2xl hover:border-primary-accent/30 transition-all duration-300">
               <div className="flex items-center space-x-3">
                 <div className="flex items-center">
                   {[...Array(5)].map((_, i) => (
@@ -175,7 +174,7 @@ export default function TestimonialsWithDrag() {
                   }}
                 >
                   {/* Trustpilot-style Review Card */}
-                  <div className={`bg-white rounded-lg border border-gray-200 overflow-hidden transition-all ${
+                  <div className={`bg-white rounded-3xl border border-gray-200/50 overflow-hidden transition-all shadow-lg hover:shadow-2xl hover:border-primary-accent/30 duration-300 ${
                     isDragging ? 'duration-100' : 'duration-500'
                   } ${
                     isCenter 
@@ -220,7 +219,7 @@ export default function TestimonialsWithDrag() {
                           <p className={`text-gray-600 ${
                             isCenter ? 'text-sm' : 'text-xs'
                           }`}>
-                            {testimonial.location} • {testimonial.date}
+                            {testimonial.location}
                           </p>
                         </div>
                       </div>
@@ -266,18 +265,7 @@ export default function TestimonialsWithDrag() {
                             Verified Review
                           </span>
                         </div>
-                        <div className="flex items-center space-x-1">
-                          <span className={`text-gray-400 ${
-                            isCenter ? 'text-xs' : 'text-xs'
-                          }`}>
-                            Helpful?
-                          </span>
-                          <button className={`text-gray-600 hover:text-primary-accent transition-colors ${
-                            isCenter ? 'text-xs' : 'text-xs'
-                          }`}>
-                            👍
-                          </button>
-                        </div>
+
                       </div>
                     </div>
                   </div>
@@ -289,14 +277,14 @@ export default function TestimonialsWithDrag() {
           {/* Navigation Buttons - Hidden on screens < 533px */}
           <button
             onClick={prevTestimonial}
-            className="hidden sm:flex absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg border border-gray-200 items-center justify-center text-gray-600 hover:text-green-600 hover:border-green-200 hover:shadow-xl transition-all duration-300 z-10 hover:scale-110 active:scale-95 carousel-nav-320"
+            className="hidden sm:flex absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg border border-gray-200/50 items-center justify-center text-gray-600 hover:text-green-600 hover:border-primary-accent/30 hover:shadow-2xl transition-all duration-300 z-10 hover:scale-110 active:scale-95 carousel-nav-320"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
 
           <button
             onClick={nextTestimonial}
-            className="hidden sm:flex absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg border border-gray-200 items-center justify-center text-gray-600 hover:text-green-600 hover:border-green-200 hover:shadow-xl transition-all duration-300 z-10 hover:scale-110 active:scale-95 carousel-nav-320"
+            className="hidden sm:flex absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg border border-gray-200/50 items-center justify-center text-gray-600 hover:text-green-600 hover:border-primary-accent/30 hover:shadow-2xl transition-all duration-300 z-10 hover:scale-110 active:scale-95 carousel-nav-320"
           >
             <ChevronRight className="w-6 h-6" />
           </button>
@@ -316,25 +304,6 @@ export default function TestimonialsWithDrag() {
             />
           ))}
         </div>
-
-        {/* Trustpilot-style CTA */}
-        <div className="text-center mt-12">
-          <div className="inline-flex items-center space-x-4 bg-white rounded-lg shadow-sm border border-gray-200 px-6 py-4">
-            <div className="flex items-center space-x-2">
-              <div className="flex">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 text-green-500 fill-current" />
-                ))}
-              </div>
-              <span className="text-gray-700 font-medium">TrustScore 5.0</span>
-            </div>
-            <div className="h-6 w-px bg-gray-200"></div>
-            <span className="text-gray-600 text-sm">
-              Based on {trustpilotStyleTestimonials.length} verified reviews
-            </span>
-          </div>
-        </div>
-
 
       </div>
     </section>
