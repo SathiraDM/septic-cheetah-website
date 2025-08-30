@@ -71,8 +71,35 @@ export default function HomePage() {
                   </div>
                 </div>
 
+                {/* Contact Image */}
+                <div className="mt-6 sm:mt-8">
+                  <div className="relative group cursor-pointer" onClick={openEmergencyModal}>
+                    {/* Simple hover glow */}
+                    <div className="absolute -inset-1 bg-gradient-to-r from-primary-accent/20 to-secondary-accent/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm"></div>
+                    
+                    {/* Clean image container */}
+                    <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                      {/* Clean hover overlay */}
+                      <div className="absolute inset-0 bg-red-600/20 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+                        <div className="bg-red-600/90 text-white px-4 py-2 rounded-full text-sm font-semibold backdrop-blur-sm">
+                          Click for Emergency
+                        </div>
+                      </div>
+                      
+                      <Image
+                        src="/images/contact-us.jpeg"
+                        alt="Contact Septic Cheetah for professional septic services - Click for Emergency"
+                        width={350}
+                        height={240}
+                        className="w-full h-auto transition-all duration-300 group-hover:scale-[1.02]"
+                        priority={false}
+                      />
+                    </div>
+                  </div>
+                </div>
+
                 {/* Emergency Contact */}
-                <div className="bg-red-600/90 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-red-500/20 emergency-section-320">
+                <div className="bg-red-600/90 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-red-500/20 emergency-section-320 mt-4 sm:mt-8">
                   <h4 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 flex items-center">
                     <AlertTriangle className="w-5 h-5 sm:w-6 sm:h-6 mr-2 icon-320-md" />
                     24/7 Emergency Service
@@ -89,40 +116,6 @@ export default function HomePage() {
                     <Phone className="w-4 h-4 sm:w-5 sm:h-5 icon-320-sm" />
                     <span className="whitespace-nowrap emergency-text-320">EMERGENCY: {CONTACT_INFO.emergencyPhone}</span>
                   </a>
-                </div>
-
-                {/* Contact Image */}
-                <div className="mt-8 sm:mt-10">
-                  <div className="relative group cursor-pointer" onClick={openEmergencyModal}>
-                    {/* Animated background gradient */}
-                    <div className="absolute -inset-2 bg-gradient-to-r from-primary-accent via-secondary-accent to-primary-accent rounded-3xl blur-lg opacity-30 group-hover:opacity-50 transition-all duration-500 animate-pulse"></div>
-                    
-                    {/* Secondary glow layer */}
-                    <div className="absolute -inset-1 bg-gradient-to-br from-white/20 to-primary-accent/30 rounded-2xl blur opacity-40 group-hover:opacity-60 transition-all duration-300"></div>
-                    
-                    {/* Main image container */}
-                    <div className="relative bg-white/5 backdrop-blur-md rounded-2xl p-3 sm:p-4 border border-white/30 shadow-2xl overflow-hidden">
-                      {/* Decorative corner accents */}
-                      <div className="absolute top-0 left-0 w-12 h-12 bg-gradient-to-br from-primary-accent/30 to-transparent rounded-br-3xl"></div>
-                      <div className="absolute bottom-0 right-0 w-12 h-12 bg-gradient-to-tl from-secondary-accent/30 to-transparent rounded-tl-3xl"></div>
-                      
-                      {/* Click indicator overlay */}
-                      <div className="absolute inset-0 bg-red-600/10 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-xl flex items-center justify-center">
-                        <div className="bg-red-600/90 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                          Click for Emergency
-                        </div>
-                      </div>
-                      
-                      <Image
-                        src="/images/ContactUs.png"
-                        alt="Contact Septic Cheetah for professional septic services - Click for Emergency"
-                        width={350}
-                        height={240}
-                        className="w-full h-auto rounded-xl shadow-xl transition-all duration-500 group-hover:scale-[1.02] group-hover:shadow-2xl"
-                        priority={false}
-                      />
-                    </div>
-                  </div>
                 </div>
               </div>
 
