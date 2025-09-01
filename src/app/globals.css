@@ -1265,36 +1265,71 @@ div.septic-content-constrained {
 
 /* ===== MAIN SERVICES PAGE HERO HEIGHT ===== */
 .main-services-hero-responsive {
-  height: 900px; /* Desktop default */
+  height: 800px; /* Desktop default */
 }
 
 @media (max-width: 1024px) {
   .main-services-hero-responsive {
-    height: 950px; /* Tablets */
+    height: 850px; /* Tablets */
   }
 }
 
 @media (max-width: 768px) {
   .main-services-hero-responsive {
-    height: 1000px; /* Small tablets */
+    height: 900px; /* Small tablets */
   }
 }
 
 @media (max-width: 640px) {
   .main-services-hero-responsive {
-    height: 1050px; /* Large phones */
+    height: 950px; /* Large phones */
   }
 }
 
 @media (max-width: 475px) {
   .main-services-hero-responsive {
-    height: 1100px; /* Small phones */
+    height: 1000px; /* Small phones */
   }
 }
 
 @media (max-width: 399px) {
   .main-services-hero-responsive {
-    height: 1150px; /* Ultra-small phones (320px) */
+    height: 1050px; /* Ultra-small phones (320px) */
+  }
+}
+
+/* ===== CONTACT HERO HEIGHT (SHORTER) ===== */
+.contact-hero-responsive {
+  height: 600px; /* Desktop default */
+}
+
+@media (max-width: 1024px) {
+  .contact-hero-responsive {
+    height: 650px; /* Tablets */
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-hero-responsive {
+    height: 700px; /* Small tablets */
+  }
+}
+
+@media (max-width: 640px) {
+  .contact-hero-responsive {
+    height: 750px; /* Large phones */
+  }
+}
+
+@media (max-width: 475px) {
+  .contact-hero-responsive {
+    height: 800px; /* Small phones */
+  }
+}
+
+@media (max-width: 399px) {
+  .contact-hero-responsive {
+    height: 850px; /* Ultra-small phones (320px) */
   }
 }
 

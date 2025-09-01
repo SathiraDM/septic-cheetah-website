@@ -56,7 +56,7 @@ const serviceFeatures = [
     title: "Cheetah Speed Response",
     description: "Emergency services with same-day response guaranteed across all service areas",
     highlight: "24/7 Available",
-    tagline: "Fast, Reliable and Kinda Dirty"
+    tagline: "Cheetah Speed Service"
   },
   {
     icon: Shield,
@@ -197,14 +197,6 @@ export default function ServiceAreas() {
                   <span className="text-3xl md:text-4xl lg:text-5xl text-gray-200">100-Mile Service Radius</span>
                 </h1>
                 
-                <motion.p
-                  className="text-xl md:text-2xl text-primary-accent font-medium drop-shadow-md hero-subtitle-320"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.7 }}
-                >
-                  Fast, Reliable and Kinda Dirty
-                </motion.p>
               </div>
 
               {/* Description */}

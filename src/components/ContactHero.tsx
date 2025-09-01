@@ -8,7 +8,7 @@ import { trackPhoneCall } from '@/lib/utils';
 export default function ContactHero() {
   return (
     <section 
-      className="relative flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-dark via-primary-dark to-secondary-accent text-white main-services-hero-responsive"
+      className="relative flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-dark via-primary-dark to-secondary-accent text-white contact-hero-responsive"
       style={{
         backgroundImage: 'url(/images/ServiceArea.jpg)',
         backgroundSize: 'cover',
@@ -78,7 +78,7 @@ export default function ContactHero() {
         <Mail className="w-5 h-5" />
       </motion.div>
 
-      <div className="septic-max-width relative z-10 h-full flex items-center justify-center py-20 px-6">
+      <div className="septic-max-width relative z-10 h-full flex items-center justify-center py-8 px-6">
         {/* Enhanced Content Background for Maximum Readability */}
         <div className="absolute inset-0 bg-gradient-radial from-black/20 via-black/8 to-transparent blur-3xl opacity-70"></div>
         
@@ -94,16 +94,6 @@ export default function ContactHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            {/* Icon */}
-            <motion.div
-              className="inline-flex items-center justify-center w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl mb-6 shadow-2xl"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-            >
-              <Phone className="w-10 h-10 text-primary-accent" />
-            </motion.div>
-
             {/* Main Heading */}
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight drop-shadow-2xl hero-title-320">
@@ -113,15 +103,6 @@ export default function ContactHero() {
                 <br />
                 <span className="text-3xl md:text-4xl lg:text-5xl text-gray-200">24/7 Emergency Service</span>
               </h1>
-              
-              <motion.p
-                className="text-xl md:text-2xl text-primary-accent font-medium drop-shadow-md hero-subtitle-320"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.7 }}
-              >
-                Fast, Reliable and Kinda Dirty
-              </motion.p>
             </div>
 
             {/* Description */}
