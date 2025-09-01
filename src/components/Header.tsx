@@ -206,40 +206,60 @@ export default function Header() {
                       setActiveSubmenu(null);
                     }}
                   >
-                    <Link href={item.href} className="relative group/link">
-                      <div className="flex items-center space-x-1">
-                        <span className={`relative font-medium text-[15px] tracking-wide transition-all duration-300 ease-out ${
-                          isActive 
-                            ? 'text-primary-accent' 
-                            : 'text-gray-700 group-hover/link:text-primary-accent'
-                        }`}>
-                          {item.label}
-                          
-                          {/* Enhanced gradient underline animation */}
-                          <div className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-primary-accent via-primary-accent/80 to-secondary-accent transition-all duration-300 ease-out ${
+                    {/* Conditional rendering: Link for regular items, button for mega menu */}
+                    {item.isMegaMenu ? (
+                      <button className="relative group/link cursor-pointer">
+                        <div className="flex items-center space-x-1">
+                          <span className={`relative font-medium text-[15px] tracking-wide transition-all duration-300 ease-out ${
                             isActive 
-                              ? 'w-full opacity-100' 
-                              : 'w-0 group-hover/link:w-full opacity-0 group-hover/link:opacity-100'
-                          }`}></div>
-                        </span>
-                        {item.isMegaMenu && (
+                              ? 'text-primary-accent' 
+                              : 'text-gray-700 group-hover/link:text-primary-accent'
+                          }`}>
+                            {item.label}
+                            
+                            {/* Enhanced gradient underline animation */}
+                            <div className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-primary-accent via-primary-accent/80 to-secondary-accent transition-all duration-300 ease-out ${
+                              isActive 
+                                ? 'w-full opacity-100' 
+                                : 'w-0 group-hover/link:w-full opacity-0 group-hover/link:opacity-100'
+                            }`}></div>
+                          </span>
                           <ChevronDown className={`w-4 h-4 transition-all duration-300 ${
                             activeSubmenu === item.label ? 'rotate-180' : ''
                           } ${isActive ? 'text-primary-accent' : 'text-gray-500 group-hover/link:text-primary-accent'}`} />
-                        )}
-                      </div>
-                    </Link>
+                        </div>
+                      </button>
+                    ) : (
+                      <Link href={item.href} className="relative group/link">
+                        <div className="flex items-center space-x-1">
+                          <span className={`relative font-medium text-[15px] tracking-wide transition-all duration-300 ease-out ${
+                            isActive 
+                              ? 'text-primary-accent' 
+                              : 'text-gray-700 group-hover/link:text-primary-accent'
+                          }`}>
+                            {item.label}
+                            
+                            {/* Enhanced gradient underline animation */}
+                            <div className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-primary-accent via-primary-accent/80 to-secondary-accent transition-all duration-300 ease-out ${
+                              isActive 
+                                ? 'w-full opacity-100' 
+                                : 'w-0 group-hover/link:w-full opacity-0 group-hover/link:opacity-100'
+                            }`}></div>
+                          </span>
+                        </div>
+                      </Link>
+                    )}
 
-                    {/* Revolutionary Mega Menu Design */}
+                    {/* Ultra-Compact Services Mega Menu */}
                     {item.isMegaMenu && item.megaMenuCategories && (
                       <AnimatePresence>
                         {activeSubmenu === item.label && (
                           <motion.div
-                            className="absolute top-full left-1/2 transform -translate-x-1/2 mt-4 bg-white/98 backdrop-blur-xl rounded-3xl shadow-2xl border border-gray-100/80"
+                            className="absolute top-full left-1/2 transform -translate-x-1/2 mt-4 bg-white/98 backdrop-blur-xl rounded-xl shadow-2xl border border-gray-100/80"
                             style={{ 
                               zIndex: 99999,
                               overflow: 'visible',
-                              width: '920px',
+                              width: '950px',
                               maxWidth: '95vw'
                             }}
                             initial={{ opacity: 0, y: -15, scale: 0.95 }}
@@ -250,103 +270,83 @@ export default function Header() {
                             {/* Elegant arrow indicator */}
                             <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-6 h-6 bg-white/98 border-l border-t border-gray-100/80 rotate-45 rounded-tl-lg"></div>
                             
-                            <div className="p-8 relative z-10">
-                              {/* Header */}
-                              <div className="text-center mb-8">
-                                <h3 className="text-2xl font-bold text-primary-dark mb-2">
-                                  Our Professional Services
+                            <div className="p-4 relative z-10">
+                              {/* Minimal Header */}
+                              <div className="text-center mb-4">
+                                <h3 className="text-lg font-bold text-primary-dark">
+                                  Our Services
                                 </h3>
-                                <p className="text-gray-600 text-sm">
-                                  Comprehensive septic solutions for every need
-                                </p>
                               </div>
 
-                              {/* Service Categories Grid */}
-                              <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
+                              {/* Ultra-Compact Service Cards Grid */}
+                              <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
                                 {item.megaMenuCategories.map((category, categoryIndex) => (
                                   <motion.div
                                     key={category.id}
-                                    className="group/category"
+                                    className="bg-white rounded-lg border border-gray-200/70 hover:border-primary-accent/30 transition-all duration-300 hover:shadow-md group/card overflow-hidden"
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: categoryIndex * 0.05, duration: 0.2 }}
                                   >
-                                    {/* Category Header */}
+                                    {/* Main Service Header - Minimal */}
                                     <Link
                                       href={category.href}
-                                      className="block relative p-4 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100/50 border border-gray-200/50 hover:border-primary-accent/30 transition-all duration-300 group-hover/category:shadow-lg group-hover/category:shadow-primary-accent/10 mb-4"
+                                      className="block p-3 hover:bg-gray-50/50 transition-colors duration-200"
                                     >
-                                      <div className="flex items-start space-x-3">
-                                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
-                                          category.color === 'blue' ? 'bg-blue-100 text-blue-600' :
-                                          category.color === 'red' ? 'bg-red-100 text-red-600' :
-                                          category.color === 'green' ? 'bg-green-100 text-green-600' :
-                                          category.color === 'orange' ? 'bg-orange-100 text-orange-600' :
-                                          'bg-purple-100 text-purple-600'
-                                        } group-hover/category:scale-110 transition-transform duration-300`}>
-                                          <div className="w-5 h-5">
-                                            {/* Icon placeholder - would use actual icons in real implementation */}
-                                            <div className="w-full h-full bg-current rounded opacity-80"></div>
-                                          </div>
+                                      <div className="flex items-center space-x-2 mb-2">
+                                        <div className="w-6 h-6 rounded flex items-center justify-center flex-shrink-0 bg-primary-accent/10 text-primary-accent group-hover/card:scale-105 transition-transform duration-300">
+                                          <div className="w-3 h-3 bg-current rounded opacity-80"></div>
                                         </div>
-                                        <div className="flex-1 min-w-0">
-                                          <h4 className="font-semibold text-gray-900 text-sm leading-tight mb-1 group-hover/category:text-primary-accent transition-colors duration-300">
-                                            {category.title}
-                                          </h4>
-                                          <p className="text-xs text-gray-600 leading-relaxed line-clamp-2">
-                                            {category.description}
-                                          </p>
-                                        </div>
+                                        <h4 className="font-semibold text-gray-900 text-sm leading-tight group-hover/card:text-primary-accent transition-colors duration-300">
+                                          {category.title}
+                                        </h4>
                                       </div>
-                                      
-                                      {/* Subtle hover effect */}
-                                      <div className="absolute inset-0 bg-gradient-to-r from-primary-accent/5 to-transparent opacity-0 group-hover/category:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none"></div>
                                     </Link>
 
-                                    {/* Sub-services */}
-                                    <div className="space-y-1">
-                                      {category.services.slice(0, 3).map((service, serviceIndex) => (
-                                        <motion.div
-                                          key={service.id}
-                                          initial={{ opacity: 0, x: -10 }}
-                                          animate={{ opacity: 1, x: 0 }}
-                                          transition={{ delay: (categoryIndex * 0.05) + (serviceIndex * 0.02), duration: 0.15 }}
-                                        >
-                                          <div className="block px-3 py-2 text-xs text-gray-600 cursor-default">
-                                            <span className="relative">
-                                              • {service.title}
+                                    {/* Sub-services List - Minimal (2-3 services only) */}
+                                    <div className="px-3 pb-3">
+                                      <div className="space-y-0.5">
+                                        {category.services.slice(0, 3).map((service, serviceIndex) => (
+                                          <motion.div
+                                            key={service.id}
+                                            className="group/service"
+                                            initial={{ opacity: 0, x: -5 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ delay: (categoryIndex * 0.05) + (serviceIndex * 0.02), duration: 0.15 }}
+                                          >
+                                            <div className="flex items-center space-x-2 py-1 px-2 rounded hover:bg-gray-50/80 transition-colors duration-200 cursor-default">
+                                              <div className="w-1 h-1 bg-primary-accent/60 rounded-full flex-shrink-0"></div>
+                                              <div className="flex-1 min-w-0">
+                                                <div className="text-xs font-medium text-gray-700 leading-tight group-hover/service:text-primary-accent transition-colors truncate">
+                                                  {service.title}
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </motion.div>
+                                        ))}
+                                        
+                                        {category.services.length > 3 && (
+                                          <div className="px-2 py-1">
+                                            <span className="text-xs text-gray-500 italic">
+                                              +{category.services.length - 3} more
                                             </span>
                                           </div>
-                                        </motion.div>
-                                      ))}
+                                        )}
+                                      </div>
                                       
-                                      {category.services.length > 3 && (
-                                        <div className="block px-3 py-1 text-xs text-gray-500 cursor-default">
-                                          + {category.services.length - 3} more services...
-                                        </div>
-                                      )}
+                                      {/* View Category Link - Minimal */}
+                                      <Link
+                                        href={category.href}
+                                        className="block mt-2 pt-2 border-t border-gray-100 text-xs font-medium text-primary-accent hover:text-primary-dark transition-colors duration-200"
+                                      >
+                                        View all →
+                                      </Link>
                                     </div>
                                   </motion.div>
                                 ))}
                               </div>
 
-                              {/* Call-to-Action Footer */}
-                              <div className="mt-8 pt-6 border-t border-gray-200/80 text-center">
-                                <div className="flex items-center justify-center space-x-4">
-                                  <Link
-                                    href="/services"
-                                    className="px-6 py-2.5 bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-medium rounded-xl hover:shadow-lg transition-all duration-300 text-sm"
-                                  >
-                                    View All Services
-                                  </Link>
-                                  <Link
-                                    href="/contact"
-                                    className="px-6 py-2.5 border border-primary-accent text-primary-accent hover:bg-primary-accent hover:text-white font-medium rounded-xl transition-all duration-300 text-sm"
-                                  >
-                                    Get Free Quote
-                                  </Link>
-                                </div>
-                              </div>
+
                             </div>
                           </motion.div>
                         )}
@@ -457,45 +457,73 @@ export default function Header() {
                               }`} />
                             </button>
                             
-                            {/* Mobile Mega Menu */}
+                            {/* Ultra-Compact Mobile Mega Menu */}
                             <AnimatePresence>
                               {activeSubmenu === item.label && (
                                 <motion.div
-                                  className="ml-4 mt-2 space-y-3"
+                                  className="ml-2 mt-2 space-y-2"
                                   initial={{ opacity: 0, height: 0 }}
                                   animate={{ opacity: 1, height: 'auto' }}
                                   exit={{ opacity: 0, height: 0 }}
                                   transition={{ duration: 0.2 }}
                                 >
-                                  {item.megaMenuCategories.map((category) => (
-                                    <div key={category.id} className="border-l-2 border-primary-accent/20 pl-3">
+                                  {item.megaMenuCategories.map((category, categoryIndex) => (
+                                    <motion.div 
+                                      key={category.id} 
+                                      className="bg-white border border-gray-200/50 rounded-lg overflow-hidden"
+                                      initial={{ opacity: 0, y: 10 }}
+                                      animate={{ opacity: 1, y: 0 }}
+                                      transition={{ delay: categoryIndex * 0.05 }}
+                                    >
+                                      {/* Category Header - Minimal */}
                                       <Link
                                         href={category.href}
-                                        className="block py-2 px-3 text-sm font-medium text-gray-800 hover:text-primary-accent hover:bg-primary-accent/5 rounded-md transition-all duration-200"
+                                        className="block p-2.5 bg-gray-50/50 hover:bg-gray-100/50 transition-colors duration-200"
                                         onClick={() => {
                                           setIsMenuOpen(false);
                                           setActiveSubmenu(null);
                                         }}
                                       >
-                                        {category.title}
+                                        <div className="flex items-center space-x-2">
+                                          <div className="w-5 h-5 rounded flex items-center justify-center bg-primary-accent/10 text-primary-accent">
+                                            <div className="w-2.5 h-2.5 bg-current rounded opacity-80"></div>
+                                          </div>
+                                          <h4 className="text-sm font-semibold text-gray-900">
+                                            {category.title}
+                                          </h4>
+                                        </div>
                                       </Link>
-                                      <div className="ml-3 space-y-1">
+                                      
+                                      {/* Sub-services - 2-3 only */}
+                                      <div className="px-2.5 pb-2.5">
                                         {category.services.slice(0, 2).map((service) => (
                                           <div
                                             key={service.id}
-                                            className="block py-1 px-2 text-xs text-gray-600 cursor-default"
+                                            className="flex items-center space-x-2 py-1 rounded hover:bg-gray-50/50 transition-colors duration-200"
                                           >
-                                            • {service.title}
+                                            <div className="w-1 h-1 bg-primary-accent/60 rounded-full flex-shrink-0"></div>
+                                            <div className="flex-1 min-w-0">
+                                              <div className="text-xs font-medium text-gray-700 leading-tight truncate">
+                                                {service.title}
+                                              </div>
+                                            </div>
                                           </div>
                                         ))}
+                                        {category.services.length > 2 && (
+                                          <div className="px-2 py-0.5">
+                                            <span className="text-xs text-gray-500 italic">
+                                              +{category.services.length - 2} more
+                                            </span>
+                                          </div>
+                                        )}
                                       </div>
-                                    </div>
+                                    </motion.div>
                                   ))}
                                   
                                   <div className="pt-2 border-t border-gray-200/50">
                                     <Link
                                       href="/services"
-                                      className="block py-2 px-3 text-sm font-medium text-primary-accent hover:bg-primary-accent/5 rounded-md transition-all duration-200"
+                                      className="block py-1.5 px-3 text-sm font-medium text-primary-accent hover:bg-primary-accent/5 rounded-md transition-all duration-200"
                                       onClick={() => {
                                         setIsMenuOpen(false);
                                         setActiveSubmenu(null);
@@ -536,41 +564,6 @@ export default function Header() {
                         </motion.div>
                       );
                     })}
-                  </div>
-
-                  {/* Action Buttons - Streamlined */}
-                  <div className="flex gap-2 pt-3 border-t border-gray-100">
-                    <motion.a
-                      href={`tel:${CONTACT_INFO.phone}`}
-                      onClick={() => {
-                        trackPhoneCall('mobile_header');
-                        setIsMenuOpen(false);
-                      }}
-                      className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-medium py-2.5 px-4 rounded-lg shadow-sm hover:shadow-md transition-all duration-200"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 }}
-                    >
-                      <Phone className="w-4 h-4" />
-                      <span className="text-sm">Call Now</span>
-                    </motion.a>
-                    
-                    <motion.button
-                      onClick={() => {
-                        setIsEmergencyModalOpen(true);
-                        setIsMenuOpen(false);
-                      }}
-                      className="px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg shadow-sm hover:shadow-md transition-all duration-200 text-sm"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.25 }}
-                    >
-                      Emergency
-                    </motion.button>
                   </div>
                 </div>
               </motion.div>
