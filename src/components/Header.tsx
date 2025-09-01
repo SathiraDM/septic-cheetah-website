@@ -250,16 +250,16 @@ export default function Header() {
                       </Link>
                     )}
 
-                    {/* Ultra-Compact Services Mega Menu */}
+                    {/* Compact Services Mega Menu */}
                     {item.isMegaMenu && item.megaMenuCategories && (
                       <AnimatePresence>
                         {activeSubmenu === item.label && (
                           <motion.div
-                            className="absolute top-full left-1/2 transform -translate-x-1/2 mt-4 bg-white/98 backdrop-blur-xl rounded-xl shadow-2xl border border-gray-100/80"
+                            className="absolute top-full left-1/2 transform -translate-x-1/2 mt-3 bg-white/98 backdrop-blur-xl rounded-xl shadow-2xl border border-gray-100/80"
                             style={{ 
                               zIndex: 99999,
                               overflow: 'visible',
-                              width: '950px',
+                              width: '800px',
                               maxWidth: '95vw'
                             }}
                             initial={{ opacity: 0, y: -15, scale: 0.95 }}
@@ -267,74 +267,77 @@ export default function Header() {
                             exit={{ opacity: 0, y: -15, scale: 0.95 }}
                             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                           >
-                            {/* Elegant arrow indicator */}
+                            {/* Arrow indicator */}
                             <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-6 h-6 bg-white/98 border-l border-t border-gray-100/80 rotate-45 rounded-tl-lg"></div>
                             
                             <div className="p-4 relative z-10">
-                              {/* Minimal Header */}
+                              {/* Compact Header */}
                               <div className="text-center mb-4">
                                 <h3 className="text-lg font-bold text-primary-dark">
                                   Our Services
                                 </h3>
                               </div>
 
-                              {/* Ultra-Compact Service Cards Grid */}
+                              {/* Compact Service Cards Grid */}
                               <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
                                 {item.megaMenuCategories.map((category, categoryIndex) => (
                                   <motion.div
                                     key={category.id}
-                                    className="bg-white rounded-lg border border-gray-200/70 hover:border-primary-accent/30 transition-all duration-300 hover:shadow-md group/card overflow-hidden"
+                                    className="relative group/card"
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: categoryIndex * 0.05, duration: 0.2 }}
                                   >
-                                    {/* Main Service Card - Entire Card Clickable */}
                                     <Link
                                       href={category.href}
-                                      className="block p-3 hover:bg-gray-50/50 transition-colors duration-200"
+                                      className="block bg-white rounded-lg border border-gray-200/70 hover:border-primary-accent/40 transition-all duration-300 hover:shadow-md group/link overflow-hidden"
                                     >
-                                      <div className="flex items-center space-x-2 mb-3">
-                                        <div className="w-6 h-6 rounded flex items-center justify-center flex-shrink-0 bg-primary-accent/10 text-primary-accent group-hover/card:scale-105 transition-transform duration-300">
-                                          <div className="w-3 h-3 bg-current rounded opacity-80"></div>
+                                      <div className="p-3">
+                                        {/* Compact Category Header */}
+                                        <div className="flex items-center space-x-2 mb-3">
+                                          <div className={`w-6 h-6 rounded flex items-center justify-center flex-shrink-0 ${
+                                            category.color === 'blue' ? 'bg-blue-500/20 text-blue-600' :
+                                            category.color === 'green' ? 'bg-green-500/20 text-green-600' :
+                                            category.color === 'orange' ? 'bg-orange-500/20 text-orange-600' :
+                                            category.color === 'red' ? 'bg-red-500/20 text-red-600' :
+                                            'bg-purple-500/20 text-purple-600'
+                                          } group-hover/link:scale-105 transition-transform duration-300`}>
+                                            <div className="w-3 h-3 bg-current rounded opacity-80"></div>
+                                          </div>
+                                          <h4 className="font-semibold text-gray-900 text-sm leading-tight group-hover/link:text-primary-accent transition-colors duration-300">
+                                            {category.title}
+                                          </h4>
                                         </div>
-                                        <h4 className="font-semibold text-gray-900 text-sm leading-tight group-hover/card:text-primary-accent transition-colors duration-300">
-                                          {category.title}
-                                        </h4>
-                                      </div>
 
-                                      {/* Sub-services List - Display Only (Not Clickable) */}
-                                      <div className="space-y-1">
-                                        {category.services.slice(0, 3).map((service, serviceIndex) => (
-                                          <motion.div
-                                            key={service.id}
-                                            className="flex items-center space-x-2 py-1 px-2 rounded"
-                                            initial={{ opacity: 0, x: -5 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: (categoryIndex * 0.05) + (serviceIndex * 0.02), duration: 0.15 }}
-                                          >
-                                            <div className="w-1 h-1 bg-primary-accent/60 rounded-full flex-shrink-0"></div>
-                                            <div className="flex-1 min-w-0">
-                                              <div className="text-xs font-medium text-gray-700 leading-tight transition-colors truncate group-hover/card:text-primary-accent/80">
-                                                {service.title}
+                                        {/* Compact Sub-services List */}
+                                        <div className="space-y-1">
+                                          {category.services.slice(0, 3).map((service, serviceIndex) => (
+                                            <div
+                                              key={service.id}
+                                              className="flex items-center space-x-2 py-1 px-2 rounded"
+                                            >
+                                              <div className="w-1 h-1 bg-primary-accent/60 rounded-full flex-shrink-0"></div>
+                                              <div className="flex-1 min-w-0">
+                                                <div className="text-xs font-medium text-gray-700 leading-tight transition-colors truncate group-hover/link:text-primary-accent/80">
+                                                  {service.title}
+                                                </div>
                                               </div>
                                             </div>
-                                          </motion.div>
-                                        ))}
-                                        
-                                        {category.services.length > 3 && (
-                                          <div className="px-2 py-1">
-                                            <span className="text-xs text-gray-500 italic group-hover/card:text-primary-accent/60 transition-colors">
-                                              +{category.services.length - 3} more
-                                            </span>
-                                          </div>
-                                        )}
+                                          ))}
+                                          
+                                          {category.services.length > 3 && (
+                                            <div className="px-2 py-1">
+                                              <span className="text-xs text-gray-500 italic group-hover/link:text-primary-accent/60 transition-colors">
+                                                +{category.services.length - 3} more
+                                              </span>
+                                            </div>
+                                          )}
+                                        </div>
                                       </div>
                                     </Link>
                                   </motion.div>
                                 ))}
                               </div>
-
-
                             </div>
                           </motion.div>
                         )}
@@ -445,7 +448,7 @@ export default function Header() {
                               }`} />
                             </button>
                             
-                            {/* Ultra-Compact Mobile Mega Menu */}
+                            {/* Compact Mobile Mega Menu */}
                             <AnimatePresence>
                               {activeSubmenu === item.label && (
                                 <motion.div
@@ -463,17 +466,22 @@ export default function Header() {
                                       animate={{ opacity: 1, y: 0 }}
                                       transition={{ delay: categoryIndex * 0.05 }}
                                     >
-                                      {/* Category Card - Entire Card Clickable */}
                                       <Link
                                         href={category.href}
-                                        className="block p-2.5 bg-gray-50/50 hover:bg-gray-100/50 transition-colors duration-200"
+                                        className="block p-3 hover:bg-gray-50/50 transition-colors duration-200"
                                         onClick={() => {
                                           setIsMenuOpen(false);
                                           setActiveSubmenu(null);
                                         }}
                                       >
                                         <div className="flex items-center space-x-2 mb-2">
-                                          <div className="w-5 h-5 rounded flex items-center justify-center bg-primary-accent/10 text-primary-accent">
+                                          <div className={`w-5 h-5 rounded flex items-center justify-center ${
+                                            category.color === 'blue' ? 'bg-blue-500/20 text-blue-600' :
+                                            category.color === 'green' ? 'bg-green-500/20 text-green-600' :
+                                            category.color === 'orange' ? 'bg-orange-500/20 text-orange-600' :
+                                            category.color === 'red' ? 'bg-red-500/20 text-red-600' :
+                                            'bg-purple-500/20 text-purple-600'
+                                          }`}>
                                             <div className="w-2.5 h-2.5 bg-current rounded opacity-80"></div>
                                           </div>
                                           <h4 className="text-sm font-semibold text-gray-900">
@@ -481,7 +489,6 @@ export default function Header() {
                                           </h4>
                                         </div>
                                         
-                                        {/* Sub-services - Display Only (Not Individually Clickable) */}
                                         <div className="space-y-1">
                                           {category.services.slice(0, 2).map((service) => (
                                             <div

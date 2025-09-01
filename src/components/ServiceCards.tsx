@@ -173,15 +173,15 @@ export default function ServiceCards() {
           ))}
         </motion.div>
 
-        {/* Enhanced Service Cards */}
+        {/* Enhanced Service Cards - 2nd row cards span equally */}
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-20"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {SERVICE_CATEGORIES.slice(0, 6).map((category, index) => {
+          {SERVICE_CATEGORIES.slice(0, 5).map((category, index) => {
             const iconMap = {
               'Wrench': Wrench,
               'Settings': Settings,
@@ -196,7 +196,10 @@ export default function ServiceCards() {
             return (
               <motion.div
                 key={category.id}
-                className="group relative"
+                className={`group relative ${
+                  // First 3 cards span 2 columns each (2+2+2=6), last 2 cards span 3 columns each (3+3=6)
+                  index < 3 ? 'lg:col-span-2' : 'lg:col-span-3'
+                }`}
                 variants={cardVariants}
                 whileHover={{ 
                   y: -8,

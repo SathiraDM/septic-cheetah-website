@@ -42,7 +42,7 @@ const socialLinks = [
 ];
 
 const trustBadges = [
-  { icon: Shield, text: 'Licensed & Insured', subtext: 'State License #12345' },
+  { icon: Shield, text: 'Licensed & Insured', subtext: 'Fully Licensed' },
   { icon: Award, text: 'Top Rated', subtext: 'Premium Service' }
 ];
 
@@ -171,7 +171,7 @@ export default function Footer() {
                   </div>
                   <div>
                     <div className="font-medium">Service Area</div>
-                    <div className="text-sm text-gray-300">50+ Mile Radius</div>
+                    <div className="text-sm text-gray-300">100+ Mile Radius</div>
                   </div>
                 </div>
 

@@ -26,127 +26,52 @@ export const CONTACT_INFO = {
 export const SERVICE_CATEGORIES = [
   {
     id: 'installation',
-    title: 'Septic System Installation',
-    description: 'Complete septic system installation services for new construction and system replacements.',
+    title: 'Septic Installation',
+    description: 'Complete septic system installation services with professional design and implementation.',
     href: '/services/installation',
     icon: 'Wrench',
     color: 'blue',
     services: [
       {
-        id: 'new-construction',
-        title: 'Septic System Installation (New Construction)',
-        description: 'Complete septic system installation for new homes and buildings with full permit assistance.',
-        href: '/services/installation#new-construction',
+        id: 'new-installation',
+        title: 'New System Installation',
+        description: 'Complete septic system installation for new construction and replacements.',
+        href: '/services/installation#new-installation',
         features: [
-          'New construction installations',
-          'Permit assistance included',
-          'Licensed & insured installers',
-          'Soil testing coordination',
-          'Full warranty coverage'
+          'Site assessment & design',
+          'Permit handling',
+          'Professional installation',
+          'System testing',
+          'Warranty included'
         ]
       },
-      {
-        id: 'aerobic-systems',
-        title: 'Aerobic Septic Systems',
-        description: 'Advanced aerobic treatment systems for enhanced wastewater processing.',
-        href: '/services/installation#aerobic-systems',
-        features: [
-          'Advanced treatment technology',
-          'Enhanced wastewater processing',
-          'Environmentally friendly',
-          'Suitable for challenging soils',
-          'Long-term reliability'
-        ]
-      }
-    ]
-  },
-  {
-    id: 'repairs',
-    title: 'Septic System Repairs',
-    description: 'Emergency repairs and comprehensive septic system restoration services.',
-    href: '/services/repairs',
-    icon: 'Settings',
-    color: 'red',
-    services: [
       {
         id: 'system-replacement',
-        title: 'Septic System Replacement',
-        description: 'Complete septic system replacement when repairs are no longer cost-effective.',
-        href: '/services/repairs#system-replacement',
+        title: 'System Replacement',
+        description: 'Full septic system replacement with modern, efficient components.',
+        href: '/services/installation#system-replacement',
         features: [
-          'Complete system assessment',
-          'Modern system design',
-          'Professional installation',
-          'Permit coordination',
-          'Warranty protection'
-        ]
-      },
-      {
-        id: 'emergency-repairs',
-        title: 'Emergency Septic Repairs',
-        description: '24/7 emergency septic repair services for urgent system failures.',
-        href: '/services/repairs#emergency-repairs',
-        features: [
-          '24/7 emergency response',
-          'Same-day service available',
-          'Rapid problem diagnosis',
-          'Immediate solutions',
-          'Emergency backup systems'
-        ]
-      },
-      {
-        id: 'pump-repair',
-        title: 'Septic Pump Installation/Repair',
-        description: 'Professional septic pump installation, repair, and replacement services.',
-        href: '/services/repairs#pump-repair',
-        features: [
-          'Pump installation & replacement',
-          'Electrical connections',
-          'Alarm system setup',
-          'Performance testing',
-          'Maintenance recommendations'
-        ]
-      },
-      {
-        id: 'distribution-box',
-        title: 'Distribution Box Repairs',
-        description: 'Expert repair and replacement of septic distribution boxes and outlets.',
-        href: '/services/repairs#distribution-box',
-        features: [
-          'Distribution box repair',
-          'Outlet pipe replacement',
-          'Flow balancing',
-          'Baffle replacement',
-          'System optimization'
-        ]
-      },
-      {
-        id: 'drain-field',
-        title: 'Drain Field Repairs',
-        description: 'Comprehensive drain field restoration and repair services.',
-        href: '/services/repairs#drain-field',
-        features: [
-          'Drain field restoration',
-          'Pipe replacement',
-          'Soil remediation',
-          'System rejuvenation',
-          'Alternative solutions'
+          'Old system removal',
+          'Updated design standards',
+          'Minimal property disruption',
+          'Code compliance',
+          'Performance optimization'
         ]
       }
     ]
   },
   {
     id: 'maintenance-inspection',
-    title: 'Septic Maintenance & Inspection',
-    description: 'Preventive maintenance and professional inspection services to keep your system healthy.',
+    title: 'Maintenance & Inspection',
+    description: 'Regular maintenance and inspection services to keep your septic system running smoothly.',
     href: '/services/maintenance-inspection',
-    icon: 'Search',
+    icon: 'CheckCircle',
     color: 'green',
     services: [
       {
         id: 'pumping-cleaning',
-        title: 'Septic Tank Pumping/Cleaning',
-        description: 'Professional septic tank pumping and cleaning services for optimal system performance.',
+        title: 'Septic Pumping & Cleaning',
+        description: 'Professional septic tank pumping and cleaning services to maintain system health.',
         href: '/services/maintenance-inspection#pumping-cleaning',
         features: [
           'Complete waste removal',
@@ -190,6 +115,68 @@ export const SERVICE_CATEGORIES = [
           'Compliance documentation',
           'Proper waste disposal',
           'Restaurant & commercial focus'
+        ]
+      },
+      {
+        id: 'commercial-drain-cleaning',
+        title: 'Commercial Drain Cleaning',
+        description: 'Professional drain cleaning services for restaurants and commercial kitchens.',
+        href: '/services/grease-waste-management#commercial-drain-cleaning',
+        features: [
+          'Grease blockage removal',
+          'High-pressure jetting',
+          'Kitchen drain maintenance',
+          'Emergency drain services',
+          'Preventive maintenance plans'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'repairs',
+    title: 'Septic Repairs',
+    description: 'Expert septic system repairs and emergency services to restore your system.',
+    href: '/services/repairs',
+    icon: 'Settings',
+    color: 'red',
+    services: [
+      {
+        id: 'emergency-repairs',
+        title: 'Emergency Repairs',
+        description: 'Fast response emergency septic repair services available 24/7.',
+        href: '/services/repairs#emergency-repairs',
+        features: [
+          '24/7 emergency response',
+          'Rapid problem diagnosis',
+          'Immediate temporary solutions',
+          'Permanent repair options',
+          'Minimal downtime'
+        ]
+      },
+      {
+        id: 'pump-repairs',
+        title: 'Pump Repairs',
+        description: 'Septic pump repair and replacement services for all pump types.',
+        href: '/services/repairs#pump-repairs',
+        features: [
+          'All pump types serviced',
+          'Electrical troubleshooting',
+          'Pump replacement options',
+          'Performance optimization',
+          'Preventive maintenance'
+        ]
+      },
+      {
+        id: 'pipe-repairs',
+        title: 'Pipe & Line Repairs',
+        description: 'Septic pipe and distribution line repair services.',
+        href: '/services/repairs#pipe-repairs',
+        features: [
+          'Leak detection & repair',
+          'Pipe replacement',
+          'Root intrusion removal',
+          'Line cleaning services',
+          'Trenchless repair options'
         ]
       }
     ]
@@ -243,7 +230,7 @@ export const SERVICE_CATEGORIES = [
       }
     ]
   }
-] as const;
+]
 
 // Legacy services for backward compatibility and SEO
 export const SERVICES = [
