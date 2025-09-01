@@ -201,7 +201,7 @@ export default function GreaseWasteManagementPage() {
             <div className="relative flex justify-center lg:justify-end">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-lg w-full">
                 <Image
-                  src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=500&fit=crop"
+                  src="/images/hero-09.jpg"
                   alt="Commercial grease trap cleaning service"
                   width={600}
                   height={500}

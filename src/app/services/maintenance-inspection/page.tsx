@@ -171,7 +171,7 @@ export default function MaintenanceInspectionPage() {
             <div className="relative flex justify-center lg:justify-end">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-lg w-full">
                 <Image
-                  src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=500&fit=crop"
+                  src="/images/hero-02.jpg"
                   alt="Professional septic maintenance and inspection"
                   width={600}
                   height={500}
