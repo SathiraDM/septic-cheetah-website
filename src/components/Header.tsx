@@ -15,7 +15,7 @@ import {
   Shield,
   ChevronDown
 } from 'lucide-react';
-import { CONTACT_INFO } from '@/lib/constants';
+import { CONTACT_INFO, SERVICE_CATEGORIES } from '@/lib/constants';
 import { trackPhoneCall } from '@/lib/utils';
 import EmergencyModal from './EmergencyModal';
 
@@ -26,17 +26,11 @@ const navigationItems = [
     description: 'Professional septic services'
   },
   {
-    href: '#',
+    href: '/services',
     label: 'Services',
     description: 'Complete septic solutions',
-    submenu: [
-      { href: '/services/pumping', label: 'Septic Pumping' },
-      { href: '/services/installation', label: 'System Installation' },
-      { href: '/services/repairs', label: 'Emergency Repairs' },
-      { href: '/services/inspections', label: 'System Inspections' },
-      { href: '/services/grease-trap', label: 'Grease Trap Services' },
-      { href: '/services/portable-toilets', label: 'Portable Toilet Rentals' }
-    ]
+    isMegaMenu: true,
+    megaMenuCategories: SERVICE_CATEGORIES
   },
   { 
     href: '/service-areas', 
@@ -189,11 +183,14 @@ export default function Header() {
               </motion.div>
             </Link>
 
-            {/* Desktop Navigation - Elegant Minimalist Design */}
+            {/* Desktop Navigation - World-Class Mega Menu Design */}
             <nav className="hidden xl:flex items-center space-x-8" style={{ overflow: 'visible', position: 'relative' }}>
               {navigationItems.map((item) => {
                 const isActive = pathname === item.href || 
-                  (item.submenu && item.submenu.some(subItem => pathname === subItem.href));
+                  (item.isMegaMenu && item.megaMenuCategories?.some(category => 
+                    pathname.startsWith(category.href) || 
+                    category.services.some(service => pathname === service.href)
+                  ));
                 
                 return (
                   <div
@@ -201,7 +198,7 @@ export default function Header() {
                     className="relative group"
                     style={{ overflow: 'visible' }}
                     onMouseEnter={() => {
-                      if (item.submenu) {
+                      if (item.isMegaMenu) {
                         setActiveSubmenu(item.label);
                       }
                     }}
@@ -209,30 +206,8 @@ export default function Header() {
                       setActiveSubmenu(null);
                     }}
                   >
-                    {item.href === '#' ? (
-                      <div className="relative flex items-center space-x-1 cursor-pointer group/link">
-                        <span className={`relative font-medium text-[15px] tracking-wide transition-all duration-300 ease-out ${
-                          isActive 
-                            ? 'text-primary-accent' 
-                            : 'text-gray-700 group-hover/link:text-primary-accent'
-                        }`}>
-                          {item.label}
-                          
-                          {/* Enhanced gradient underline animation - only under text */}
-                          <div className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-primary-accent via-primary-accent/80 to-secondary-accent transition-all duration-300 ease-out ${
-                            isActive 
-                              ? 'w-full opacity-100' 
-                              : 'w-0 group-hover/link:w-full opacity-0 group-hover/link:opacity-100'
-                          }`}></div>
-                        </span>
-                        {item.submenu && (
-                          <ChevronDown className={`w-4 h-4 transition-all duration-300 ${
-                            activeSubmenu === item.label ? 'rotate-180' : ''
-                          } ${isActive ? 'text-primary-accent' : 'text-gray-500 group-hover/link:text-primary-accent'}`} />
-                        )}
-                      </div>
-                    ) : (
-                      <Link href={item.href} className="relative group/link">
+                    <Link href={item.href} className="relative group/link">
+                      <div className="flex items-center space-x-1">
                         <span className={`relative font-medium text-[15px] tracking-wide transition-all duration-300 ease-out ${
                           isActive 
                             ? 'text-primary-accent' 
@@ -247,50 +222,131 @@ export default function Header() {
                               : 'w-0 group-hover/link:w-full opacity-0 group-hover/link:opacity-100'
                           }`}></div>
                         </span>
-                      </Link>
-                    )}
+                        {item.isMegaMenu && (
+                          <ChevronDown className={`w-4 h-4 transition-all duration-300 ${
+                            activeSubmenu === item.label ? 'rotate-180' : ''
+                          } ${isActive ? 'text-primary-accent' : 'text-gray-500 group-hover/link:text-primary-accent'}`} />
+                        )}
+                      </div>
+                    </Link>
 
-                    {/* Enhanced Submenu with Clean Design */}
-                    {item.submenu && (
+                    {/* Revolutionary Mega Menu Design */}
+                    {item.isMegaMenu && item.megaMenuCategories && (
                       <AnimatePresence>
                         {activeSubmenu === item.label && (
                           <motion.div
-                            className="absolute top-full left-1/2 transform -translate-x-1/2 mt-4 min-w-max bg-white/98 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-100/80"
+                            className="absolute top-full left-1/2 transform -translate-x-1/2 mt-4 bg-white/98 backdrop-blur-xl rounded-3xl shadow-2xl border border-gray-100/80"
                             style={{ 
                               zIndex: 99999,
                               overflow: 'visible',
-                              width: 'max-content'
+                              width: '920px',
+                              maxWidth: '95vw'
                             }}
                             initial={{ opacity: 0, y: -15, scale: 0.95 }}
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: -15, scale: 0.95 }}
-                            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                           >
-                            {/* Arrow indicator */}
-                            <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white/98 border-l border-t border-gray-100/80 rotate-45 rounded-tl-sm"></div>
+                            {/* Elegant arrow indicator */}
+                            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-6 h-6 bg-white/98 border-l border-t border-gray-100/80 rotate-45 rounded-tl-lg"></div>
                             
-                            <div className="py-3 relative z-10">
-                              {item.submenu.map((subItem, index) => (
-                                <motion.div
-                                  key={subItem.href}
-                                  initial={{ opacity: 0, x: -10 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: index * 0.04, duration: 0.2 }}
-                                >
-                                  <Link
-                                    href={subItem.href}
-                                    className="relative flex items-center px-6 py-3 text-gray-700 hover:text-primary-accent transition-all duration-200 group/sub whitespace-nowrap"
+                            <div className="p-8 relative z-10">
+                              {/* Header */}
+                              <div className="text-center mb-8">
+                                <h3 className="text-2xl font-bold text-primary-dark mb-2">
+                                  Our Professional Services
+                                </h3>
+                                <p className="text-gray-600 text-sm">
+                                  Comprehensive septic solutions for every need
+                                </p>
+                              </div>
+
+                              {/* Service Categories Grid */}
+                              <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
+                                {item.megaMenuCategories.map((category, categoryIndex) => (
+                                  <motion.div
+                                    key={category.id}
+                                    className="group/category"
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: categoryIndex * 0.05, duration: 0.2 }}
                                   >
-                                    <span className="font-medium text-[14px] tracking-wide">{subItem.label}</span>
-                                    
-                                    {/* Subtle hover indicator */}
-                                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary-accent scale-y-0 group-hover/sub:scale-y-100 transition-transform duration-200 origin-center rounded-r-full"></div>
-                                    
-                                    {/* Gentle background highlight */}
-                                    <div className="absolute inset-0 bg-gradient-to-r from-primary-accent/5 to-transparent opacity-0 group-hover/sub:opacity-100 transition-opacity duration-200 rounded-xl"></div>
+                                    {/* Category Header */}
+                                    <Link
+                                      href={category.href}
+                                      className="block relative p-4 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100/50 border border-gray-200/50 hover:border-primary-accent/30 transition-all duration-300 group-hover/category:shadow-lg group-hover/category:shadow-primary-accent/10 mb-4"
+                                    >
+                                      <div className="flex items-start space-x-3">
+                                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                                          category.color === 'blue' ? 'bg-blue-100 text-blue-600' :
+                                          category.color === 'red' ? 'bg-red-100 text-red-600' :
+                                          category.color === 'green' ? 'bg-green-100 text-green-600' :
+                                          category.color === 'orange' ? 'bg-orange-100 text-orange-600' :
+                                          'bg-purple-100 text-purple-600'
+                                        } group-hover/category:scale-110 transition-transform duration-300`}>
+                                          <div className="w-5 h-5">
+                                            {/* Icon placeholder - would use actual icons in real implementation */}
+                                            <div className="w-full h-full bg-current rounded opacity-80"></div>
+                                          </div>
+                                        </div>
+                                        <div className="flex-1 min-w-0">
+                                          <h4 className="font-semibold text-gray-900 text-sm leading-tight mb-1 group-hover/category:text-primary-accent transition-colors duration-300">
+                                            {category.title}
+                                          </h4>
+                                          <p className="text-xs text-gray-600 leading-relaxed line-clamp-2">
+                                            {category.description}
+                                          </p>
+                                        </div>
+                                      </div>
+                                      
+                                      {/* Subtle hover effect */}
+                                      <div className="absolute inset-0 bg-gradient-to-r from-primary-accent/5 to-transparent opacity-0 group-hover/category:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none"></div>
+                                    </Link>
+
+                                    {/* Sub-services */}
+                                    <div className="space-y-1">
+                                      {category.services.slice(0, 3).map((service, serviceIndex) => (
+                                        <motion.div
+                                          key={service.id}
+                                          initial={{ opacity: 0, x: -10 }}
+                                          animate={{ opacity: 1, x: 0 }}
+                                          transition={{ delay: (categoryIndex * 0.05) + (serviceIndex * 0.02), duration: 0.15 }}
+                                        >
+                                          <div className="block px-3 py-2 text-xs text-gray-600 cursor-default">
+                                            <span className="relative">
+                                              • {service.title}
+                                            </span>
+                                          </div>
+                                        </motion.div>
+                                      ))}
+                                      
+                                      {category.services.length > 3 && (
+                                        <div className="block px-3 py-1 text-xs text-gray-500 cursor-default">
+                                          + {category.services.length - 3} more services...
+                                        </div>
+                                      )}
+                                    </div>
+                                  </motion.div>
+                                ))}
+                              </div>
+
+                              {/* Call-to-Action Footer */}
+                              <div className="mt-8 pt-6 border-t border-gray-200/80 text-center">
+                                <div className="flex items-center justify-center space-x-4">
+                                  <Link
+                                    href="/services"
+                                    className="px-6 py-2.5 bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-medium rounded-xl hover:shadow-lg transition-all duration-300 text-sm"
+                                  >
+                                    View All Services
                                   </Link>
-                                </motion.div>
-                              ))}
+                                  <Link
+                                    href="/contact"
+                                    className="px-6 py-2.5 border border-primary-accent text-primary-accent hover:bg-primary-accent hover:text-white font-medium rounded-xl transition-all duration-300 text-sm"
+                                  >
+                                    Get Free Quote
+                                  </Link>
+                                </div>
+                              </div>
                             </div>
                           </motion.div>
                         )}
@@ -373,10 +429,13 @@ export default function Header() {
                   <div className="space-y-1 mb-4">
                     {navigationItems.map((item, index) => {
                       const isActive = pathname === item.href || 
-                        (item.submenu && item.submenu.some(subItem => pathname === subItem.href));
+                        (item.isMegaMenu && item.megaMenuCategories?.some(category => 
+                          pathname.startsWith(category.href) || 
+                          category.services.some(service => pathname === service.href)
+                        ));
                       
-                      // Handle Services dropdown
-                      if (item.href === '#' && item.submenu) {
+                      // Handle Services mega menu
+                      if (item.isMegaMenu && item.megaMenuCategories) {
                         return (
                           <motion.div
                             key={item.label}
@@ -398,30 +457,53 @@ export default function Header() {
                               }`} />
                             </button>
                             
-                            {/* Submenu */}
+                            {/* Mobile Mega Menu */}
                             <AnimatePresence>
                               {activeSubmenu === item.label && (
                                 <motion.div
-                                  className="ml-4 mt-1 space-y-1"
+                                  className="ml-4 mt-2 space-y-3"
                                   initial={{ opacity: 0, height: 0 }}
                                   animate={{ opacity: 1, height: 'auto' }}
                                   exit={{ opacity: 0, height: 0 }}
                                   transition={{ duration: 0.2 }}
                                 >
-                                  {item.submenu.map((subItem) => (
+                                  {item.megaMenuCategories.map((category) => (
+                                    <div key={category.id} className="border-l-2 border-primary-accent/20 pl-3">
+                                      <Link
+                                        href={category.href}
+                                        className="block py-2 px-3 text-sm font-medium text-gray-800 hover:text-primary-accent hover:bg-primary-accent/5 rounded-md transition-all duration-200"
+                                        onClick={() => {
+                                          setIsMenuOpen(false);
+                                          setActiveSubmenu(null);
+                                        }}
+                                      >
+                                        {category.title}
+                                      </Link>
+                                      <div className="ml-3 space-y-1">
+                                        {category.services.slice(0, 2).map((service) => (
+                                          <div
+                                            key={service.id}
+                                            className="block py-1 px-2 text-xs text-gray-600 cursor-default"
+                                          >
+                                            • {service.title}
+                                          </div>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  ))}
+                                  
+                                  <div className="pt-2 border-t border-gray-200/50">
                                     <Link
-                                      key={subItem.href}
-                                      href={subItem.href}
-                                      className="flex items-center py-2 px-3 text-sm text-gray-600 hover:text-primary-accent hover:bg-primary-accent/5 rounded-md transition-all duration-200 border-l-2 border-transparent hover:border-primary-accent/30"
+                                      href="/services"
+                                      className="block py-2 px-3 text-sm font-medium text-primary-accent hover:bg-primary-accent/5 rounded-md transition-all duration-200"
                                       onClick={() => {
                                         setIsMenuOpen(false);
                                         setActiveSubmenu(null);
                                       }}
                                     >
-                                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mr-3"></div>
-                                      {subItem.label}
+                                      View All Services →
                                     </Link>
-                                  ))}
+                                  </div>
                                 </motion.div>
                               )}
                             </AnimatePresence>

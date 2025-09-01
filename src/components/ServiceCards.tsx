@@ -3,18 +3,9 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Truck, Wrench, Settings, Search, Building, Home, ArrowRight, Star, Clock, Shield, Zap } from 'lucide-react';
-import { SERVICES, CONTACT_INFO } from '@/lib/constants';
+import { SERVICE_CATEGORIES, CONTACT_INFO } from '@/lib/constants';
 import { trackEvent } from '@/lib/utils';
 import { useState } from 'react';
-
-const iconMap = {
-  Truck,
-  Wrench,
-  Settings,
-  Search,
-  Building,
-  Home,
-};
 
 const features = [
   {
@@ -190,13 +181,21 @@ export default function ServiceCards() {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {SERVICES.map((service, index) => {
-            const IconComponent = iconMap[service.icon as keyof typeof iconMap];
-            const isHovered = hoveredCard === service.id;
+          {SERVICE_CATEGORIES.slice(0, 6).map((category, index) => {
+            const iconMap = {
+              'Wrench': Wrench,
+              'Settings': Settings,
+              'Search': Search,
+              'Building': Building,
+              'Home': Home,
+              'Truck': Truck
+            };
+            const IconComponent = iconMap[category.icon as keyof typeof iconMap] || Wrench;
+            const isHovered = hoveredCard === category.id;
             
             return (
               <motion.div
-                key={service.id}
+                key={category.id}
                 className="group relative"
                 variants={cardVariants}
                 whileHover={{ 
@@ -204,7 +203,7 @@ export default function ServiceCards() {
                   scale: 1.02,
                   transition: { duration: 0.3, ease: "easeOut" }
                 }}
-                onHoverStart={() => setHoveredCard(service.id)}
+                onHoverStart={() => setHoveredCard(category.id)}
                 onHoverEnd={() => setHoveredCard(null)}
               >
                 {/* Redesigned Card with Subtle Border and Elegant Hover */}
@@ -234,7 +233,7 @@ export default function ServiceCards() {
                       
                       <div className="flex-1">
                         <h3 className="text-2xl font-bold text-primary-dark group-hover:text-primary-accent transition-colors duration-300">
-                          {service.title}
+                          {category.title}
                         </h3>
                         <motion.div
                           className="h-1 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full mt-2 origin-left"
@@ -254,10 +253,10 @@ export default function ServiceCards() {
                       viewport={{ once: true }}
                       transition={{ duration: 0.6, delay: index * 0.1 + 0.2 }}
                     >
-                      {service.description}
+                      {category.description}
                     </motion.p>
 
-                    {/* Features List */}
+                    {/* Services List */}
                     <motion.div 
                       className="mb-8"
                       initial={{ opacity: 0, y: 20 }}
@@ -266,22 +265,22 @@ export default function ServiceCards() {
                       transition={{ duration: 0.6, delay: index * 0.1 + 0.4 }}
                     >
                       <ul className="space-y-3">
-                        {service.features.map((feature, featureIndex) => (
+                        {category.services.slice(0, 3).map((service, serviceIndex) => (
                           <motion.li 
-                            key={featureIndex} 
+                            key={serviceIndex} 
                             className="flex items-center text-gray-700"
                             initial={{ opacity: 0, x: -10 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.4, delay: index * 0.1 + featureIndex * 0.1 + 0.5 }}
+                            transition={{ duration: 0.4, delay: index * 0.1 + serviceIndex * 0.1 + 0.5 }}
                           >
                             <motion.div 
                               className="w-2 h-2 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full mr-3 flex-shrink-0"
                               whileInView={{ scale: [0, 1.2, 1] }}
                               viewport={{ once: true }}
-                              transition={{ duration: 0.5, delay: index * 0.1 + featureIndex * 0.1 + 0.6 }}
+                              transition={{ duration: 0.5, delay: index * 0.1 + serviceIndex * 0.1 + 0.6 }}
                             />
-                            <span className="text-sm">{feature}</span>
+                            <span className="text-sm">{service.title}</span>
                           </motion.li>
                         ))}
                       </ul>
@@ -295,8 +294,8 @@ export default function ServiceCards() {
                       transition={{ duration: 0.6, delay: index * 0.1 + 0.6 }}
                     >
                       <Link
-                        href={service.href}
-                        onClick={() => trackEvent('service_interest', { service: service.id })}
+                        href={category.href}
+                        onClick={() => trackEvent('service_interest', { service: category.id })}
                         className="block"
                       >
                         <motion.div

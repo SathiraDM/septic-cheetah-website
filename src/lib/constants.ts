@@ -22,6 +22,230 @@ export const CONTACT_INFO = {
   counties: 'Travis, Williamson, Burnet, and Hays Counties',
 } as const;
 
+// New Service Categories Structure
+export const SERVICE_CATEGORIES = [
+  {
+    id: 'installation',
+    title: 'Septic System Installation',
+    description: 'Complete septic system installation services for new construction and system replacements.',
+    href: '/services/installation',
+    icon: 'Wrench',
+    color: 'blue',
+    services: [
+      {
+        id: 'new-construction',
+        title: 'Septic System Installation (New Construction)',
+        description: 'Complete septic system installation for new homes and buildings with full permit assistance.',
+        href: '/services/installation#new-construction',
+        features: [
+          'New construction installations',
+          'Permit assistance included',
+          'Licensed & insured installers',
+          'Soil testing coordination',
+          'Full warranty coverage'
+        ]
+      },
+      {
+        id: 'aerobic-systems',
+        title: 'Aerobic Septic Systems',
+        description: 'Advanced aerobic treatment systems for enhanced wastewater processing.',
+        href: '/services/installation#aerobic-systems',
+        features: [
+          'Advanced treatment technology',
+          'Enhanced wastewater processing',
+          'Environmentally friendly',
+          'Suitable for challenging soils',
+          'Long-term reliability'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'repairs',
+    title: 'Septic System Repairs',
+    description: 'Emergency repairs and comprehensive septic system restoration services.',
+    href: '/services/repairs',
+    icon: 'Settings',
+    color: 'red',
+    services: [
+      {
+        id: 'system-replacement',
+        title: 'Septic System Replacement',
+        description: 'Complete septic system replacement when repairs are no longer cost-effective.',
+        href: '/services/repairs#system-replacement',
+        features: [
+          'Complete system assessment',
+          'Modern system design',
+          'Professional installation',
+          'Permit coordination',
+          'Warranty protection'
+        ]
+      },
+      {
+        id: 'emergency-repairs',
+        title: 'Emergency Septic Repairs',
+        description: '24/7 emergency septic repair services for urgent system failures.',
+        href: '/services/repairs#emergency-repairs',
+        features: [
+          '24/7 emergency response',
+          'Same-day service available',
+          'Rapid problem diagnosis',
+          'Immediate solutions',
+          'Emergency backup systems'
+        ]
+      },
+      {
+        id: 'pump-repair',
+        title: 'Septic Pump Installation/Repair',
+        description: 'Professional septic pump installation, repair, and replacement services.',
+        href: '/services/repairs#pump-repair',
+        features: [
+          'Pump installation & replacement',
+          'Electrical connections',
+          'Alarm system setup',
+          'Performance testing',
+          'Maintenance recommendations'
+        ]
+      },
+      {
+        id: 'distribution-box',
+        title: 'Distribution Box Repairs',
+        description: 'Expert repair and replacement of septic distribution boxes and outlets.',
+        href: '/services/repairs#distribution-box',
+        features: [
+          'Distribution box repair',
+          'Outlet pipe replacement',
+          'Flow balancing',
+          'Baffle replacement',
+          'System optimization'
+        ]
+      },
+      {
+        id: 'drain-field',
+        title: 'Drain Field Repairs',
+        description: 'Comprehensive drain field restoration and repair services.',
+        href: '/services/repairs#drain-field',
+        features: [
+          'Drain field restoration',
+          'Pipe replacement',
+          'Soil remediation',
+          'System rejuvenation',
+          'Alternative solutions'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'maintenance-inspection',
+    title: 'Septic Maintenance & Inspection',
+    description: 'Preventive maintenance and professional inspection services to keep your system healthy.',
+    href: '/services/maintenance-inspection',
+    icon: 'Search',
+    color: 'green',
+    services: [
+      {
+        id: 'pumping-cleaning',
+        title: 'Septic Tank Pumping/Cleaning',
+        description: 'Professional septic tank pumping and cleaning services for optimal system performance.',
+        href: '/services/maintenance-inspection#pumping-cleaning',
+        features: [
+          'Complete waste removal',
+          'Tank inspection included',
+          'Proper waste disposal',
+          'System performance check',
+          'Maintenance recommendations'
+        ]
+      },
+      {
+        id: 'inspections',
+        title: 'Septic Inspections',
+        description: 'Thorough septic system inspections for real estate transactions and maintenance.',
+        href: '/services/maintenance-inspection#inspections',
+        features: [
+          'Pre-purchase inspections',
+          'Routine maintenance inspections',
+          'Detailed reporting',
+          'Problem identification',
+          'Compliance verification'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'grease-waste-management',
+    title: 'Grease & Waste Management',
+    description: 'Commercial grease trap services and specialized waste management solutions.',
+    href: '/services/grease-waste-management',
+    icon: 'Building',
+    color: 'orange',
+    services: [
+      {
+        id: 'grease-trap',
+        title: 'Grease Trap Services',
+        description: 'Commercial grease trap cleaning and maintenance for restaurants and businesses.',
+        href: '/services/grease-waste-management#grease-trap',
+        features: [
+          'Regular maintenance schedules',
+          'Emergency cleaning services',
+          'Compliance documentation',
+          'Proper waste disposal',
+          'Restaurant & commercial focus'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'site-preparation',
+    title: 'Site Preparation & Compliance',
+    description: 'Professional site preparation services and regulatory compliance assistance.',
+    href: '/services/site-preparation-compliance',
+    icon: 'Truck',
+    color: 'purple',
+    services: [
+      {
+        id: 'excavation',
+        title: 'Excavation Services',
+        description: 'Professional excavation services for septic system installation and repairs.',
+        href: '/services/site-preparation-compliance#excavation',
+        features: [
+          'Precision excavation',
+          'Site preparation',
+          'Trenching services',
+          'Backfill & grading',
+          'Restoration work'
+        ]
+      },
+      {
+        id: 'soil-testing',
+        title: 'Soil Testing',
+        description: 'Comprehensive soil testing and percolation testing for septic system design.',
+        href: '/services/site-preparation-compliance#soil-testing',
+        features: [
+          'Percolation testing',
+          'Soil composition analysis',
+          'Drainage assessment',
+          'System sizing recommendations',
+          'Regulatory compliance'
+        ]
+      },
+      {
+        id: 'permit-assistance',
+        title: 'Permit Assistance',
+        description: 'Complete permit assistance and regulatory compliance for septic projects.',
+        href: '/services/site-preparation-compliance#permit-assistance',
+        features: [
+          'Permit application assistance',
+          'Regulatory compliance',
+          'Documentation preparation',
+          'Inspection coordination',
+          'Code compliance verification'
+        ]
+      }
+    ]
+  }
+] as const;
+
+// Legacy services for backward compatibility and SEO
 export const SERVICES = [
   {
     id: 'pumping',
@@ -36,7 +260,7 @@ export const SERVICES = [
       'Residential & commercial systems'
     ],
     icon: 'Truck',
-    href: '/services/pumping',
+    href: '/services/maintenance-inspection#pumping-cleaning',
   },
   {
     id: 'installation',
@@ -81,7 +305,7 @@ export const SERVICES = [
       'Maintenance recommendations'
     ],
     icon: 'Search',
-    href: '/services/inspections',
+    href: '/services/maintenance-inspection#inspections',
   },
   {
     id: 'grease-trap',
@@ -96,22 +320,7 @@ export const SERVICES = [
       'Commercial & restaurant focused'
     ],
     icon: 'Building',
-    href: '/services/grease-trap',
-  },
-  {
-    id: 'portable-toilets',
-    title: 'Portable Toilet Rentals',
-    description: 'Clean, reliable portable toilet rentals for construction sites and events.',
-    startingPrice: 'Call for Quote',
-    features: [
-      'Construction site rentals',
-      'Event portable toilets',
-      'Regular service schedules',
-      'Hand sanitizer stations available',
-      'Delivery & pickup included'
-    ],
-    icon: 'Home',
-    href: '/services/portable-toilets',
+    href: '/services/grease-waste-management#grease-trap',
   },
 ] as const;
 
