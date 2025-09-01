@@ -417,46 +417,79 @@ export default function InstallationPage() {
             </motion.div>
 
             <motion.div 
-              className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16"
+              className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16"
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
             >
               {installationServices.map((service, index) => (
-                <motion.div 
-                  key={index} 
-                  className="bg-gradient-to-br from-bg-primary to-bg-secondary border border-primary-accent/30 rounded-3xl p-10 transition-all duration-300 group cursor-pointer"
+                <motion.div
+                  key={service.id}
+                  className="group relative"
                   variants={cardVariants}
                   whileHover={{ 
                     y: -8,
                     scale: 1.02,
-                    borderColor: "rgba(191, 136, 41, 0.6)",
-                    boxShadow: "0 25px 50px rgba(0, 0, 0, 0.15)"
+                    transition: { duration: 0.3, ease: "easeOut" }
                   }}
-                  onHoverStart={() => {}}
-                  onHoverEnd={() => {}}
                 >
-                  <div className="flex items-start space-x-6">
-                    <motion.div 
-                      className="w-16 h-16 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-xl flex items-center justify-center flex-shrink-0"
-                      whileHover={{ rotate: 12, scale: 1.1 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <Wrench className="w-8 h-8 text-white" />
-                    </motion.div>
-                    <div className="flex-1">
-                      <motion.h3 
-                        className="text-2xl font-bold text-primary-dark mb-4 group-hover:text-primary-accent transition-colors duration-300"
+                  {/* Redesigned Card with Elegant Styling */}
+                  <div className="relative bg-white rounded-3xl p-8 h-full shadow-lg border border-gray-200/50 overflow-hidden group-hover:shadow-2xl group-hover:border-primary-accent/30 transition-all duration-300">
+                    {/* Subtle Gradient Overlay on Hover */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-br from-primary-accent/5 via-transparent to-secondary-accent/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                    
+                    {/* Floating Background Element */}
+                    <motion.div
+                      className="absolute top-4 right-4 w-24 h-24 bg-gradient-to-br from-primary-accent/10 to-secondary-accent/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      animate={{
+                        scale: [1, 1.2, 1],
+                        rotate: [0, 180, 360],
+                      }}
+                      transition={{
+                        duration: 8,
+                        repeat: Infinity,
+                        ease: "linear"
+                      }}
+                    />
+                    
+                    {/* Card Content */}
+                    <div className="relative h-full flex flex-col">
+                      {/* Service Icon & Title */}
+                      <motion.div 
+                        className="flex items-start mb-6"
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: index * 0.1 }}
                       >
-                        {service.title}
-                      </motion.h3>
+                        <motion.div 
+                          className="relative p-4 bg-gradient-to-br from-primary-accent/10 to-secondary-accent/5 rounded-2xl mr-4 group-hover:from-primary-accent/20 group-hover:to-secondary-accent/10 transition-all duration-300 flex-shrink-0"
+                          whileHover={{ rotate: 12, scale: 1.1 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <Home className="w-8 h-8 text-primary-accent group-hover:scale-110 transition-transform duration-300" />
+                        </motion.div>
+                        
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-primary-dark group-hover:text-primary-accent transition-colors duration-300 leading-tight">
+                            {service.title}
+                          </h3>
+                          <motion.div
+                            className="h-1 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full mt-2 origin-left"
+                            initial={{ scaleX: 0 }}
+                            whileInView={{ scaleX: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: index * 0.1 + 0.3 }}
+                          />
+                        </div>
+                      </motion.div>
+
+                      {/* Service Description */}
                       <motion.p 
-                        className="text-text-primary mb-6 leading-relaxed"
+                        className="text-gray-600 mb-6 leading-relaxed flex-grow"
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
@@ -464,32 +497,77 @@ export default function InstallationPage() {
                       >
                         {service.description}
                       </motion.p>
-                      
+
+                      {/* Features List */}
                       <motion.div 
-                        className="space-y-3"
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
+                        className="mb-6"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: index * 0.1 + 0.4 }}
                       >
-                        {service.features.map((feature, featureIndex) => (
-                          <motion.div 
-                            key={featureIndex} 
-                            className="flex items-start space-x-3"
-                            initial={{ opacity: 0, x: -10 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.4, delay: index * 0.1 + 0.6 + featureIndex * 0.1 }}
-                          >
-                            <motion.div
-                              whileHover={{ scale: 1.2, rotate: 360 }}
-                              transition={{ duration: 0.3 }}
+                        <ul className="space-y-3">
+                          {service.features.slice(0, 4).map((feature, featureIndex) => (
+                            <motion.li 
+                              key={featureIndex} 
+                              className="flex items-center text-gray-700"
+                              initial={{ opacity: 0, x: -10 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ duration: 0.4, delay: index * 0.1 + featureIndex * 0.1 + 0.5 }}
                             >
-                              <CheckCircle className="w-5 h-5 text-primary-accent flex-shrink-0 mt-1" />
-                            </motion.div>
-                            <span className="text-text-primary">{feature}</span>
+                              <motion.div 
+                                className="w-2 h-2 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full mr-3 flex-shrink-0"
+                                whileInView={{ scale: [0, 1.2, 1] }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: index * 0.1 + featureIndex * 0.1 + 0.6 }}
+                              />
+                              <span className="text-sm font-medium">{feature}</span>
+                            </motion.li>
+                          ))}
+                        </ul>
+                      </motion.div>
+
+                      {/* Enhanced CTA Button */}
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: index * 0.1 + 0.6 }}
+                      >
+                        <motion.button
+                          className="w-full relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-semibold py-4 px-6 rounded-2xl transition-all duration-300 flex items-center justify-center space-x-3 group/btn cursor-pointer"
+                          whileHover={{ scale: 1.02, y: -2 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => {
+                            // Smooth scroll to contact form
+                            const contactSection = document.querySelector('section:last-of-type');
+                            contactSection?.scrollIntoView({ behavior: 'smooth' });
+                          }}
+                        >
+                          {/* Background shine effect */}
+                          <motion.div
+                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                            initial={{ x: '-100%' }}
+                            whileHover={{ x: '100%' }}
+                            transition={{ duration: 0.6 }}
+                          />
+                          
+                          <span className="relative z-10">Get Free Quote</span>
+                          <motion.div
+                            className="relative z-10"
+                            animate={{
+                              x: [0, 4, 0]
+                            }}
+                            transition={{
+                              duration: 1.5,
+                              repeat: Infinity,
+                              ease: "easeInOut"
+                            }}
+                          >
+                            <ArrowRight className="w-5 h-5" />
                           </motion.div>
-                        ))}
+                        </motion.button>
                       </motion.div>
                     </div>
                   </div>
@@ -584,52 +662,103 @@ export default function InstallationPage() {
               {whyChooseInstallation.map((benefit, index) => (
                 <motion.div 
                   key={index} 
-                  className="bg-white rounded-2xl p-8 shadow-lg border border-primary-accent/30 group cursor-pointer"
+                  className="group relative"
                   variants={cardVariants}
                   whileHover={{ 
                     y: -10, 
-                    scale: 1.05,
-                    borderColor: "rgba(191, 136, 41, 0.6)",
-                    boxShadow: "0 25px 50px rgba(0, 0, 0, 0.15)"
+                    scale: 1.02,
+                    transition: { duration: 0.3, ease: "easeOut" }
                   }}
                   onHoverStart={() => setHoveredBenefit(index)}
                   onHoverEnd={() => setHoveredBenefit(null)}
                 >
-                  <motion.div
-                    initial={{ scale: 0, rotate: -180 }}
-                    whileInView={{ scale: 1, rotate: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    whileHover={{ rotate: 12, scale: 1.1 }}
-                  >
-                    <benefit.icon className="w-12 h-12 text-primary-accent mb-6 group-hover:text-secondary-accent transition-colors duration-300" />
-                  </motion.div>
-                  <motion.h3 
-                    className="text-xl font-bold text-primary-dark mb-4 group-hover:text-primary-accent transition-colors duration-300"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.1 + 0.2 }}
-                  >
-                    {benefit.title}
-                  </motion.h3>
-                  <motion.p 
-                    className="text-text-primary leading-relaxed"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.1 + 0.4 }}
-                  >
-                    {benefit.description}
-                  </motion.p>
-                  
-                  {/* Hover Effect Lines */}
-                  <motion.div
-                    className="h-1 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full mt-4 origin-left"
-                    initial={{ scaleX: 0 }}
-                    whileInView={{ scaleX: hoveredBenefit === index ? 1 : 0 }}
-                    transition={{ duration: 0.3 }}
-                  />
+                  {/* Card Container */}
+                  <div className="relative bg-white rounded-2xl p-8 h-full shadow-lg border border-gray-200/50 overflow-hidden group-hover:shadow-2xl group-hover:border-primary-accent/30 transition-all duration-300">
+                    {/* Subtle Gradient Overlay on Hover */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-br from-primary-accent/5 via-transparent to-secondary-accent/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                    
+                    {/* Floating Background Element */}
+                    <motion.div
+                      className="absolute top-2 right-2 w-16 h-16 bg-gradient-to-br from-primary-accent/10 to-secondary-accent/5 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      animate={{
+                        scale: [1, 1.2, 1],
+                        rotate: [0, 180, 360],
+                      }}
+                      transition={{
+                        duration: 6,
+                        repeat: Infinity,
+                        ease: "linear"
+                      }}
+                    />
+                    
+                    {/* Card Content */}
+                    <div className="relative h-full flex flex-col text-center">
+                      {/* Icon Container */}
+                      <motion.div
+                        className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-accent/10 to-secondary-accent/5 rounded-2xl mx-auto mb-6 group-hover:from-primary-accent/20 group-hover:to-secondary-accent/10 transition-all duration-300"
+                        initial={{ scale: 0, rotate: -180 }}
+                        whileInView={{ scale: 1, rotate: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: index * 0.1 }}
+                        whileHover={{ rotate: 12, scale: 1.1 }}
+                      >
+                        <benefit.icon className="w-8 h-8 text-primary-accent group-hover:scale-110 transition-transform duration-300" />
+                      </motion.div>
+
+                      {/* Title */}
+                      <motion.h3 
+                        className="text-lg font-bold text-primary-dark mb-4 group-hover:text-primary-accent transition-colors duration-300"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: index * 0.1 + 0.2 }}
+                      >
+                        {benefit.title}
+                      </motion.h3>
+
+                      {/* Description */}
+                      <motion.p 
+                        className="text-gray-600 leading-relaxed text-sm flex-grow"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: index * 0.1 + 0.4 }}
+                      >
+                        {benefit.description}
+                      </motion.p>
+                      
+                      {/* Animated Progress Line */}
+                      <motion.div
+                        className="relative h-1 mt-6 mx-auto overflow-hidden rounded-full bg-gray-200"
+                        style={{ width: '40%' }}
+                      >
+                        {/* Base line */}
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full"
+                          initial={{ scaleX: 0 }}
+                          whileInView={{ scaleX: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.8, delay: index * 0.1 + 0.6 }}
+                          style={{ originX: 0 }}
+                        />
+                        {/* Hover expansion */}
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full opacity-0"
+                          animate={{ 
+                            scaleX: hoveredBenefit === index ? 2.5 : 1,
+                            opacity: hoveredBenefit === index ? 1 : 0
+                          }}
+                          transition={{ 
+                            duration: 0.3, 
+                            ease: "easeInOut"
+                          }}
+                          style={{ originX: 0 }}
+                        />
+                      </motion.div>
+                    </div>
+                  </div>
                 </motion.div>
               ))}
             </motion.div>
@@ -724,23 +853,39 @@ export default function InstallationPage() {
                   className="relative group"
                   variants={cardVariants}
                 >
+                  {/* Enhanced Card Container */}
                   <motion.div
-                    className="bg-gradient-to-br from-bg-primary to-bg-secondary rounded-2xl p-8 shadow-lg border border-primary-accent/30 h-full relative overflow-hidden"
+                    className="relative bg-white rounded-3xl p-8 h-full shadow-lg border border-gray-200/50 overflow-hidden group-hover:shadow-2xl group-hover:border-primary-accent/30 transition-all duration-300"
                     whileHover={{ 
                       y: -8,
                       scale: 1.02,
-                      boxShadow: "0 25px 50px rgba(0, 0, 0, 0.15)"
+                      transition: { duration: 0.3, ease: "easeOut" }
                     }}
                   >
-                    {/* Gradient Overlay on Hover */}
+                    {/* Subtle Gradient Overlay on Hover */}
                     <motion.div
-                      className="absolute inset-0 bg-gradient-to-br from-primary-accent/5 via-transparent to-secondary-accent/5 rounded-2xl opacity-0 transition-opacity duration-300"
-                      whileHover={{ opacity: 1 }}
+                      className="absolute inset-0 bg-gradient-to-br from-primary-accent/5 via-transparent to-secondary-accent/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     />
                     
-                    <div className="relative z-10">
+                    {/* Floating Background Element */}
+                    <motion.div
+                      className="absolute top-2 right-2 w-16 h-16 bg-gradient-to-br from-primary-accent/10 to-secondary-accent/5 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      animate={{
+                        scale: [1, 1.2, 1],
+                        rotate: [0, 180, 360],
+                      }}
+                      transition={{
+                        duration: 6,
+                        repeat: Infinity,
+                        ease: "linear"
+                      }}
+                    />
+                    
+                    {/* Card Content */}
+                    <div className="relative h-full flex flex-col text-center">
+                      {/* Step Number */}
                       <motion.div 
-                        className="w-16 h-16 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-xl flex items-center justify-center text-white font-bold text-xl mb-6 group-hover:scale-110 transition-transform duration-300"
+                        className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-accent to-secondary-accent rounded-2xl text-white font-bold text-xl mx-auto mb-6 group-hover:scale-110 transition-transform duration-300"
                         initial={{ scale: 0, rotate: -180 }}
                         whileInView={{ scale: 1, rotate: 0 }}
                         viewport={{ once: true }}
@@ -749,8 +894,10 @@ export default function InstallationPage() {
                       >
                         {step.number}
                       </motion.div>
+
+                      {/* Step Title */}
                       <motion.h3 
-                        className="text-xl font-bold text-primary-dark mb-4 group-hover:text-primary-accent transition-colors duration-300"
+                        className="text-lg font-bold text-primary-dark mb-4 group-hover:text-primary-accent transition-colors duration-300"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -758,8 +905,10 @@ export default function InstallationPage() {
                       >
                         {step.title}
                       </motion.h3>
+
+                      {/* Step Description */}
                       <motion.p 
-                        className="text-text-primary mb-4 leading-relaxed"
+                        className="text-gray-600 mb-4 leading-relaxed text-sm flex-grow"
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
@@ -767,19 +916,22 @@ export default function InstallationPage() {
                       >
                         {step.description}
                       </motion.p>
+
+                      {/* Duration Badge */}
                       <motion.div 
-                        className="text-primary-accent text-sm font-semibold"
+                        className="inline-flex items-center px-3 py-2 bg-gradient-to-r from-primary-accent/10 to-secondary-accent/10 rounded-full text-primary-accent text-sm font-semibold mx-auto"
                         initial={{ opacity: 0, scale: 0.8 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.4, delay: index * 0.2 + 0.6 }}
                       >
+                        <Clock className="w-4 h-4 mr-2" />
                         {step.duration}
                       </motion.div>
                     </div>
                   </motion.div>
                   
-                  {/* Animated Connection Arrow */}
+                  {/* Enhanced Connection Arrow */}
                   {index < processSteps.length - 1 && (
                     <motion.div 
                       className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-20"
@@ -789,10 +941,12 @@ export default function InstallationPage() {
                       transition={{ duration: 0.6, delay: index * 0.2 + 0.8 }}
                     >
                       <motion.div
+                        className="bg-white rounded-full p-2 shadow-lg border border-gray-200/50"
                         animate={{ x: [0, 5, 0] }}
                         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                        whileHover={{ scale: 1.1 }}
                       >
-                        <ArrowRight className="w-8 h-8 text-primary-accent/50 group-hover:text-primary-accent transition-colors duration-300" />
+                        <ArrowRight className="w-6 h-6 text-primary-accent" />
                       </motion.div>
                     </motion.div>
                   )}
@@ -878,7 +1032,7 @@ export default function InstallationPage() {
             </motion.div>
 
             <motion.div 
-              className="grid grid-cols-1 md:grid-cols-2 gap-12"
+              className="grid grid-cols-1 md:grid-cols-2 gap-8"
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
@@ -887,45 +1041,73 @@ export default function InstallationPage() {
               {installationBenefits.map((benefit, index) => (
                 <motion.div 
                   key={index} 
-                  className="bg-white rounded-2xl p-10 shadow-lg border border-primary-accent/30 group cursor-pointer relative overflow-hidden"
+                  className="group relative"
                   variants={cardVariants}
                   whileHover={{ 
                     y: -8,
                     scale: 1.02,
-                    boxShadow: "0 25px 50px rgba(0, 0, 0, 0.15)"
+                    transition: { duration: 0.3, ease: "easeOut" }
                   }}
-                  onHoverStart={() => {}}
-                  onHoverEnd={() => {}}
                 >
-                  {/* Subtle Gradient Overlay on Hover */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-br from-primary-accent/5 via-transparent to-secondary-accent/5 rounded-2xl opacity-0 transition-opacity duration-300"
-                    whileHover={{ opacity: 1 }}
-                  />
-                  
-                  <div className="flex items-start space-x-6 relative z-10">
-                    <motion.div 
-                      className="w-14 h-14 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
-                      initial={{ scale: 0, rotate: -90 }}
-                      whileInView={{ scale: 1, rotate: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: index * 0.2 }}
-                      whileHover={{ rotate: 12, scale: 1.2 }}
-                    >
-                      <benefit.icon className="w-7 h-7 text-white" />
-                    </motion.div>
-                    <div className="flex-1">
-                      <motion.h3 
-                        className="text-2xl font-bold text-primary-dark mb-4 group-hover:text-primary-accent transition-colors duration-300"
+                  {/* Enhanced Card Container */}
+                  <div className="relative bg-white rounded-3xl p-8 h-full shadow-lg border border-gray-200/50 overflow-hidden group-hover:shadow-2xl group-hover:border-primary-accent/30 transition-all duration-300">
+                    {/* Subtle Gradient Overlay on Hover */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-br from-primary-accent/5 via-transparent to-secondary-accent/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                    
+                    {/* Floating Background Element */}
+                    <motion.div
+                      className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-primary-accent/10 to-secondary-accent/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      animate={{
+                        scale: [1, 1.2, 1],
+                        rotate: [0, 180, 360],
+                      }}
+                      transition={{
+                        duration: 10,
+                        repeat: Infinity,
+                        ease: "linear"
+                      }}
+                    />
+                    
+                    {/* Card Content */}
+                    <div className="relative h-full flex flex-col">
+                      {/* Header with Icon and Title */}
+                      <motion.div 
+                        className="flex items-start mb-6"
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: index * 0.2 + 0.2 }}
+                        transition={{ duration: 0.6, delay: index * 0.2 }}
                       >
-                        {benefit.title}
-                      </motion.h3>
+                        <motion.div 
+                          className="relative p-4 bg-gradient-to-br from-primary-accent/10 to-secondary-accent/5 rounded-2xl mr-4 group-hover:from-primary-accent/20 group-hover:to-secondary-accent/10 transition-all duration-300 flex-shrink-0"
+                          initial={{ scale: 0, rotate: -90 }}
+                          whileInView={{ scale: 1, rotate: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.6, delay: index * 0.2 }}
+                          whileHover={{ rotate: 12, scale: 1.1 }}
+                        >
+                          <benefit.icon className="w-8 h-8 text-primary-accent group-hover:scale-110 transition-transform duration-300" />
+                        </motion.div>
+                        
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-primary-dark group-hover:text-primary-accent transition-colors duration-300 leading-tight">
+                            {benefit.title}
+                          </h3>
+                          <motion.div
+                            className="h-1 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full mt-2 origin-left"
+                            initial={{ scaleX: 0 }}
+                            whileInView={{ scaleX: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: index * 0.2 + 0.3 }}
+                          />
+                        </div>
+                      </motion.div>
+
+                      {/* Description */}
                       <motion.p 
-                        className="text-text-primary leading-relaxed text-lg"
+                        className="text-gray-600 leading-relaxed flex-grow"
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
@@ -934,14 +1116,43 @@ export default function InstallationPage() {
                         {benefit.description}
                       </motion.p>
                       
-                      {/* Animated Progress Line */}
+                      {/* Bottom Accent */}
                       <motion.div
-                        className="h-1 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full mt-6 origin-left"
-                        initial={{ scaleX: 0 }}
-                        whileInView={{ scaleX: 1 }}
+                        className="mt-6 pt-4 border-t border-gray-100"
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 1, delay: index * 0.2 + 0.6 }}
-                      />
+                        transition={{ duration: 0.6, delay: index * 0.2 + 0.6 }}
+                      >
+                        <motion.div
+                          className="flex items-center text-primary-accent text-sm font-medium"
+                        >
+                          {index === 0 && (
+                            <>
+                              <div className="w-2 h-2 bg-primary-accent rounded-full mr-2"></div>
+                              <span>Tailored Solutions</span>
+                            </>
+                          )}
+                          {index === 1 && (
+                            <>
+                              <div className="w-2 h-2 bg-primary-accent rounded-full mr-2"></div>
+                              <span>Premium Components</span>
+                            </>
+                          )}
+                          {index === 2 && (
+                            <>
+                              <div className="w-2 h-2 bg-primary-accent rounded-full mr-2"></div>
+                              <span>On-Time Delivery</span>
+                            </>
+                          )}
+                          {index === 3 && (
+                            <>
+                              <div className="w-2 h-2 bg-primary-accent rounded-full mr-2"></div>
+                              <span>Full Compliance</span>
+                            </>
+                          )}
+                        </motion.div>
+                      </motion.div>
                     </div>
                   </div>
                 </motion.div>
@@ -1026,7 +1237,7 @@ export default function InstallationPage() {
             </motion.div>
 
             <motion.div 
-              className="space-y-8"
+              className="space-y-6"
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
@@ -1035,49 +1246,108 @@ export default function InstallationPage() {
               {frequentlyAskedQuestions.map((faq, index) => (
                 <motion.div 
                   key={index} 
-                  className="bg-gradient-to-br from-bg-primary to-bg-secondary border border-primary-accent/30 rounded-2xl p-8 shadow-sm group cursor-pointer relative overflow-hidden"
+                  className="group relative"
                   variants={cardVariants}
                   whileHover={{ 
                     y: -4,
                     scale: 1.01,
-                    borderColor: "rgba(191, 136, 41, 0.6)",
-                    boxShadow: "0 20px 40px rgba(0, 0, 0, 0.1)"
+                    transition: { duration: 0.3, ease: "easeOut" }
                   }}
                 >
-                  {/* Hover Gradient Overlay */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-br from-primary-accent/5 via-transparent to-secondary-accent/5 rounded-2xl opacity-0 transition-opacity duration-300"
-                    whileHover={{ opacity: 1 }}
-                  />
-                  
-                  <div className="relative z-10">
-                    <motion.h3 
-                      className="text-xl font-bold text-primary-dark mb-4 group-hover:text-primary-accent transition-colors duration-300"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                    >
-                      {faq.question}
-                    </motion.h3>
-                    <motion.p 
-                      className="text-text-primary leading-relaxed text-lg"
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: index * 0.1 + 0.2 }}
-                    >
-                      {faq.answer}
-                    </motion.p>
-                    
-                    {/* Animated Accent Line */}
+                  {/* Enhanced FAQ Card */}
+                  <div className="relative bg-white rounded-3xl p-8 shadow-lg border border-gray-200/50 overflow-hidden group-hover:shadow-2xl group-hover:border-primary-accent/30 transition-all duration-300">
+                    {/* Subtle Gradient Overlay on Hover */}
                     <motion.div
-                      className="h-0.5 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full mt-6 origin-left"
-                      initial={{ scaleX: 0 }}
-                      whileInView={{ scaleX: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.8, delay: index * 0.1 + 0.4 }}
+                      className="absolute inset-0 bg-gradient-to-br from-primary-accent/5 via-transparent to-secondary-accent/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     />
+                    
+                    {/* Floating Background Element */}
+                    <motion.div
+                      className="absolute top-4 right-4 w-24 h-24 bg-gradient-to-br from-primary-accent/10 to-secondary-accent/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      animate={{
+                        scale: [1, 1.2, 1],
+                        rotate: [0, 180, 360],
+                      }}
+                      transition={{
+                        duration: 8,
+                        repeat: Infinity,
+                        ease: "linear"
+                      }}
+                    />
+                    
+                    {/* Card Content */}
+                    <div className="relative">
+                      {/* Question with Icon */}
+                      <motion.div 
+                        className="flex items-start mb-6"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: index * 0.1 }}
+                      >
+                        {/* Question Icon */}
+                        <motion.div 
+                          className="relative p-3 bg-gradient-to-br from-primary-accent/10 to-secondary-accent/5 rounded-2xl mr-4 group-hover:from-primary-accent/20 group-hover:to-secondary-accent/10 transition-all duration-300 flex-shrink-0"
+                          whileHover={{ rotate: 12, scale: 1.1 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <svg 
+                            className="w-6 h-6 text-primary-accent group-hover:scale-110 transition-transform duration-300" 
+                            fill="none" 
+                            viewBox="0 0 24 24" 
+                            stroke="currentColor"
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                        </motion.div>
+                        
+                        {/* Question Text */}
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-primary-dark group-hover:text-primary-accent transition-colors duration-300 leading-tight">
+                            {faq.question}
+                          </h3>
+                          <motion.div
+                            className="h-1 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full mt-3 origin-left"
+                            initial={{ scaleX: 0 }}
+                            whileInView={{ scaleX: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: index * 0.1 + 0.3 }}
+                          />
+                        </div>
+                      </motion.div>
+
+                      {/* Answer */}
+                      <motion.div 
+                        className="ml-16"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: index * 0.1 + 0.2 }}
+                      >
+                        <p className="text-gray-600 leading-relaxed text-lg">
+                          {faq.answer}
+                        </p>
+                        
+                        {/* Bottom accent */}
+                        <motion.div
+                          className="mt-6 pt-4 border-t border-gray-100"
+                          initial={{ opacity: 0, y: 10 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.6, delay: index * 0.1 + 0.4 }}
+                        >
+                          <motion.a
+                            href="/contact"
+                            className="flex items-center text-primary-accent text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer hover:text-secondary-accent"
+                            whileHover={{ x: 5 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            <span>Need more details?</span>
+                            <ArrowRight className="w-4 h-4 ml-2" />
+                          </motion.a>
+                        </motion.div>
+                      </motion.div>
+                    </div>
                   </div>
                 </motion.div>
               ))}
