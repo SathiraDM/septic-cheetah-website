@@ -1,70 +1,89 @@
-import { Metadata } from 'next';
+'use client';
+
 import Image from 'next/image';
-import { AlertTriangle, CheckCircle, Phone, Shield, Clock, MapPin, Star, ArrowRight, Award, Settings, Zap } from 'lucide-react';
-import { CONTACT_INFO } from '@/lib/constants';
+import { ArrowRight, CheckCircle, Phone, Shield, Clock, AlertTriangle, Wrench, Star, Award } from 'lucide-react';
+import { CONTACT_INFO, SERVICE_CATEGORIES } from '@/lib/constants';
+import { trackPhoneCall } from '@/lib/utils';
 import { ServiceErrorBoundary } from '@/components/ServiceErrorBoundary';
 
-export const metadata: Metadata = {
-  title: 'Emergency Septic System Repairs | Septic Cheetah',
-  description: 'Emergency septic system repairs available 24/7. Fast diagnosis, professional repair, warranty included. Call now for immediate service.',
-  openGraph: {
-    title: 'Emergency Septic System Repairs | Septic Cheetah',
-    description: '24/7 emergency septic repairs with fast response',
-    url: '/services/repairs'
-  }
-};
+// Get repairs category data
+const repairsCategory = SERVICE_CATEGORIES.find(cat => cat.id === 'repairs');
+const repairServices = repairsCategory?.services || [];
 
-const warningSignsData = [
+const urgencyLevels = [
   {
-    icon: AlertTriangle,
-    title: "Sewage Backup",
-    description: "Immediate health hazard requiring emergency response",
-    severity: "critical"
+    level: 'Emergency',
+    timeframe: '< 2 hours',
+    description: 'Sewage backup, system overflow, health hazards',
+    color: 'red'
   },
   {
-    icon: MapPin,
-    title: "System Overflow",
-    description: "Raw sewage surfacing on property",
-    severity: "danger"
+    level: 'Urgent',
+    timeframe: 'Same day',
+    description: 'Pump failures, system not functioning',
+    color: 'orange'
   },
   {
-    icon: Zap,
-    title: "Pump Failure",
-    description: "System not functioning, backup imminent",
-    severity: "warning"
+    level: 'Serious',
+    timeframe: '1-2 days',
+    description: 'Drain field issues, standing water',
+    color: 'yellow'
   },
   {
-    icon: Settings,
-    title: "Regular Maintenance",
-    description: "Preventive repairs and system tune-ups",
-    severity: "info"
+    level: 'Planned',
+    timeframe: '1-2 weeks',
+    description: 'System replacement, major upgrades',
+    color: 'blue'
+  }
+];
+
+const repairBenefits = [
+  {
+    icon: Clock,
+    title: 'Fast Emergency Response',
+    description: '24/7 emergency response with rapid dispatch to address urgent septic failures and protect your property.'
+  },
+  {
+    icon: Shield,
+    title: 'Expert Diagnosis',
+    description: 'Professional assessment and accurate diagnosis to provide the most effective and cost-efficient repair solution.'
+  },
+  {
+    icon: CheckCircle,
+    title: 'Lasting Solutions',
+    description: 'Quality repairs with warranties that fix problems permanently, not just temporarily patch them.'
+  },
+  {
+    icon: Award,
+    title: 'Licensed Technicians',
+    description: 'All repair work performed by licensed professionals with years of experience in septic system restoration.'
   }
 ];
 
 const processSteps = [
   {
-    number: "01",
-    title: "Emergency Dispatch",
-    description: "Immediate dispatch of emergency repair team with all necessary equipment",
-    duration: "< 30 min"
+    number: '01',
+    title: 'Emergency Assessment',
+    description: 'Rapid on-site evaluation to identify the problem and determine the best repair approach.',
+    duration: '15-30 min'
   },
   {
-    number: "02", 
-    title: "Rapid Assessment",
-    description: "Comprehensive system diagnosis to identify root cause and damage extent",
-    duration: "15-30 min"
+    number: '02',
+    title: 'Professional Repair',
+    description: 'Expert repair work using quality materials and proven techniques for lasting results.',
+    duration: '1-4 hours'
   },
   {
-    number: "03",
-    title: "Emergency Repair", 
-    description: "Expert repair using quality materials and proven emergency techniques",
-    duration: "1-4 hours"
+    number: '03',
+    title: 'System Testing',
+    description: 'Comprehensive testing to ensure the repair is complete and the system functions properly.',
+    duration: '15-30 min'
   },
   {
-    number: "04",
-    title: "System Testing",
-    description: "Complete system testing and verification with warranty coverage",
-    duration: "20-30 min"
+    number: '04',
+    title: 'Prevention Planning',
+    description: 'Maintenance recommendations and planning to prevent future problems.',
+    duration: '10-15 min'
   }
 ];
 
@@ -93,20 +112,20 @@ const serviceGuarantees = [
 
 const frequentlyAskedQuestions = [
   {
-    question: "How quickly can you respond to emergencies?",
-    answer: "We provide emergency response within 2 hours for critical situations like sewage backups or system overflows. Our emergency team is available 24/7 with fully equipped trucks."
+    question: 'How quickly can you respond to septic emergencies?',
+    answer: 'We provide 24/7 emergency response with typical arrival times of 1-2 hours for critical emergencies. Our emergency hotline is staffed around the clock to dispatch our repair teams immediately.'
   },
   {
-    question: "What constitutes a septic emergency?",
-    answer: "Septic emergencies include sewage backup in the home, system overflow, pump failures, and any situation creating immediate health hazards or property damage."
+    question: 'How do I know if I need emergency repair vs. replacement?',
+    answer: 'Our experts will assess your system and provide honest recommendations. Generally, if repair costs exceed 50% of replacement cost, or if you\'re having repeated failures, replacement may be more cost-effective long-term.'
   },
   {
-    question: "Do emergency repairs come with warranty?",
-    answer: "Yes, all emergency repairs include a 1-year warranty on parts and labor. We stand behind our emergency work just as we do our scheduled services."
+    question: 'Do you provide warranties on repair work?',
+    answer: 'Yes, we provide comprehensive warranties on all repair work. Emergency repairs include immediate warranty coverage, and major repairs come with extended warranty protection for your peace of mind.'
   },
   {
-    question: "What are your emergency service rates?",
-    answer: "Emergency service includes a $199 service call fee plus repair costs. After-hours, weekend, and holiday services have additional surcharges. All fees are applied toward repair costs."
+    question: 'Can you repair systems installed by other companies?',
+    answer: 'Absolutely. We service and repair all types of septic systems regardless of who installed them. Our expertise covers conventional, aerobic, and specialized system types.'
   }
 ];
 
@@ -114,35 +133,42 @@ export default function RepairsPage() {
   return (
     <ServiceErrorBoundary>
       <main className="min-h-screen bg-white">
-        {/* Elegant Hero Section with Emergency Colors */}
-        <section className="relative bg-gradient-to-br from-red-900 via-red-800 to-orange-900 min-h-[90vh] flex items-center overflow-hidden">
+        {/* Hero Section */}
+        <section 
+          className="relative bg-gradient-to-br from-primary-dark via-primary-dark/95 to-secondary-accent flex items-center justify-center overflow-hidden service-hero-responsive"
+        >
+          {/* Background Elements */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-dark/55 via-primary-dark/35 to-secondary-accent/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/30 to-black/10"></div>
+          <div className="absolute inset-0 bg-red-900/20"></div>
+          
           {/* Subtle Background Pattern */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-20 left-20 w-64 h-64 bg-red-500 rounded-full blur-3xl"></div>
             <div className="absolute bottom-20 right-20 w-80 h-80 bg-orange-500 rounded-full blur-3xl"></div>
           </div>
           
-          <div className="container-service z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="septic-max-width z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center hero-grid-mobile">
               {/* Content Side */}
-              <div className="space-y-8 text-center lg:text-center flex flex-col justify-center">
+              <div className="space-y-8 text-center lg:text-center flex flex-col justify-center hero-content-mobile">
                 <div className="space-y-8">
-                  <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
+                  <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight hero-title-320">
                     <span className="text-white">Emergency</span>
                     <span className="block text-red-300">Septic Repairs</span>
                   </h1>
                   
-                  <p className="text-lg lg:text-xl text-red-100 leading-relaxed max-w-2xl mx-auto">
+                  <p className="text-lg lg:text-xl text-red-100 leading-relaxed max-w-2xl mx-auto hero-subtitle-320">
                     24/7 emergency septic repair services with rapid response times. 
                     Professional technicians ready when your system fails.
                   </p>
                 </div>
 
                 {/* Service Guarantees */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto service-guarantees-320">
                   {serviceGuarantees.map((guarantee, index) => (
-                    <div key={index} className="flex items-center space-x-3 p-4 bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl hover:shadow-lg transition-all duration-300">
-                      <guarantee.icon className="w-6 h-6 text-red-300 flex-shrink-0" />
+                    <div key={index} className="flex items-center space-x-3 p-4 bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl hover:shadow-lg transition-all duration-300 guarantee-card-320">
+                      <guarantee.icon className="w-6 h-6 text-red-300 flex-shrink-0 icon-320-sm" />
                       <div>
                         <div className="font-bold text-white text-sm">{guarantee.title}</div>
                         <div className="text-red-200 text-xs">{guarantee.description}</div>
@@ -152,40 +178,42 @@ export default function RepairsPage() {
                 </div>
 
                 {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center emergency-cta-ultra-responsive">
                   <a
                     href={`tel:${CONTACT_INFO.emergencyPhone}`}
-                    className="group relative overflow-hidden bg-gradient-to-r from-red-500 to-orange-500 text-white font-bold py-5 px-8 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 hover:shadow-xl hover:scale-105 animate-pulse"
+                    onClick={() => trackPhoneCall('repairs_emergency_hero')}
+                    className="group relative overflow-hidden bg-gradient-to-r from-red-500 to-orange-500 text-white font-bold py-5 px-8 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 hover:shadow-xl hover:scale-105 animate-pulse emergency-banner-320"
                   >
-                    <AlertTriangle className="w-6 h-6" />
-                    <span className="text-lg">Emergency: {CONTACT_INFO.emergencyPhone}</span>
-                    <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                    <AlertTriangle className="w-6 h-6 icon-320-md" />
+                    <span className="text-lg emergency-text-320">Emergency: {CONTACT_INFO.emergencyPhone}</span>
+                    <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform icon-320-md" />
                   </a>
                   <a
                     href={`tel:${CONTACT_INFO.phone}`}
-                    className="bg-white/20 text-white font-bold py-5 px-8 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 hover:bg-white/30 hover:shadow-xl hover:scale-105"
+                    onClick={() => trackPhoneCall('repairs_hero')}
+                    className="bg-white/20 text-white font-bold py-5 px-8 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 hover:bg-white/30 hover:shadow-xl hover:scale-105 emergency-banner-320"
                   >
-                    <Phone className="w-6 h-6" />
-                    <span className="text-lg">Schedule Repair</span>
+                    <Phone className="w-6 h-6 icon-320-md" />
+                    <span className="text-lg emergency-text-320">Schedule Repair</span>
                   </a>
                 </div>
               </div>
 
               {/* Image Side */}
               <div className="relative flex justify-center lg:justify-end">
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-lg w-full">
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-lg w-full service-image-320">
                   <Image
                     src="https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?w=600&h=500&fit=crop"
                     alt="Emergency septic repair service"
                     width={600}
                     height={500}
-                    className="object-cover w-full h-[500px]"
+                    className="object-cover w-full h-[500px] image-320-responsive"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                 </div>
                 
                 {/* Floating Emergency Badge */}
-                <div className="absolute -bottom-4 -left-4 bg-gradient-to-r from-red-500 to-orange-500 text-white p-6 rounded-xl shadow-xl animate-pulse">
+                <div className="absolute -bottom-4 -left-4 bg-gradient-to-r from-red-500 to-orange-500 text-white p-6 rounded-xl shadow-xl animate-pulse floating-badge-320">
                   <div className="text-2xl font-bold">24/7</div>
                   <div className="text-sm opacity-90">Emergency Service</div>
                 </div>
@@ -205,13 +233,13 @@ export default function RepairsPage() {
           </div>
         </section>
 
-        {/* Warning Signs Section */}
+        {/* Repair Services Section */}
         <section className="py-24 bg-white">
-          <div className="container-service">
+          <div className="septic-max-width">
             <div className="text-center mb-20">
               <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-                <span className="text-primary-dark">Emergency</span>
-                <span className="block text-red-600">Repair Situations</span>
+                <span className="text-primary-dark">Repair</span>
+                <span className="block text-red-600">Services</span>
               </h2>
               {/* Modern decorative line */}
               <div className="flex items-center justify-center mb-6">
@@ -220,48 +248,44 @@ export default function RepairsPage() {
                 <div className="h-px bg-gradient-to-r from-transparent via-red-600 to-transparent w-32"></div>
               </div>
               <p className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed">
-                Don&apos;t wait when these emergency situations occur. Immediate professional response prevents health hazards and property damage.
+                Comprehensive septic repair services from emergency response to complete system replacement
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-              {warningSignsData.map((sign, index) => {
-                const severityStyles = {
-                  critical: "bg-red-50 border-red-200 text-red-800 hover:bg-red-100",
-                  danger: "bg-orange-50 border-orange-200 text-orange-800 hover:bg-orange-100", 
-                  warning: "bg-yellow-50 border-yellow-200 text-yellow-800 hover:bg-yellow-100",
-                  info: "bg-blue-50 border-blue-200 text-blue-800 hover:bg-blue-100"
-                };
-
-                return (
-                  <div key={index} className={`p-8 border-2 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-xl ${severityStyles[sign.severity as keyof typeof severityStyles]}`}>
-                    <sign.icon className="w-10 h-10 mb-6" />
-                    <h3 className="text-lg font-bold mb-3">{sign.title}</h3>
-                    <p className="text-sm opacity-90 leading-relaxed">{sign.description}</p>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+              {repairServices.map((service) => (
+                <div key={service.id} id={service.id} className="bg-gradient-to-br from-bg-primary to-bg-secondary border border-red-200 rounded-3xl p-8 hover:border-red-400 transition-all duration-300 hover:shadow-xl">
+                  <div className="flex items-start space-x-6">
+                    <div className="w-16 h-16 bg-gradient-to-r from-red-500 to-red-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <Wrench className="w-8 h-8 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold text-primary-dark mb-4">{service.title}</h3>
+                      <p className="text-text-primary mb-6 leading-relaxed">{service.description}</p>
+                      
+                      <div className="space-y-3">
+                        {service.features.map((feature, featureIndex) => (
+                          <div key={featureIndex} className="flex items-start space-x-3">
+                            <CheckCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-1" />
+                            <span className="text-text-primary">{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                );
-              })}
-            </div>
-
-            <div className="text-center">
-              <a
-                href={`tel:${CONTACT_INFO.emergencyPhone}`}
-                className="inline-flex items-center space-x-3 bg-gradient-to-r from-red-600 to-orange-600 text-white font-bold py-5 px-10 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-              >
-                <AlertTriangle className="w-6 h-6" />
-                <span className="text-lg">Call Emergency Line</span>
-              </a>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Process Section */}
+        {/* Urgency Levels Section */}
         <section className="py-24 bg-gradient-to-br from-bg-primary to-bg-secondary">
-          <div className="container-service">
+          <div className="septic-max-width">
             <div className="text-center mb-20">
               <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-                <span className="text-primary-dark">Our Emergency</span>
-                <span className="block text-red-600">Response Process</span>
+                <span className="text-primary-dark">Response</span>
+                <span className="block text-red-600">Urgency Levels</span>
               </h2>
               {/* Modern decorative line */}
               <div className="flex items-center justify-center mb-6">
@@ -270,15 +294,57 @@ export default function RepairsPage() {
                 <div className="h-px bg-gradient-to-r from-transparent via-red-600 to-transparent w-32"></div>
               </div>
               <p className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed">
-                Systematic emergency response ensuring rapid diagnosis and professional repair every time
+                We prioritize repairs based on urgency to ensure emergency situations get immediate attention
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {urgencyLevels.map((level, index) => {
+                const colorStyles = {
+                  red: "bg-red-50 border-red-200 text-red-800",
+                  orange: "bg-orange-50 border-orange-200 text-orange-800",
+                  yellow: "bg-yellow-50 border-yellow-200 text-yellow-800",
+                  blue: "bg-blue-50 border-blue-200 text-blue-800"
+                };
+
+                return (
+                  <div key={index} className={`p-8 border-2 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-xl ${colorStyles[level.color as keyof typeof colorStyles]}`}>
+                    <div className="text-center mb-6">
+                      <div className="text-2xl font-bold mb-2">{level.level}</div>
+                      <div className="text-lg font-semibold opacity-80">{level.timeframe}</div>
+                    </div>
+                    <p className="text-sm opacity-90 leading-relaxed text-center">{level.description}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Repair Process Section */}
+        <section className="py-24 bg-white">
+          <div className="septic-max-width">
+            <div className="text-center mb-20">
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+                <span className="text-primary-dark">Our Repair</span>
+                <span className="block text-red-600">Process</span>
+              </h2>
+              {/* Modern decorative line */}
+              <div className="flex items-center justify-center mb-6">
+                <div className="h-px bg-gradient-to-r from-transparent via-red-600 to-transparent w-32"></div>
+                <div className="w-2 h-2 bg-red-600 rounded-full mx-4"></div>
+                <div className="h-px bg-gradient-to-r from-transparent via-red-600 to-transparent w-32"></div>
+              </div>
+              <p className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed">
+                Systematic repair process ensuring rapid diagnosis and professional solutions every time
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {processSteps.map((step, index) => (
                 <div key={index} className="relative">
-                  <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-red-200">
-                    <div className="w-16 h-16 bg-gradient-to-r from-red-600 to-orange-600 rounded-xl flex items-center justify-center text-white font-bold text-xl mb-6">
+                  <div className="bg-gradient-to-br from-bg-primary to-bg-secondary rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-red-200">
+                    <div className="w-16 h-16 bg-gradient-to-r from-red-500 to-red-600 rounded-xl flex items-center justify-center text-white font-bold text-xl mb-6">
                       {step.number}
                     </div>
                     <h3 className="text-xl font-bold text-primary-dark mb-4">{step.title}</h3>
@@ -298,13 +364,13 @@ export default function RepairsPage() {
           </div>
         </section>
 
-        {/* Pricing Section */}
-        <section className="py-24 bg-white">
-          <div className="container-service">
+        {/* Repair Benefits Section */}
+        <section className="py-24 bg-gradient-to-br from-bg-primary to-bg-secondary">
+          <div className="septic-max-width">
             <div className="text-center mb-20">
               <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-                <span className="text-primary-dark">Emergency</span>
-                <span className="block text-red-600">Service Pricing</span>
+                <span className="text-primary-dark">Why Choose Our</span>
+                <span className="block text-red-600">Repair Services</span>
               </h2>
               {/* Modern decorative line */}
               <div className="flex items-center justify-center mb-6">
@@ -313,92 +379,31 @@ export default function RepairsPage() {
                 <div className="h-px bg-gradient-to-r from-transparent via-red-600 to-transparent w-32"></div>
               </div>
               <p className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed">
-                Transparent emergency pricing with no hidden fees - you&apos;ll know exactly what to expect.
+                Professional repair advantages that provide long-term solutions and peace of mind
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-              {/* Pricing Card */}
-              <div className="bg-gradient-to-br from-bg-primary to-bg-secondary rounded-3xl p-10 border-2 border-red-200 hover:border-red-400 transition-all duration-300 hover:shadow-xl">
-                <div className="text-center mb-10">
-                  <div className="text-5xl font-bold text-red-600 mb-4">$199 - $499</div>
-                  <div className="text-2xl text-primary-dark font-semibold">Emergency Service Call</div>
-                  {/* Small decorative line */}
-                  <div className="flex items-center justify-center mt-4 mb-2">
-                    <div className="h-px bg-gradient-to-r from-transparent via-red-600/50 to-transparent w-20"></div>
-                    <div className="w-1 h-1 bg-red-600/50 rounded-full mx-2"></div>
-                    <div className="h-px bg-gradient-to-r from-transparent via-red-600/50 to-transparent w-20"></div>
-                  </div>
-                  <div className="text-text-primary mt-3">Plus repair costs</div>
-                </div>
-                
-                <div className="space-y-6 mb-10">
-                  <div className="flex justify-between items-center py-3 border-b border-red-200">
-                    <span className="text-text-primary font-medium">Emergency Response:</span>
-                    <span className="font-bold text-primary-dark">{"< 2 hours"}</span>
-                  </div>
-                  <div className="flex justify-between items-center py-3 border-b border-red-200">
-                    <span className="text-text-primary font-medium">24/7 Availability:</span>
-                    <span className="font-bold text-green-600">Yes</span>
-                  </div>
-                  <div className="flex justify-between items-center py-3 border-b border-red-200">
-                    <span className="text-text-primary font-medium">After-Hours Surcharge:</span>
-                    <span className="font-bold text-orange-600">+$100</span>
-                  </div>
-                  <div className="flex justify-between items-center py-3">
-                    <span className="text-text-primary font-medium">Repair Warranty:</span>
-                    <span className="font-bold text-green-600">1 Year</span>
-                  </div>
-                </div>
-
-                <a
-                  href={`tel:${CONTACT_INFO.emergencyPhone}`}
-                  className="block w-full text-center bg-gradient-to-r from-red-600 to-orange-600 text-white font-bold py-5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-lg"
-                >
-                  Call Emergency Line
-                </a>
-              </div>
-
-              {/* What&apos;s Included Card */}
-              <div className="bg-gradient-to-br from-red-900 to-orange-900 text-white rounded-3xl p-10">
-                <h3 className="text-3xl font-bold mb-10 text-center">
-                  Emergency Service Includes
-                  <span className="block text-lg font-normal text-white/80 mt-3">Complete emergency response</span>
-                </h3>
-                
-                <div className="space-y-6 mb-10">
-                  {[
-                    "24/7 emergency response dispatch",
-                    "Complete system diagnosis", 
-                    "Immediate containment measures",
-                    "Professional emergency repair",
-                    "Quality parts and materials",
-                    "1-year warranty on all work"
-                  ].map((item, index) => (
-                    <div key={index} className="flex items-start space-x-4">
-                      <CheckCircle className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
-                      <span className="text-white/90 leading-relaxed">{item}</span>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              {repairBenefits.map((benefit, index) => (
+                <div key={index} className="bg-white rounded-2xl p-10 shadow-lg hover:shadow-xl transition-all duration-300 border border-red-200">
+                  <div className="flex items-start space-x-6">
+                    <div className="w-14 h-14 bg-gradient-to-r from-red-500 to-red-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <benefit.icon className="w-7 h-7 text-white" />
                     </div>
-                  ))}
-                </div>
-                
-                <div className="bg-green-900/30 border border-green-400/30 rounded-xl p-6">
-                  <div className="flex items-center space-x-3 mb-3">
-                    <Shield className="w-6 h-6 text-green-400" />
-                    <span className="font-bold text-green-300 text-lg">Emergency Repair Warranty</span>
+                    <div>
+                      <h3 className="text-2xl font-bold text-primary-dark mb-4">{benefit.title}</h3>
+                      <p className="text-text-primary leading-relaxed text-lg">{benefit.description}</p>
+                    </div>
                   </div>
-                  <p className="text-green-200 leading-relaxed">
-                    All emergency repairs come with a 1-year warranty on parts and labor for your peace of mind.
-                  </p>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
 
         {/* FAQ Section */}
-        <section className="py-24 bg-gradient-to-br from-bg-primary to-bg-secondary">
-          <div className="container-service">
+        <section className="py-24 bg-white">
+          <div className="septic-max-width">
             <div className="text-center mb-20">
               <h2 className="text-4xl lg:text-5xl font-bold mb-6">
                 <span className="text-primary-dark">Frequently Asked</span>
@@ -411,13 +416,13 @@ export default function RepairsPage() {
                 <div className="h-px bg-gradient-to-r from-transparent via-red-600 to-transparent w-32"></div>
               </div>
               <p className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed">
-                Get answers to common questions about emergency septic repair services
+                Get answers to common questions about septic system repair services
               </p>
             </div>
 
             <div className="space-y-8">
               {frequentlyAskedQuestions.map((faq, index) => (
-                <div key={index} className="bg-white border border-red-200 rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:border-red-400">
+                <div key={index} className="bg-gradient-to-br from-bg-primary to-bg-secondary border border-red-200 rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:border-red-400">
                   <h3 className="text-xl font-bold text-primary-dark mb-4">{faq.question}</h3>
                   <p className="text-text-primary leading-relaxed text-lg">{faq.answer}</p>
                 </div>
@@ -432,7 +437,7 @@ export default function RepairsPage() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(255,255,255,0.1)_0%,transparent_50%)] pointer-events-none"></div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,165,0,0.2)_0%,transparent_50%)] pointer-events-none"></div>
           
-          <div className="container-service text-center z-10">
+          <div className="septic-max-width text-center z-10">
             <h2 className="text-4xl lg:text-5xl font-bold mb-8">
               Septic Emergency? <span className="text-red-300">Don&apos;t Wait!</span>
             </h2>
@@ -442,17 +447,14 @@ export default function RepairsPage() {
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <a
                 href={`tel:${CONTACT_INFO.emergencyPhone}`}
-                className="bg-white text-red-600 hover:bg-gray-100 font-bold py-6 px-10 rounded-xl text-xl inline-flex items-center justify-center space-x-4 transition-all duration-300 hover:scale-105 shadow-xl"
+                onClick={() => trackPhoneCall('repairs_final_cta')}
+                className="bg-white text-red-600 hover:bg-gray-100 font-bold py-8 px-12 rounded-xl text-2xl inline-flex items-center justify-center space-x-4 transition-all duration-300 hover:scale-105 shadow-xl"
               >
-                <AlertTriangle className="w-7 h-7" />
-                <span>Emergency: {CONTACT_INFO.emergencyPhone}</span>
-              </a>
-              <a
-                href={`tel:${CONTACT_INFO.phone}`}
-                className="bg-red-800 hover:bg-red-900 text-white font-bold py-6 px-10 rounded-xl text-xl inline-flex items-center justify-center space-x-4 transition-all duration-300 hover:scale-105 shadow-xl"
-              >
-                <Phone className="w-7 h-7" />
-                <span>Schedule Repair</span>
+                <AlertTriangle className="w-8 h-8" />
+                <div className="text-left">
+                  <div className="text-sm">24/7 EMERGENCY</div>
+                  <div className="text-2xl font-black">{CONTACT_INFO.emergencyPhone}</div>
+                </div>
               </a>
             </div>
           </div>

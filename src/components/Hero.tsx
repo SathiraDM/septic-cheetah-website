@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Phone, ArrowRight, Droplets, Wrench } from 'lucide-react';
+import { Phone, ArrowRight, Wrench } from 'lucide-react';
 import { CONTACT_INFO } from '@/lib/constants';
 import { trackPhoneCall } from '@/lib/utils';
 import { useState, useEffect } from 'react';
@@ -19,7 +19,7 @@ export default function Hero() {
       alt: "Professional septic tank services"
     },
     {
-      src: "/images/hero-02.png",
+      src: "/images/hero-02.jpg",
       alt: "Heavy equipment for septic installation"
     },
     {
@@ -61,13 +61,13 @@ export default function Hero() {
       
       if (screenHeight < 700) {
         // Fixed height for very small screens - ensures scrollability
-        setHeroHeight('600px');
+        setHeroHeight('700px');
       } else {
         // Use viewport height minus the header heights for proper alignment
         // Status bar: ~28px (py-1 + border), Main header: ~72px (py-3 + logo height)
         // Total header height: approximately 100px
         const headerOffset = 90;
-        const availableHeight = Math.max(600, screenHeight - headerOffset);
+        const availableHeight = Math.max(700, screenHeight - headerOffset);
         setHeroHeight(`${availableHeight}px`);
       }
     };
@@ -209,7 +209,7 @@ export default function Hero() {
           y: { duration: 3, repeat: Infinity, ease: "easeInOut" }
         }}
       >
-        <Droplets className="w-6 h-6" />
+        <Wrench className="w-6 h-6" />
       </motion.div>
       <motion.div 
         className="absolute bottom-32 right-1/4 text-secondary-accent/40"
@@ -230,23 +230,23 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-radial from-black/20 via-black/8 to-transparent blur-3xl opacity-70"></div>
         
         <motion.div 
-          className="max-w-4xl mx-auto text-center relative z-10"
+          className="max-w-4xl lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto text-center relative z-10 hero-320-compact"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           {/* Centered Main Content */}
-          <motion.div className="space-y-6" variants={itemVariants}>
+          <motion.div className="space-y-4 sm:space-y-6 lg:space-y-8 xl:space-y-10 2xl:space-y-12" variants={itemVariants}>
             {/* Main Heading with Animated Text */}
-            <div className="space-y-4">
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight drop-shadow-2xl">
+            <div className="space-y-3 sm:space-y-4 lg:space-y-5 xl:space-y-6 2xl:space-y-8">
+              <h1 className="text-3xl xs:text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-white leading-tight drop-shadow-2xl hero-title-320">
                 Professional
                 <br />
                 <span className="relative inline-block">
                   <span className="text-primary-accent drop-shadow-lg">Septic</span>
                   <motion.span 
                     key={currentWordIndex}
-                    className="block text-primary-accent mt-1 drop-shadow-lg"
+                    className="block text-primary-accent mt-0.5 sm:mt-1 lg:mt-1 xl:mt-1.5 2xl:mt-2 drop-shadow-lg"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
@@ -254,9 +254,9 @@ export default function Hero() {
                   >
                     {septicWords[currentWordIndex]}
                   </motion.span>
-                  {/* Animated Underline */}
+                  {/* Animated Underline - Thinner with increased gap */}
                   <motion.div 
-                    className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-1 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full"
+                    className="absolute -bottom-2 sm:-bottom-3 lg:-bottom-3 xl:-bottom-4 2xl:-bottom-5 left-1/2 transform -translate-x-1/2 h-0.5 sm:h-0.5 lg:h-0.5 xl:h-1 2xl:h-1 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full"
                     initial={{ width: 0 }}
                     animate={{ width: "100%" }}
                     transition={{ duration: 0.8, delay: 0.5 }}
@@ -264,7 +264,7 @@ export default function Hero() {
                 </span>
               </h1>
               <motion.p 
-                className="text-xl md:text-2xl text-primary-accent font-medium drop-shadow-md"
+                className="text-lg xs:text-lg sm:text-xl md:text-xl lg:text-2xl xl:text-2xl 2xl:text-3xl text-primary-accent font-medium drop-shadow-md hero-subtitle-320"
                 variants={itemVariants}
               >
                 Fast, Reliable and Kinda Dirty
@@ -273,7 +273,7 @@ export default function Hero() {
 
             {/* Description */}
             <motion.p 
-              className="text-lg md:text-xl text-white max-w-3xl mx-auto leading-relaxed drop-shadow-md"
+              className="text-sm xs:text-base sm:text-base md:text-lg lg:text-lg xl:text-xl 2xl:text-2xl text-white max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl mx-auto leading-relaxed drop-shadow-md px-4 sm:px-0"
               variants={itemVariants}
             >
               Emergency septic services across the region with same day response guaranteed. 
@@ -282,29 +282,29 @@ export default function Hero() {
 
             {/* CTA Buttons */}
             <motion.div 
-              className="flex flex-col sm:flex-row gap-4 justify-center"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:gap-5 xl:gap-6 2xl:gap-8 justify-center px-4 sm:px-0 btn-group-320"
               variants={itemVariants}
             >
               <motion.a
-                href={`tel:${CONTACT_INFO.phone}`}
-                onClick={() => trackPhoneCall('hero_primary')}
-                className="relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-4 px-8 rounded-xl shadow-2xl transition-all duration-300 flex items-center justify-center space-x-3 group"
+                href={`tel:${CONTACT_INFO.emergencyPhone}`}
+                onClick={() => trackPhoneCall('hero_emergency')}
+                className="relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-3 sm:py-3 lg:py-4 xl:py-4 2xl:py-5 px-6 sm:px-7 lg:px-8 xl:px-9 2xl:px-11 rounded-xl shadow-2xl transition-all duration-300 flex items-center justify-center space-x-2 sm:space-x-2 lg:space-x-3 xl:space-x-3 2xl:space-x-4 group text-sm sm:text-sm lg:text-base xl:text-base 2xl:text-lg emergency-btn-ultra-compact before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/20 before:to-white/10 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:rounded-[inherit]"
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <Phone className="w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
-                <span className="relative z-10">CALL NOW: {CONTACT_INFO.phone}</span>
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 2xl:w-7 2xl:h-7 relative z-10 group-hover:rotate-12 transition-transform duration-300 icon-320-sm" />
+                <span className="relative z-10 whitespace-nowrap">CALL NOW: {CONTACT_INFO.emergencyPhone}</span>
               </motion.a>
 
-              <motion.button 
-                className="bg-white/20 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white hover:text-primary-dark font-bold py-4 px-8 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 group"
+              <motion.a
+                href="#contact-form"
+                className="bg-white/20 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white hover:text-primary-dark font-bold py-3 sm:py-3 lg:py-4 xl:py-4 2xl:py-5 px-6 sm:px-7 lg:px-8 xl:px-9 2xl:px-11 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 lg:space-x-2 xl:space-x-2 2xl:space-x-3 group text-sm sm:text-sm lg:text-base xl:text-base 2xl:text-lg emergency-btn-ultra-compact"
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
               >
                 <span>Get Free Estimate</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-              </motion.button>
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 2xl:w-7 2xl:h-7 group-hover:translate-x-1 transition-transform duration-300 icon-320-sm" />
+              </motion.a>
             </motion.div>
           </motion.div>
         </motion.div>
@@ -327,7 +327,7 @@ export default function Hero() {
             let scrollTarget;
             
             if (screenHeight < 700) {
-              scrollTarget = 600;
+              scrollTarget = 700;
             } else if (screenHeight >= 700 && screenHeight < 750) {
               scrollTarget = Math.floor(screenHeight * 0.9);
             } else {

@@ -74,9 +74,7 @@ body {
 }
 
 /* Ensure all containers stay within viewport */
-.container,
-section,
-div {
+.container {
   max-width: 100vw;
 }
 
@@ -169,21 +167,6 @@ section {
   @apply bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 border border-gray-100;
 }
 
-/* Sticky Phone Button */
-.sticky-phone {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-@media (min-width: 768px) {
-  .sticky-phone {
-    display: none;
-  }
-}
-
 /* Trust Signals */
 .trust-bar {
   @apply flex flex-wrap justify-center items-center gap-4 py-4 text-sm font-medium text-secondary-accent;
@@ -231,11 +214,11 @@ section {
 }
 
 /* Responsive Typography */
-.hero-title {
+.hero-title-legacy {
   @apply text-4xl md:text-5xl lg:text-6xl font-bold text-primary-dark leading-tight;
 }
 
-.hero-subtitle {
+.hero-subtitle-legacy {
   @apply text-xl md:text-2xl lg:text-3xl text-secondary-accent font-medium;
 }
 
@@ -479,4 +462,1283 @@ div.septic-content-constrained {
 .septic-full-bg .septic-max-width {
   position: relative !important;
   z-index: 10 !important;
+}
+
+/* ===== HERO COMPONENT RESPONSIVE ENHANCEMENTS ===== */
+
+/* Force hero text sizes for large screens with higher specificity */
+@media (min-width: 1280px) {
+  .hero-title-320,
+  h1.hero-title-320,
+  .hero-320-compact h1.hero-title-320 {
+    font-size: 4.5rem !important;
+    line-height: 1.1 !important;
+  }
+  
+  .hero-subtitle-320,
+  p.hero-subtitle-320,
+  .hero-320-compact p.hero-subtitle-320 {
+    font-size: 1.875rem !important;
+  }
+  
+  /* Force container width */
+  .hero-320-compact {
+    max-width: 72rem !important;
+  }
+  
+  /* Emergency button compact styling for xl screens */
+  .emergency-btn-ultra-compact {
+    padding: 1.25rem 2.5rem !important;
+    font-size: 1.125rem !important;
+  }
+  
+  /* Button group spacing */
+  .btn-group-320 {
+    gap: 1.5rem !important;
+  }
+  
+  /* Icon sizing */
+  .icon-320-sm {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+  }
+}
+
+@media (min-width: 1536px) {
+  .hero-title-320,
+  h1.hero-title-320,
+  .hero-320-compact h1.hero-title-320 {
+    font-size: 6rem !important;
+    line-height: 1.1 !important;
+  }
+  
+  .hero-subtitle-320,
+  p.hero-subtitle-320,
+  .hero-320-compact p.hero-subtitle-320 {
+    font-size: 2.25rem !important;
+  }
+  
+  /* Force container width */
+  .hero-320-compact {
+    max-width: 80rem !important;
+  }
+  
+  /* Emergency button compact styling for 2xl screens */
+  .emergency-btn-ultra-compact {
+    padding: 1.5rem 3rem !important;
+    font-size: 1.25rem !important;
+  }
+  
+  /* Button group spacing */
+  .btn-group-320 {
+    gap: 2rem !important;
+  }
+  
+  /* Icon sizing */
+  .icon-320-sm {
+    width: 1.75rem !important;
+    height: 1.75rem !important;
+  }
+}
+
+/* Additional hero element forcing for large screens */
+@media (min-width: 1280px) {
+  /* Force all text in hero to scale */
+  .hero-320-compact .text-lg,
+  .hero-320-compact .text-xl,
+  .hero-320-compact .text-2xl {
+    font-size: 1.5rem !important;
+  }
+  
+  /* Force spacing */
+  .hero-320-compact .space-y-4 > * + *,
+  .hero-320-compact .space-y-6 > * + * {
+    margin-top: 2rem !important;
+  }
+  
+  .hero-320-compact .space-y-8 > * + * {
+    margin-top: 2.5rem !important;
+  }
+}
+
+@media (min-width: 1536px) {
+  /* Force all text in hero to scale even more */
+  .hero-320-compact .text-lg,
+  .hero-320-compact .text-xl,
+  .hero-320-compact .text-2xl {
+    font-size: 1.875rem !important;
+  }
+  
+  /* Force spacing */
+  .hero-320-compact .space-y-4 > * + *,
+  .hero-320-compact .space-y-6 > * + * {
+    margin-top: 3rem !important;
+  }
+  
+  .hero-320-compact .space-y-8 > * + *,
+  .hero-320-compact .space-y-10 > * + *,
+  .hero-320-compact .space-y-12 > * + * {
+    margin-top: 4rem !important;
+  }
+}
+
+/* ===== MOBILE RESPONSIVENESS ENHANCEMENTS ===== */
+
+/* Extra small screens - phones in portrait */
+@media (max-width: 479px) {
+  /* Typography scaling for very small screens */
+  .hero-title-mobile {
+    font-size: clamp(1.75rem, 8vw, 2.5rem) !important;
+    line-height: 1.2 !important;
+  }
+  
+  .hero-subtitle-mobile {
+    font-size: clamp(1rem, 4vw, 1.25rem) !important;
+  }
+  
+  .section-title-mobile {
+    font-size: clamp(1.5rem, 6vw, 2rem) !important;
+  }
+  
+  /* Reduced padding for mobile */
+  .mobile-px-reduced {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+  
+  .mobile-py-reduced {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+  
+  /* Form elements optimization */
+  .mobile-form-spacing {
+    gap: 0.75rem !important;
+  }
+  
+  .mobile-form-input {
+    padding: 0.625rem !important;
+    font-size: 0.875rem !important;
+  }
+  
+  /* Button optimizations */
+  .mobile-btn-compact {
+    padding: 0.625rem 1rem !important;
+    font-size: 0.875rem !important;
+  }
+}
+
+/* Small screens - phones in landscape and small tablets */
+@media (max-width: 767px) {
+  /* Responsive container padding */
+  .septic-max-width {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  /* Grid adjustments for mobile */
+  .mobile-grid-single {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  
+  /* Text size optimizations */
+  .mobile-text-scale {
+    font-size: clamp(0.875rem, 3.5vw, 1rem) !important;
+  }
+  
+  .mobile-heading-scale {
+    font-size: clamp(1.25rem, 5vw, 1.75rem) !important;
+  }
+  
+  /* Spacing optimizations */
+  .mobile-space-compact {
+    gap: 1rem !important;
+  }
+  
+  .mobile-space-reduced {
+    gap: 0.75rem !important;
+  }
+  
+  /* Hero specific mobile adjustments */
+  .hero-mobile-spacing {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  /* Form mobile optimizations */
+  .form-mobile-compact {
+    padding: 1rem !important;
+    border-radius: 1rem !important;
+  }
+  
+  /* Emergency section mobile adjustments */
+  .emergency-mobile-compact {
+    padding: 0.75rem !important;
+    border-radius: 1rem !important;
+  }
+  
+  /* Button mobile sizing */
+  .btn-mobile-size {
+    padding: 0.75rem 1.5rem !important;
+    font-size: 0.875rem !important;
+  }
+  
+  /* Trust indicators mobile layout */
+  .trust-mobile-layout {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.5rem !important;
+  }
+  
+  /* Icon sizing for mobile */
+  .icon-mobile-sm {
+    width: 1rem !important;
+    height: 1rem !important;
+  }
+  
+  .icon-mobile-md {
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+  }
+}
+
+/* Medium screens optimization */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Tablet specific optimizations */
+  .tablet-text-scale {
+    font-size: clamp(1rem, 2vw, 1.125rem) !important;
+  }
+  
+  .tablet-heading-scale {
+    font-size: clamp(1.5rem, 4vw, 2.25rem) !important;
+  }
+  
+  .tablet-spacing {
+    gap: 1.5rem !important;
+  }
+}
+
+/* Touch target improvements for all mobile devices */
+@media (max-width: 1023px) {
+  .touch-friendly {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+  
+  .touch-button {
+    padding: 0.75rem 1.5rem !important;
+    min-height: 44px !important;
+  }
+  
+  /* Improved form element sizing for touch */
+  .touch-input {
+    min-height: 44px !important;
+    padding: 0.75rem !important;
+  }
+}
+
+/* Breakpoint-specific utility classes */
+.xs\:text-3xl {
+  @media (min-width: 475px) {
+    font-size: 1.875rem !important;
+    line-height: 2.25rem !important;
+  }
+}
+
+.xs\:text-4xl {
+  @media (min-width: 475px) {
+    font-size: 2.25rem !important;
+    line-height: 2.5rem !important;
+  }
+}
+
+.xs\:px-4 {
+  @media (min-width: 475px) {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+.xs\:py-3 {
+  @media (min-width: 475px) {
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+  }
+}
+
+/* Flexbox improvements for mobile */
+.mobile-flex-col {
+  @media (max-width: 767px) {
+    flex-direction: column !important;
+  }
+}
+
+.mobile-items-center {
+  @media (max-width: 767px) {
+    align-items: center !important;
+  }
+}
+
+.mobile-text-center {
+  @media (max-width: 767px) {
+    text-align: center !important;
+  }
+}
+
+/* Grid responsive utilities */
+.mobile-grid-1 {
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Spacing responsive utilities */
+.mobile-gap-3 {
+  @media (max-width: 767px) {
+    gap: 0.75rem !important;
+  }
+}
+
+.mobile-gap-4 {
+  @media (max-width: 767px) {
+    gap: 1rem !important;
+  }
+}
+
+/* ===== ULTRA-SMALL SCREEN OPTIMIZATIONS (320px) ===== */
+/* Targeting screens smaller than 400px for ultra-small phones */
+@media (max-width: 399px) {
+  /* Emergency Banner Fixes - Prevent overflow at 320px */
+  .emergency-banner-320 {
+    padding: 0.5rem !important;
+    font-size: 0.75rem !important;
+    min-height: 40px !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
+  }
+  
+  .emergency-banner-320 .space-x-3 > * + * {
+    margin-left: 0.5rem !important;
+  }
+  
+  .emergency-banner-320 .space-x-4 > * + * {
+    margin-left: 0.5rem !important;
+  }
+  
+  /* Ultra-compact emergency buttons */
+  .emergency-btn-ultra-compact {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.75rem !important;
+    border-radius: 0.5rem !important;
+    min-height: 40px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  
+  /* Testimonial Carousel - Smaller cards for 320px */
+  .testimonial-card-320 {
+    min-width: 280px !important;
+    max-width: 280px !important;
+    margin: 0 0.25rem !important;
+  }
+  
+  .testimonial-card-320.center {
+    min-width: 300px !important;
+    max-width: 300px !important;
+    transform: scale(1.02) !important;
+  }
+  
+  /* Ultra-compact typography */
+  .text-ultra-sm {
+    font-size: 0.625rem !important;
+    line-height: 0.875rem !important;
+  }
+  
+  .text-ultra-xs {
+    font-size: 0.5rem !important;
+    line-height: 0.75rem !important;
+  }
+  
+  /* Hero section 320px optimizations */
+  .hero-320-compact {
+    padding: 1rem 0.5rem !important;
+  }
+  
+  .hero-title-320 {
+    font-size: clamp(1.5rem, 7vw, 2rem) !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.025em !important;
+  }
+  
+  .hero-subtitle-320 {
+    font-size: clamp(0.875rem, 3.5vw, 1rem) !important;
+    line-height: 1.3 !important;
+  }
+  
+  /* Button spacing fixes for 320px */
+  .btn-group-320 {
+    gap: 0.5rem !important;
+    flex-direction: column !important;
+  }
+  
+  .btn-group-320 > * {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+  
+  /* Container padding for 320px */
+  .container-320 {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+  
+  /* Grid adjustments for ultra-small screens */
+  .grid-320-single {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
+  }
+  
+  /* Icon sizing for ultra-small screens */
+  .icon-320-sm {
+    width: 0.875rem !important;
+    height: 0.875rem !important;
+  }
+  
+  .icon-320-md {
+    width: 1rem !important;
+    height: 1rem !important;
+  }
+  
+  /* Service card optimizations for 320px */
+  .service-card-320 {
+    padding: 0.75rem !important;
+    border-radius: 0.75rem !important;
+  }
+  
+  /* Trust indicators ultra-compact */
+  .trust-indicator-320 {
+    font-size: 0.625rem !important;
+    padding: 0.25rem 0.5rem !important;
+    gap: 0.25rem !important;
+  }
+  
+  /* Form elements for 320px */
+  .form-320-compact {
+    padding: 0.5rem !important;
+    font-size: 0.875rem !important;
+    border-radius: 0.5rem !important;
+  }
+  
+  /* Emergency section specific fixes */
+  .emergency-section-320 {
+    padding: 0.75rem !important;
+    margin: 0.5rem !important;
+    border-radius: 0.75rem !important;
+  }
+  
+  .emergency-text-320 {
+    font-size: 0.75rem !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  
+  /* Navigation improvements for 320px */
+  .nav-320-compact {
+    padding: 0.5rem !important;
+    font-size: 0.75rem !important;
+  }
+  
+  /* Footer optimizations for 320px */
+  .footer-320-compact {
+    padding: 1rem 0.5rem !important;
+    font-size: 0.75rem !important;
+  }
+  
+  .footer-320-compact .grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+}
+
+/* ===== SPECIFIC COMPONENT FIXES FOR 320px ===== */
+
+/* Emergency CTA buttons - ultra responsive */
+@media (max-width: 399px) {
+  .emergency-cta-ultra-responsive {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    padding: 0.75rem !important;
+  }
+  
+  .emergency-cta-ultra-responsive a {
+    font-size: 0.75rem !important;
+    padding: 0.5rem 0.75rem !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 100% !important;
+  }
+  
+  .emergency-cta-ultra-responsive .space-x-3 > * + *,
+  .emergency-cta-ultra-responsive .space-x-4 > * + * {
+    margin-left: 0.25rem !important;
+  }
+}
+
+/* Carousel navigation for 320px */
+@media (max-width: 399px) {
+  .carousel-nav-320 {
+    width: 2rem !important;
+    height: 2rem !important;
+    left: 0.25rem !important;
+    right: 0.25rem !important;
+  }
+  
+  .carousel-nav-320 svg {
+    width: 1rem !important;
+    height: 1rem !important;
+  }
+}
+
+/* ===== END ULTRA-SMALL SCREEN OPTIMIZATIONS ===== */
+
+/* ===== TAILWIND RESPONSIVE UTILITIES FOR 320px ===== */
+.xxs\:text-xs {
+  @media (min-width: 320px) {
+    font-size: 0.75rem !important;
+    line-height: 1rem !important;
+  }
+}
+
+.xxs\:text-sm {
+  @media (min-width: 320px) {
+    font-size: 0.875rem !important;
+    line-height: 1.25rem !important;
+  }
+}
+
+.xxs\:px-2 {
+  @media (min-width: 320px) {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+}
+
+.xxs\:py-2 {
+  @media (min-width: 320px) {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+  }
+}
+
+.xxs\:w-4 {
+  @media (min-width: 320px) {
+    width: 1rem !important;
+  }
+}
+
+.xxs\:h-4 {
+  @media (min-width: 320px) {
+    height: 1rem !important;
+  }
+}
+
+.xxs\:gap-2 {
+  @media (min-width: 320px) {
+    gap: 0.5rem !important;
+  }
+}
+
+.xxs\:space-x-2 > :not([hidden]) ~ :not([hidden]) {
+  @media (min-width: 320px) {
+    margin-left: 0.5rem !important;
+  }
+}
+
+/* ===== END TAILWIND RESPONSIVE UTILITIES ===== */
+
+/* ===== END MOBILE RESPONSIVENESS ENHANCEMENTS ===== */
+
+/* ===== ADDITIONAL MOBILE OVERFLOW PREVENTION ===== */
+@media (max-width: 399px) {
+  /* Text content overflow prevention */
+  .text-content-320 {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    max-width: 100%;
+  }
+  
+  /* Image responsiveness for 320px */
+  .image-320-responsive {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  /* Card layouts for 320px */
+  .card-320 {
+    padding: 0.75rem !important;
+    margin: 0.5rem 0 !important;
+  }
+  
+  /* Grid overrides for ultra-small screens */
+  .grid-320-auto {
+    grid-template-columns: 1fr !important;
+    gap: 0.5rem !important;
+  }
+  
+  /* List items for 320px */
+  .list-320 li {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Badge and tag responsiveness */
+  .badge-320 {
+    font-size: 0.75rem !important;
+    padding: 0.25rem 0.5rem !important;
+  }
+  
+  /* Modal and popup responsiveness */
+  .modal-320 {
+    width: calc(100vw - 1rem) !important;
+    max-width: 300px !important;
+    margin: 0.5rem !important;
+  }
+  
+  /* Stats and metrics for 320px */
+  .stats-320 {
+    font-size: 1rem !important;
+    padding: 0.5rem !important;
+  }
+  
+  .stats-320 .stat-number {
+    font-size: 1.25rem !important;
+  }
+  
+  .stats-320 .stat-label {
+    font-size: 0.75rem !important;
+  }
+}
+
+/* ===== RESPONSIVE TYPOGRAPHY SCALE ===== */
+@media (max-width: 399px) {
+  .responsive-text-xs { font-size: 0.65rem; }
+  .responsive-text-sm { font-size: 0.75rem; }
+  .responsive-text-base { font-size: 0.875rem; }
+  .responsive-text-lg { font-size: 1rem; }
+  .responsive-text-xl { font-size: 1.125rem; }
+  .responsive-text-2xl { font-size: 1.25rem; }
+  .responsive-text-3xl { font-size: 1.5rem; }
+  .responsive-text-4xl { font-size: 1.875rem; }
+}
+
+/* ===== SERVICE-SPECIFIC RESPONSIVE FIXES ===== */
+@media (max-width: 399px) {
+  /* Process steps responsiveness */
+  .process-step-320 {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem 0.5rem;
+  }
+  
+  .process-step-320 .step-number {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+  }
+  
+  /* FAQ section responsiveness */
+  .faq-320 {
+    padding: 0.75rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .faq-320 .question {
+    font-size: 0.875rem !important;
+    line-height: 1.25rem !important;
+  }
+  
+  .faq-320 .answer {
+    font-size: 0.8rem !important;
+    line-height: 1.2rem !important;
+  }
+  
+  /* Testimonial responsiveness */
+  .testimonial-320-text {
+    font-size: 0.8rem !important;
+    line-height: 1.2rem !important;
+    padding: 0.75rem !important;
+  }
+  
+  .testimonial-320-author {
+    font-size: 0.75rem !important;
+    margin-top: 0.5rem !important;
+  }
+}
+
+/* ===== RESPONSIVE HERO SECTION HEIGHTS ===== */
+.service-hero-responsive {
+  min-height: 700px; /* Desktop default - use min-height for content flexibility */
+  height: auto; /* Allow content to determine height */
+}
+
+@media (max-width: 1024px) {
+  .service-hero-responsive {
+    min-height: 900px; /* Tablets - increased for content */
+  }
+}
+
+@media (max-width: 768px) {
+  .service-hero-responsive {
+    min-height: 950px; /* Small tablets - increased for stacked content */
+  }
+}
+
+@media (max-width: 640px) {
+  .service-hero-responsive {
+    min-height: 1000px; /* Large phones - single column layout needs more height */
+  }
+}
+
+@media (max-width: 475px) {
+  .service-hero-responsive {
+    min-height: 1000px; /* Small phones - increased height */
+  }
+}
+
+@media (max-width: 450px) {
+  .service-hero-responsive {
+    min-height: 1050px; /* Transition to ultra-small */
+  }
+}
+
+@media (max-width: 399px) {
+  .service-hero-responsive {
+    min-height: 1100px; /* Ultra-small phones (320px) - Increased for full content */
+    height: auto; /* Allow content to determine height */
+  }
+}
+
+/* Alternative responsive hero for pages with more content */
+.service-hero-responsive-xl {
+  height: 750px; /* Desktop default */
+}
+
+@media (max-width: 1024px) {
+  .service-hero-responsive-xl {
+    height: 800px; /* Tablets */
+  }
+}
+
+@media (max-width: 768px) {
+  .service-hero-responsive-xl {
+    height: 850px; /* Small tablets */
+  }
+}
+
+@media (max-width: 640px) {
+  .service-hero-responsive-xl {
+    height: 920px; /* Large phones */
+  }
+}
+
+@media (max-width: 475px) {
+  .service-hero-responsive-xl {
+    height: 980px; /* Small phones */
+  }
+}
+
+@media (max-width: 399px) {
+  .service-hero-responsive-xl {
+    height: 1020px; /* Ultra-small phones (320px) */
+  }
+}
+
+/* ===== MAIN SERVICES PAGE HERO HEIGHT ===== */
+.main-services-hero-responsive {
+  height: 900px; /* Desktop default */
+}
+
+@media (max-width: 1024px) {
+  .main-services-hero-responsive {
+    height: 950px; /* Tablets */
+  }
+}
+
+@media (max-width: 768px) {
+  .main-services-hero-responsive {
+    height: 1000px; /* Small tablets */
+  }
+}
+
+@media (max-width: 640px) {
+  .main-services-hero-responsive {
+    height: 1050px; /* Large phones */
+  }
+}
+
+@media (max-width: 475px) {
+  .main-services-hero-responsive {
+    height: 1100px; /* Small phones */
+  }
+}
+
+@media (max-width: 399px) {
+  .main-services-hero-responsive {
+    height: 1150px; /* Ultra-small phones (320px) */
+  }
+}
+
+/* ===== SERVICE PAGE IMAGE AND BADGE RESPONSIVENESS ===== */
+@media (max-width: 640px) {
+  /* Image container responsiveness */
+  .service-image-320 {
+    max-width: 100% !important;
+    margin: 1rem 0 !important;
+  }
+  
+  .service-image-320 img {
+    height: 300px !important;
+  }
+  
+  /* Floating badge responsiveness */
+  .floating-badge-320 {
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
+    margin-top: 1rem !important;
+    padding: 1rem !important;
+    font-size: 1rem !important;
+  }
+  
+  .floating-badge-320 .text-2xl {
+    font-size: 1.25rem !important;
+  }
+}
+
+@media (max-width: 399px) {
+  /* Ultra-small adjustments */
+  .service-image-320 img {
+    height: 250px !important;
+  }
+  
+  .floating-badge-320 {
+    padding: 0.75rem !important;
+  }
+  
+  .floating-badge-320 .text-2xl {
+    font-size: 1.125rem !important;
+  }
+}
+
+/* ===== MEDIUM SCREENS RESPONSIVE ADJUSTMENTS (400px-768px) ===== */
+@media (max-width: 770px) {
+  /* Hide floating badge for screens smaller than 770px */
+  .floating-badge-320 {
+    display: none !important;
+  }
+  
+  /* Show mobile pricing display when floating badge is hidden */
+  .mobile-pricing-display {
+    display: block !important;
+  }
+}
+
+/* Hide mobile pricing display by default (when floating badge is visible) */
+@media (min-width: 771px) {
+  .mobile-pricing-display {
+    display: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Center pricing section vertically for small screens */
+  .mobile-pricing-display {
+    margin: 1.5rem auto !important;
+    max-width: 300px !important;
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+
+@media (max-width: 768px) and (min-width: 400px) {
+  .hero-content-mobile {
+    padding: 1.25rem !important;
+  }
+  
+  .hero-grid-mobile {
+    gap: 2.5rem !important;
+  }
+  
+  /* Adjust spacing for medium screens where content stacks */
+  .hero-content-mobile .space-y-12 > * + * {
+    margin-top: 2.5rem !important;
+  }
+  
+  .hero-content-mobile .space-y-8 > * + * {
+    margin-top: 2rem !important;
+  }
+  
+  /* Service guarantee cards for medium screens */
+  .service-guarantees-320 {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  .guarantee-card-320 {
+    padding: 1rem !important;
+  }
+  
+  /* Ensure CTA buttons have adequate spacing */
+  .emergency-cta-ultra-responsive {
+    margin-top: 2rem !important;
+  }
+}
+
+/* ===== HERO SECTION CONTENT RESPONSIVENESS ===== */
+@media (max-width: 640px) {
+  .hero-content-mobile {
+    padding: 1rem !important;
+  }
+  
+  .hero-grid-mobile {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  
+  /* Text alignment handled directly in components */
+}
+
+@media (max-width: 500px) {
+  .hero-content-mobile {
+    padding: 0.875rem !important;
+  }
+  
+  .hero-grid-mobile {
+    gap: 1.75rem !important;
+  }
+  
+  /* Optimize spacing for mid-range small screens */
+  .hero-content-mobile .space-y-12 > * + * {
+    margin-top: 2.5rem !important;
+  }
+  
+  .hero-content-mobile .space-y-8 > * + * {
+    margin-top: 2rem !important;
+  }
+  
+  /* Service guarantee cards responsive spacing */
+  .service-guarantees-320 {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
+  }
+  
+  .guarantee-card-320 {
+    padding: 0.875rem !important;
+  }
+}
+
+@media (max-width: 450px) {
+  .hero-content-mobile {
+    padding: 0.8rem !important;
+  }
+  
+  .hero-grid-mobile {
+    gap: 1.6rem !important;
+  }
+  
+  /* Optimize spacing for service pages with more content */
+  .hero-content-mobile .space-y-12 > * + * {
+    margin-top: 2.25rem !important;
+  }
+  
+  .hero-content-mobile .space-y-8 > * + * {
+    margin-top: 1.75rem !important;
+  }
+  
+  .service-guarantees-320 {
+    gap: 0.625rem !important;
+  }
+  
+  .guarantee-card-320 {
+    padding: 0.8rem !important;
+  }
+}
+
+@media (max-width: 399px) {
+  .hero-content-mobile {
+    padding: 0.75rem !important;
+  }
+  
+  .hero-grid-mobile {
+    gap: 1.5rem !important;
+  }
+  
+  /* Optimize spacing for service pages with more content */
+  .hero-content-mobile .space-y-12 > * + * {
+    margin-top: 2rem !important;
+  }
+  
+  .hero-content-mobile .space-y-8 > * + * {
+    margin-top: 1.5rem !important;
+  }
+  
+  /* Service guarantee cards responsive spacing */
+  .hero-content-mobile .grid.gap-4 {
+    gap: 0.75rem !important;
+  }
+  
+  .service-guarantees-320 {
+    grid-template-columns: 1fr !important;
+    gap: 0.5rem !important;
+  }
+  
+  .guarantee-card-320 {
+    padding: 0.75rem !important;
+    font-size: 0.8rem !important;
+  }
+  
+  .guarantee-card-320 .text-sm {
+    font-size: 0.75rem !important;
+  }
+  
+  .guarantee-card-320 .text-xs {
+    font-size: 0.7rem !important;
+  }
+  
+  /* CTA buttons responsive spacing */
+  .emergency-cta-ultra-responsive {
+    margin-top: 1.5rem !important;
+  }
+}
+
+/* ===== NAVIGATION RESPONSIVE FIXES ===== */
+
+/* Large screens (1024px-1279px) - Tablet/Laptop transition */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  /* Hide desktop navigation in this range to prevent text wrapping */
+  .desktop-nav-lg-hidden {
+    display: none !important;
+  }
+  
+  /* Ensure mobile menu is available in this range */
+  .mobile-menu-lg-show {
+    display: block !important;
+  }
+  
+  /* Optimize header spacing for this breakpoint */
+  .septic-header-content {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+  
+  /* Compact navigation spacing for tablets */
+  .nav-compact-spacing {
+    gap: 0.5rem !important;
+  }
+  
+  /* Smaller button padding for this range */
+  .nav-btn-compact {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+/* Extra large screens (1280px+) - Full desktop navigation */
+@media (min-width: 1280px) {
+  /* Ensure desktop navigation is shown */
+  .desktop-nav-xl-show {
+    display: flex !important;
+  }
+  
+  /* Hide mobile menu button */
+  .mobile-menu-xl-hidden {
+    display: none !important;
+  }
+  
+  /* Full desktop spacing */
+  .septic-header-content {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+}
+
+/* Prevent navigation text wrapping */
+.nav-no-wrap {
+  white-space: nowrap !important;
+}
+
+/* Hero description text scaling */
+@media (min-width: 1280px) {
+  .hero-320-compact p {
+    font-size: 1.5rem !important;
+    max-width: 64rem !important;
+  }
+}
+
+@media (min-width: 1536px) {
+  .hero-320-compact p {
+    font-size: 1.875rem !important;
+    max-width: 80rem !important;
+  }
+}
+
+/* Hero spacing enhancements */
+@media (min-width: 1280px) {
+  .hero-320-compact > div {
+    gap: 2rem !important;
+  }
+  
+  .hero-320-compact > div > div:first-child {
+    gap: 1.5rem !important;
+  }
+}
+
+@media (min-width: 1536px) {
+  .hero-320-compact > div {
+    gap: 3rem !important;
+  }
+  
+  .hero-320-compact > div > div:first-child {
+    gap: 2rem !important;
+  }
+}
+
+/* ===== CONTACT FORM SPECIFIC OVERRIDES ===== */
+
+/* Override hero title and subtitle sizes specifically for ContactForm component */
+/* This ensures ContactForm headings remain small regardless of screen size */
+
+/* ContactForm title should stay at text-2xl (1.5rem) for all screen sizes */
+@media (min-width: 1280px) {
+  /* ContactForm h3 with hero-title-320 class */
+  form h3.hero-title-320,
+  .contact-form h3.hero-title-320,
+  [class*="ContactForm"] h3.hero-title-320 {
+    font-size: 1.5rem !important;
+    line-height: 1.33 !important;
+  }
+  
+  /* ContactForm paragraph with hero-subtitle-320 class */
+  form p.hero-subtitle-320,
+  .contact-form p.hero-subtitle-320,
+  [class*="ContactForm"] p.hero-subtitle-320 {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
+}
+
+@media (min-width: 1536px) {
+  /* ContactForm h3 with hero-title-320 class */
+  form h3.hero-title-320,
+  .contact-form h3.hero-title-320,
+  [class*="ContactForm"] h3.hero-title-320 {
+    font-size: 1.5rem !important;
+    line-height: 1.33 !important;
+  }
+  
+  /* ContactForm paragraph with hero-subtitle-320 class */
+  form p.hero-subtitle-320,
+  .contact-form p.hero-subtitle-320,
+  [class*="ContactForm"] p.hero-subtitle-320 {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
+}
+
+/* More specific override by targeting the form container structure */
+/* This targets the motion.div containing the ContactForm header */
+.relative.overflow-hidden.bg-white\/95 h3.hero-title-320 {
+  font-size: 1.5rem !important;
+  line-height: 1.33 !important;
+}
+
+.relative.overflow-hidden.bg-white\/95 p.hero-subtitle-320 {
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+}
+
+/* Alternative approach: Target by form context */
+div[class*="motion"] form h3.hero-title-320,
+div[class*="relative"] form h3.hero-title-320 {
+  font-size: 1.5rem !important;
+  line-height: 1.33 !important;
+}
+
+div[class*="motion"] form p.hero-subtitle-320,
+div[class*="relative"] form p.hero-subtitle-320 {
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+}
+
+/* Most specific ContactForm overrides using the new classes */
+.contact-form-header .contact-form-title.hero-title-320 {
+  font-size: 1.5rem !important;
+  line-height: 1.33 !important;
+}
+
+.contact-form-header .contact-form-subtitle.hero-subtitle-320 {
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+}
+
+/* Ensure these rules apply at all screen sizes */
+@media (min-width: 768px) {
+  .contact-form-header .contact-form-title.hero-title-320 {
+    font-size: 1.5rem !important;
+    line-height: 1.33 !important;
+  }
+  
+  .contact-form-header .contact-form-subtitle.hero-subtitle-320 {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .contact-form-header .contact-form-title.hero-title-320 {
+    font-size: 1.5rem !important;
+    line-height: 1.33 !important;
+  }
+  
+  .contact-form-header .contact-form-subtitle.hero-subtitle-320 {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .contact-form-header .contact-form-title.hero-title-320 {
+    font-size: 1.5rem !important;
+    line-height: 1.33 !important;
+  }
+  
+  .contact-form-header .contact-form-subtitle.hero-subtitle-320 {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
+}
+
+@media (min-width: 1536px) {
+  .contact-form-header .contact-form-title.hero-title-320 {
+    font-size: 1.5rem !important;
+    line-height: 1.33 !important;
+  }
+  
+  .contact-form-header .contact-form-subtitle.hero-subtitle-320 {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
 }

@@ -13,12 +13,11 @@ import {
   MapPin, 
   Star,
   Shield,
-  ChevronDown,
-  ExternalLink,
-  Sparkles
+  ChevronDown
 } from 'lucide-react';
-import { CONTACT_INFO } from '@/lib/constants';
+import { CONTACT_INFO, SERVICE_CATEGORIES } from '@/lib/constants';
 import { trackPhoneCall } from '@/lib/utils';
+import EmergencyModal from './EmergencyModal';
 
 const navigationItems = [
   { 
@@ -30,14 +29,8 @@ const navigationItems = [
     href: '/services',
     label: 'Services',
     description: 'Complete septic solutions',
-    submenu: [
-      { href: '/services/pumping', label: 'Septic Pumping', price: 'Call for Quote' },
-      { href: '/services/installation', label: 'System Installation', price: 'Call for Quote' },
-      { href: '/services/repairs', label: 'Emergency Repairs', price: '24/7 Available' },
-      { href: '/services/inspections', label: 'System Inspections', price: 'Call for Quote' },
-      { href: '/services/grease-trap', label: 'Grease Trap Services', price: 'Call for Quote' },
-      { href: '/services/portable-toilets', label: 'Portable Toilet Rentals', price: 'Call for Quote' }
-    ]
+    isMegaMenu: true,
+    megaMenuCategories: SERVICE_CATEGORIES
   },
   { 
     href: '/service-areas', 
@@ -61,6 +54,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
+  const [isEmergencyModalOpen, setIsEmergencyModalOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -93,9 +87,9 @@ export default function Header() {
   };
 
   return (
-    <div className="w-full septic-no-overflow">
+    <div className="w-full" style={{ overflow: 'visible' }}>
       {/* Top Status Bar - SCROLLABLE (Normal document flow) */}
-      <div className="septic-full-bg bg-gradient-to-r from-primary-dark to-primary-dark/95 text-white py-1 px-4 hidden md:block border-b border-primary-accent/20"
+      <div className="w-full bg-gradient-to-r from-primary-dark to-primary-dark/95 text-white py-1 hidden md:block border-b border-primary-accent/20"
            style={{
              // Ensure proper positioning and smooth scrolling
              position: 'relative',
@@ -142,8 +136,8 @@ export default function Header() {
       <motion.header
         className={`${
           isScrolled 
-            ? 'fixed top-0 left-0 right-0 z-50' 
-            : 'relative z-40'
+            ? 'fixed top-0 left-0 right-0 z-[999]' 
+            : 'relative z-[999]'
         } transition-all duration-700 ease-out ${
           isScrolled 
             ? 'bg-white/98 backdrop-blur-xl shadow-2xl border-b border-primary-accent/10' 
@@ -154,7 +148,9 @@ export default function Header() {
           minHeight: '72px',
           // GPU acceleration for smooth transitions
           transform: 'translateZ(0)',
-          willChange: 'transform, background-color, box-shadow'
+          willChange: 'transform, background-color, box-shadow',
+          zIndex: 999,
+          overflow: 'visible'
         }}
         animate={{ 
           y: 0,
@@ -166,8 +162,8 @@ export default function Header() {
           ease: [0.25, 0.46, 0.45, 0.94] // Custom bezier for ultra smooth
         }}
       >
-        <div className="septic-max-width septic-header-content">
-          <div className="flex justify-between items-center py-3">
+        <div className="septic-max-width septic-header-content" style={{ overflow: 'visible', position: 'static' }}>
+          <div className="flex justify-between items-center py-3" style={{ overflow: 'visible', position: 'relative' }}>
             {/* Logo Section - Enhanced */}
             <Link href="/" className="flex items-center group">
               <motion.div
@@ -187,83 +183,158 @@ export default function Header() {
               </motion.div>
             </Link>
 
-            {/* Desktop Navigation - Modern Glass Design */}
-            <nav className="hidden lg:flex items-center space-x-1 bg-gray-50/50 backdrop-blur-sm rounded-xl p-1.5 border border-gray-200/50">
+            {/* Desktop Navigation - World-Class Mega Menu Design */}
+            <nav className="hidden xl:flex items-center space-x-8" style={{ overflow: 'visible', position: 'relative' }}>
               {navigationItems.map((item) => {
                 const isActive = pathname === item.href || 
-                  (item.submenu && item.submenu.some(subItem => pathname === subItem.href));
+                  (item.isMegaMenu && item.megaMenuCategories?.some(category => 
+                    pathname.startsWith(category.href) || 
+                    category.services.some(service => pathname === service.href)
+                  ));
                 
                 return (
                   <div
                     key={item.href}
                     className="relative group"
-                    onMouseEnter={() => item.submenu && setActiveSubmenu(item.label)}
-                    onMouseLeave={() => setActiveSubmenu(null)}
+                    style={{ overflow: 'visible' }}
+                    onMouseEnter={() => {
+                      if (item.isMegaMenu) {
+                        setActiveSubmenu(item.label);
+                      }
+                    }}
+                    onMouseLeave={() => {
+                      setActiveSubmenu(null);
+                    }}
                   >
-                    <Link
-                      href={item.href}
-                      className={`relative flex items-center space-x-1 px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
-                        isActive 
-                          ? 'text-primary-accent' 
-                          : 'text-gray-700 hover:text-primary-accent hover:bg-white/70 hover:shadow-md'
-                      }`}
-                    >
-                      <span className="relative z-10">{item.label}</span>
-                      {item.submenu && (
-                        <ChevronDown className={`w-4 h-4 transition-all duration-300 ${
-                          activeSubmenu === item.label ? 'rotate-180' : ''
-                        } ${isActive ? 'text-primary-accent' : 'text-gray-500'}`} />
-                      )}
-                      
-                      {/* Simple Bottom Line Active Indicator */}
-                      {isActive && (
-                        <motion.div
-                          className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full"
-                          layoutId="activeIndicator"
-                          initial={false}
-                          transition={{ type: "spring", damping: 30, stiffness: 400 }}
-                        />
-                      )}
-                    </Link>
+                    {/* Conditional rendering: Link for regular items, button for mega menu */}
+                    {item.isMegaMenu ? (
+                      <button className="relative group/link cursor-pointer">
+                        <div className="flex items-center space-x-1">
+                          <span className={`relative font-medium text-[15px] tracking-wide transition-all duration-300 ease-out ${
+                            isActive 
+                              ? 'text-primary-accent' 
+                              : 'text-gray-700 group-hover/link:text-primary-accent'
+                          }`}>
+                            {item.label}
+                            
+                            {/* Enhanced gradient underline animation */}
+                            <div className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-primary-accent via-primary-accent/80 to-secondary-accent transition-all duration-300 ease-out ${
+                              isActive 
+                                ? 'w-full opacity-100' 
+                                : 'w-0 group-hover/link:w-full opacity-0 group-hover/link:opacity-100'
+                            }`}></div>
+                          </span>
+                          <ChevronDown className={`w-4 h-4 transition-all duration-300 ${
+                            activeSubmenu === item.label ? 'rotate-180' : ''
+                          } ${isActive ? 'text-primary-accent' : 'text-gray-500 group-hover/link:text-primary-accent'}`} />
+                        </div>
+                      </button>
+                    ) : (
+                      <Link href={item.href} className="relative group/link">
+                        <div className="flex items-center space-x-1">
+                          <span className={`relative font-medium text-[15px] tracking-wide transition-all duration-300 ease-out ${
+                            isActive 
+                              ? 'text-primary-accent' 
+                              : 'text-gray-700 group-hover/link:text-primary-accent'
+                          }`}>
+                            {item.label}
+                            
+                            {/* Enhanced gradient underline animation */}
+                            <div className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-primary-accent via-primary-accent/80 to-secondary-accent transition-all duration-300 ease-out ${
+                              isActive 
+                                ? 'w-full opacity-100' 
+                                : 'w-0 group-hover/link:w-full opacity-0 group-hover/link:opacity-100'
+                            }`}></div>
+                          </span>
+                        </div>
+                      </Link>
+                    )}
 
-                    {/* Enhanced Submenu */}
-                    {item.submenu && (
+                    {/* Ultra-Compact Services Mega Menu */}
+                    {item.isMegaMenu && item.megaMenuCategories && (
                       <AnimatePresence>
                         {activeSubmenu === item.label && (
                           <motion.div
-                            className="absolute top-full left-1/2 transform -translate-x-1/2 mt-3 w-80 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-100/50 overflow-hidden"
-                            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                            className="absolute top-full left-1/2 transform -translate-x-1/2 mt-4 bg-white/98 backdrop-blur-xl rounded-xl shadow-2xl border border-gray-100/80"
+                            style={{ 
+                              zIndex: 99999,
+                              overflow: 'visible',
+                              width: '950px',
+                              maxWidth: '95vw'
+                            }}
+                            initial={{ opacity: 0, y: -15, scale: 0.95 }}
                             animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                            transition={{ duration: 0.2, ease: "easeOut" }}
+                            exit={{ opacity: 0, y: -15, scale: 0.95 }}
+                            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                           >
-                            <div className="p-3">
-                              {item.submenu.map((subItem, index) => (
-                                <motion.div
-                                  key={subItem.href}
-                                  initial={{ opacity: 0, x: -10 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: index * 0.05 }}
-                                >
-                                  <Link
-                                    href={subItem.href}
-                                    className="flex items-center justify-between p-4 rounded-xl hover:bg-gradient-to-r hover:from-primary-accent/5 hover:to-secondary-accent/5 transition-all duration-200 group"
+                            {/* Elegant arrow indicator */}
+                            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-6 h-6 bg-white/98 border-l border-t border-gray-100/80 rotate-45 rounded-tl-lg"></div>
+                            
+                            <div className="p-4 relative z-10">
+                              {/* Minimal Header */}
+                              <div className="text-center mb-4">
+                                <h3 className="text-lg font-bold text-primary-dark">
+                                  Our Services
+                                </h3>
+                              </div>
+
+                              {/* Ultra-Compact Service Cards Grid */}
+                              <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
+                                {item.megaMenuCategories.map((category, categoryIndex) => (
+                                  <motion.div
+                                    key={category.id}
+                                    className="bg-white rounded-lg border border-gray-200/70 hover:border-primary-accent/30 transition-all duration-300 hover:shadow-md group/card overflow-hidden"
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: categoryIndex * 0.05, duration: 0.2 }}
                                   >
-                                    <div>
-                                      <div className="font-semibold text-primary-dark group-hover:text-primary-accent transition-colors">
-                                        {subItem.label}
+                                    {/* Main Service Card - Entire Card Clickable */}
+                                    <Link
+                                      href={category.href}
+                                      className="block p-3 hover:bg-gray-50/50 transition-colors duration-200"
+                                    >
+                                      <div className="flex items-center space-x-2 mb-3">
+                                        <div className="w-6 h-6 rounded flex items-center justify-center flex-shrink-0 bg-primary-accent/10 text-primary-accent group-hover/card:scale-105 transition-transform duration-300">
+                                          <div className="w-3 h-3 bg-current rounded opacity-80"></div>
+                                        </div>
+                                        <h4 className="font-semibold text-gray-900 text-sm leading-tight group-hover/card:text-primary-accent transition-colors duration-300">
+                                          {category.title}
+                                        </h4>
                                       </div>
-                                      <div className="text-sm text-gray-600 font-medium">
-                                        {subItem.price}
+
+                                      {/* Sub-services List - Display Only (Not Clickable) */}
+                                      <div className="space-y-1">
+                                        {category.services.slice(0, 3).map((service, serviceIndex) => (
+                                          <motion.div
+                                            key={service.id}
+                                            className="flex items-center space-x-2 py-1 px-2 rounded"
+                                            initial={{ opacity: 0, x: -5 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ delay: (categoryIndex * 0.05) + (serviceIndex * 0.02), duration: 0.15 }}
+                                          >
+                                            <div className="w-1 h-1 bg-primary-accent/60 rounded-full flex-shrink-0"></div>
+                                            <div className="flex-1 min-w-0">
+                                              <div className="text-xs font-medium text-gray-700 leading-tight transition-colors truncate group-hover/card:text-primary-accent/80">
+                                                {service.title}
+                                              </div>
+                                            </div>
+                                          </motion.div>
+                                        ))}
+                                        
+                                        {category.services.length > 3 && (
+                                          <div className="px-2 py-1">
+                                            <span className="text-xs text-gray-500 italic group-hover/card:text-primary-accent/60 transition-colors">
+                                              +{category.services.length - 3} more
+                                            </span>
+                                          </div>
+                                        )}
                                       </div>
-                                    </div>
-                                    <div className="flex items-center space-x-2">
-                                      <Sparkles className="w-4 h-4 text-secondary-accent opacity-0 group-hover:opacity-100 transition-opacity" />
-                                      <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-primary-accent transition-colors" />
-                                    </div>
-                                  </Link>
-                                </motion.div>
-                              ))}
+                                    </Link>
+                                  </motion.div>
+                                ))}
+                              </div>
+
+
                             </div>
                           </motion.div>
                         )}
@@ -279,32 +350,28 @@ export default function Header() {
               <motion.a
                 href={`tel:${CONTACT_INFO.phone}`}
                 onClick={() => trackPhoneCall('header_primary')}
-                className="relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-semibold py-2.5 px-5 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center space-x-2 group"
+                className="relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-semibold py-2.5 px-5 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center space-x-2 group before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/15 before:to-white/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:rounded-[inherit]"
                 whileHover={{ scale: 1.02, y: -1 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-primary-accent/80 to-secondary-accent/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <Phone className="w-4 h-4 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
                 <span className="hidden xl:inline relative z-10">{CONTACT_INFO.phone}</span>
                 <span className="xl:hidden relative z-10">Call Now</span>
               </motion.a>
 
-              <motion.a
-                href={`tel:${CONTACT_INFO.emergencyPhone}`}
-                onClick={() => trackPhoneCall('header_emergency')}
-                className="relative overflow-hidden bg-gradient-to-r from-red-600 to-red-700 text-white font-bold py-2.5 px-5 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center space-x-2 group"
+              <motion.button
+                onClick={() => setIsEmergencyModalOpen(true)}
+                className="relative overflow-hidden bg-gradient-to-r from-red-600 to-red-700 text-white font-bold py-2.5 px-5 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center space-x-2 group cursor-pointer before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/20 before:to-white/10 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:rounded-[inherit] after:absolute after:-inset-1 after:bg-red-400 after:rounded-xl after:opacity-30 after:animate-pulse after:-z-10"
                 whileHover={{ scale: 1.02, y: -1 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-red-700 to-red-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute -inset-1 bg-red-400 rounded-xl opacity-30 animate-pulse"></div>
                 <span className="text-sm relative z-10 tracking-wide">EMERGENCY</span>
-              </motion.a>
+              </motion.button>
             </div>
 
             {/* Enhanced Mobile Menu Button */}
             <button
-              className="lg:hidden relative p-2.5 rounded-xl hover:bg-gray-100/80 transition-all duration-300 group"
+              className="xl:hidden relative p-2.5 rounded-xl hover:bg-gray-100/80 transition-all duration-300 group"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -335,80 +402,156 @@ export default function Header() {
             </button>
           </div>
 
-          {/* Mobile Navigation */}
+          {/* Modern Mobile Navigation Drawer */}
           <AnimatePresence>
             {isMenuOpen && (
               <motion.div
-                className="lg:hidden border-t border-gray-100"
+                className="xl:hidden bg-white/98 backdrop-blur-xl border-t border-gray-100/80 shadow-lg"
                 variants={mobileMenuVariants}
                 initial="closed"
                 animate="open"
                 exit="closed"
               >
-                <div className="py-4 space-y-2">
-                  {navigationItems.map((item, index) => (
-                    <motion.div
-                      key={item.href}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                    >
-                      <Link
-                        href={item.href}
-                        className="flex items-center justify-between p-3 rounded-lg hover:bg-primary-accent/5 transition-colors group"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        <div>
-                          <div className="font-medium text-primary-dark group-hover:text-primary-accent">
-                            {item.label}
-                          </div>
-                          <div className="text-sm text-gray-600">
-                            {item.description}
-                          </div>
-                        </div>
-                        <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-primary-accent" />
-                      </Link>
-
-                      {/* Mobile Submenu */}
-                      {item.submenu && (
-                        <div className="ml-4 mt-2 space-y-1">
-                          {item.submenu.map((subItem) => (
-                            <Link
-                              key={subItem.href}
-                              href={subItem.href}
-                              className="block p-2 text-sm text-gray-600 hover:text-primary-accent transition-colors"
-                              onClick={() => setIsMenuOpen(false)}
+                <div className="px-4 py-3">
+                  {/* Primary Navigation - Clean List */}
+                  <div className="space-y-1 mb-4">
+                    {navigationItems.map((item, index) => {
+                      const isActive = pathname === item.href || 
+                        (item.isMegaMenu && item.megaMenuCategories?.some(category => 
+                          pathname.startsWith(category.href) || 
+                          category.services.some(service => pathname === service.href)
+                        ));
+                      
+                      // Handle Services mega menu
+                      if (item.isMegaMenu && item.megaMenuCategories) {
+                        return (
+                          <motion.div
+                            key={item.label}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: index * 0.05 }}
+                          >
+                            <button
+                              className={`w-full flex items-center justify-between py-3 px-4 rounded-lg text-left transition-all duration-200 group ${
+                                isActive || activeSubmenu === item.label
+                                  ? 'bg-primary-accent/10 text-primary-accent' 
+                                  : 'text-gray-700 hover:bg-gray-50 hover:text-primary-accent'
+                              }`}
+                              onClick={() => setActiveSubmenu(activeSubmenu === item.label ? null : item.label)}
                             >
-                              {subItem.label} - {subItem.price}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </motion.div>
-                  ))}
-
-                  {/* Mobile CTA Buttons */}
-                  <div className="pt-4 space-y-3">
-                    <a
-                      href={`tel:${CONTACT_INFO.phone}`}
-                      onClick={() => {
-                        trackPhoneCall('mobile_header');
-                        setIsMenuOpen(false);
-                      }}
-                      className="block bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-3 px-6 rounded-lg text-center shadow-lg"
-                    >
-                      Call Now: {CONTACT_INFO.phone}
-                    </a>
-                    <a
-                      href={`tel:${CONTACT_INFO.emergencyPhone}`}
-                      onClick={() => {
-                        trackPhoneCall('mobile_emergency');
-                        setIsMenuOpen(false);
-                      }}
-                      className="block bg-red-600 text-white font-bold py-3 px-6 rounded-lg text-center shadow-lg animate-pulse"
-                    >
-                      EMERGENCY: {CONTACT_INFO.emergencyPhone}
-                    </a>
+                              <span className="font-medium">{item.label}</span>
+                              <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${
+                                activeSubmenu === item.label ? 'rotate-180' : ''
+                              }`} />
+                            </button>
+                            
+                            {/* Ultra-Compact Mobile Mega Menu */}
+                            <AnimatePresence>
+                              {activeSubmenu === item.label && (
+                                <motion.div
+                                  className="ml-2 mt-2 space-y-2"
+                                  initial={{ opacity: 0, height: 0 }}
+                                  animate={{ opacity: 1, height: 'auto' }}
+                                  exit={{ opacity: 0, height: 0 }}
+                                  transition={{ duration: 0.2 }}
+                                >
+                                  {item.megaMenuCategories.map((category, categoryIndex) => (
+                                    <motion.div 
+                                      key={category.id} 
+                                      className="bg-white border border-gray-200/50 rounded-lg overflow-hidden"
+                                      initial={{ opacity: 0, y: 10 }}
+                                      animate={{ opacity: 1, y: 0 }}
+                                      transition={{ delay: categoryIndex * 0.05 }}
+                                    >
+                                      {/* Category Card - Entire Card Clickable */}
+                                      <Link
+                                        href={category.href}
+                                        className="block p-2.5 bg-gray-50/50 hover:bg-gray-100/50 transition-colors duration-200"
+                                        onClick={() => {
+                                          setIsMenuOpen(false);
+                                          setActiveSubmenu(null);
+                                        }}
+                                      >
+                                        <div className="flex items-center space-x-2 mb-2">
+                                          <div className="w-5 h-5 rounded flex items-center justify-center bg-primary-accent/10 text-primary-accent">
+                                            <div className="w-2.5 h-2.5 bg-current rounded opacity-80"></div>
+                                          </div>
+                                          <h4 className="text-sm font-semibold text-gray-900">
+                                            {category.title}
+                                          </h4>
+                                        </div>
+                                        
+                                        {/* Sub-services - Display Only (Not Individually Clickable) */}
+                                        <div className="space-y-1">
+                                          {category.services.slice(0, 2).map((service) => (
+                                            <div
+                                              key={service.id}
+                                              className="flex items-center space-x-2 py-1"
+                                            >
+                                              <div className="w-1 h-1 bg-primary-accent/60 rounded-full flex-shrink-0"></div>
+                                              <div className="flex-1 min-w-0">
+                                                <div className="text-xs font-medium text-gray-700 leading-tight truncate">
+                                                  {service.title}
+                                                </div>
+                                              </div>
+                                            </div>
+                                          ))}
+                                          {category.services.length > 2 && (
+                                            <div className="py-0.5">
+                                              <span className="text-xs text-gray-500 italic">
+                                                +{category.services.length - 2} more
+                                              </span>
+                                            </div>
+                                          )}
+                                        </div>
+                                      </Link>
+                                    </motion.div>
+                                  ))}
+                                  
+                                  <div className="pt-2 border-t border-gray-200/50">
+                                    <Link
+                                      href="/services"
+                                      className="block py-1.5 px-3 text-sm font-medium text-primary-accent hover:bg-primary-accent/5 rounded-md transition-all duration-200"
+                                      onClick={() => {
+                                        setIsMenuOpen(false);
+                                        setActiveSubmenu(null);
+                                      }}
+                                    >
+                                      View All Services →
+                                    </Link>
+                                  </div>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </motion.div>
+                        );
+                      }
+                      
+                      // Regular navigation items
+                      return (
+                        <motion.div
+                          key={item.href}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.05 }}
+                        >
+                          <Link
+                            href={item.href}
+                            className={`flex items-center py-3 px-4 rounded-lg transition-all duration-200 group ${
+                              isActive
+                                ? 'bg-primary-accent/10 text-primary-accent font-medium' 
+                                : 'text-gray-700 hover:bg-gray-50 hover:text-primary-accent'
+                            }`}
+                            onClick={() => setIsMenuOpen(false)}
+                          >
+                            <span className="font-medium">{item.label}</span>
+                            {isActive && (
+                              <div className="ml-auto w-2 h-2 bg-primary-accent rounded-full"></div>
+                            )}
+                          </Link>
+                        </motion.div>
+                      );
+                    })}
                   </div>
                 </div>
               </motion.div>
@@ -425,6 +568,12 @@ export default function Header() {
           aria-hidden="true"
         />
       )}
+
+      {/* Emergency Modal */}
+      <EmergencyModal 
+        isOpen={isEmergencyModalOpen}
+        onClose={() => setIsEmergencyModalOpen(false)}
+      />
     </div>
   );
 }

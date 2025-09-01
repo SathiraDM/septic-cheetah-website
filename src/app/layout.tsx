@@ -3,7 +3,6 @@ import { Inter, Playfair_Display } from "next/font/google";
 import { Suspense } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import PhoneButton from '@/components/PhoneButton'
 import "./globals.css";
 
 const inter = Inter({
@@ -29,6 +28,11 @@ export const metadata: Metadata = {
   authors: [{ name: 'Septic Cheetah' }],
   creator: 'Septic Cheetah',
   publisher: 'Septic Cheetah',
+  icons: {
+    icon: '/icon.png',
+    shortcut: '/icon.png',
+    apple: '/icon.png'
+  },
   formatDetection: {
     email: false,
     address: false,
@@ -93,8 +97,6 @@ export default function RootLayout({
             <Footer />
           </Suspense>
         </div>
-        
-        <PhoneButton />
       </body>
     </html>
   );

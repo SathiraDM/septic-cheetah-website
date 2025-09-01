@@ -35,14 +35,15 @@ const config: Config = {
       },
       container: {
         center: true,
-        padding: '1rem',
-        screens: {
-          sm: '640px',
-          md: '768px',
-          lg: '1024px',
-          xl: '1200px',
-          '2xl': '1200px',
-        },
+        padding: '1rem',      screens: {
+        'xxs': '320px',
+        'xs': '475px',
+        'sm': '640px',
+        'md': '768px',
+        'lg': '1024px',
+        'xl': '1280px',
+        '2xl': '1536px',
+      },
       },
     },
   },

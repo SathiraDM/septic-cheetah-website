@@ -4,19 +4,17 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
 import { 
-  Phone, 
   Mail, 
   MapPin, 
   Clock, 
-  Star,
   Shield,
+  AlertTriangle,
   Award,
   Facebook,
   Twitter,
   Instagram,
   Linkedin,
-  ArrowRight,
-  CheckCircle
+  ArrowRight
 } from 'lucide-react';
 import { CONTACT_INFO, SERVICES } from '@/lib/constants';
 import { trackPhoneCall, trackEvent } from '@/lib/utils';
@@ -27,7 +25,7 @@ const quickLinks = [
   { href: '/about', label: 'About Us' },
   { href: '/contact', label: 'Contact' },
   { href: '/service-areas', label: 'Service Areas' },
-  { href: '/faq', label: 'FAQ' }
+  { href: '/contact#faq', label: 'FAQ' }
 ];
 
 const legalLinks = [
@@ -45,9 +43,7 @@ const socialLinks = [
 
 const trustBadges = [
   { icon: Shield, text: 'Licensed & Insured', subtext: 'State License #12345' },
-  { icon: Award, text: 'Top Rated', subtext: 'Premium Service' },
-  { icon: Star, text: '4.9/5 Rating', subtext: '500+ Reviews' },
-  { icon: CheckCircle, text: 'Skilled Workers', subtext: 'Expert Team' }
+  { icon: Award, text: 'Top Rated', subtext: 'Premium Service' }
 ];
 
 export default function Footer() {
@@ -87,30 +83,20 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {/* Company Info */}
             <motion.div variants={itemVariants} className="lg:col-span-1">
-              <Link href="/" className="flex items-center justify-center mb-6 group">
-                <div className="relative bg-white/20 backdrop-blur-xl rounded-2xl p-8 border border-white/30 shadow-2xl group-hover:bg-white/25 transition-all duration-300 hover:scale-105 w-full">
-                  {/* Glassmorphism overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-white/10 to-transparent rounded-2xl"></div>
-                  <div className="absolute inset-0 bg-gradient-to-tl from-primary-accent/20 via-transparent to-secondary-accent/10 rounded-2xl"></div>
-                  
-                  {/* Logo */}
-                  <div className="relative z-10 flex justify-center">
-                    <Image
-                      src="/images/logo-high-resolution.png"
-                      alt="Septic Cheetah - Fast, Reliable and Kinda Dirty"
-                      width={320}
-                      height={240}
-                      className="h-24 lg:h-28 xl:h-32 w-auto max-w-full group-hover:scale-105 transition-transform duration-300 drop-shadow-lg"
-                      priority
-                    />
-                  </div>
-                  
-                  {/* Subtle shine effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 translate-x-[-100%] group-hover:translate-x-[300%] transition-transform duration-1000 rounded-2xl"></div>
+              <Link href="/" className="block mb-6 group">
+                <div className="relative w-full h-48 lg:h-56 xl:h-64 bg-white/25 backdrop-blur-sm rounded-xl border border-white/30 flex items-center justify-center p-4 group-hover:bg-white/35 transition-all duration-300">
+                  <Image
+                    src="/images/logo-high-resolution.png"
+                    alt="Septic Cheetah - Fast, Reliable and Kinda Dirty"
+                    width={800}
+                    height={600}
+                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                    priority
+                  />
                 </div>
               </Link>
 
-              <p className="text-gray-300 mb-4 leading-relaxed text-sm text-center">
+              <p className="text-gray-300 mb-4 leading-relaxed text-sm">
                 Professional septic services with over 15 years of experience. 
                 Licensed, insured, and committed to keeping your septic system running smoothly.
               </p>
@@ -129,7 +115,6 @@ export default function Footer() {
                   >
                     <div>
                       <div className="font-medium">{service.title}</div>
-                      <div className="text-sm text-gray-400">{service.startingPrice}</div>
                     </div>
                     <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </Link>
@@ -152,17 +137,17 @@ export default function Footer() {
               <h3 className="text-lg font-bold mb-4 text-primary-accent">Contact Info</h3>
               <div className="space-y-3">
                 <motion.a
-                  href={`tel:${CONTACT_INFO.phone}`}
-                  onClick={() => trackPhoneCall('footer_main')}
-                  className="flex items-center space-x-3 group hover:text-primary-accent transition-colors"
+                  href={`tel:${CONTACT_INFO.emergencyPhone}`}
+                  onClick={() => trackPhoneCall('footer_emergency')}
+                  className="flex items-center space-x-3 group hover:text-red-400 transition-colors"
                   whileHover={{ x: 5 }}
                 >
-                  <div className="w-10 h-10 bg-primary-accent/20 rounded-lg flex items-center justify-center group-hover:bg-primary-accent/30 transition-colors">
-                    <Phone className="w-5 h-5" />
+                  <div className="w-10 h-10 bg-red-500/20 rounded-lg flex items-center justify-center group-hover:bg-red-500/30 transition-colors">
+                    <AlertTriangle className="w-5 h-5 text-red-400" />
                   </div>
                   <div>
-                    <div className="font-medium">Business Line</div>
-                    <div className="text-sm text-gray-300">{CONTACT_INFO.phone}</div>
+                    <div className="font-medium text-red-400">24/7 Emergency Line</div>
+                    <div className="text-sm text-gray-300">{CONTACT_INFO.emergencyPhone}</div>
                   </div>
                 </motion.a>
 
@@ -276,7 +261,14 @@ export default function Footer() {
               </div>
 
               <div className="flex items-center space-x-4 text-xs text-gray-300">
-                <span>Made with ❤️ by Absterco</span>
+                <a 
+                  href="https://absterco.com/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-primary-accent transition-colors"
+                >
+                  Made with ❤️ by Absterco
+                </a>
               </div>
             </div>
           </div>

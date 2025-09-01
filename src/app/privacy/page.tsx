@@ -16,15 +16,15 @@ export default function PrivacyPolicyPage() {
     <main className="min-h-screen bg-gradient-to-br from-slate-50 to-white">
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary-dark via-primary-accent to-secondary-accent py-16">
-        <div className="container mx-auto px-4 max-w-[1540px] text-center">
+        <div className="septic-max-width text-center container-320">
           <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full px-4 py-2 mb-6">
-            <Shield className="w-5 h-5 text-white" />
+            <Shield className="w-5 h-5 text-white icon-320-sm" />
             <span className="text-white font-medium">Your Privacy Matters</span>
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 hero-title-320">
             Privacy Policy
           </h1>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto">
+          <p className="text-xl text-white/90 max-w-3xl mx-auto hero-subtitle-320">
             At Septic Cheetah, we are committed to protecting your privacy and personal information. 
             This policy explains how we collect, use, and safeguard your data.
           </p>
@@ -37,7 +37,7 @@ export default function PrivacyPolicyPage() {
 
       {/* Privacy Policy Content */}
       <section className="py-16">
-        <div className="container mx-auto px-4 max-w-4xl">
+        <div className="septic-max-width">
           <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12">
             
             {/* Introduction */}
