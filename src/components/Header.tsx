@@ -288,12 +288,12 @@ export default function Header() {
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: categoryIndex * 0.05, duration: 0.2 }}
                                   >
-                                    {/* Main Service Header - Minimal */}
+                                    {/* Main Service Card - Entire Card Clickable */}
                                     <Link
                                       href={category.href}
                                       className="block p-3 hover:bg-gray-50/50 transition-colors duration-200"
                                     >
-                                      <div className="flex items-center space-x-2 mb-2">
+                                      <div className="flex items-center space-x-2 mb-3">
                                         <div className="w-6 h-6 rounded flex items-center justify-center flex-shrink-0 bg-primary-accent/10 text-primary-accent group-hover/card:scale-105 transition-transform duration-300">
                                           <div className="w-3 h-3 bg-current rounded opacity-80"></div>
                                         </div>
@@ -301,25 +301,21 @@ export default function Header() {
                                           {category.title}
                                         </h4>
                                       </div>
-                                    </Link>
 
-                                    {/* Sub-services List - Minimal (2-3 services only) */}
-                                    <div className="px-3 pb-3">
-                                      <div className="space-y-0.5">
+                                      {/* Sub-services List - Display Only (Not Clickable) */}
+                                      <div className="space-y-1">
                                         {category.services.slice(0, 3).map((service, serviceIndex) => (
                                           <motion.div
                                             key={service.id}
-                                            className="group/service"
+                                            className="flex items-center space-x-2 py-1 px-2 rounded"
                                             initial={{ opacity: 0, x: -5 }}
                                             animate={{ opacity: 1, x: 0 }}
                                             transition={{ delay: (categoryIndex * 0.05) + (serviceIndex * 0.02), duration: 0.15 }}
                                           >
-                                            <div className="flex items-center space-x-2 py-1 px-2 rounded hover:bg-gray-50/80 transition-colors duration-200 cursor-default">
-                                              <div className="w-1 h-1 bg-primary-accent/60 rounded-full flex-shrink-0"></div>
-                                              <div className="flex-1 min-w-0">
-                                                <div className="text-xs font-medium text-gray-700 leading-tight group-hover/service:text-primary-accent transition-colors truncate">
-                                                  {service.title}
-                                                </div>
+                                            <div className="w-1 h-1 bg-primary-accent/60 rounded-full flex-shrink-0"></div>
+                                            <div className="flex-1 min-w-0">
+                                              <div className="text-xs font-medium text-gray-700 leading-tight transition-colors truncate group-hover/card:text-primary-accent/80">
+                                                {service.title}
                                               </div>
                                             </div>
                                           </motion.div>
@@ -327,21 +323,13 @@ export default function Header() {
                                         
                                         {category.services.length > 3 && (
                                           <div className="px-2 py-1">
-                                            <span className="text-xs text-gray-500 italic">
+                                            <span className="text-xs text-gray-500 italic group-hover/card:text-primary-accent/60 transition-colors">
                                               +{category.services.length - 3} more
                                             </span>
                                           </div>
                                         )}
                                       </div>
-                                      
-                                      {/* View Category Link - Minimal */}
-                                      <Link
-                                        href={category.href}
-                                        className="block mt-2 pt-2 border-t border-gray-100 text-xs font-medium text-primary-accent hover:text-primary-dark transition-colors duration-200"
-                                      >
-                                        View all →
-                                      </Link>
-                                    </div>
+                                    </Link>
                                   </motion.div>
                                 ))}
                               </div>
@@ -475,7 +463,7 @@ export default function Header() {
                                       animate={{ opacity: 1, y: 0 }}
                                       transition={{ delay: categoryIndex * 0.05 }}
                                     >
-                                      {/* Category Header - Minimal */}
+                                      {/* Category Card - Entire Card Clickable */}
                                       <Link
                                         href={category.href}
                                         className="block p-2.5 bg-gray-50/50 hover:bg-gray-100/50 transition-colors duration-200"
@@ -484,7 +472,7 @@ export default function Header() {
                                           setActiveSubmenu(null);
                                         }}
                                       >
-                                        <div className="flex items-center space-x-2">
+                                        <div className="flex items-center space-x-2 mb-2">
                                           <div className="w-5 h-5 rounded flex items-center justify-center bg-primary-accent/10 text-primary-accent">
                                             <div className="w-2.5 h-2.5 bg-current rounded opacity-80"></div>
                                           </div>
@@ -492,31 +480,31 @@ export default function Header() {
                                             {category.title}
                                           </h4>
                                         </div>
-                                      </Link>
-                                      
-                                      {/* Sub-services - 2-3 only */}
-                                      <div className="px-2.5 pb-2.5">
-                                        {category.services.slice(0, 2).map((service) => (
-                                          <div
-                                            key={service.id}
-                                            className="flex items-center space-x-2 py-1 rounded hover:bg-gray-50/50 transition-colors duration-200"
-                                          >
-                                            <div className="w-1 h-1 bg-primary-accent/60 rounded-full flex-shrink-0"></div>
-                                            <div className="flex-1 min-w-0">
-                                              <div className="text-xs font-medium text-gray-700 leading-tight truncate">
-                                                {service.title}
+                                        
+                                        {/* Sub-services - Display Only (Not Individually Clickable) */}
+                                        <div className="space-y-1">
+                                          {category.services.slice(0, 2).map((service) => (
+                                            <div
+                                              key={service.id}
+                                              className="flex items-center space-x-2 py-1"
+                                            >
+                                              <div className="w-1 h-1 bg-primary-accent/60 rounded-full flex-shrink-0"></div>
+                                              <div className="flex-1 min-w-0">
+                                                <div className="text-xs font-medium text-gray-700 leading-tight truncate">
+                                                  {service.title}
+                                                </div>
                                               </div>
                                             </div>
-                                          </div>
-                                        ))}
-                                        {category.services.length > 2 && (
-                                          <div className="px-2 py-0.5">
-                                            <span className="text-xs text-gray-500 italic">
-                                              +{category.services.length - 2} more
-                                            </span>
-                                          </div>
-                                        )}
-                                      </div>
+                                          ))}
+                                          {category.services.length > 2 && (
+                                            <div className="py-0.5">
+                                              <span className="text-xs text-gray-500 italic">
+                                                +{category.services.length - 2} more
+                                              </span>
+                                            </div>
+                                          )}
+                                        </div>
+                                      </Link>
                                     </motion.div>
                                   ))}
                                   

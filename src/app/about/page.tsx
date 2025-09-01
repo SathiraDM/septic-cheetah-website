@@ -10,7 +10,7 @@ import { useState, useRef } from 'react';
 const founderStory = {
   mission: "At Septic Cheetah, our mission is to deliver fast, reliable, and high-quality septic system installations and maintenance services. We are dedicated to protecting our customers' property, health, and the environment through expert workmanship, dependable service, and long-lasting solutions.",
   vision: "Septic Cheetah envisions becoming the leading septic service provider in Austin and the surrounding areas, recognized for our speed, reliability, and commitment to environmental responsibility.",
-  story: "Septic Cheetah was founded by a local family man who wanted to bring something meaningful to the Austin area—dependable service built on values of honesty, hard work, and respect for the people he serves. With deep roots in the community, he saw an opportunity to provide a service that families and businesses could count on for years to come.",
+  story: "Septic Cheetah was founded by a local family man who wanted to bring something meaningful to the Austin area dependable service built on values of honesty, hard work, and respect for the people he serves. With deep roots in the community, he saw an opportunity to provide a service that families and businesses could count on for years to come.",
   coreValue: "Service built on trust and reliability"
 };
 
@@ -401,20 +401,31 @@ export default function AboutPage() {
     <ServiceErrorBoundary>
       <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
         {/* Modern Hero Section */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-primary-dark via-primary-dark/95 to-secondary-accent py-24 lg:py-32">
-          {/* Background Elements */}
-          <div className="absolute inset-0 bg-gradient-to-br from-primary-dark/80 via-primary-dark/60 to-secondary-accent/70"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/20 to-black/10"></div>
+        <section 
+          className="relative overflow-hidden bg-gradient-to-br from-primary-dark via-primary-dark/95 to-secondary-accent py-24 lg:py-32"
+          style={{
+            backgroundImage: 'url(/images/AboutUs.jpg)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
+        >
+          {/* Background Overlays - Reduced for better image visibility */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-dark/40 via-primary-dark/30 to-secondary-accent/35"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/25 to-black/10"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-black/5 to-black/20"></div>
+          <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/15 to-black/25"></div>
+          <div className="absolute inset-0 bg-black/15"></div>
           
           <div className="septic-max-width relative z-10 container-320">
-            <div className="text-center max-w-5xl mx-auto">
+            <div className="text-left max-w-5xl">
               <div className="inline-flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 mb-8 border border-white/20">
                 <Home className="w-5 h-5 text-primary-accent icon-320-sm" />
                 <span className="text-white font-semibold">Family-Owned • Local Business</span>
               </div>
 
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 hero-title-320">
-                About{' '}
+                About<br />
                 <span className="bg-gradient-to-r from-primary-accent via-yellow-400 to-secondary-accent bg-clip-text text-transparent">
                   Septic Cheetah
                 </span>
@@ -424,12 +435,12 @@ export default function AboutPage() {
                 Fast, Reliable and Kinda Dirty
               </p>
 
-              <p className="text-lg md:text-xl text-white/90 max-w-4xl mx-auto leading-relaxed mb-10">
-                A local family business serving Austin and Central Texas with dependable septic services 
-                built on values of honesty, hard work, and respect for the people we serve.
+              <p className="text-lg md:text-xl text-white/90 max-w-lg leading-relaxed mb-10">
+                A local family business serving Austin and Central Texas with dependable septic <br />
+                services built on values of honesty, hard work, and respect for the people we serve.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center btn-group-320">
+              <div className="flex flex-col sm:flex-row gap-4 justify-start btn-group-320">
                 <a
                   href={`tel:${CONTACT_INFO.emergencyPhone}`}
                   className="relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-4 px-8 rounded-xl shadow-2xl transition-all duration-300 flex items-center justify-center space-x-3 group hover:scale-105 emergency-btn-ultra-compact before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/20 before:to-white/10 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:rounded-[inherit]"
@@ -438,8 +449,16 @@ export default function AboutPage() {
                   <span className="relative z-10">Call: {CONTACT_INFO.emergencyPhone}</span>
                 </a>
 
-                <button className="bg-white/20 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white hover:text-primary-dark font-bold py-4 px-8 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 group">
-                  <span>Learn More</span>
+                <button 
+                  onClick={() => {
+                    document.getElementById('our-story')?.scrollIntoView({ 
+                      behavior: 'smooth',
+                      block: 'start'
+                    });
+                  }}
+                  className="bg-white/20 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white hover:text-primary-dark font-bold py-4 px-8 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 group"
+                >
+                  <span>View More</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
                 </button>
               </div>
@@ -448,7 +467,7 @@ export default function AboutPage() {
         </section>
 
         {/* Founder's Story Section */}
-        <section className="py-24 bg-white relative overflow-hidden">
+        <section id="our-story" className="py-24 bg-white relative overflow-hidden">
           <div className="absolute top-0 left-0 w-96 h-96 bg-primary-accent/5 rounded-full blur-3xl transform -translate-x-48 -translate-y-48"></div>
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary-accent/5 rounded-full blur-3xl transform translate-x-48 translate-y-48"></div>
           
@@ -480,7 +499,7 @@ export default function AboutPage() {
                   
                   <p className="text-lg">
                     The business is driven by the idea that customers deserve septic services that are fast, 
-                    dependable, and rooted in integrity—always prioritizing long-term solutions over quick fixes.
+                    dependable, and rooted in integrity always prioritizing long-term solutions over quick fixes.
                   </p>
                 </div>
               </div>
@@ -501,7 +520,7 @@ export default function AboutPage() {
                     <div className="relative rounded-2xl overflow-hidden shadow-xl group-hover:shadow-2xl transition-shadow duration-500">
                       <div className="absolute inset-0 bg-gradient-to-tr from-primary-dark/10 via-transparent to-secondary-accent/10 z-10"></div>
                       <Image
-                        src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80"
+                        src="/images/FamilyOwned.jpg"
                         alt="Family-owned septic business serving Central Texas"
                         width={600}
                         height={400}

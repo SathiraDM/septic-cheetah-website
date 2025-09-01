@@ -9,13 +9,19 @@ export default function ContactHero() {
   return (
     <section 
       className="relative flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-dark via-primary-dark to-secondary-accent text-white main-services-hero-responsive"
+      style={{
+        backgroundImage: 'url(/images/ServiceArea.jpg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
     >
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-dark/55 via-primary-dark/35 to-secondary-accent/40"></div>
-      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/30 to-black/10"></div>
-      <div className="absolute inset-0 bg-gradient-to-r from-black/25 via-black/5 to-black/25"></div>
-      <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/15 to-black/30"></div>
-      <div className="absolute inset-0 bg-black/18"></div>
+      {/* Background Overlays - Reduced for better image visibility */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary-dark/40 via-primary-dark/30 to-secondary-accent/35"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/25 to-black/10"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-black/5 to-black/20"></div>
+      <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/15 to-black/25"></div>
+      <div className="absolute inset-0 bg-black/15"></div>
 
       {/* Animated Background Elements */}
       <motion.div 

@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { CheckCircle, Phone, Shield, Clock, Star, ArrowRight, Award, Settings, Wrench, Zap, TreePine, Home } from 'lucide-react';
+import { CheckCircle, Phone, Shield, Clock, ArrowRight, Award, Settings, Wrench, Zap, TreePine, Home } from 'lucide-react';
 import { CONTACT_INFO, SERVICE_CATEGORIES } from '@/lib/constants';
 import { ServiceErrorBoundary } from '@/components/ServiceErrorBoundary';
 import { useState } from 'react';
@@ -81,29 +81,6 @@ const processSteps = [
     title: "Testing & Startup",
     description: "Final inspections, system testing, and operational startup with owner training",
     duration: "1-2 days"
-  }
-];
-
-const serviceGuarantees = [
-  {
-    icon: Shield,
-    title: "Licensed Installers",
-    description: "Certified professionals"
-  },
-  {
-    icon: CheckCircle,
-    title: "Permits Included",
-    description: "Complete paperwork"
-  },
-  {
-    icon: Star,
-    title: "5-Year Warranty",
-    description: "Installation guarantee"
-  },
-  {
-    icon: Award,
-    title: "Quality Materials",
-    description: "Premium components"
   }
 ];
 
@@ -202,18 +179,18 @@ export default function InstallationPage() {
             />
           </div>
           
-          <div className="septic-max-width z-10 py-12 lg:py-8 px-4 lg:px-16 xl:px-24">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center max-w-7xl mx-auto">
-              {/* Content Side */}
+          <div className="septic-max-width z-10 py-12 lg:py-8 px-4 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-6 items-center max-w-6xl mx-auto">
+              {/* Content Side - Compacted */}
               <motion.div 
-                className="space-y-6 lg:space-y-4 text-center lg:text-left flex flex-col justify-center"
+                className="space-y-5 lg:space-y-4 text-center lg:text-left flex flex-col justify-center"
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                <div className="space-y-6 lg:space-y-4">
+                <div className="space-y-5 lg:space-y-4">
                   <motion.h1 
-                    className="text-4xl lg:text-4xl xl:text-5xl font-bold leading-tight"
+                    className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight"
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
@@ -223,7 +200,7 @@ export default function InstallationPage() {
                   </motion.h1>
                   
                   <motion.p 
-                    className="text-lg lg:text-lg text-gray-200 leading-relaxed max-w-xl mx-auto lg:mx-0"
+                    className="text-base lg:text-lg text-gray-200 leading-relaxed max-w-lg mx-auto lg:mx-0"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.6 }}
@@ -233,48 +210,16 @@ export default function InstallationPage() {
                   </motion.p>
                 </div>
 
-                {/* Service Guarantees */}
+                {/* CTA Buttons - Increased Size */}
                 <motion.div 
-                  className="grid grid-cols-1 sm:grid-cols-2 gap-3 lg:gap-2 max-w-xl mx-auto lg:mx-0"
-                  variants={containerVariants}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  {serviceGuarantees.map((guarantee, index) => (
-                    <motion.div 
-                      key={index} 
-                      className="flex items-center space-x-3 p-3 lg:p-2.5 bg-white/15 backdrop-blur-sm border border-white/20 rounded-lg hover:shadow-lg transition-all duration-300 group"
-                      variants={cardVariants}
-                      whileHover={{ 
-                        scale: 1.02, 
-                        backgroundColor: "rgba(255, 255, 255, 0.2)",
-                        borderColor: "rgba(255, 255, 255, 0.3)"
-                      }}
-                    >
-                      <motion.div
-                        whileHover={{ rotate: 12, scale: 1.1 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <guarantee.icon className="w-5 h-5 lg:w-4 lg:h-4 text-primary-accent flex-shrink-0 group-hover:text-white transition-colors duration-300" />
-                      </motion.div>
-                      <div>
-                        <div className="font-bold text-white text-sm lg:text-xs">{guarantee.title}</div>
-                        <div className="text-gray-300 text-xs lg:text-xs">{guarantee.description}</div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </motion.div>
-
-                {/* CTA Buttons */}
-                <motion.div 
-                  className="flex flex-col sm:flex-row gap-3 lg:gap-2 justify-center lg:justify-start"
+                  className="flex flex-col sm:flex-row gap-3 lg:gap-3 justify-center lg:justify-start"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.8 }}
                 >
                   <motion.a
                     href={`tel:${CONTACT_INFO.phone}`}
-                    className="group relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-4 lg:py-3 px-6 lg:px-5 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3"
+                    className="group relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-4 lg:py-4 px-7 lg:px-6 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 text-base lg:text-base"
                     whileHover={{ 
                       scale: 1.05, 
                       y: -2,
@@ -282,13 +227,13 @@ export default function InstallationPage() {
                     }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <Phone className="w-5 h-5 lg:w-4 lg:h-4 group-hover:rotate-12 transition-transform duration-300" />
-                    <span className="text-base lg:text-sm">Get Free Quote</span>
-                    <ArrowRight className="w-5 h-5 lg:w-4 lg:h-4 group-hover:translate-x-1 transition-transform" />
+                    <Phone className="w-5 h-5 lg:w-5 lg:h-5 group-hover:rotate-12 transition-transform duration-300" />
+                    <span>Get Free Quote</span>
+                    <ArrowRight className="w-5 h-5 lg:w-5 lg:h-5 group-hover:translate-x-1 transition-transform" />
                   </motion.a>
                   <motion.a
                     href="/contact"
-                    className="bg-white/15 text-white font-bold py-4 lg:py-3 px-6 lg:px-5 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 group"
+                    className="bg-white/15 text-white font-bold py-4 lg:py-4 px-7 lg:px-6 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 group text-base lg:text-base"
                     whileHover={{ 
                       scale: 1.05, 
                       y: -2,
@@ -297,21 +242,21 @@ export default function InstallationPage() {
                     }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <Wrench className="w-5 h-5 lg:w-4 lg:h-4 group-hover:rotate-12 transition-transform duration-300" />
-                    <span className="text-base lg:text-sm">Plan Installation</span>
+                    <Wrench className="w-5 h-5 lg:w-5 lg:h-5 group-hover:rotate-12 transition-transform duration-300" />
+                    <span>Plan Installation</span>
                   </motion.a>
                 </motion.div>
               </motion.div>
 
-              {/* Image Side */}
+              {/* Image Side - Increased Height & Compacted */}
               <motion.div 
-                className="relative flex justify-center lg:justify-center"
+                className="relative flex justify-center lg:justify-end"
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
                 <motion.div 
-                  className="relative rounded-2xl overflow-hidden shadow-2xl max-w-lg lg:max-w-md w-full mx-auto"
+                  className="relative rounded-2xl overflow-hidden shadow-2xl max-w-md lg:max-w-sm w-full mx-auto"
                   whileHover={{ scale: 1.02, y: -5 }}
                   transition={{ duration: 0.3 }}
                 >
@@ -320,12 +265,12 @@ export default function InstallationPage() {
                     alt="Professional septic system installation"
                     width={600}
                     height={500}
-                    className="object-cover w-full h-[400px] lg:h-[350px]"
+                    className="object-cover w-full h-[500px] lg:h-[450px]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
                 </motion.div>
                 
-                {/* Floating Guarantee Badge */}
+                {/* Floating Warranty Badge */}
                 <motion.div 
                   className="absolute -bottom-3 -left-3 lg:-bottom-2 lg:-left-2 bg-gradient-to-r from-primary-accent to-secondary-accent text-white p-4 lg:p-3 rounded-xl shadow-xl"
                   initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
@@ -333,8 +278,8 @@ export default function InstallationPage() {
                   transition={{ duration: 0.6, delay: 1 }}
                   whileHover={{ scale: 1.1, rotate: 5 }}
                 >
-                  <div className="text-xl lg:text-lg font-bold">5-Year</div>
-                  <div className="text-sm lg:text-xs opacity-90">Warranty</div>
+                  <div className="text-xl lg:text-lg font-bold">Warranty</div>
+                  <div className="text-sm lg:text-xs opacity-90">Available</div>
                 </motion.div>
 
                 {/* Licensed Badge */}
