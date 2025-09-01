@@ -187,16 +187,6 @@ export default function ServiceAreas() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-              {/* Icon */}
-              <motion.div
-                className="inline-flex items-center justify-center w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl mb-6 shadow-2xl"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-              >
-                <MapPin className="w-10 h-10 text-primary-accent" />
-              </motion.div>
-
               {/* Main Heading */}
               <div className="space-y-4">
                 <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight drop-shadow-2xl hero-title-320">

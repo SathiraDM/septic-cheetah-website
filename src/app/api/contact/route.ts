@@ -71,7 +71,7 @@ async function sendNotificationEmail(formData: ContactFormData) {
     <body>
       <div class="container">
         <div class="header">
-          <h1>🚨 New Contact Form Submission</h1>
+          <h1>New Contact Form Submission</h1>
           <p>A new customer has submitted a contact form on your website.</p>
         </div>
         
@@ -136,7 +136,7 @@ async function sendNotificationEmail(formData: ContactFormData) {
             Name: 'Septic Cheetah Team'
           }
         ],
-        Subject: `🚨 New ${urgency === 'emergency' ? 'EMERGENCY' : 'Contact'} Request from ${name}`,
+        Subject: `New ${urgency === 'emergency' ? 'EMERGENCY' : 'Contact'} Request from ${name}`,
         HTMLPart: htmlContent,
         TextPart: `
 New Contact Form Submission
@@ -180,14 +180,14 @@ async function sendConfirmationEmail(formData: ContactFormData) {
     <body>
       <div class="container">
         <div class="header">
-          <h1>✅ Thank You, ${name}!</h1>
+          <h1>Thank You, ${name}!</h1>
           <p>We've received your request for ${getServiceLabel(service)}</p>
         </div>
         
         <div class="content">
           <div class="highlight">
             <h2>What happens next?</h2>
-            <p><strong>📞 We'll call you within 2 hours</strong> during business hours to discuss your ${getServiceLabel(service)} needs.</p>
+            <p><strong>We'll call you within 2 hours</strong> during business hours to discuss your ${getServiceLabel(service)} needs.</p>
             <p>Your request has been marked as: <strong>${getUrgencyLabel(urgency)}</strong></p>
           </div>
           
