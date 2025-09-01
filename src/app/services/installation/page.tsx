@@ -261,7 +261,7 @@ export default function InstallationPage() {
                   transition={{ duration: 0.3 }}
                 >
                   <Image
-                    src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?w=600&h=500&fit=crop"
+                    src="/images/hero-10.jpg"
                     alt="Professional septic system installation"
                     width={600}
                     height={500}
