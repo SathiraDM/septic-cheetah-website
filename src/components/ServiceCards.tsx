@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Truck, Wrench, Settings, Search, Building, Home, ArrowRight, Star, Clock, Shield, Zap } from 'lucide-react';
+import { Truck, Wrench, Settings, Search, Building, Home, ArrowRight, Star, Clock, Shield, Zap, MapPin } from 'lucide-react';
 import { SERVICES, CONTACT_INFO } from '@/lib/constants';
 import { trackEvent } from '@/lib/utils';
 import { useState } from 'react';
@@ -11,9 +11,8 @@ const iconMap = {
   Truck,
   Wrench,
   Settings,
-  Search,
   Building,
-  Home,
+  MapPin,
 };
 
 const features = [
