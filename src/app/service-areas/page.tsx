@@ -495,16 +495,6 @@ export default function ServiceAreas() {
               </motion.div>
               
               <div className="relative z-10">
-                {/* Icon with enhanced styling */}
-                <motion.div
-                  className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-white/20 backdrop-blur-sm rounded-2xl sm:rounded-3xl mx-auto mb-6 sm:mb-8 shadow-2xl border border-white/30"
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                >
-                  <MapPin className="w-8 h-8 sm:w-10 sm:h-10 text-primary-accent" />
-                </motion.div>
-                
                 {/* Badge */}
                 <motion.div
                   className="inline-flex items-center space-x-2 bg-primary-accent/20 backdrop-blur-sm rounded-full px-4 sm:px-6 py-2 sm:py-3 mb-4 sm:mb-6 border border-primary-accent/40"
@@ -512,7 +502,9 @@ export default function ServiceAreas() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 }}
                 >
-                  <div className="w-2 h-2 bg-primary-accent rounded-full animate-pulse"></div>
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 bg-white/10 rounded-full flex items-center justify-center animate-pulse">
+                    <MapPin className="w-4 h-4 text-white/90" />
+                  </div>
                   <span className="text-sm sm:text-base text-primary-accent font-bold tracking-wide">EXPANDING COVERAGE</span>
                 </motion.div>
                 
@@ -668,7 +660,7 @@ export default function ServiceAreas() {
               </div>
               <div className="mt-4 sm:mt-6 text-center">
                 <p className="text-red-200 text-xs sm:text-sm md:text-base font-medium">
-                  🚨 <span className="font-bold">What constitutes an emergency?</span> Septic tank overflows and system failures
+                  <span className="font-bold">What constitutes an emergency?</span> Septic tank overflows and system failures
                 </p>
               </div>
             </motion.div>

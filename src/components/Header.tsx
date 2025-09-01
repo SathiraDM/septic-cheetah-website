@@ -255,7 +255,7 @@ export default function Header() {
                       <AnimatePresence>
                         {activeSubmenu === item.label && (
                           <motion.div
-                            className="absolute top-full left-1/2 transform -translate-x-1/2 mt-3 bg-white/98 backdrop-blur-xl rounded-xl shadow-2xl border border-gray-100/80"
+                            className="absolute top-full left-1/2 transform -translate-x-1/2 mt-3 bg-white/98 backdrop-blur-xl rounded-xl shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_10px_10px_-5px_rgba(0,0,0,0.04),0_0_0_1px_rgba(59,130,246,0.05)] border border-primary-accent/20"
                             style={{ 
                               zIndex: 99999,
                               overflow: 'visible',
@@ -267,8 +267,8 @@ export default function Header() {
                             exit={{ opacity: 0, y: -15, scale: 0.95 }}
                             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                           >
-                            {/* Arrow indicator */}
-                            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-6 h-6 bg-white/98 border-l border-t border-gray-100/80 rotate-45 rounded-tl-lg"></div>
+                            {/* Enhanced arrow indicator with matching shadow */}
+                            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-6 h-6 bg-white/98 border-l border-t border-primary-accent/20 rotate-45 rounded-tl-lg shadow-lg"></div>
                             
                             <div className="p-4 relative z-10">
                               {/* Compact Header */}
