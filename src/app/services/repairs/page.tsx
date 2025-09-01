@@ -1,114 +1,14 @@
 'use client';
 
 import Image from 'next/image';
-import { ArrowRight, CheckCircle, Phone, Shield, Clock, AlertTriangle, Wrench, Star, Award } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ArrowRight, Phone, Shield, AlertTriangle, Wrench } from 'lucide-react';
 import { CONTACT_INFO, SERVICE_CATEGORIES } from '@/lib/constants';
-import { trackPhoneCall } from '@/lib/utils';
 import { ServiceErrorBoundary } from '@/components/ServiceErrorBoundary';
 
 // Get repairs category data
 const repairsCategory = SERVICE_CATEGORIES.find(cat => cat.id === 'repairs');
 const repairServices = repairsCategory?.services || [];
-
-const urgencyLevels = [
-  {
-    level: 'Emergency',
-    timeframe: '< 2 hours',
-    description: 'Sewage backup, system overflow, health hazards',
-    color: 'red'
-  },
-  {
-    level: 'Urgent',
-    timeframe: 'Same day',
-    description: 'Pump failures, system not functioning',
-    color: 'orange'
-  },
-  {
-    level: 'Serious',
-    timeframe: '1-2 days',
-    description: 'Drain field issues, standing water',
-    color: 'yellow'
-  },
-  {
-    level: 'Planned',
-    timeframe: '1-2 weeks',
-    description: 'System replacement, major upgrades',
-    color: 'blue'
-  }
-];
-
-const repairBenefits = [
-  {
-    icon: Clock,
-    title: 'Fast Emergency Response',
-    description: '24/7 emergency response with rapid dispatch to address urgent septic failures and protect your property.'
-  },
-  {
-    icon: Shield,
-    title: 'Expert Diagnosis',
-    description: 'Professional assessment and accurate diagnosis to provide the most effective and cost-efficient repair solution.'
-  },
-  {
-    icon: CheckCircle,
-    title: 'Lasting Solutions',
-    description: 'Quality repairs with warranties that fix problems permanently, not just temporarily patch them.'
-  },
-  {
-    icon: Award,
-    title: 'Licensed Technicians',
-    description: 'All repair work performed by licensed professionals with years of experience in septic system restoration.'
-  }
-];
-
-const processSteps = [
-  {
-    number: '01',
-    title: 'Emergency Assessment',
-    description: 'Rapid on-site evaluation to identify the problem and determine the best repair approach.',
-    duration: '15-30 min'
-  },
-  {
-    number: '02',
-    title: 'Professional Repair',
-    description: 'Expert repair work using quality materials and proven techniques for lasting results.',
-    duration: '1-4 hours'
-  },
-  {
-    number: '03',
-    title: 'System Testing',
-    description: 'Comprehensive testing to ensure the repair is complete and the system functions properly.',
-    duration: '15-30 min'
-  },
-  {
-    number: '04',
-    title: 'Prevention Planning',
-    description: 'Maintenance recommendations and planning to prevent future problems.',
-    duration: '10-15 min'
-  }
-];
-
-const serviceGuarantees = [
-  {
-    icon: Shield,
-    title: "24/7 Emergency",
-    description: "Always available"
-  },
-  {
-    icon: Clock,
-    title: "< 2 Hour Response",
-    description: "Critical emergencies"
-  },
-  {
-    icon: Star,
-    title: "Licensed Technicians",
-    description: "Emergency specialists"
-  },
-  {
-    icon: Award,
-    title: "1-Year Warranty",
-    description: "All repair work"
-  }
-];
 
 const frequentlyAskedQuestions = [
   {
@@ -117,7 +17,7 @@ const frequentlyAskedQuestions = [
   },
   {
     question: 'How do I know if I need emergency repair vs. replacement?',
-    answer: 'Our experts will assess your system and provide honest recommendations. Generally, if repair costs exceed 50% of replacement cost, or if you\'re having repeated failures, replacement may be more cost-effective long-term.'
+    answer: 'Our experts will assess your system and provide honest recommendations. Generally, if repair costs exceed 50% of replacement cost, or if you&apos;re having repeated failures, replacement may be more cost-effective long-term.'
   },
   {
     question: 'Do you provide warranties on repair work?',
@@ -130,333 +30,503 @@ const frequentlyAskedQuestions = [
 ];
 
 export default function RepairsPage() {
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 50,
+      scale: 0.9
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.6 }
+    }
+  };
+
   return (
     <ServiceErrorBoundary>
       <main className="min-h-screen bg-white">
-        {/* Hero Section */}
-        <section 
-          className="relative bg-gradient-to-br from-primary-dark via-primary-dark/95 to-secondary-accent flex items-center justify-center overflow-hidden service-hero-responsive"
+        {/* Hero Section - Matching Installation Page Design */}
+        <motion.section 
+          className="relative bg-gradient-to-br from-primary-dark via-primary-dark/95 to-secondary-accent flex items-center justify-center overflow-hidden min-h-[80vh] lg:min-h-[75vh]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
         >
           {/* Background Elements */}
-          <div className="absolute inset-0 bg-gradient-to-br from-primary-dark/55 via-primary-dark/35 to-secondary-accent/40"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/30 to-black/10"></div>
-          <div className="absolute inset-0 bg-red-900/20"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-dark/60 via-primary-dark/40 to-secondary-accent/50"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/20 to-black/10"></div>
           
-          {/* Subtle Background Pattern */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-20 left-20 w-64 h-64 bg-red-500 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-20 right-20 w-80 h-80 bg-orange-500 rounded-full blur-3xl"></div>
+          {/* Animated Background Pattern */}
+          <div className="absolute inset-0 opacity-8">
+            <motion.div 
+              className="absolute top-20 left-20 w-48 h-48 lg:w-32 lg:h-32 bg-primary-accent rounded-full blur-3xl"
+              animate={{
+                y: [-10, 10, -10],
+                opacity: [0.3, 0.6, 0.3]
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+            <motion.div 
+              className="absolute bottom-20 right-20 w-64 h-64 lg:w-40 lg:h-40 bg-secondary-accent rounded-full blur-3xl"
+              animate={{
+                y: [-15, 15, -15],
+                opacity: [0.2, 0.5, 0.2]
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1
+              }}
+            />
           </div>
           
-          <div className="septic-max-width z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center hero-grid-mobile">
+          <div className="septic-max-width z-10 py-12 lg:py-8 px-4 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-6 items-center max-w-6xl mx-auto">
               {/* Content Side */}
-              <div className="space-y-8 text-center lg:text-center flex flex-col justify-center hero-content-mobile">
-                <div className="space-y-8">
-                  <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight hero-title-320">
-                    <span className="text-white">Emergency</span>
-                    <span className="block text-red-300">Septic Repairs</span>
-                  </h1>
+              <motion.div 
+                className="space-y-5 lg:space-y-4 text-center lg:text-left flex flex-col justify-center"
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <div className="space-y-5 lg:space-y-4">
+                  <motion.h1 
+                    className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight"
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                  >
+                    <span className="text-white">Professional</span>
+                    <span className="block text-primary-accent">Septic Repairs</span>
+                  </motion.h1>
                   
-                  <p className="text-lg lg:text-xl text-red-100 leading-relaxed max-w-2xl mx-auto hero-subtitle-320">
+                  <motion.p 
+                    className="text-base lg:text-lg text-gray-200 leading-relaxed max-w-lg mx-auto lg:mx-0"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.6 }}
+                  >
                     24/7 emergency septic repair services with rapid response times. 
                     Professional technicians ready when your system fails.
-                  </p>
-                </div>
-
-                {/* Service Guarantees */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto service-guarantees-320">
-                  {serviceGuarantees.map((guarantee, index) => (
-                    <div key={index} className="flex items-center space-x-3 p-4 bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl hover:shadow-lg transition-all duration-300 guarantee-card-320">
-                      <guarantee.icon className="w-6 h-6 text-red-300 flex-shrink-0 icon-320-sm" />
-                      <div>
-                        <div className="font-bold text-white text-sm">{guarantee.title}</div>
-                        <div className="text-red-200 text-xs">{guarantee.description}</div>
-                      </div>
-                    </div>
-                  ))}
+                  </motion.p>
                 </div>
 
                 {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-center emergency-cta-ultra-responsive">
-                  <a
+                <motion.div 
+                  className="flex flex-col sm:flex-row gap-3 lg:gap-3 justify-center lg:justify-start"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.8 }}
+                >
+                  <motion.a
                     href={`tel:${CONTACT_INFO.emergencyPhone}`}
-                    onClick={() => trackPhoneCall('repairs_emergency_hero')}
-                    className="group relative overflow-hidden bg-gradient-to-r from-red-500 to-orange-500 text-white font-bold py-5 px-8 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 hover:shadow-xl hover:scale-105 animate-pulse emergency-banner-320"
+                    className="group relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-4 lg:py-4 px-7 lg:px-6 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 text-base lg:text-base"
+                    whileHover={{ 
+                      scale: 1.05, 
+                      y: -2,
+                      boxShadow: "0 20px 40px rgba(0, 0, 0, 0.3)"
+                    }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    <AlertTriangle className="w-6 h-6 icon-320-md" />
-                    <span className="text-lg emergency-text-320">Emergency: {CONTACT_INFO.emergencyPhone}</span>
-                    <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform icon-320-md" />
-                  </a>
-                  <a
+                    <AlertTriangle className="w-5 h-5 lg:w-5 lg:h-5 group-hover:rotate-12 transition-transform duration-300" />
+                    <span>Emergency Repair</span>
+                    <ArrowRight className="w-5 h-5 lg:w-5 lg:h-5 group-hover:translate-x-1 transition-transform" />
+                  </motion.a>
+                  <motion.a
                     href={`tel:${CONTACT_INFO.phone}`}
-                    onClick={() => trackPhoneCall('repairs_hero')}
-                    className="bg-white/20 text-white font-bold py-5 px-8 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 hover:bg-white/30 hover:shadow-xl hover:scale-105 emergency-banner-320"
+                    className="bg-white/15 text-white font-bold py-4 lg:py-4 px-7 lg:px-6 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 group text-base lg:text-base"
+                    whileHover={{ 
+                      scale: 1.05, 
+                      y: -2,
+                      backgroundColor: "rgba(255, 255, 255, 0.25)",
+                      boxShadow: "0 20px 40px rgba(0, 0, 0, 0.2)"
+                    }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    <Phone className="w-6 h-6 icon-320-md" />
-                    <span className="text-lg emergency-text-320">Schedule Repair</span>
-                  </a>
-                </div>
-              </div>
+                    <Wrench className="w-5 h-5 lg:w-5 lg:h-5 group-hover:rotate-12 transition-transform duration-300" />
+                    <span>Schedule Repair</span>
+                  </motion.a>
+                </motion.div>
+              </motion.div>
 
               {/* Image Side */}
-              <div className="relative flex justify-center lg:justify-end">
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-lg w-full service-image-320">
+              <motion.div 
+                className="relative flex justify-center lg:justify-end"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                <motion.div 
+                  className="relative rounded-2xl overflow-hidden shadow-2xl max-w-md lg:max-w-sm w-full mx-auto"
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  transition={{ duration: 0.3 }}
+                >
                   <Image
-                    src="https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?w=600&h=500&fit=crop"
-                    alt="Emergency septic repair service"
+                    src="/images/hero-10.jpg"
+                    alt="Professional septic system repair"
                     width={600}
                     height={500}
-                    className="object-cover w-full h-[500px] image-320-responsive"
+                    className="object-cover w-full h-[500px] lg:h-[450px]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                </motion.div>
                 
                 {/* Floating Emergency Badge */}
-                <div className="absolute -bottom-4 -left-4 bg-gradient-to-r from-red-500 to-orange-500 text-white p-6 rounded-xl shadow-xl animate-pulse floating-badge-320">
-                  <div className="text-2xl font-bold">24/7</div>
-                  <div className="text-sm opacity-90">Emergency Service</div>
-                </div>
+                <motion.div 
+                  className="absolute -bottom-3 -left-3 lg:-bottom-2 lg:-left-2 bg-gradient-to-r from-primary-accent to-secondary-accent text-white p-4 lg:p-3 rounded-xl shadow-xl"
+                  initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
+                  animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                  transition={{ duration: 0.6, delay: 1 }}
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                >
+                  <div className="text-xl lg:text-lg font-bold">24/7</div>
+                  <div className="text-sm lg:text-xs opacity-90">Emergency</div>
+                </motion.div>
 
-                {/* Response Time Badge */}
-                <div className="absolute -top-4 -right-4 bg-white p-4 rounded-xl shadow-lg">
-                  <div className="flex items-center space-x-2">
-                    <Clock className="w-5 h-5 text-red-600" />
+                {/* Licensed Badge */}
+                <motion.div 
+                  className="absolute -top-3 -right-3 lg:-top-2 lg:-right-2 bg-white p-3 lg:p-2.5 rounded-xl shadow-lg"
+                  initial={{ opacity: 0, scale: 0.5, rotate: 10 }}
+                  animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                  transition={{ duration: 0.6, delay: 1.2 }}
+                  whileHover={{ scale: 1.1, rotate: -5 }}
+                >
+                  <div className="flex items-center space-x-2 lg:space-x-1.5">
+                    <Shield className="w-4 h-4 lg:w-3 lg:h-3 text-primary-accent" />
                     <div>
-                      <div className="font-bold text-sm text-red-600">{"< 2 Hours"}</div>
-                      <div className="text-xs text-gray-600">Emergency Response</div>
+                      <div className="font-bold text-sm lg:text-xs text-primary-accent">Licensed</div>
+                      <div className="text-xs lg:text-xs text-gray-600">& Insured</div>
                     </div>
                   </div>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             </div>
           </div>
-        </section>
+          
+          {/* Scroll Indicator */}
+          <motion.div 
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2, duration: 0.8 }}
+          >
+            <motion.div
+              className="cursor-pointer group"
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              onClick={() => {
+                window.scrollTo({
+                  top: window.innerHeight * 0.9,
+                  behavior: 'smooth'
+                });
+              }}
+            >
+              <motion.div
+                className="w-5 h-8 border-2 border-white/40 rounded-full flex justify-center group-hover:border-white/80 transition-colors duration-300"
+                whileHover={{ scale: 1.1 }}
+              >
+                <motion.div
+                  className="w-0.5 h-2 bg-white/40 rounded-full mt-1.5 group-hover:bg-white/80 transition-colors duration-300"
+                  animate={{ 
+                    y: [0, 8, 0],
+                    opacity: [1, 0.3, 1]
+                  }}
+                  transition={{ 
+                    duration: 1.5, 
+                    repeat: Infinity, 
+                    ease: "easeInOut" 
+                  }}
+                />
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        </motion.section>
 
-        {/* Repair Services Section */}
-        <section className="py-24 bg-white">
-          <div className="septic-max-width">
-            <div className="text-center mb-20">
-              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-                <span className="text-primary-dark">Repair</span>
-                <span className="block text-red-600">Services</span>
-              </h2>
+        {/* Main Services Section */}
+        <section className="py-24 bg-white relative overflow-hidden">
+          {/* Animated Background Elements */}
+          <motion.div
+            className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary-accent/5 to-secondary-accent/5 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.2, 1],
+              rotate: [0, 180, 360],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          />
+          
+          <div className="septic-max-width px-4 lg:px-8 relative z-10">
+            <motion.div 
+              className="text-center mb-20"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <motion.h2 
+                className="text-4xl lg:text-5xl font-bold mb-6"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <span className="text-primary-dark">Septic Repair</span>
+                <span className="block text-primary-accent">Services</span>
+              </motion.h2>
               {/* Modern decorative line */}
-              <div className="flex items-center justify-center mb-6">
-                <div className="h-px bg-gradient-to-r from-transparent via-red-600 to-transparent w-32"></div>
-                <div className="w-2 h-2 bg-red-600 rounded-full mx-4"></div>
-                <div className="h-px bg-gradient-to-r from-transparent via-red-600 to-transparent w-32"></div>
-              </div>
-              <p className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed">
-                Comprehensive septic repair services from emergency response to complete system replacement
-              </p>
-            </div>
+              <motion.div 
+                className="flex items-center justify-center mb-6"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: 0.4 }}
+              >
+                <motion.div 
+                  className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                />
+                <motion.div 
+                  className="w-2 h-2 bg-primary-accent rounded-full mx-4"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.8 }}
+                />
+                <motion.div 
+                  className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                />
+              </motion.div>
+              <motion.p 
+                className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+              >
+                Professional repair services for all types of septic system issues, from emergency fixes to planned maintenance
+              </motion.p>
+            </motion.div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-              {repairServices.map((service) => (
-                <div key={service.id} id={service.id} className="bg-gradient-to-br from-bg-primary to-bg-secondary border border-red-200 rounded-3xl p-8 hover:border-red-400 transition-all duration-300 hover:shadow-xl">
-                  <div className="flex items-start space-x-6">
-                    <div className="w-16 h-16 bg-gradient-to-r from-red-500 to-red-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <Wrench className="w-8 h-8 text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-2xl font-bold text-primary-dark mb-4">{service.title}</h3>
-                      <p className="text-text-primary mb-6 leading-relaxed">{service.description}</p>
+            <motion.div 
+              className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              {repairServices.map((service, index) => (
+                <motion.div
+                  key={service.id}
+                  className="group relative"
+                  variants={cardVariants}
+                  whileHover={{ 
+                    y: -8,
+                    scale: 1.02,
+                    transition: { duration: 0.3, ease: "easeOut" }
+                  }}
+                >
+                  {/* Redesigned Card with Elegant Styling */}
+                  <div className="relative bg-white rounded-3xl p-8 h-full shadow-lg border border-gray-200/50 overflow-hidden group-hover:shadow-2xl group-hover:border-primary-accent/30 transition-all duration-300">
+                    {/* Subtle Gradient Overlay on Hover */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-br from-primary-accent/5 via-transparent to-secondary-accent/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                    
+                    {/* Floating Background Element */}
+                    <motion.div
+                      className="absolute top-4 right-4 w-24 h-24 bg-gradient-to-br from-primary-accent/10 to-secondary-accent/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      animate={{
+                        scale: [1, 1.2, 1],
+                        rotate: [0, 180, 360],
+                      }}
+                      transition={{
+                        duration: 15,
+                        repeat: Infinity,
+                        ease: "linear"
+                      }}
+                    />
+                    
+                    <div className="relative z-10">
+                      {/* Service Icon */}
+                      <motion.div 
+                        className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-accent/10 to-secondary-accent/5 rounded-2xl mb-6 group-hover:from-primary-accent/20 group-hover:to-secondary-accent/10 transition-all duration-300"
+                        whileHover={{ rotate: 360, scale: 1.1 }}
+                        transition={{ duration: 0.6 }}
+                      >
+                        <Wrench className="w-8 h-8 text-primary-accent group-hover:scale-110 transition-transform duration-300" />
+                      </motion.div>
+
+                      {/* Service Content */}
+                      <motion.h3 
+                        className="text-2xl font-bold text-primary-dark mb-4 group-hover:text-primary-accent transition-colors duration-300"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: index * 0.1 }}
+                      >
+                        {service.name}
+                      </motion.h3>
                       
-                      <div className="space-y-3">
-                        {service.features.map((feature, featureIndex) => (
-                          <div key={featureIndex} className="flex items-start space-x-3">
-                            <CheckCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-1" />
-                            <span className="text-text-primary">{feature}</span>
-                          </div>
-                        ))}
-                      </div>
+                      <motion.p 
+                        className="text-gray-600 mb-8 leading-relaxed text-lg flex-grow"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: index * 0.1 + 0.2 }}
+                      >
+                        {service.description}
+                      </motion.p>
+
+                      {/* Action Button */}
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: index * 0.1 + 0.8 }}
+                      >
+                        <motion.a
+                          href={service.href}
+                          className="inline-flex items-center space-x-2 text-primary-accent font-semibold hover:text-secondary-accent transition-colors duration-300 group/button"
+                          whileHover={{ x: 5 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <span>Learn More</span>
+                          <motion.div
+                            whileHover={{ x: 3 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            <ArrowRight className="w-5 h-5" />
+                          </motion.div>
+                        </motion.a>
+                      </motion.div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Urgency Levels Section */}
-        <section className="py-24 bg-gradient-to-br from-bg-primary to-bg-secondary">
-          <div className="septic-max-width">
-            <div className="text-center mb-20">
-              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-                <span className="text-primary-dark">Response</span>
-                <span className="block text-red-600">Urgency Levels</span>
-              </h2>
-              {/* Modern decorative line */}
-              <div className="flex items-center justify-center mb-6">
-                <div className="h-px bg-gradient-to-r from-transparent via-red-600 to-transparent w-32"></div>
-                <div className="w-2 h-2 bg-red-600 rounded-full mx-4"></div>
-                <div className="h-px bg-gradient-to-r from-transparent via-red-600 to-transparent w-32"></div>
-              </div>
-              <p className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed">
-                We prioritize repairs based on urgency to ensure emergency situations get immediate attention
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {urgencyLevels.map((level, index) => {
-                const colorStyles = {
-                  red: "bg-red-50 border-red-200 text-red-800",
-                  orange: "bg-orange-50 border-orange-200 text-orange-800",
-                  yellow: "bg-yellow-50 border-yellow-200 text-yellow-800",
-                  blue: "bg-blue-50 border-blue-200 text-blue-800"
-                };
-
-                return (
-                  <div key={index} className={`p-8 border-2 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-xl ${colorStyles[level.color as keyof typeof colorStyles]}`}>
-                    <div className="text-center mb-6">
-                      <div className="text-2xl font-bold mb-2">{level.level}</div>
-                      <div className="text-lg font-semibold opacity-80">{level.timeframe}</div>
-                    </div>
-                    <p className="text-sm opacity-90 leading-relaxed text-center">{level.description}</p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* Repair Process Section */}
-        <section className="py-24 bg-white">
-          <div className="septic-max-width">
-            <div className="text-center mb-20">
-              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-                <span className="text-primary-dark">Our Repair</span>
-                <span className="block text-red-600">Process</span>
-              </h2>
-              {/* Modern decorative line */}
-              <div className="flex items-center justify-center mb-6">
-                <div className="h-px bg-gradient-to-r from-transparent via-red-600 to-transparent w-32"></div>
-                <div className="w-2 h-2 bg-red-600 rounded-full mx-4"></div>
-                <div className="h-px bg-gradient-to-r from-transparent via-red-600 to-transparent w-32"></div>
-              </div>
-              <p className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed">
-                Systematic repair process ensuring rapid diagnosis and professional solutions every time
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {processSteps.map((step, index) => (
-                <div key={index} className="relative">
-                  <div className="bg-gradient-to-br from-bg-primary to-bg-secondary rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-red-200">
-                    <div className="w-16 h-16 bg-gradient-to-r from-red-500 to-red-600 rounded-xl flex items-center justify-center text-white font-bold text-xl mb-6">
-                      {step.number}
-                    </div>
-                    <h3 className="text-xl font-bold text-primary-dark mb-4">{step.title}</h3>
-                    <p className="text-text-primary mb-4 leading-relaxed">{step.description}</p>
-                    <div className="text-red-600 text-sm font-semibold">{step.duration}</div>
-                  </div>
-                  
-                  {/* Connection Arrow */}
-                  {index < processSteps.length - 1 && (
-                    <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2">
-                      <ArrowRight className="w-8 h-8 text-red-600/50" />
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Repair Benefits Section */}
-        <section className="py-24 bg-gradient-to-br from-bg-primary to-bg-secondary">
-          <div className="septic-max-width">
-            <div className="text-center mb-20">
-              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-                <span className="text-primary-dark">Why Choose Our</span>
-                <span className="block text-red-600">Repair Services</span>
-              </h2>
-              {/* Modern decorative line */}
-              <div className="flex items-center justify-center mb-6">
-                <div className="h-px bg-gradient-to-r from-transparent via-red-600 to-transparent w-32"></div>
-                <div className="w-2 h-2 bg-red-600 rounded-full mx-4"></div>
-                <div className="h-px bg-gradient-to-r from-transparent via-red-600 to-transparent w-32"></div>
-              </div>
-              <p className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed">
-                Professional repair advantages that provide long-term solutions and peace of mind
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              {repairBenefits.map((benefit, index) => (
-                <div key={index} className="bg-white rounded-2xl p-10 shadow-lg hover:shadow-xl transition-all duration-300 border border-red-200">
-                  <div className="flex items-start space-x-6">
-                    <div className="w-14 h-14 bg-gradient-to-r from-red-500 to-red-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <benefit.icon className="w-7 h-7 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold text-primary-dark mb-4">{benefit.title}</h3>
-                      <p className="text-text-primary leading-relaxed text-lg">{benefit.description}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
         {/* FAQ Section */}
-        <section className="py-24 bg-white">
-          <div className="septic-max-width">
-            <div className="text-center mb-20">
-              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+        <section className="py-24 bg-gray-50">
+          <div className="septic-max-width px-4 lg:px-8">
+            <motion.div 
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <motion.h2 
+                className="text-4xl lg:text-5xl font-bold mb-6"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
                 <span className="text-primary-dark">Frequently Asked</span>
-                <span className="block text-red-600">Questions</span>
-              </h2>
-              {/* Modern decorative line */}
-              <div className="flex items-center justify-center mb-6">
-                <div className="h-px bg-gradient-to-r from-transparent via-red-600 to-transparent w-32"></div>
-                <div className="w-2 h-2 bg-red-600 rounded-full mx-4"></div>
-                <div className="h-px bg-gradient-to-r from-transparent via-red-600 to-transparent w-32"></div>
-              </div>
-              <p className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed">
-                Get answers to common questions about septic system repair services
-              </p>
-            </div>
+                <span className="block text-primary-accent">Questions</span>
+              </motion.h2>
+              <motion.p 
+                className="text-xl text-text-primary max-w-3xl mx-auto leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                Common questions about emergency septic repairs and our professional repair services
+              </motion.p>
+            </motion.div>
 
-            <div className="space-y-8">
+            <div className="space-y-8 max-w-4xl mx-auto">
               {frequentlyAskedQuestions.map((faq, index) => (
-                <div key={index} className="bg-gradient-to-br from-bg-primary to-bg-secondary border border-red-200 rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:border-red-400">
+                <motion.div 
+                  key={index} 
+                  className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:border-primary-accent/30"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                >
                   <h3 className="text-xl font-bold text-primary-dark mb-4">{faq.question}</h3>
                   <p className="text-text-primary leading-relaxed text-lg">{faq.answer}</p>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
         </section>
 
         {/* Final CTA Section */}
-        <section className="py-24 bg-gradient-to-br from-red-900 via-red-800 to-orange-900 text-white relative overflow-hidden">
+        <section className="py-24 bg-gradient-to-br from-primary-dark via-primary-dark to-secondary-accent text-white relative overflow-hidden">
           {/* Background Elements */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(255,255,255,0.1)_0%,transparent_50%)] pointer-events-none"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,165,0,0.2)_0%,transparent_50%)] pointer-events-none"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(191,136,41,0.2)_0%,transparent_50%)] pointer-events-none"></div>
           
-          <div className="septic-max-width text-center z-10">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-8">
-              Septic Emergency? <span className="text-red-300">Don&apos;t Wait!</span>
-            </h2>
-            <p className="text-xl mb-12 max-w-4xl mx-auto opacity-90 leading-relaxed">
-              Emergency septic problems get worse fast. Our emergency response team is standing by 24/7 to help when you need it most.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <a
-                href={`tel:${CONTACT_INFO.emergencyPhone}`}
-                onClick={() => trackPhoneCall('repairs_final_cta')}
-                className="bg-white text-red-600 hover:bg-gray-100 font-bold py-8 px-12 rounded-xl text-2xl inline-flex items-center justify-center space-x-4 transition-all duration-300 hover:scale-105 shadow-xl"
-              >
-                <AlertTriangle className="w-8 h-8" />
-                <div className="text-left">
-                  <div className="text-sm">24/7 EMERGENCY</div>
-                  <div className="text-2xl font-black">{CONTACT_INFO.emergencyPhone}</div>
-                </div>
-              </a>
-            </div>
+          <div className="septic-max-width text-center z-10 px-4 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+                Need Emergency Septic Repair?
+              </h2>
+              <p className="text-xl text-gray-200 mb-12 max-w-3xl mx-auto leading-relaxed">
+                Don&apos;t wait when your septic system fails. Our emergency repair team is standing by 24/7 
+                to restore your system quickly and professionally.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <motion.a
+                  href={`tel:${CONTACT_INFO.emergencyPhone}`}
+                  className="bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-6 px-10 rounded-xl text-xl inline-flex items-center justify-center space-x-4 transition-all duration-300 hover:scale-105 shadow-xl"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <AlertTriangle className="w-7 h-7" />
+                  <span>Emergency Repair</span>
+                </motion.a>
+                <motion.a
+                  href={`tel:${CONTACT_INFO.phone}`}
+                  className="bg-white/15 text-white font-bold py-6 px-10 rounded-xl text-xl inline-flex items-center justify-center space-x-4 transition-all duration-300 hover:scale-105 shadow-xl"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Phone className="w-7 h-7" />
+                  <span>Schedule Service</span>
+                </motion.a>
+              </div>
+            </motion.div>
           </div>
         </section>
       </main>
