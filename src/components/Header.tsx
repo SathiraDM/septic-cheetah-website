@@ -13,11 +13,25 @@ import {
   MapPin, 
   Star,
   Shield,
-  ChevronDown
+  ChevronDown,
+  ExternalLink,
+  Sparkles,
+  Wrench,
+  Settings,
+  Truck,
+  Building
 } from 'lucide-react';
-import { CONTACT_INFO } from '@/lib/constants';
+import { CONTACT_INFO, SERVICES } from '@/lib/constants';
 import { trackPhoneCall } from '@/lib/utils';
 import EmergencyModal from './EmergencyModal';
+
+const iconMap = {
+  'Wrench': Wrench,
+  'Settings': Settings,
+  'Truck': Truck,
+  'Building': Building,
+  'MapPin': MapPin
+};
 
 const navigationItems = [
   { 
@@ -29,14 +43,14 @@ const navigationItems = [
     href: '#',
     label: 'Services',
     description: 'Complete septic solutions',
-    submenu: [
-      { href: '/services/pumping', label: 'Septic Pumping' },
-      { href: '/services/installation', label: 'System Installation' },
-      { href: '/services/repairs', label: 'Emergency Repairs' },
-      { href: '/services/inspections', label: 'System Inspections' },
-      { href: '/services/grease-trap', label: 'Grease Trap Services' },
-      { href: '/services/portable-toilets', label: 'Portable Toilet Rentals' }
-    ]
+    megaMenu: SERVICES.map(service => ({
+      href: service.href,
+      label: service.title,
+      category: service.category,
+      description: service.description,
+      icon: iconMap[service.icon as keyof typeof iconMap],
+      subServices: service.subServices
+    }))
   },
   { 
     href: '/service-areas', 
@@ -193,7 +207,7 @@ export default function Header() {
             <nav className="hidden xl:flex items-center space-x-8" style={{ overflow: 'visible', position: 'relative' }}>
               {navigationItems.map((item) => {
                 const isActive = pathname === item.href || 
-                  (item.submenu && item.submenu.some(subItem => pathname === subItem.href));
+                  (item.megaMenu && item.megaMenu.some(megaItem => pathname === megaItem.href));
                 
                 return (
                   <div
@@ -201,7 +215,7 @@ export default function Header() {
                     className="relative group"
                     style={{ overflow: 'visible' }}
                     onMouseEnter={() => {
-                      if (item.submenu) {
+                      if (item.megaMenu) {
                         setActiveSubmenu(item.label);
                       }
                     }}
@@ -225,7 +239,7 @@ export default function Header() {
                               : 'w-0 group-hover/link:w-full opacity-0 group-hover/link:opacity-100'
                           }`}></div>
                         </span>
-                        {item.submenu && (
+                        {item.megaMenu && (
                           <ChevronDown className={`w-4 h-4 transition-all duration-300 ${
                             activeSubmenu === item.label ? 'rotate-180' : ''
                           } ${isActive ? 'text-primary-accent' : 'text-gray-500 group-hover/link:text-primary-accent'}`} />
@@ -250,16 +264,17 @@ export default function Header() {
                       </Link>
                     )}
 
-                    {/* Enhanced Submenu with Clean Design */}
-                    {item.submenu && (
+                    {/* Enhanced Mega Menu with Modern Design */}
+                    {item.megaMenu && (
                       <AnimatePresence>
                         {activeSubmenu === item.label && (
                           <motion.div
-                            className="absolute top-full left-1/2 transform -translate-x-1/2 mt-4 min-w-max bg-white/98 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-100/80"
+                            className="absolute top-full left-1/2 transform -translate-x-1/2 mt-4 bg-white/98 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-100/80"
                             style={{ 
                               zIndex: 99999,
                               overflow: 'visible',
-                              width: 'max-content'
+                              width: '720px',
+                              maxWidth: '90vw'
                             }}
                             initial={{ opacity: 0, y: -15, scale: 0.95 }}
                             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -269,28 +284,52 @@ export default function Header() {
                             {/* Arrow indicator */}
                             <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white/98 border-l border-t border-gray-100/80 rotate-45 rounded-tl-sm"></div>
                             
-                            <div className="py-3 relative z-10">
-                              {item.submenu.map((subItem, index) => (
-                                <motion.div
-                                  key={subItem.href}
-                                  initial={{ opacity: 0, x: -10 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: index * 0.04, duration: 0.2 }}
-                                >
-                                  <Link
-                                    href={subItem.href}
-                                    className="relative flex items-center px-6 py-3 text-gray-700 hover:text-primary-accent transition-all duration-200 group/sub whitespace-nowrap"
-                                  >
-                                    <span className="font-medium text-[14px] tracking-wide">{subItem.label}</span>
-                                    
-                                    {/* Subtle hover indicator */}
-                                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary-accent scale-y-0 group-hover/sub:scale-y-100 transition-transform duration-200 origin-center rounded-r-full"></div>
-                                    
-                                    {/* Gentle background highlight */}
-                                    <div className="absolute inset-0 bg-gradient-to-r from-primary-accent/5 to-transparent opacity-0 group-hover/sub:opacity-100 transition-opacity duration-200 rounded-xl"></div>
-                                  </Link>
-                                </motion.div>
-                              ))}
+                            <div className="p-6 relative z-10">
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {item.megaMenu.map((megaItem, index) => {
+                                  const IconComponent = megaItem.icon;
+                                  return (
+                                    <motion.div
+                                      key={megaItem.href}
+                                      initial={{ opacity: 0, y: 10 }}
+                                      animate={{ opacity: 1, y: 0 }}
+                                      transition={{ delay: index * 0.05, duration: 0.2 }}
+                                    >
+                                      <Link
+                                        href={megaItem.href}
+                                        className="group/mega block p-4 rounded-xl hover:bg-gradient-to-r hover:from-primary-accent/5 hover:to-secondary-accent/5 transition-all duration-300 border border-transparent hover:border-primary-accent/20"
+                                      >
+                                        <div className="flex items-start space-x-3">
+                                          <div className="flex-shrink-0">
+                                            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-accent/10 to-secondary-accent/10 flex items-center justify-center group-hover/mega:from-primary-accent/20 group-hover/mega:to-secondary-accent/20 transition-all duration-300">
+                                              {IconComponent && <IconComponent className="w-5 h-5 text-primary-accent" />}
+                                            </div>
+                                          </div>
+                                          <div className="flex-1 min-w-0">
+                                            <h4 className="font-semibold text-gray-900 text-sm group-hover/mega:text-primary-accent transition-colors duration-200">
+                                              {megaItem.label}
+                                            </h4>
+                                            <p className="text-xs text-gray-600 mt-1 leading-relaxed">
+                                              {megaItem.description}
+                                            </p>
+                                            <div className="mt-2 space-y-1">
+                                              {megaItem.subServices?.map((subService, subIndex) => (
+                                                <div key={subIndex} className="flex items-center space-x-2">
+                                                  <div className="w-1 h-1 bg-primary-accent/60 rounded-full flex-shrink-0"></div>
+                                                  <span className="text-xs text-gray-500">{subService.name}</span>
+                                                </div>
+                                              ))}
+                                            </div>
+                                          </div>
+                                        </div>
+                                        
+                                        {/* Subtle hover indicator */}
+                                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary-accent scale-y-0 group-hover/mega:scale-y-100 transition-transform duration-200 origin-center rounded-r-full"></div>
+                                      </Link>
+                                    </motion.div>
+                                  );
+                                })}
+                              </div>
                             </div>
                           </motion.div>
                         )}
@@ -373,10 +412,10 @@ export default function Header() {
                   <div className="space-y-1 mb-4">
                     {navigationItems.map((item, index) => {
                       const isActive = pathname === item.href || 
-                        (item.submenu && item.submenu.some(subItem => pathname === subItem.href));
+                        (item.megaMenu && item.megaMenu.some(megaItem => pathname === megaItem.href));
                       
                       // Handle Services dropdown
-                      if (item.href === '#' && item.submenu) {
+                      if (item.href === '#' && item.megaMenu) {
                         return (
                           <motion.div
                             key={item.label}
@@ -398,30 +437,40 @@ export default function Header() {
                               }`} />
                             </button>
                             
-                            {/* Submenu */}
+                            {/* Mobile Mega Menu */}
                             <AnimatePresence>
                               {activeSubmenu === item.label && (
                                 <motion.div
-                                  className="ml-4 mt-1 space-y-1"
+                                  className="ml-4 mt-1 space-y-2"
                                   initial={{ opacity: 0, height: 0 }}
                                   animate={{ opacity: 1, height: 'auto' }}
                                   exit={{ opacity: 0, height: 0 }}
                                   transition={{ duration: 0.2 }}
                                 >
-                                  {item.submenu.map((subItem) => (
-                                    <Link
-                                      key={subItem.href}
-                                      href={subItem.href}
-                                      className="flex items-center py-2 px-3 text-sm text-gray-600 hover:text-primary-accent hover:bg-primary-accent/5 rounded-md transition-all duration-200 border-l-2 border-transparent hover:border-primary-accent/30"
-                                      onClick={() => {
-                                        setIsMenuOpen(false);
-                                        setActiveSubmenu(null);
-                                      }}
-                                    >
-                                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mr-3"></div>
-                                      {subItem.label}
-                                    </Link>
-                                  ))}
+                                  {item.megaMenu.map((megaItem) => {
+                                    const IconComponent = megaItem.icon;
+                                    return (
+                                      <Link
+                                        key={megaItem.href}
+                                        href={megaItem.href}
+                                        className="flex items-start p-3 text-sm text-gray-600 hover:text-primary-accent hover:bg-primary-accent/5 rounded-lg transition-all duration-200 border border-transparent hover:border-primary-accent/20"
+                                        onClick={() => {
+                                          setIsMenuOpen(false);
+                                          setActiveSubmenu(null);
+                                        }}
+                                      >
+                                        <div className="flex-shrink-0 mr-3 mt-0.5">
+                                          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-accent/10 to-secondary-accent/10 flex items-center justify-center">
+                                            {IconComponent && <IconComponent className="w-4 h-4 text-primary-accent" />}
+                                          </div>
+                                        </div>
+                                        <div className="flex-1">
+                                          <div className="font-medium text-gray-900">{megaItem.label}</div>
+                                          <div className="text-xs text-gray-500 mt-1">{megaItem.description}</div>
+                                        </div>
+                                      </Link>
+                                    );
+                                  })}
                                 </motion.div>
                               )}
                             </AnimatePresence>

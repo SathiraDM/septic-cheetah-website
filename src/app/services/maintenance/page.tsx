@@ -5,12 +5,12 @@ import { CONTACT_INFO } from '@/lib/constants';
 import { ServiceErrorBoundary } from '@/components/ServiceErrorBoundary';
 
 export const metadata: Metadata = {
-  title: 'Professional Septic Tank Pumping Services | Septic Cheetah',
-  description: 'Expert septic tank pumping with same-day service. Licensed technicians, transparent pricing, and 100% satisfaction guarantee. Serving Central Texas.',
+  title: 'Septic Maintenance & Cleaning Services | Septic Cheetah',
+  description: 'Professional septic tank pumping, cleaning, and inspection services. Same-day service, licensed technicians, and comprehensive system evaluations.',
   openGraph: {
-    title: 'Professional Septic Tank Pumping Services | Septic Cheetah',
-    description: 'Expert septic tank pumping with same-day service available',
-    url: '/services/pumping'
+    title: 'Septic Maintenance & Cleaning Services | Septic Cheetah',
+    description: 'Expert septic maintenance including pumping, cleaning, and inspections',
+    url: '/services/maintenance'
   }
 };
 
@@ -36,7 +36,7 @@ const warningSignsData = [
   {
     icon: Calendar,
     title: "Regular Maintenance",
-    description: "Every 3-5 years for optimal performance",
+    description: "Pumping every 3-5 years, inspections annually",
     severity: "info"
   }
 ];
@@ -97,20 +97,28 @@ const frequentlyAskedQuestions = [
     answer: "Most residential septic tanks should be pumped every 3-5 years, depending on household size and usage. Regular pumping prevents costly system failures and extends the life of your septic system."
   },
   {
+    question: "How often should I have my septic system inspected?",
+    answer: "We recommend annual inspections for optimal performance, or every 3-5 years minimum. Regular inspections help identify potential issues before they become costly repairs."
+  },
+  {
     question: "How long does septic pumping take?",
     answer: "Standard pumping takes 45-90 minutes from start to finish. We work efficiently to minimize disruption while ensuring thorough service and proper system inspection."
+  },
+  {
+    question: "What's included in a septic inspection?",
+    answer: "Our comprehensive inspections include tank condition assessment, sludge level measurement, component functionality testing, drain field evaluation, and detailed reporting with maintenance recommendations."
   },
   {
     question: "What happens to the waste after pumping?",
     answer: "All waste is transported to state-approved treatment facilities in our licensed vehicles. We follow strict environmental regulations and provide proper disposal documentation."
   },
   {
-    question: "Do you offer emergency pumping services?",
-    answer: "Yes, we provide 24/7 emergency services for critical situations. Emergency services include priority response with additional charges, but we prioritize health and safety above all."
+    question: "Do you offer emergency services?",
+    answer: "Yes, we provide 24/7 emergency services for critical situations. Emergency services include priority response for both pumping and inspection needs when health and safety are at risk."
   }
 ];
 
-export default function PumpingPage() {
+export default function MaintenancePage() {
   return (
     <ServiceErrorBoundary>
       <main className="min-h-screen bg-white">

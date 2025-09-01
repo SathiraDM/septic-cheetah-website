@@ -24,94 +24,151 @@ export const CONTACT_INFO = {
 
 export const SERVICES = [
   {
-    id: 'pumping',
-    title: 'Septic Tank Pumping & Cleaning',
-    description: 'Professional septic tank pumping and cleaning services to keep your system running smoothly.',
-    startingPrice: 'Call for Quote',
-    features: [
-      'Same-day service available',
-      'Proper waste disposal at licensed facilities',
-      'Complete tank inspection included',
-      'Emergency pumping services',
-      'Residential & commercial systems'
-    ],
-    icon: 'Truck',
-    href: '/services/pumping',
-  },
-  {
     id: 'installation',
-    title: 'New Septic System Installation',
-    description: 'Complete septic system installation for new construction with permits and warranties.',
+    title: 'Septic System Installation',
+    category: 'Septic System Installation',
+    description: 'Complete septic system installation for new construction and replacement systems with permits and warranties.',
     startingPrice: 'Call for Quote',
     features: [
-      'New construction installations',
-      'Permit assistance included',
+      'Septic system installation (new construction)',
+      'Aerobic septic systems',
+      'System replacement and upgrades',
       'Licensed & insured installers',
-      'Soil testing coordination',
-      'Aerobic septic systems available'
+      'Permit assistance included',
+      'Soil testing coordination'
+    ],
+    subServices: [
+      {
+        name: 'Septic system installation (new construction)',
+        description: 'Complete new septic system installation for new homes and buildings'
+      },
+      {
+        name: 'Aerobic septic systems',
+        description: 'Advanced aerobic treatment systems for enhanced wastewater processing'
+      }
     ],
     icon: 'Wrench',
     href: '/services/installation',
   },
   {
     id: 'repairs',
-    title: 'Emergency Repairs & Maintenance',
-    description: 'Fast emergency septic repairs and comprehensive maintenance services.',
+    title: 'Septic System Repairs',
+    category: 'Septic System Repairs',
+    description: 'Emergency septic repairs and comprehensive maintenance services to restore your system.',
     startingPrice: 'Call for Quote',
     features: [
-      '24/7 emergency response',
-      'Drain field repairs',
+      'Septic system replacement',
+      'Emergency septic repairs',
       'Septic pump installation/repair',
       'Distribution box repairs',
-      'System replacement when needed'
+      'Drain field repairs',
+      '24/7 emergency response'
+    ],
+    subServices: [
+      {
+        name: 'Septic system replacement',
+        description: 'Complete system replacement when repair is not feasible'
+      },
+      {
+        name: 'Emergency septic repairs',
+        description: '24/7 emergency response for critical septic system failures'
+      },
+      {
+        name: 'Septic pump installation/repair',
+        description: 'Installation and repair of septic system pumps and controls'
+      },
+      {
+        name: 'Distribution box repairs',
+        description: 'Repair and replacement of distribution boxes and components'
+      },
+      {
+        name: 'Drain field repairs',
+        description: 'Drain field restoration and repair services'
+      }
     ],
     icon: 'Settings',
     href: '/services/repairs',
   },
   {
-    id: 'inspections',
-    title: 'Septic System Inspections',
-    description: 'Thorough septic system inspections for real estate transactions and maintenance.',
+    id: 'maintenance',
+    title: 'Septic Maintenance & Cleaning',
+    category: 'Septic Maintenance & Inspection',
+    description: 'Professional septic tank pumping, cleaning, and inspection services to maintain optimal system performance.',
     startingPrice: 'Call for Quote',
     features: [
-      'Pre-purchase inspections',
-      'Routine maintenance inspections',
-      'Detailed reporting',
-      'Problem identification',
-      'Maintenance recommendations'
+      'Septic tank pumping/cleaning',
+      'Septic inspections',
+      'Same-day service available',
+      'Proper waste disposal at licensed facilities',
+      'Complete system evaluation',
+      'Detailed reporting and recommendations'
     ],
-    icon: 'Search',
-    href: '/services/inspections',
+    subServices: [
+      {
+        name: 'Septic tank pumping/cleaning',
+        description: 'Professional septic tank pumping and thorough cleaning services'
+      },
+      {
+        name: 'Septic inspections',
+        description: 'Comprehensive system inspections for maintenance and real estate transactions'
+      }
+    ],
+    icon: 'Truck',
+    href: '/services/maintenance',
   },
   {
     id: 'grease-trap',
-    title: 'Grease Trap Services',
-    description: 'Commercial grease trap cleaning and maintenance for restaurants and businesses.',
+    title: 'Grease & Commercial Waste Services',
+    category: 'Grease & Waste Management',
+    description: 'Commercial grease trap cleaning and waste management services for restaurants and businesses.',
     startingPrice: 'Call for Quote',
     features: [
+      'Grease trap services',
       'Regular maintenance schedules',
       'Emergency cleaning services',
       'Compliance documentation',
       'Proper waste disposal',
       'Commercial & restaurant focused'
     ],
+    subServices: [
+      {
+        name: 'Grease trap services',
+        description: 'Complete grease trap cleaning, maintenance, and compliance services'
+      }
+    ],
     icon: 'Building',
     href: '/services/grease-trap',
   },
   {
-    id: 'portable-toilets',
-    title: 'Portable Toilet Rentals',
-    description: 'Clean, reliable portable toilet rentals for construction sites and events.',
+    id: 'site-preparation',
+    title: 'Site Preparation & Support Services',
+    category: 'Site Preparation & Compliance',
+    description: 'Comprehensive site preparation, excavation, and compliance services for septic system projects.',
     startingPrice: 'Call for Quote',
     features: [
-      'Construction site rentals',
-      'Event portable toilets',
-      'Regular service schedules',
-      'Hand sanitizer stations available',
-      'Delivery & pickup included'
+      'Excavation services',
+      'Soil testing',
+      'Permit assistance',
+      'Site evaluation and planning',
+      'Regulatory compliance support',
+      'Licensed excavation professionals'
     ],
-    icon: 'Home',
-    href: '/services/portable-toilets',
+    subServices: [
+      {
+        name: 'Excavation services',
+        description: 'Professional excavation for septic system installation and repairs'
+      },
+      {
+        name: 'Soil testing',
+        description: 'Comprehensive soil percolation and composition testing'
+      },
+      {
+        name: 'Permit assistance',
+        description: 'Complete permit application and regulatory approval assistance'
+      }
+    ],
+    icon: 'MapPin',
+    href: '/services/site-preparation',
   },
 ] as const;
 
