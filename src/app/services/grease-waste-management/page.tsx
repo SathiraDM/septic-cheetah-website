@@ -2,497 +2,1373 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle, Phone, Shield, Clock, Calendar, Building, FileText } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { CheckCircle, Phone, Shield, Clock, ArrowRight, Award, Wrench, Calendar, Droplets, Truck, Clipboard, Settings, Home, Zap, TreePine } from 'lucide-react';
 import { CONTACT_INFO } from '@/lib/constants';
+import { ServiceErrorBoundary } from '@/components/ServiceErrorBoundary';
+import FAQSection from '@/components/FAQSection';
 import { trackPhoneCall } from '@/lib/utils';
 
-const mainServices = [
+const greaseServices = [
   {
-    id: 'grease-trap',
-    title: 'Grease Trap Services',
-    description: 'Professional grease trap cleaning and maintenance for restaurants and commercial kitchens.',
-    href: '/services/grease-waste-management#grease-trap',
-    icon: Building,
+    id: "grease-trap-cleaning",
+    icon: Droplets,
+    title: "Grease Trap Cleaning",
+    description: "Professional grease trap cleaning and maintenance for commercial kitchens and restaurants",
     features: [
-      'Regular maintenance schedules',
-      'Emergency cleaning services',
-      'Compliance documentation',
-      'Proper waste disposal',
-      'Restaurant & commercial focus'
+      "Regular scheduled cleaning",
+      "Emergency cleaning services",
+      "Compliance documentation", 
+      "Waste disposal included"
     ],
-    benefits: [
-      'Prevent costly blockages',
-      'Maintain health code compliance',
-      'Avoid fines and violations',
-      'Protect your reputation',
-      'Extend equipment lifespan'
-    ]
+    image: "/images/hero-08.jpg"
+  },
+  {
+    id: "waste-management",
+    icon: Truck,
+    title: "Specialized Waste Management",
+    description: "Comprehensive waste management solutions for commercial and industrial facilities",
+    features: [
+      "Liquid waste removal",
+      "Sludge management",
+      "Hazardous waste handling",
+      "Environmental compliance"
+    ],
+    image: "/images/hero-09.jpg"
+  },
+  {
+    id: "maintenance-programs",
+    icon: Calendar,
+    title: "Maintenance Programs",
+    description: "Customized maintenance programs to keep your grease management systems running efficiently",
+    features: [
+      "Scheduled maintenance visits",
+      "Performance monitoring",
+      "Preventive maintenance",
+      "24/7 support availability"
+    ],
+    image: "/images/hero-10.jpg"
   }
 ];
 
-const commercialBenefits = [
+const whyChooseGreaseManagement = [
   {
     icon: Shield,
-    title: 'Regulatory Compliance',
-    description: 'Stay compliant with local health codes and environmental regulations with proper documentation and certified disposal.'
+    title: "Regulatory Compliance",
+    description: "Expert knowledge of local regulations and environmental standards for grease management.",
   },
   {
     icon: Clock,
-    title: 'Scheduled Service',
-    description: 'Reliable scheduled maintenance ensures your grease traps never overflow, keeping your business running smoothly.'
+    title: "Reliable Service", 
+    description: "Consistent, scheduled service to prevent backups and maintain system efficiency.",
   },
   {
-    icon: FileText,
-    title: 'Complete Documentation',
-    description: 'Detailed service records and compliance certificates for health inspections and regulatory requirements.'
+    icon: Award,
+    title: "Commercial Expertise",
+    description: "Specialized experience with commercial kitchens, restaurants, and industrial facilities.",
+  },
+  {
+    icon: TreePine,
+    title: "Environmental Focus",
+    description: "Eco-friendly disposal methods and comprehensive environmental protection practices that exceed industry standards.",
   }
 ];
 
-const businessTypes = [
+const greaseBenefits = [
   {
-    title: 'Restaurants',
-    description: 'Full-service restaurants, fast-food chains, and dining establishments',
-    icon: '🍽️'
+    icon: Settings,
+    title: "Custom Solutions",
+    description: "Tailored grease management programs designed for your specific business needs and volume.",
   },
   {
-    title: 'Commercial Kitchens',
-    description: 'Hospital cafeterias, school kitchens, and corporate dining facilities',
-    icon: '🏢'
+    icon: Award,
+    title: "Professional Service",
+    description: "Certified technicians using specialized equipment for thorough and efficient cleaning.",
   },
   {
-    title: 'Food Processing',
-    description: 'Food manufacturing, processing plants, and commercial bakeries',
-    icon: '🏭'
+    icon: Clock,
+    title: "Flexible Scheduling",
+    description: "Service scheduling that works around your business hours to minimize disruption.",
   },
   {
-    title: 'Hotels & Hospitality',
-    description: 'Hotels, resorts, catering companies, and event venues',
-    icon: '🏨'
+    icon: CheckCircle,
+    title: "Complete Compliance",
+    description: "Full documentation and environmental compliance to meet all regulatory requirements.",
   }
 ];
 
-const processSteps = [
+const greaseProcess = [
   {
-    number: '01',
-    title: 'System Assessment',
-    description: 'Evaluate grease trap condition, capacity, and maintenance needs for optimal scheduling.',
-    duration: '10-15 min'
+    number: "01",
+    title: "Assessment & Scheduling",
+    description: "Evaluate your grease trap system and create a customized maintenance schedule",
+    duration: "Initial visit"
   },
   {
-    number: '02',
-    title: 'Professional Cleaning',
-    description: 'Complete removal of grease, oil, and debris using specialized equipment and techniques.',
-    duration: '30-45 min'
+    number: "02", 
+    title: "Professional Cleaning",
+    description: "Complete removal of grease, oil, and debris using specialized equipment",
+    duration: "30-60 min"
   },
   {
-    number: '03',
-    title: 'Proper Disposal',
-    description: 'Safe, environmentally compliant disposal at licensed waste management facilities.',
-    duration: 'Included'
+    number: "03",
+    title: "Waste Disposal", 
+    description: "Environmentally compliant disposal at licensed waste management facilities",
+    duration: "Included"
   },
   {
-    number: '04',
-    title: 'Documentation',
-    description: 'Complete service records and compliance certificates for your business records.',
-    duration: '5 min'
-  }
-];
-
-const maintenanceSchedule = [
-  {
-    frequency: 'Weekly',
-    businessType: 'High-volume restaurants',
-    description: 'Busy establishments with heavy grease production'
-  },
-  {
-    frequency: 'Bi-weekly',
-    businessType: 'Medium restaurants',
-    description: 'Moderate volume dining establishments'
-  },
-  {
-    frequency: 'Monthly',
-    businessType: 'Small restaurants',
-    description: 'Lower volume or specialty food service'
-  },
-  {
-    frequency: 'Quarterly',
-    businessType: 'Commercial kitchens',
-    description: 'Office cafeterias and limited food service'
+    number: "04",
+    title: "Documentation & Follow-up",
+    description: "Service records, compliance certificates, and maintenance scheduling",
+    duration: "Complete"
   }
 ];
 
 const frequentlyAskedQuestions = [
   {
-    question: 'How often should my grease trap be cleaned?',
-    answer: 'Cleaning frequency depends on your business volume and local regulations. Most restaurants need service every 2-4 weeks, while high-volume establishments may require weekly cleaning. We\'ll assess your needs and create a customized maintenance schedule.'
+    question: "How often should my grease trap be cleaned?",
+    answer: "Cleaning frequency depends on your business volume and local regulations. Most restaurants need service every 2-4 weeks, while high-volume establishments may require weekly cleaning. We'll assess your needs and create a customized maintenance schedule."
   },
   {
-    question: 'What happens if I don\'t maintain my grease trap?',
-    answer: 'Neglected grease traps can cause serious problems including sewage backups, health code violations, environmental fines, and expensive emergency repairs. Regular maintenance prevents these costly issues.'
+    question: "What happens if I don't maintain my grease trap?",
+    answer: "Neglected grease traps can cause serious problems including sewage backups, health code violations, environmental fines, and expensive emergency repairs. Regular maintenance prevents these costly issues."
   },
   {
-    question: 'Do you provide compliance documentation?',
-    answer: 'Yes, we provide complete service records and compliance certificates after each cleaning. This documentation is essential for health inspections and environmental compliance requirements.'
+    question: "Do you provide compliance documentation?",
+    answer: "Yes, we provide complete service records and compliance certificates after each cleaning. This documentation is essential for health inspections and environmental compliance requirements."
   },
   {
-    question: 'Can you service grease traps during business hours?',
-    answer: 'We offer flexible scheduling to minimize disruption to your business. Many cleanings can be performed during low-activity periods, and we work quickly to reduce any inconvenience.'
+    question: "Can you service grease traps during business hours?",
+    answer: "We offer flexible scheduling to minimize disruption to your business. Many cleanings can be performed during low-activity periods, and we work quickly to reduce any inconvenience."
+  },
+  {
+    question: "What types of businesses do you serve?",
+    answer: "We serve restaurants, commercial kitchens, food processing facilities, hotels, hospitals, schools, and any business with grease trap systems requiring professional maintenance."
   }
 ];
 
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const cardVariants = {
+  hidden: { 
+    opacity: 0, 
+    y: 50,
+    scale: 0.9
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.6 }
+  }
+};
+
 export default function GreaseWasteManagementPage() {
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative min-h-[80vh] flex items-center bg-gradient-to-br from-orange-800 via-orange-700 to-amber-600 text-white overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-20 w-64 h-64 bg-orange-400 rounded-full blur-3xl opacity-20"></div>
-          <div className="absolute bottom-20 right-20 w-80 h-80 bg-amber-400 rounded-full blur-3xl opacity-20"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(255,255,255,0.1)_0%,transparent_50%)] pointer-events-none"></div>
-        </div>
-        
-        <div className="septic-max-width relative z-10 py-20 px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Content Side */}
-            <div className="space-y-8 text-center lg:text-left">
-              <div className="space-y-6">
-                <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
-                  <span className="text-white">Grease & Waste</span>
-                  <span className="block text-orange-300">Management</span>
-                </h1>
-                <p className="text-xl lg:text-2xl text-orange-100 leading-relaxed max-w-2xl">
-                  Professional grease trap services and commercial waste management solutions 
-                  to keep your business compliant and running smoothly.
-                </p>
-              </div>
+    <ServiceErrorBoundary>
+      <main className="min-h-screen bg-white">
+        {/* Hero Section */}
+        <motion.section 
+          className="relative bg-gradient-to-br from-primary-dark via-primary-dark/95 to-secondary-accent flex items-center justify-center overflow-hidden min-h-[80vh] lg:min-h-[75vh]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          {/* Background Elements */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-dark/60 via-primary-dark/40 to-secondary-accent/50"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/20 to-black/10"></div>
+          
+          {/* Animated Background Pattern */}
+          <div className="absolute inset-0 opacity-8">
+            <motion.div 
+              className="absolute top-20 left-20 w-48 h-48 lg:w-32 lg:h-32 bg-primary-accent rounded-full blur-3xl"
+              animate={{
+                y: [-10, 10, -10],
+                opacity: [0.3, 0.6, 0.3]
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+            <motion.div 
+              className="absolute bottom-20 right-20 w-64 h-64 lg:w-40 lg:h-40 bg-secondary-accent rounded-full blur-3xl"
+              animate={{
+                y: [-15, 15, -15],
+                opacity: [0.2, 0.5, 0.2]
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1
+              }}
+            />
+          </div>
+          
+          <div className="septic-max-width z-10 py-12 lg:py-8 px-4 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-6 items-center max-w-6xl mx-auto">
+              {/* Content Side */}
+              <motion.div 
+                className="space-y-5 lg:space-y-4 text-center lg:text-left flex flex-col justify-center"
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <div className="space-y-5 lg:space-y-4">
+                  <motion.h1 
+                    className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight"
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                  >
+                    <span className="text-white">Grease & Waste</span>
+                    <span className="block text-primary-accent">Management</span>
+                  </motion.h1>
+                  
+                  <motion.p 
+                    className="text-base lg:text-lg text-gray-200 leading-relaxed max-w-lg mx-auto lg:mx-0"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.6 }}
+                  >
+                    Professional grease trap services and commercial waste management solutions 
+                    to keep your business compliant and running smoothly.
+                  </motion.p>
+                </div>
 
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <a
-                  href={`tel:${CONTACT_INFO.phone}`}
-                  onClick={() => trackPhoneCall('grease_hero')}
-                  className="group relative overflow-hidden bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold py-4 px-8 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 hover:shadow-xl hover:scale-105"
+                {/* CTA Buttons */}
+                <motion.div 
+                  className="flex flex-col sm:flex-row gap-3 lg:gap-3 justify-center lg:justify-start"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.8 }}
                 >
-                  <Phone className="w-6 h-6" />
-                  <span className="text-lg">Schedule Service</span>
-                  <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-                </a>
-                <Link
-                  href="/contact"
-                  className="bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 flex items-center justify-center space-x-3 hover:bg-white/20 hover:border-white/30"
-                >
-                  <span className="text-lg">Get Free Quote</span>
-                </Link>
-              </div>
+                  <motion.a
+                    href={`tel:${CONTACT_INFO.phone}`}
+                    onClick={() => trackPhoneCall('grease_hero')}
+                    className="group relative overflow-hidden bg-gradient-to-r from-primary-accent to-secondary-accent text-white font-bold py-4 lg:py-4 px-7 lg:px-6 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 text-base lg:text-base"
+                    whileHover={{ 
+                      scale: 1.05, 
+                      y: -2,
+                      boxShadow: "0 20px 40px rgba(0, 0, 0, 0.3)"
+                    }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Phone className="w-5 h-5 lg:w-5 lg:h-5 group-hover:rotate-12 transition-transform duration-300" />
+                    <span>Schedule Service</span>
+                    <ArrowRight className="w-5 h-5 lg:w-5 lg:h-5 group-hover:translate-x-1 transition-transform" />
+                  </motion.a>
+                  <motion.a
+                    href="/contact"
+                    className="bg-white/15 text-white font-bold py-4 lg:py-4 px-7 lg:px-6 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3 group text-base lg:text-base"
+                    whileHover={{ 
+                      scale: 1.05, 
+                      y: -2,
+                      backgroundColor: "rgba(255, 255, 255, 0.25)",
+                      boxShadow: "0 20px 40px rgba(0, 0, 0, 0.2)"
+                    }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Calendar className="w-5 h-5 lg:w-5 lg:h-5 group-hover:rotate-12 transition-transform duration-300" />
+                    <span>Get Free Quote</span>
+                  </motion.a>
+                </motion.div>
+              </motion.div>
 
-              {/* Trust Signals */}
-              <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-                {['Licensed', 'Insured', 'Compliant Disposal', '24/7 Emergency'].map((signal, index) => (
-                  <div key={index} className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
-                    <CheckCircle className="w-4 h-4 text-orange-300" />
-                    <span className="text-sm font-medium text-white/90">{signal}</span>
+              {/* Image Side */}
+              <motion.div 
+                className="relative flex justify-center lg:justify-end"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                <motion.div 
+                  className="relative rounded-2xl overflow-hidden shadow-2xl max-w-md lg:max-w-sm w-full mx-auto"
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Image
+                    src="/images/hero-09.jpg"
+                    alt="Commercial grease trap cleaning service"
+                    width={600}
+                    height={500}
+                    className="object-cover w-full h-[500px] lg:h-[450px]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                </motion.div>
+                
+                {/* Floating Service Badge */}
+                <motion.div 
+                  className="absolute -bottom-3 -left-3 lg:-bottom-2 lg:-left-2 bg-gradient-to-r from-primary-accent to-secondary-accent text-white p-4 lg:p-3 rounded-xl shadow-xl"
+                  initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
+                  animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                  transition={{ duration: 0.6, delay: 1 }}
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                >
+                  <div className="text-xl lg:text-lg font-bold">Commercial</div>
+                  <div className="text-sm lg:text-xs opacity-90">Specialist</div>
+                </motion.div>
+
+                {/* Licensed Badge */}
+                <motion.div 
+                  className="absolute -top-3 -right-3 lg:-top-2 lg:-right-2 bg-white p-3 lg:p-2.5 rounded-xl shadow-lg"
+                  initial={{ opacity: 0, scale: 0.5, rotate: 10 }}
+                  animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                  transition={{ duration: 0.6, delay: 1.2 }}
+                  whileHover={{ scale: 1.1, rotate: -5 }}
+                >
+                  <div className="flex items-center space-x-2 lg:space-x-1.5">
+                    <Shield className="w-4 h-4 lg:w-3 lg:h-3 text-primary-accent" />
+                    <div>
+                      <div className="font-bold text-sm lg:text-xs text-primary-accent">Licensed</div>
+                      <div className="text-xs lg:text-xs text-gray-600">& Insured</div>
+                    </div>
                   </div>
+                </motion.div>
+              </motion.div>
+            </div>
+          </div>
+          
+          {/* Scroll Indicator */}
+          <motion.div 
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2, duration: 0.8 }}
+          >
+            <motion.div
+              className="cursor-pointer group"
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              onClick={() => {
+                window.scrollTo({
+                  top: window.innerHeight * 0.9,
+                  behavior: 'smooth'
+                });
+              }}
+            >
+              <motion.div
+                className="w-5 h-8 border-2 border-white/40 rounded-full flex justify-center group-hover:border-white/80 transition-colors duration-300"
+                whileHover={{ scale: 1.1 }}
+              >
+                <motion.div
+                  className="w-0.5 h-2 bg-white/40 rounded-full mt-1.5 group-hover:bg-white/80 transition-colors duration-300"
+                  animate={{ 
+                    y: [0, 8, 0],
+                    opacity: [1, 0.3, 1]
+                  }}
+                  transition={{ 
+                    duration: 1.5, 
+                    repeat: Infinity, 
+                    ease: "easeInOut" 
+                  }}
+                />
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        </motion.section>
+
+        {/* Grease Management Services Section */}
+        <section className="py-24 bg-white relative overflow-hidden">
+          {/* Animated Background Elements */}
+          <motion.div
+            className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary-accent/5 to-secondary-accent/5 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.2, 1],
+              rotate: [0, 180, 360],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          />
+          
+          <div className="septic-max-width px-4 lg:px-8 relative z-10">
+            <motion.div 
+              className="text-center mb-20"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <motion.h2 
+                className="text-4xl lg:text-5xl font-bold mb-6"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <span className="text-primary-dark">Professional Grease</span>
+                <span className="block text-primary-accent">Management Services</span>
+              </motion.h2>
+              {/* Modern decorative line */}
+              <motion.div 
+                className="flex items-center justify-center mb-6"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: 0.4 }}
+              >
+                <motion.div 
+                  className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                />
+                <motion.div 
+                  className="w-2 h-2 bg-primary-accent rounded-full mx-4"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.8 }}
+                />
+                <motion.div 
+                  className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                />
+              </motion.div>
+              <motion.p 
+                className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+              >
+                Keep your business compliant and running smoothly with our comprehensive grease trap services and waste management solutions
+              </motion.p>
+            </motion.div>
+
+            <motion.div 
+              className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              {greaseServices.map((service, index) => (
+                <motion.div 
+                  key={service.id} 
+                  className="group relative"
+                  variants={cardVariants}
+                  whileHover={{ 
+                    y: -8,
+                    scale: 1.02,
+                    transition: { duration: 0.3, ease: "easeOut" }
+                  }}
+                >
+                  {/* Enhanced Card Container */}
+                  <div className="relative bg-white rounded-3xl overflow-hidden h-full shadow-lg border border-gray-200/50 group-hover:shadow-2xl group-hover:border-primary-accent/30 transition-all duration-300">
+                    {/* Subtle Gradient Overlay on Hover */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-br from-primary-accent/5 via-transparent to-secondary-accent/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                    
+                    {/* Floating Background Element */}
+                    <motion.div
+                      className="absolute top-4 right-4 w-24 h-24 bg-gradient-to-br from-primary-accent/10 to-secondary-accent/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      animate={{
+                        scale: [1, 1.2, 1],
+                        rotate: [0, 180, 360],
+                      }}
+                      transition={{
+                        duration: 8,
+                        repeat: Infinity,
+                        ease: "linear"
+                      }}
+                    />
+                    
+                    {/* Image Section */}
+                    <div className="relative h-64 overflow-hidden rounded-t-3xl">
+                      <Image
+                        src={service.image}
+                        alt={service.title}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                      
+                      {/* Service Icon */}
+                      <motion.div 
+                        className="absolute top-6 left-6 p-4 bg-white/90 backdrop-blur-sm rounded-2xl"
+                        initial={{ scale: 0, rotate: -90 }}
+                        whileInView={{ scale: 1, rotate: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: index * 0.2 }}
+                        whileHover={{ rotate: 12, scale: 1.1 }}
+                      >
+                        <service.icon className="w-8 h-8 text-primary-accent" />
+                      </motion.div>
+                    </div>
+                    
+                    {/* Card Content */}
+                    <div className="relative p-8">
+                      {/* Header */}
+                      <motion.div 
+                        className="mb-6"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: index * 0.2 }}
+                      >
+                        <h3 className="text-2xl font-bold text-primary-dark group-hover:text-primary-accent transition-colors duration-300 mb-3">
+                          {service.title}
+                        </h3>
+                        <motion.div
+                          className="h-1 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full mb-4 origin-left"
+                          initial={{ scaleX: 0 }}
+                          whileInView={{ scaleX: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.8, delay: index * 0.2 + 0.3 }}
+                        />
+                        <p className="text-gray-600 leading-relaxed text-lg">
+                          {service.description}
+                        </p>
+                      </motion.div>
+
+                      {/* Features List */}
+                      <motion.div 
+                        className="space-y-3"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: index * 0.2 + 0.4 }}
+                      >
+                        {service.features.map((feature, featureIndex) => (
+                          <motion.div
+                            key={featureIndex}
+                            className="flex items-center space-x-3"
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.4, delay: index * 0.2 + featureIndex * 0.1 + 0.5 }}
+                          >
+                            <CheckCircle className="w-5 h-5 text-primary-accent flex-shrink-0" />
+                            <span className="text-gray-700 font-medium">{feature}</span>
+                          </motion.div>
+                        ))}
+                      </motion.div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Why Choose Grease Management Section */}
+        <section className="py-24 bg-gradient-to-br from-bg-secondary via-white to-bg-secondary relative overflow-hidden">
+          {/* Floating Background Elements */}
+          <motion.div
+            className="absolute top-20 left-10 w-40 h-40 bg-primary-accent/10 rounded-full blur-3xl"
+            animate={{
+              y: [-20, 20, -20],
+              scale: [1, 1.1, 1],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="absolute bottom-20 right-10 w-60 h-60 bg-secondary-accent/10 rounded-full blur-3xl"
+            animate={{
+              y: [20, -20, 20],
+              scale: [1.1, 1, 1.1],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2
+            }}
+          />
+          
+          <div className="septic-max-width px-4 lg:px-8 relative z-10">
+            <motion.div 
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <motion.h2 
+                className="text-4xl lg:text-5xl font-bold mb-6"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <span className="text-primary-dark">Why Choose Our</span>
+                <span className="block text-primary-accent">Grease Management?</span>
+              </motion.h2>
+              {/* Modern decorative line */}
+              <motion.div 
+                className="flex items-center justify-center mb-6"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: 0.4 }}
+              >
+                <motion.div 
+                  className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                />
+                <motion.div 
+                  className="w-2 h-2 bg-primary-accent rounded-full mx-4"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.8 }}
+                />
+                <motion.div 
+                  className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                />
+              </motion.div>
+              <motion.p 
+                className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+              >
+                Professional grease management that keeps your business compliant, efficient, and protected
+              </motion.p>
+            </motion.div>
+
+            {/* Compact Feature Highlights Layout */}
+            <div className="max-w-5xl mx-auto">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {whyChooseGreaseManagement.map((reason, index) => (
+                  <motion.div 
+                    key={index} 
+                    className="group relative"
+                    initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: index * 0.2 }}
+                    whileHover={{ 
+                      scale: 1.02,
+                      transition: { duration: 0.3, ease: "easeOut" }
+                    }}
+                  >
+                    {/* Horizontal Feature Card */}
+                    <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200/50 group-hover:shadow-xl group-hover:border-primary-accent/30 transition-all duration-300 p-6">
+                      {/* Subtle Gradient Overlay on Hover */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-primary-accent/5 via-transparent to-secondary-accent/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      />
+                      
+                      {/* Horizontal Layout */}
+                      <div className="flex items-start space-x-6 relative">
+                        {/* Icon Section */}
+                        <motion.div 
+                          className="flex-shrink-0"
+                          initial={{ scale: 0, rotate: -90 }}
+                          whileInView={{ scale: 1, rotate: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.6, delay: index * 0.2 + 0.2 }}
+                        >
+                          <motion.div 
+                            className="w-16 h-16 bg-gradient-to-br from-primary-accent to-secondary-accent rounded-xl flex items-center justify-center shadow-lg"
+                            whileHover={{ rotate: 12, scale: 1.1 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            <reason.icon className="w-8 h-8 text-white" />
+                          </motion.div>
+                        </motion.div>
+                        
+                        {/* Content */}
+                        <div className="flex-1 min-w-0">
+                          <motion.h3 
+                            className="text-xl font-bold text-primary-dark group-hover:text-primary-accent transition-colors duration-300 mb-3"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, delay: index * 0.2 + 0.3 }}
+                          >
+                            {reason.title}
+                          </motion.h3>
+                          <motion.div
+                            className="h-1 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full mb-4 origin-left w-12"
+                            initial={{ scaleX: 0 }}
+                            whileInView={{ scaleX: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: index * 0.2 + 0.4 }}
+                          />
+                          <motion.p 
+                            className="text-gray-600 leading-relaxed"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, delay: index * 0.2 + 0.5 }}
+                          >
+                            {reason.description}
+                          </motion.p>
+                        </div>
+                      </div>
+
+                      {/* Corner Accent */}
+                      <motion.div
+                        className="absolute top-4 right-4 w-12 h-12 bg-gradient-to-br from-primary-accent/10 to-secondary-accent/5 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        animate={{
+                          scale: [1, 1.2, 1],
+                          rotate: [0, 180, 360],
+                        }}
+                        transition={{
+                          duration: 8,
+                          repeat: Infinity,
+                          ease: "linear"
+                        }}
+                      />
+                    </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
+          </div>
+        </section>
 
-            {/* Image Side */}
-            <div className="relative flex justify-center lg:justify-end">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-lg w-full">
-                <Image
-                  src="/images/hero-09.jpg"
-                  alt="Commercial grease trap cleaning service"
-                  width={600}
-                  height={500}
-                  className="object-cover w-full h-full"
+        {/* Our Process Section */}
+        <section className="py-24 bg-white relative overflow-hidden">
+          {/* Animated Background Elements */}
+          <motion.div
+            className="absolute top-0 left-0 w-72 h-72 bg-gradient-to-br from-primary-accent/5 to-secondary-accent/5 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.3, 1],
+              x: [0, 50, 0],
+              y: [0, 30, 0],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          
+          <div className="septic-max-width px-4 lg:px-8 relative z-10">
+            <motion.div 
+              className="text-center mb-20"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <motion.h2 
+                className="text-4xl lg:text-5xl font-bold mb-6"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <span className="text-primary-dark">Our Professional</span>
+                <span className="block text-primary-accent">Service Process</span>
+              </motion.h2>
+              {/* Modern decorative line */}
+              <motion.div 
+                className="flex items-center justify-center mb-6"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: 0.4 }}
+              >
+                <motion.div 
+                  className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
                 />
-                
-                {/* Floating Service Badge */}
-                <div className="absolute top-6 right-6 bg-orange-600/95 backdrop-blur-sm text-white p-4 rounded-xl shadow-lg">
-                  <div className="text-center">
-                    <div className="text-lg font-bold">Commercial Focus</div>
-                    <div className="text-sm opacity-90">Licensed & Certified</div>
-                  </div>
-                </div>
+                <motion.div 
+                  className="w-2 h-2 bg-primary-accent rounded-full mx-4"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.8 }}
+                />
+                <motion.div 
+                  className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                />
+              </motion.div>
+              <motion.p 
+                className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+              >
+                Every grease trap service follows our proven process for thorough cleaning and complete compliance documentation
+              </motion.p>
+            </motion.div>
 
-                {/* Trust Badges */}
-                <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-sm p-4 rounded-xl shadow-lg">
-                  <div className="flex items-center justify-between text-sm">
-                    <div className="flex items-center space-x-2">
-                      <Building className="w-4 h-4 text-orange-600" />
-                      <span className="font-semibold text-gray-800">Commercial Specialist</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <div className="flex text-yellow-400">
-                        {'★'.repeat(5)}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+              {greaseProcess.map((step, index) => (
+                <motion.div 
+                  key={index} 
+                  className="group relative"
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  whileHover={{ 
+                    y: -8,
+                    transition: { duration: 0.3, ease: "easeOut" }
+                  }}
+                >
+                  {/* Connection Line */}
+                  {index < greaseProcess.length - 1 && (
+                    <motion.div 
+                      className="hidden lg:block absolute top-16 -right-4 w-8 h-px z-10"
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.8, delay: index * 0.2 + 0.6 }}
+                    >
+                      <div className="w-full h-px bg-gradient-to-r from-primary-accent to-secondary-accent relative">
+                        <motion.div
+                          className="absolute right-0 top-1/2 w-2 h-2 bg-secondary-accent rounded-full transform -translate-y-1/2"
+                          initial={{ scale: 0 }}
+                          whileInView={{ scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.4, delay: index * 0.2 + 1 }}
+                        />
                       </div>
-                      <div className="font-bold text-sm text-gray-800">4.9/5</div>
-                      <div className="text-xs text-gray-600">200+ Businesses</div>
+                    </motion.div>
+                  )}
+                  
+                  {/* Enhanced Card Container */}
+                  <div className="relative bg-white rounded-3xl overflow-hidden h-full shadow-lg border border-gray-200/50 group-hover:shadow-2xl group-hover:border-primary-accent/30 transition-all duration-300 p-8 text-center">
+                    {/* Subtle Gradient Overlay on Hover */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-br from-primary-accent/5 via-transparent to-secondary-accent/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                    
+                    {/* Floating Background Element */}
+                    <motion.div
+                      className="absolute top-4 right-4 w-16 h-16 bg-gradient-to-br from-primary-accent/10 to-secondary-accent/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      animate={{
+                        scale: [1, 1.2, 1],
+                        rotate: [0, 180, 360],
+                      }}
+                      transition={{
+                        duration: 8,
+                        repeat: Infinity,
+                        ease: "linear"
+                      }}
+                    />
+                    
+                    {/* Step Number */}
+                    <motion.div 
+                      className="relative mb-8"
+                      initial={{ scale: 0, rotate: -180 }}
+                      whileInView={{ scale: 1, rotate: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.8, delay: index * 0.2, type: "spring", bounce: 0.4 }}
+                    >
+                      <motion.div 
+                        className="w-20 h-20 bg-gradient-to-br from-primary-accent to-secondary-accent rounded-2xl flex items-center justify-center mx-auto shadow-lg"
+                        whileHover={{ rotate: 12, scale: 1.1 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <span className="text-3xl font-bold text-white">{step.number}</span>
+                      </motion.div>
+                    </motion.div>
+                    
+                    {/* Content */}
+                    <div className="relative">
+                      {/* Header */}
+                      <motion.div 
+                        className="mb-6"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: index * 0.2 + 0.2 }}
+                      >
+                        <h3 className="text-2xl font-bold text-primary-dark group-hover:text-primary-accent transition-colors duration-300 mb-4">
+                          {step.title}
+                        </h3>
+                        <motion.div
+                          className="h-1 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full mb-6 origin-center w-16 mx-auto"
+                          initial={{ scaleX: 0 }}
+                          whileInView={{ scaleX: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.8, delay: index * 0.2 + 0.4 }}
+                        />
+                        <p className="text-gray-600 leading-relaxed text-lg mb-4">
+                          {step.description}
+                        </p>
+                      </motion.div>
+
+                      {/* Duration Badge */}
+                      <motion.div
+                        className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary-accent/10 to-secondary-accent/10 text-primary-accent rounded-full text-sm font-semibold border border-primary-accent/20"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: index * 0.2 + 0.6 }}
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        <Clock className="w-4 h-4 mr-2" />
+                        {step.duration}
+                      </motion.div>
                     </div>
                   </div>
-                </div>
-              </div>
+                </motion.div>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Main Services Section */}
-      <section className="py-24 bg-white">
-        <div className="septic-max-width">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              <span className="text-primary-dark">Professional Grease</span>
-              <span className="block text-orange-600">Management Services</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Keep your business compliant and running smoothly with our comprehensive 
-              grease trap services and waste management solutions.
-            </p>
-          </div>
+        {/* Benefits Section */}
+        <section className="py-24 bg-gradient-to-br from-bg-secondary via-white to-bg-secondary relative overflow-hidden">
+          {/* Floating Background Elements */}
+          <motion.div
+            className="absolute top-20 left-10 w-40 h-40 bg-primary-accent/10 rounded-full blur-3xl"
+            animate={{
+              y: [-20, 20, -20],
+              scale: [1, 1.1, 1],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="absolute bottom-20 right-10 w-60 h-60 bg-secondary-accent/10 rounded-full blur-3xl"
+            animate={{
+              y: [20, -20, 20],
+              scale: [1.1, 1, 1.1],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2
+            }}
+          />
+          
+          <div className="septic-max-width px-4 lg:px-8 relative z-10">
+            <motion.div 
+              className="text-center mb-20"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <motion.h2 
+                className="text-4xl lg:text-5xl font-bold mb-6"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <span className="text-primary-dark">Service</span>
+                <span className="block text-primary-accent">Benefits</span>
+              </motion.h2>
+              {/* Modern decorative line */}
+              <motion.div 
+                className="flex items-center justify-center mb-6"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: 0.4 }}
+              >
+                <motion.div 
+                  className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                />
+                <motion.div 
+                  className="w-2 h-2 bg-primary-accent rounded-full mx-4"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.8 }}
+                />
+                <motion.div 
+                  className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                />
+              </motion.div>
+              <motion.p 
+                className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+              >
+                Professional grease management delivers measurable value to your business operations and bottom line
+              </motion.p>
+            </motion.div>
 
-          <div className="max-w-4xl mx-auto">
-            {mainServices.map((service) => (
-              <div key={service.id} id={service.id} className="group relative bg-white rounded-2xl border border-gray-200 hover:border-orange-400/50 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
-                <div className="p-8">
-                  {/* Service Header */}
-                  <div className="flex items-start space-x-6 mb-8">
-                    <div className="w-16 h-16 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <service.icon className="w-8 h-8" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-3xl font-bold text-primary-dark mb-4 group-hover:text-orange-600 transition-colors duration-300">
-                        {service.title}
-                      </h3>
-                      <p className="text-gray-600 leading-relaxed text-lg">
-                        {service.description}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {/* Service Features */}
-                    <div>
-                      <h4 className="font-semibold text-gray-800 mb-4 text-lg">What&apos;s Included:</h4>
-                      <div className="space-y-3">
-                        {service.features.map((feature, idx) => (
-                          <div key={idx} className="flex items-center space-x-3">
-                            <CheckCircle className="w-5 h-5 text-orange-500 flex-shrink-0" />
-                            <span className="text-gray-700">{feature}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Business Benefits */}
-                    <div>
-                      <h4 className="font-semibold text-gray-800 mb-4 text-lg">Business Benefits:</h4>
-                      <div className="space-y-3">
-                        {service.benefits.map((benefit, idx) => (
-                          <div key={idx} className="flex items-center space-x-3">
-                            <Shield className="w-5 h-5 text-green-500 flex-shrink-0" />
-                            <span className="text-gray-700">{benefit}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* CTA Button */}
-                  <div className="mt-8">
-                    <Link
-                      href={service.href}
-                      className="inline-flex items-center space-x-2 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-semibold py-3 px-8 rounded-xl hover:shadow-lg transition-all duration-300 group-hover:scale-105"
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 max-w-4xl mx-auto"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              {greaseBenefits.map((benefit, index) => (
+                <motion.div 
+                  key={index} 
+                  className="group relative"
+                  variants={cardVariants}
+                  whileHover={{ 
+                    y: -8,
+                    scale: 1.02,
+                    transition: { duration: 0.3, ease: "easeOut" }
+                  }}
+                >
+                  {/* Enhanced Card Container */}
+                  <div className="relative bg-white rounded-3xl overflow-hidden h-full shadow-lg border border-gray-200/50 group-hover:shadow-2xl group-hover:border-primary-accent/30 transition-all duration-300 p-8">
+                    {/* Subtle Gradient Overlay on Hover */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-br from-primary-accent/5 via-transparent to-secondary-accent/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                    
+                    {/* Floating Background Element */}
+                    <motion.div
+                      className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-primary-accent/10 to-secondary-accent/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      animate={{
+                        scale: [1, 1.3, 1],
+                        rotate: [0, 180, 360],
+                      }}
+                      transition={{
+                        duration: 6,
+                        repeat: Infinity,
+                        ease: "linear"
+                      }}
+                    />
+                    
+                    {/* Icon Section */}
+                    <motion.div 
+                      className="relative mb-8"
+                      initial={{ scale: 0, rotate: -90 }}
+                      whileInView={{ scale: 1, rotate: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: index * 0.2 }}
                     >
-                      <span>Learn More</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                    </Link>
+                      <motion.div 
+                        className="w-20 h-20 bg-gradient-to-br from-primary-accent to-secondary-accent rounded-2xl flex items-center justify-center mx-auto shadow-lg"
+                        whileHover={{ rotate: 12, scale: 1.1 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <benefit.icon className="w-10 h-10 text-white" />
+                      </motion.div>
+                    </motion.div>
+                    
+                    {/* Content */}
+                    <div className="relative text-center">
+                      {/* Header */}
+                      <motion.div 
+                        className="mb-6"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: index * 0.2 }}
+                      >
+                        <h3 className="text-2xl font-bold text-primary-dark group-hover:text-primary-accent transition-colors duration-300 mb-4">
+                          {benefit.title}
+                        </h3>
+                        <motion.div
+                          className="h-1 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full mb-6 origin-center w-16 mx-auto"
+                          initial={{ scaleX: 0 }}
+                          whileInView={{ scaleX: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.8, delay: index * 0.2 + 0.3 }}
+                        />
+                        <p className="text-gray-600 leading-relaxed text-lg">
+                          {benefit.description}
+                        </p>
+                      </motion.div>
+                    </div>
                   </div>
-                </div>
-
-                {/* Hover Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-              </div>
-            ))}
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Business Types Section */}
-      <section className="py-24 bg-gradient-to-br from-orange-50 to-amber-50">
-        <div className="septic-max-width">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              <span className="text-primary-dark">Businesses We</span>
-              <span className="block text-orange-600">Serve</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Specialized grease management services for all types of commercial food service operations
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {businessTypes.map((business, index) => (
-              <div key={index} className="text-center group">
-                <div className="w-20 h-20 bg-white rounded-2xl shadow-lg flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 text-3xl">
-                  {business.icon}
-                </div>
-                <h3 className="text-xl font-bold text-primary-dark mb-3">{business.title}</h3>
-                <p className="text-gray-600 leading-relaxed text-sm">{business.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Maintenance Schedule Section */}
-      <section className="py-24 bg-white">
-        <div className="septic-max-width">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              <span className="text-primary-dark">Recommended</span>
-              <span className="block text-orange-600">Maintenance Schedule</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Proper scheduling keeps your grease traps compliant and prevents costly emergencies
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {maintenanceSchedule.map((schedule, index) => (
-              <div key={index} className="bg-gradient-to-br from-orange-50 to-amber-50 border border-orange-200 rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300">
-                <div className="text-3xl font-bold text-orange-600 mb-3">{schedule.frequency}</div>
-                <h3 className="text-lg font-semibold text-primary-dark mb-3">{schedule.businessType}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{schedule.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits Section */}
-      <section className="py-24 bg-gradient-to-br from-orange-50 to-amber-50">
-        <div className="septic-max-width">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              <span className="text-primary-dark">Why Choose Our</span>
-              <span className="block text-orange-600">Commercial Services?</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Professional grease management that keeps your business compliant, efficient, and protected
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {commercialBenefits.map((benefit, index) => (
-              <div key={index} className="text-center group">
-                <div className="w-20 h-20 bg-white rounded-2xl shadow-lg flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <benefit.icon className="w-10 h-10 text-orange-600" />
-                </div>
-                <h3 className="text-2xl font-bold text-primary-dark mb-4">{benefit.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{benefit.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Process Section */}
-      <section className="py-24 bg-white">
-        <div className="septic-max-width">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              <span className="text-primary-dark">Our Professional</span>
-              <span className="block text-orange-600">Service Process</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Every grease trap service follows our proven process for thorough cleaning 
-              and complete compliance documentation.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {processSteps.map((step, index) => (
-              <div key={index} className="relative group">
-                <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm group-hover:shadow-lg transition-all duration-300 text-center">
-                  <div className="w-16 h-16 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl font-bold group-hover:scale-110 transition-transform duration-300">
-                    {step.number}
-                  </div>
-                  <h3 className="text-xl font-bold text-primary-dark mb-4">{step.title}</h3>
-                  <p className="text-gray-600 mb-4 leading-relaxed">{step.description}</p>
-                  <div className="text-orange-600 text-sm font-semibold">{step.duration}</div>
-                </div>
-                
-                {/* Connection Arrow */}
-                {index < processSteps.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2">
-                    <ArrowRight className="w-8 h-8 text-orange-400/50" />
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-24 bg-gradient-to-br from-orange-50 to-amber-50">
-        <div className="septic-max-width">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              <span className="text-primary-dark">Frequently Asked</span>
-              <span className="block text-orange-600">Questions</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Get answers to common questions about commercial grease trap services
-            </p>
-          </div>
-
-          <div className="space-y-8">
-            {frequentlyAskedQuestions.map((faq, index) => (
-              <div key={index} className="bg-white border border-orange-200/50 rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:border-orange-400/50">
-                <h3 className="text-xl font-bold text-primary-dark mb-4">{faq.question}</h3>
-                <p className="text-gray-600 leading-relaxed text-lg">{faq.answer}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Final CTA Section */}
-      <section className="py-24 bg-gradient-to-br from-orange-700 via-orange-600 to-amber-600 text-white relative overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(255,255,255,0.1)_0%,transparent_50%)] pointer-events-none"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.1)_0%,transparent_50%)] pointer-events-none"></div>
-        
-        <div className="septic-max-width text-center relative z-10">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-8">
-            Ready to Schedule Your <span className="text-orange-300">Grease Trap Service?</span>
-          </h2>
-          <p className="text-xl mb-12 max-w-4xl mx-auto opacity-90 leading-relaxed">
-            Keep your business compliant and running smoothly with professional grease management. 
-            Contact us today for reliable service and complete documentation.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <a
-              href={`tel:${CONTACT_INFO.phone}`}
-              onClick={() => trackPhoneCall('grease_final_cta')}
-              className="bg-white text-orange-600 font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-3 hover:scale-105"
+        {/* FAQ Section */}
+        <section className="py-24 bg-white relative overflow-hidden">
+          {/* Animated Background Elements */}
+          <motion.div
+            className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-br from-primary-accent/5 to-secondary-accent/5 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.2, 1],
+              rotate: [0, -180, -360],
+            }}
+            transition={{
+              duration: 25,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          />
+          
+          <div className="septic-max-width px-4 lg:px-8 relative z-10">
+            <motion.div 
+              className="text-center mb-20"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
             >
-              <Phone className="w-6 h-6" />
-              <span className="text-lg">Call Now: {CONTACT_INFO.phone}</span>
-            </a>
-            <Link
-              href="/contact"
-              className="bg-orange-800 border border-orange-600 text-white font-bold py-4 px-8 rounded-xl hover:bg-orange-700 transition-all duration-300 flex items-center justify-center space-x-3"
+              <motion.h2 
+                className="text-4xl lg:text-5xl font-bold mb-6"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <span className="text-primary-dark">Frequently Asked</span>
+                <span className="block text-primary-accent">Questions</span>
+              </motion.h2>
+              {/* Modern decorative line */}
+              <motion.div 
+                className="flex items-center justify-center mb-6"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: 0.4 }}
+              >
+                <motion.div 
+                  className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                />
+                <motion.div 
+                  className="w-2 h-2 bg-primary-accent rounded-full mx-4"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.8 }}
+                />
+                <motion.div 
+                  className="h-px bg-gradient-to-r from-transparent via-primary-accent to-transparent w-32"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                />
+              </motion.div>
+              <motion.p 
+                className="text-xl text-text-primary max-w-4xl mx-auto leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+              >
+                Get answers to common questions about commercial grease trap services
+              </motion.p>
+            </motion.div>
+
+            <motion.div 
+              className="space-y-8 max-w-4xl mx-auto"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
             >
-              <Calendar className="w-6 h-6" />
-              <span className="text-lg">Schedule Service</span>
-            </Link>
+              {frequentlyAskedQuestions.map((faq, index) => (
+                <motion.div 
+                  key={index} 
+                  className="group relative"
+                  variants={cardVariants}
+                  whileHover={{ 
+                    y: -4,
+                    transition: { duration: 0.3, ease: "easeOut" }
+                  }}
+                >
+                  {/* Enhanced Card Container */}
+                  <div className="relative bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-200/50 group-hover:shadow-2xl group-hover:border-primary-accent/30 transition-all duration-300 p-8">
+                    {/* Subtle Gradient Overlay on Hover */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-br from-primary-accent/5 via-transparent to-secondary-accent/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                    
+                    {/* Content */}
+                    <div className="relative">
+                      <motion.h3 
+                        className="text-2xl font-bold text-primary-dark group-hover:text-primary-accent transition-colors duration-300 mb-6"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: index * 0.1 }}
+                      >
+                        {faq.question}
+                      </motion.h3>
+                      <motion.div
+                        className="h-1 bg-gradient-to-r from-primary-accent to-secondary-accent rounded-full mb-6 origin-left w-20"
+                        initial={{ scaleX: 0 }}
+                        whileInView={{ scaleX: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: index * 0.1 + 0.2 }}
+                      />
+                      <motion.p 
+                        className="text-gray-600 leading-relaxed text-lg"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: index * 0.1 + 0.3 }}
+                      >
+                        {faq.answer}
+                      </motion.p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+
+        {/* Final CTA Section */}
+        <section className="py-24 bg-gradient-to-br from-primary-dark via-primary-dark to-primary-accent text-white relative overflow-hidden">
+          {/* Enhanced Background Elements */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(255,255,255,0.1)_0%,transparent_50%)] pointer-events-none"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.1)_0%,transparent_50%)] pointer-events-none"></div>
+          <motion.div
+            className="absolute top-20 left-20 w-64 h-64 bg-gradient-to-br from-primary-accent/20 to-secondary-accent/10 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.3, 1],
+              x: [-20, 20, -20],
+              y: [-10, 10, -10],
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-br from-secondary-accent/20 to-primary-accent/10 rounded-full blur-3xl"
+            animate={{
+              scale: [1.3, 1, 1.3],
+              x: [20, -20, 20],
+              y: [10, -10, 10],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2
+            }}
+          />
+          
+          <div className="septic-max-width px-4 lg:px-8 text-center relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <motion.h2 
+                className="text-4xl lg:text-5xl font-bold mb-8"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                Ready to Schedule Your{" "}
+                <span className="text-primary-accent">Grease Trap Service?</span>
+              </motion.h2>
+              <motion.p 
+                className="text-xl mb-12 max-w-4xl mx-auto opacity-90 leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                Keep your business compliant and running smoothly with professional grease management. 
+                Contact us today for reliable service and complete documentation.
+              </motion.p>
+              <motion.div 
+                className="flex justify-center"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+              >
+                <motion.a
+                  href={`tel:${CONTACT_INFO.phone}`}
+                  onClick={() => trackPhoneCall('grease_final_cta')}
+                  className="bg-white text-primary-dark font-bold py-8 px-12 rounded-xl text-2xl inline-flex items-center justify-center space-x-4 transition-all duration-300 shadow-xl group relative overflow-hidden"
+                  whileHover={{ 
+                    scale: 1.05, 
+                    y: -5,
+                    boxShadow: "0 25px 50px rgba(0, 0, 0, 0.3)"
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {/* Hover Gradient Overlay */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-primary-accent/10 to-secondary-accent/10 opacity-0 transition-opacity duration-300"
+                    whileHover={{ opacity: 1 }}
+                  />
+                  
+                  <motion.div
+                    whileHover={{ rotate: 12, scale: 1.1 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Phone className="w-8 h-8 relative z-10" />
+                  </motion.div>
+                  <div className="text-left relative z-10">
+                    <motion.div 
+                      className="text-sm"
+                      initial={{ opacity: 0.7 }}
+                      whileHover={{ opacity: 1 }}
+                    >
+                      SCHEDULE SERVICE
+                    </motion.div>
+                    <motion.div 
+                      className="text-2xl font-black"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {CONTACT_INFO.phone}
+                    </motion.div>
+                  </div>
+                </motion.a>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+      </main>
+    </ServiceErrorBoundary>
   );
 }

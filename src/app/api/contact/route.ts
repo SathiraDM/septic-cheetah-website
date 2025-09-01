@@ -48,7 +48,7 @@ const getServiceLabel = (service: string): string => {
 
 async function sendNotificationEmail(formData: ContactFormData) {
   const { name, phone, email, service, urgency, message } = formData;
-  
+
   const htmlContent = `
     <!DOCTYPE html>
     <html>
@@ -111,7 +111,7 @@ async function sendNotificationEmail(formData: ContactFormData) {
           <div class="footer">
             <p><strong>Next Steps:</strong></p>
             <ul>
-              <li>Call the customer within 2 hours during business hours</li>
+              <li>Call the customer as soon as possible</li>
               <li>Send a confirmation email if needed</li>
               <li>Schedule the service appointment</li>
             </ul>
@@ -148,7 +148,7 @@ Service: ${getServiceLabel(service)}
 Urgency: ${getUrgencyLabel(urgency)}
 ${message ? `Message: ${message}` : ''}
 
-Please contact the customer within 2 hours during business hours.
+Please contact the customer as soon as possible.
         `.trim()
       }
     ]
@@ -159,7 +159,7 @@ Please contact the customer within 2 hours during business hours.
 
 async function sendConfirmationEmail(formData: ContactFormData) {
   const { name, email, service, urgency } = formData;
-  
+
   const htmlContent = `
     <!DOCTYPE html>
     <html>
@@ -187,7 +187,7 @@ async function sendConfirmationEmail(formData: ContactFormData) {
         <div class="content">
           <div class="highlight">
             <h2>What happens next?</h2>
-            <p><strong>We'll call you within 2 hours</strong> during business hours to discuss your ${getServiceLabel(service)} needs.</p>
+            <p><strong>We'll call you soon</strong> to discuss your ${getServiceLabel(service)} needs.</p>
             <p>Your request has been marked as: <strong>${getUrgencyLabel(urgency)}</strong></p>
           </div>
           
@@ -222,12 +222,12 @@ async function sendConfirmationEmail(formData: ContactFormData) {
             Name: name
           }
         ],
-        Subject: 'Thank you for contacting Septic Cheetah - We\'ll call you soon!',
+        Subject: 'Thank you for contacting Septic Cheetah!',
         HTMLPart: htmlContent,
         TextPart: `
 Thank you, ${name}!
 
-We've received your request for ${getServiceLabel(service)} and will call you within 2 hours during business hours.
+We've received your request for ${getServiceLabel(service)} and will call you soon.
 
 Your request urgency: ${getUrgencyLabel(urgency)}
 
@@ -245,7 +245,7 @@ Thank you for choosing Septic Cheetah!
 export async function POST(request: NextRequest) {
   try {
     const formData: ContactFormData = await request.json();
-    
+
     // Validate required fields
     const { name, phone, email, service, urgency } = formData;
     if (!name || !phone || !email || !service || !urgency) {
@@ -277,7 +277,7 @@ export async function POST(request: NextRequest) {
         sendNotificationEmail(formData),
         sendConfirmationEmail(formData)
       ]);
-      
+
       console.log('Emails sent successfully for lead:', name);
     } catch (emailError) {
       console.error('Email sending failed:', emailError);
@@ -285,11 +285,11 @@ export async function POST(request: NextRequest) {
       // The form submission should still be considered successful
     }
 
-    return NextResponse.json({ 
-      success: true, 
-      message: 'Form submitted successfully. You will receive a confirmation email shortly.' 
+    return NextResponse.json({
+      success: true,
+      message: 'Form submitted successfully. You will receive a confirmation email shortly.'
     });
-    
+
   } catch (error) {
     console.error('Contact form error:', error);
     return NextResponse.json(
