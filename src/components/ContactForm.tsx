@@ -29,22 +29,92 @@ export default function ContactForm() {
   const [focusedField, setFocusedField] = useState<string>('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
+    const { name, value } = e.target;
+    
+    // Auto-format phone number
+    if (name === 'phone') {
+      const cleaned = value.replace(/\D/g, '');
+      let formatted = cleaned;
+      
+      if (cleaned.length >= 6) {
+        formatted = `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(6, 10)}`;
+      } else if (cleaned.length >= 3) {
+        formatted = `(${cleaned.slice(0, 3)}) ${cleaned.slice(3)}`;
+      } else if (cleaned.length > 0) {
+        formatted = cleaned;
+      }
+      
+      setFormData(prev => ({
+        ...prev,
+        [name]: formatted
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('[FORM] Form submission started:', {
+      name: formData.name,
+      phone: formData.phone,
+      email: formData.email,
+      service: formData.service,
+      urgency: formData.urgency,
+      hasMessage: !!formData.message
+    });
+
+    // Validate required fields
+    if (!formData.name.trim()) {
+      console.error('[FORM] Validation failed: Name is required');
+      alert('Please enter your name.');
+      return;
+    }
+
+    if (!formData.service) {
+      console.error('[FORM] Validation failed: Service is required');
+      alert('Please select a service.');
+      return;
+    }
+
+    if (!formData.urgency) {
+      console.error('[FORM] Validation failed: Urgency is required');
+      alert('Please select when you need service.');
+      return;
+    }
 
     // Custom validation: require either email or phone
     if (!formData.email && !formData.phone) {
+      console.error('[FORM] Validation failed: No contact method provided');
       alert('Please provide either an email address or phone number so we can contact you.');
       return;
     }
 
+    // Validate email format if provided
+    if (formData.email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        console.error('[FORM] Validation failed: Invalid email format');
+        alert('Please enter a valid email address.');
+        return;
+      }
+    }
+
+    // Validate phone format if provided
+    if (formData.phone) {
+      const phoneDigits = formData.phone.replace(/\D/g, '');
+      if (phoneDigits.length < 10) {
+        console.error('[FORM] Validation failed: Invalid phone number');
+        alert('Please enter a valid 10-digit phone number.');
+        return;
+      }
+    }
+
     setIsSubmitting(true);
+    console.log('[FORM] Sending form data to API...');
 
     try {
       const response = await fetch('/api/contact', {
@@ -53,16 +123,35 @@ export default function ContactForm() {
         body: JSON.stringify(formData)
       });
 
+      console.log('[FORM] API response received:', {
+        status: response.status,
+        statusText: response.statusText,
+        ok: response.ok
+      });
+
       if (response.ok) {
+        const responseData = await response.json();
+        console.log('[FORM] Form submitted successfully:', responseData);
         setSubmitStatus('success');
         trackFormSubmit('contact_form');
       } else {
+        const errorData = await response.json().catch(() => ({}));
+        console.error('[FORM] API error response:', {
+          status: response.status,
+          statusText: response.statusText,
+          errorData: errorData
+        });
         setSubmitStatus('error');
       }
-    } catch {
+    } catch (error) {
+      console.error('[FORM] Network/fetch error:', {
+        error: error,
+        errorMessage: error instanceof Error ? error.message : 'Unknown error'
+      });
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
+      console.log('[FORM] Form submission process completed');
     }
   };
 
@@ -196,7 +285,6 @@ export default function ContactForm() {
                   onChange={handleChange}
                   onFocus={() => setFocusedField('name')}
                   onBlur={() => setFocusedField('')}
-                  required
                   className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-3 sm:py-4 bg-gray-50/80 border-2 border-gray-200/60 rounded-xl sm:rounded-2xl focus:outline-none focus:border-primary-accent focus:bg-white transition-all duration-300 text-gray-800 placeholder:text-gray-400 text-sm sm:text-base"
                   placeholder="Enter your full name"
                 />
@@ -278,7 +366,6 @@ export default function ContactForm() {
                 onChange={handleChange}
                 onFocus={() => setFocusedField('service')}
                 onBlur={() => setFocusedField('')}
-                required
                 className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-3 sm:py-4 bg-gray-50/80 border-2 border-gray-200/60 rounded-xl sm:rounded-2xl focus:outline-none focus:border-primary-accent focus:bg-white transition-all duration-300 text-gray-800 appearance-none cursor-pointer text-sm sm:text-base"
               >
                 <option value="">Select a service...</option>
@@ -352,7 +439,6 @@ export default function ContactForm() {
                       value={option.value}
                       checked={formData.urgency === option.value}
                       onChange={handleChange}
-                      required
                       className="sr-only"
                     />
                     <div className={`w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 mr-2 sm:mr-3 flex items-center justify-center transition-all duration-300 ${formData.urgency === option.value
@@ -419,7 +505,7 @@ export default function ContactForm() {
             <motion.button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-gradient-to-r from-primary-accent to-secondary-accent hover:from-secondary-accent hover:to-primary-accent text-white font-bold py-4 sm:py-5 px-6 sm:px-8 rounded-xl sm:rounded-2xl transition-all duration-300 flex items-center justify-center space-x-2 sm:space-x-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              className="w-full bg-gradient-to-r from-primary-accent to-secondary-accent hover:from-secondary-accent hover:to-primary-accent text-white font-bold py-4 sm:py-5 px-6 sm:px-8 rounded-xl sm:rounded-2xl transition-all duration-300 flex items-center justify-center space-x-2 sm:space-x-3 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >

@@ -1,10 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Mailjet from 'node-mailjet';
+import { CONTACT_INFO } from '@/lib/constants';
+
+// Validate required environment variables
+if (!process.env.MAILJET_API_KEY) {
+  throw new Error('MAILJET_API_KEY environment variable is required');
+}
+if (!process.env.MAILJET_SECRET_KEY) {
+  throw new Error('MAILJET_SECRET_KEY environment variable is required');
+}
+if (!process.env.MAILJET_FROM_EMAIL) {
+  throw new Error('MAILJET_FROM_EMAIL environment variable is required');
+}
+if (!process.env.MAILJET_TO_EMAIL) {
+  throw new Error('MAILJET_TO_EMAIL environment variable is required');
+}
 
 // Initialize Mailjet client
 const mailjet = Mailjet.apiConnect(
-  process.env.MAILJET_API_KEY || '',
-  process.env.MAILJET_SECRET_KEY || ''
+  process.env.MAILJET_API_KEY,
+  process.env.MAILJET_SECRET_KEY
 );
 
 interface ContactFormData {
@@ -47,6 +62,7 @@ const getServiceLabel = (service: string): string => {
 };
 
 async function sendNotificationEmail(formData: ContactFormData) {
+  console.log('[EMAIL] Preparing notification email to business...');
   const { name, phone, email, service, urgency, message } = formData;
 
   const htmlContent = `
@@ -83,12 +99,12 @@ async function sendNotificationEmail(formData: ContactFormData) {
           
           <div class="field">
             <div class="label">Phone Number:</div>
-            <div class="value">${phone}</div>
+            <div class="value">${phone || 'Not provided'}</div>
           </div>
           
           <div class="field">
             <div class="label">Email Address:</div>
-            <div class="value">${email}</div>
+            <div class="value">${email || 'Not provided'}</div>
           </div>
           
           <div class="field">
@@ -123,16 +139,16 @@ async function sendNotificationEmail(formData: ContactFormData) {
     </html>
   `;
 
-  const request = mailjet.post('send', { version: 'v3.1' }).request({
+  const emailData = {
     Messages: [
       {
         From: {
-          Email: process.env.MAILJET_FROM_EMAIL || 'noreply@septiccheetah.com',
+          Email: process.env.MAILJET_FROM_EMAIL,
           Name: 'Septic Cheetah Website'
         },
         To: [
           {
-            Email: process.env.MAILJET_TO_EMAIL || 'info@septiccheetah.com',
+            Email: process.env.MAILJET_TO_EMAIL,
             Name: 'Septic Cheetah Team'
           }
         ],
@@ -142,8 +158,8 @@ async function sendNotificationEmail(formData: ContactFormData) {
 New Contact Form Submission
 
 Customer: ${name}
-Phone: ${phone}
-Email: ${email}
+Phone: ${phone || 'Not provided'}
+Email: ${email || 'Not provided'}
 Service: ${getServiceLabel(service)}
 Urgency: ${getUrgencyLabel(urgency)}
 ${message ? `Message: ${message}` : ''}
@@ -152,13 +168,36 @@ Please contact the customer as soon as possible.
         `.trim()
       }
     ]
+  };
+
+  console.log('[EMAIL] Notification email payload:', {
+    to: emailData.Messages[0].To[0].Email,
+    from: emailData.Messages[0].From.Email,
+    subject: emailData.Messages[0].Subject
   });
 
-  return request;
+  try {
+    const request = mailjet.post('send', { version: 'v3.1' }).request(emailData);
+    const result = await request;
+    console.log('[EMAIL] Notification email sent successfully:', {
+      status: result.response?.status,
+      statusText: result.response?.statusText
+    });
+    return result;
+  } catch (error) {
+    console.error('[EMAIL] Failed to send notification email:', error);
+    throw error;
+  }
 }
 
 async function sendConfirmationEmail(formData: ContactFormData) {
+  console.log('[EMAIL] Preparing confirmation email to customer...');
   const { name, email, service, urgency } = formData;
+
+  if (!email) {
+    console.log('[EMAIL] No email provided for confirmation email');
+    return;
+  }
 
   const htmlContent = `
     <!DOCTYPE html>
@@ -193,8 +232,8 @@ async function sendConfirmationEmail(formData: ContactFormData) {
           
           <div class="contact-info">
             <h3>Need immediate assistance?</h3>
-            <p><strong>Emergency Hotline:</strong> <a href="tel:+1234567890">(123) 456-7890</a></p>
-            <p><strong>Email:</strong> <a href="mailto:info@septiccheetah.com">info@septiccheetah.com</a></p>
+            <p><strong>Emergency Hotline:</strong> <a href="tel:${CONTACT_INFO.phone.replace(/[^\d]/g, '')}">${CONTACT_INFO.phone}</a></p>
+            <p><strong>Email:</strong> <a href="mailto:${CONTACT_INFO.email}">${CONTACT_INFO.email}</a></p>
           </div>
           
           <p>Thank you for choosing Septic Cheetah for your septic system needs. We're committed to providing fast, reliable, and professional service.</p>
@@ -209,11 +248,11 @@ async function sendConfirmationEmail(formData: ContactFormData) {
     </html>
   `;
 
-  const request = mailjet.post('send', { version: 'v3.1' }).request({
+  const emailData = {
     Messages: [
       {
         From: {
-          Email: process.env.MAILJET_FROM_EMAIL || 'noreply@septiccheetah.com',
+          Email: process.env.MAILJET_FROM_EMAIL,
           Name: 'Septic Cheetah'
         },
         To: [
@@ -231,67 +270,199 @@ We've received your request for ${getServiceLabel(service)} and will call you so
 
 Your request urgency: ${getUrgencyLabel(urgency)}
 
-For immediate assistance, call our emergency hotline: (123) 456-7890
+For immediate assistance, call our emergency hotline: ${CONTACT_INFO.phone}
 
 Thank you for choosing Septic Cheetah!
         `.trim()
       }
     ]
+  };
+
+  console.log('[EMAIL] Confirmation email payload:', {
+    to: emailData.Messages[0].To[0].Email,
+    from: emailData.Messages[0].From.Email,
+    subject: emailData.Messages[0].Subject
   });
 
-  return request;
+  try {
+    const request = mailjet.post('send', { version: 'v3.1' }).request(emailData);
+    const result = await request;
+    console.log('[EMAIL] Confirmation email sent successfully:', {
+      status: result.response?.status,
+      statusText: result.response?.statusText
+    });
+    return result;
+  } catch (error) {
+    console.error('[EMAIL] Failed to send confirmation email:', error);
+    throw error;
+  }
 }
 
 export async function POST(request: NextRequest) {
+  console.log('[API] Contact form API called at:', new Date().toISOString());
+  
   try {
     const formData: ContactFormData = await request.json();
+    console.log('[API] Form data received:', {
+      name: formData.name,
+      phone: formData.phone,
+      email: formData.email,
+      service: formData.service,
+      urgency: formData.urgency,
+      hasMessage: !!formData.message
+    });
 
-    // Validate required fields
+    // Validate required fields - match frontend validation (either phone OR email required)
     const { name, phone, email, service, urgency } = formData;
-    if (!name || !phone || !email || !service || !urgency) {
+    
+    if (!name?.trim()) {
+      console.error('[API] Missing or empty name field');
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        { error: 'Name is required' },
         { status: 400 }
       );
     }
 
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (!service) {
+      console.error('[API] Missing service field');
       return NextResponse.json(
-        { error: 'Invalid email format' },
+        { error: 'Service selection is required' },
         { status: 400 }
+      );
+    }
+
+    if (!urgency) {
+      console.error('[API] Missing urgency field');
+      return NextResponse.json(
+        { error: 'Urgency selection is required' },
+        { status: 400 }
+      );
+    }
+
+    // Require either phone or email (matching frontend logic)
+    if (!phone && !email) {
+      console.error('[API] No contact method provided');
+      return NextResponse.json(
+        { error: 'Please provide either a phone number or email address' },
+        { status: 400 }
+      );
+    }
+
+    // Validate email format if provided
+    if (email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        console.error('[API] Invalid email format:', email);
+        return NextResponse.json(
+          { error: 'Invalid email format' },
+          { status: 400 }
+        );
+      }
+    }
+
+    // Validate phone format if provided
+    if (phone) {
+      const phoneDigits = phone.replace(/\D/g, '');
+      if (phoneDigits.length < 10) {
+        console.error('[API] Invalid phone number:', phone);
+        return NextResponse.json(
+          { error: 'Please provide a valid 10-digit phone number' },
+          { status: 400 }
+        );
+      }
+    }
+
+    // Check Mailjet configuration
+    const apiKey = process.env.MAILJET_API_KEY;
+    const secretKey = process.env.MAILJET_SECRET_KEY;
+    const fromEmail = process.env.MAILJET_FROM_EMAIL;
+    const toEmail = process.env.MAILJET_TO_EMAIL;
+
+    console.log('[API] Mailjet configuration check:', {
+      hasApiKey: !!apiKey,
+      hasSecretKey: !!secretKey,
+      fromEmail: fromEmail,
+      toEmail: toEmail,
+      apiKeyLength: apiKey?.length || 0,
+      secretKeyLength: secretKey?.length || 0
+    });
+
+    // These should all be present due to validation at module load, but double-check
+    if (!apiKey || !secretKey || !fromEmail || !toEmail) {
+      console.error('[API] Missing Mailjet credentials');
+      return NextResponse.json(
+        { error: 'Email service configuration error' },
+        { status: 500 }
       );
     }
 
     // Log the lead
-    console.log('New lead received:', {
+    console.log('[API] New lead validated:', {
       ...formData,
       timestamp: new Date().toISOString(),
       source: 'website_contact_form'
     });
 
-    // Send emails in parallel
+    // Send emails
+    console.log('[API] Starting email sending process...');
+    
     try {
-      await Promise.all([
-        sendNotificationEmail(formData),
-        sendConfirmationEmail(formData)
-      ]);
+      const emailPromises = [];
+      
+      // Always send notification email to business
+      console.log('[API] Sending notification email to business...');
+      emailPromises.push(sendNotificationEmail(formData));
 
-      console.log('Emails sent successfully for lead:', name);
+      // Only send confirmation email if customer provided email
+      if (email) {
+        console.log('[API] Sending confirmation email to customer...');
+        emailPromises.push(sendConfirmationEmail(formData));
+      } else {
+        console.log('[API] No email provided by customer, skipping confirmation email (phone-only contact)');
+      }
+
+      await Promise.all(emailPromises);
+      console.log('[API] All emails sent successfully for lead:', name);
+
     } catch (emailError) {
-      console.error('Email sending failed:', emailError);
+      console.error('[API] Email sending failed:', {
+        error: emailError,
+        errorMessage: emailError instanceof Error ? emailError.message : 'Unknown error',
+        errorStack: emailError instanceof Error ? emailError.stack : undefined,
+        formData: { name, phone, email }
+      });
+      
+      // Log more details about the Mailjet error
+      if (emailError && typeof emailError === 'object') {
+        console.error('[API] Mailjet error details:', {
+          statusCode: (emailError as { statusCode?: number }).statusCode,
+          response: (emailError as { response?: unknown }).response,
+          body: (emailError as { body?: unknown }).body
+        });
+      }
+      
       // Don't fail the entire request if emails fail
       // The form submission should still be considered successful
+      console.log('[API] Continuing despite email failure - form submission recorded');
     }
 
+    const responseMessage = email 
+      ? 'Form submitted successfully. You will receive a confirmation email shortly.'
+      : 'Form submitted successfully. We will contact you at the phone number provided.';
+
+    console.log('[API] Contact form processing completed successfully');
     return NextResponse.json({
       success: true,
-      message: 'Form submitted successfully. You will receive a confirmation email shortly.'
+      message: responseMessage
     });
 
   } catch (error) {
-    console.error('Contact form error:', error);
+    console.error('[API] Contact form processing error:', {
+      error: error,
+      errorMessage: error instanceof Error ? error.message : 'Unknown error',
+      errorStack: error instanceof Error ? error.stack : undefined
+    });
+    
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
