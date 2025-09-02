@@ -19,7 +19,7 @@ const maintenanceServices = [
       "System performance optimization",
       "Preventive maintenance protocols"
     ],
-    image: "/images/hero-03.jpg"
+    image: "/images/hero-09.jpg"
   },
   {
     id: "comprehensive-inspections",
@@ -32,7 +32,7 @@ const maintenanceServices = [
       "Regulatory compliance checks",
       "Detailed inspection reports"
     ],
-    image: "/images/hero-08.jpg"
+    image: "/images/hero-02.jpg"
   },
   {
     id: "preventive-services",
@@ -45,7 +45,7 @@ const maintenanceServices = [
       "Component condition assessment",
       "Maintenance planning and scheduling"
     ],
-    image: "/images/hero-10.jpg"
+    image: "/images/hero-03.jpg"
   }
 ];
 
@@ -298,7 +298,7 @@ export default function MaintenanceInspectionPage() {
                   transition={{ duration: 0.3 }}
                 >
                   <Image
-                    src="/images/hero-03.jpg"
+                    src="/images/hero-02.jpg"
                     alt="Professional septic system maintenance and inspection services"
                     width={600}
                     height={500}
