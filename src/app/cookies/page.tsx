@@ -344,7 +344,7 @@ export default function CookiePolicyPage() {
                   <p><strong>Septic Cheetah LLC</strong></p>
                   <p>2204 Inks Cv, Cedar Park, TX 78613</p>
                   <p>Phone: (512) 969-9655</p>
-                  <p>Email: privacy@septiccheetah.com</p>
+                  <p>Email: info@septiccheetah.com</p>
                   <p>Website: www.septiccheetah.com</p>
                 </div>
               </div>

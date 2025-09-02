@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { CheckCircle, Phone, Shield, Clock, ArrowRight, Award, Settings, Wrench, Calendar, MapPin, FileText, TestTube, Clipboard, Truck, Building } from 'lucide-react';
+import { CheckCircle, Phone, Shield, Clock, ArrowRight, Award, Settings, Calendar, FileText, TestTube, Clipboard, Truck } from 'lucide-react';
 import { CONTACT_INFO } from '@/lib/constants';
 import { ServiceErrorBoundary } from '@/components/ServiceErrorBoundary';
 import { trackPhoneCall } from '@/lib/utils';

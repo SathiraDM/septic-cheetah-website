@@ -16,7 +16,7 @@ import {
   Linkedin,
   ArrowRight
 } from 'lucide-react';
-import { CONTACT_INFO, SERVICES } from '@/lib/constants';
+import { CONTACT_INFO, SERVICE_CATEGORIES } from '@/lib/constants';
 import { trackPhoneCall, trackEvent } from '@/lib/utils';
 
 const quickLinks = [
@@ -97,7 +97,7 @@ export default function Footer() {
               </Link>
 
               <p className="text-gray-300 mb-4 leading-relaxed text-sm">
-                Professional septic services with over 15 years of experience. 
+                Professional septic services you can trust. 
                 Licensed, insured, and committed to keeping your septic system running smoothly.
               </p>
             </motion.div>
@@ -106,15 +106,15 @@ export default function Footer() {
             <motion.div variants={itemVariants}>
               <h3 className="text-lg font-bold mb-4 text-primary-accent">Our Services</h3>
               <div className="space-y-2">
-                {SERVICES.map((service) => (
+                {SERVICE_CATEGORIES.map((category) => (
                   <Link
-                    key={service.id}
-                    href={service.href}
+                    key={category.id}
+                    href={category.href}
                     className="flex items-center justify-between group hover:text-primary-accent transition-colors"
-                    onClick={() => trackEvent('footer_service_click', { service: service.id })}
+                    onClick={() => trackEvent('footer_service_click', { service: category.id })}
                   >
                     <div>
-                      <div className="font-medium">{service.title}</div>
+                      <div className="font-medium">{category.title}</div>
                     </div>
                     <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </Link>

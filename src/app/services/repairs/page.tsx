@@ -1,9 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { CheckCircle, Phone, Shield, Clock, ArrowRight, Award, Wrench, Calendar, AlertTriangle, Truck, Clipboard, Settings, Home, Zap, TreePine } from 'lucide-react';
+import { CheckCircle, Phone, Shield, Clock, ArrowRight, Award, Wrench, Calendar, AlertTriangle, Truck, Settings } from 'lucide-react';
 import { CONTACT_INFO } from '@/lib/constants';
 import { ServiceErrorBoundary } from '@/components/ServiceErrorBoundary';
 import { trackPhoneCall } from '@/lib/utils';
@@ -1375,7 +1374,7 @@ export default function RepairsPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Don't let septic problems damage your property. Get fast, professional repair service with our 24/7 emergency response team.
+              Don&apos;t let septic problems damage your property. Get fast, professional repair service with our 24/7 emergency response team.
             </motion.p>
             <motion.div 
               className="flex flex-col sm:flex-row gap-6 justify-center"

@@ -311,7 +311,7 @@ export default function Header() {
 
                                         {/* Compact Sub-services List */}
                                         <div className="space-y-1">
-                                          {category.services.slice(0, 3).map((service, serviceIndex) => (
+                                          {category.services.slice(0, 3).map((service) => (
                                             <div
                                               key={service.id}
                                               className="flex items-center space-x-2 py-1 px-2 rounded"

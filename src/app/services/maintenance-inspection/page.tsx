@@ -1,9 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { CheckCircle, Phone, Shield, Clock, ArrowRight, Award, Calendar, Settings, Home, Zap, TreePine, Search, Clipboard, Wrench, TestTube, FileText } from 'lucide-react';
+import { CheckCircle, Phone, Shield, Clock, ArrowRight, Award, Calendar, Settings, Search } from 'lucide-react';
 import { CONTACT_INFO } from '@/lib/constants';
 import { ServiceErrorBoundary } from '@/components/ServiceErrorBoundary';
 import { trackPhoneCall } from '@/lib/utils';
